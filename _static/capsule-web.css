@@ -1,0 +1,324 @@
+/* ============================================================================
+   CoPlanAI — capsule-web.css · the Electric Commons design code, site-wide
+   ----------------------------------------------------------------------------
+   Cut 2026-08-26 from the approved stylebook:
+     CoPlanAI/CoPlan app development/electric-commons-stylebook.md
+   Twin of the app's canonical  V3/shared/capsule.css  — same tokens, same rules.
+
+   HOW IT WORKS. The site declares one palette in two places (site-chrome.css for
+   the 131 stock pages, an inline copy in each of the 25 designed pages) and
+   reskin.css then nudges a few tokens. This file loads LAST on every page and
+   redefines those same tokens, so all 156 pages re-theme from one file. Remove
+   the <link> and the site reverts exactly.
+
+   LOAD ORDER (every page):
+       … theme/inline CSS … → site-chrome.css → reskin.css → capsule-web.css
+
+   RULES THAT MUST NOT REGRESS (each is a recorded decision):
+   · Type on coral is WHITE — display sizes on #F2593F, small labels on #D04028.
+     Navy-on-coral is dead; #BC3A22 and #CB4028 brick are dead.
+   · On lime #E6FF5E, type and dots are blue-deep #1D4FD7. Lime is LIVE-ONLY.
+   · Coral means people speak & act; blue means the platform; navy is the ink.
+     Bubble-blue #2D6CFF also signs the model (a person always signs coral).
+   · Citizen-facing surfaces never use red. Danger is pro-only, icon always.
+   · No coloured edge rules anywhere (standing ruling); category colour lives in
+     chips, dots and labels.
+   · The four tasks wear the mandate-matrix quartet, NOT the old
+     terra/gold/sky/green set.
+   ========================================================================== */
+@import url("../_vendor/capsule-fonts.css");
+
+/* ── 1 · tokens ─────────────────────────────────────────────────────────── */
+:root{
+  /* ground + surfaces */
+  --canvas:#F4F7F7;          /* was #F3F9FD */
+  --canvas2:#DCEFF5;         /* was #E4F1F9 — now the sky panel               */
+  --paper:#FFFFFF;
+  --paper2:#EDF5F8;          /* was #EFF8FD — now the wash                    */
+  /* ink — the wordmark's navy family */
+  --ink:#0F2036;             /* was #142530 */
+  --ink2:#43536B;            /* was #26414F */
+  --muted:#5C6A82;           /* was #55707E — AA on every ground incl. the sky panel */
+  --faint:#5C6A82;           /* one fewer tier; every label readable          */
+  /* people speak & act */
+  --terra:#F2593F;           /* unchanged — the one true coral                */
+  --terra-deep:#D04028;      /* was #CB4028 / #BC3A22 — brick is DEAD         */
+  --terra-soft:#FFE3DA;
+  /* platform & action (the site's old --green slot carried a blue already)   */
+  --green:#2D6CFF;           /* was #1C93D8 → bubble-blue                     */
+  --green-deep:#1D4FD7;      /* was #146FA8 → blue-deep, safe for small text  */
+  --green-soft:#E4EDFF;
+  /* retired accents, re-pointed so any stray reference lands somewhere sane  */
+  --sky:#2D6CFF;             /* was #14B0C6 (failed AA at 2.61:1)             */
+  --sky-deep:#1D4FD7;
+  --gold:#985E0A;            /* was #F2A83C — gold is now the warn/Setup role */
+  --gold-deep:#985E0A;
+  /* new roles the old palette had no word for */
+  --navy:#0B1B3F;
+  --blue:#2D6CFF; --blue-deep:#1D4FD7; --blue-wash:#E4EDFF;
+  --coral:#F2593F; --coral-action:#D04028; --coral-wash:#FFE3DA;
+  --live:#E6FF5E;            /* live / in-session ONLY                        */
+  --ok:#1E7A4E; --warn:#985E0A; --danger:#A82333;
+  /* the four tasks — mandate-matrix quartet, wash + deep pairs */
+  --t-imagine:#0E6A5C; --t-imagine-w:#EAF6F6;
+  --t-test:#4A3FB5;    --t-test-w:#F2F0FB;
+  --t-shape:#3E6B2E;   --t-shape-w:#EDF7EF;
+  --t-improve:#A8391F; --t-improve-w:#FDF3EC;
+  /* lines + shadow */
+  --line:rgba(15,32,54,.12);
+  --line2:rgba(15,32,54,.06);
+  --shadow:0 1px 2px rgba(15,32,54,.04), 0 20px 50px -32px rgba(15,32,54,.4);
+  --shadow-soft:0 1px 2px rgba(15,32,54,.03), 0 26px 64px -38px rgba(15,32,54,.42);
+  /* shape — the capsule */
+  --r-lg:22px; --r-md:18px; --r-sm:14px; --pill:999px;
+  /* faces */
+  --disp:"Onest","Avenir Next",system-ui,sans-serif;
+  --body:"Hanken Grotesk","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --serif:"Onest","Avenir Next",system-ui,sans-serif;   /* Fraunces retires   */
+  --mono:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+
+/* ── 2 · the page itself ────────────────────────────────────────────────── */
+body{ background-color:var(--canvas); color:var(--ink); font-family:var(--body); }
+/* the designed pages set their own body font inline; beat it by weight of place */
+body, body p, body li{ font-family:var(--body); }
+h1,h2,h3,h4,h5{ font-family:var(--disp); letter-spacing:-.02em; }
+/* the stock (block-theme) pages set headings to Bricolage Grotesque !important */
+.wp-site-blocks h1, .wp-site-blocks h2, .wp-site-blocks h3,
+.wp-site-blocks h4, .wp-site-blocks h5{ font-family:var(--disp) !important; }
+.wp-site-blocks p, .wp-site-blocks li{ font-family:var(--body) !important; }
+
+/* ── 3 · the capsule: every control is a pill ───────────────────────────── */
+.btn, .btn-primary, .btn-ghost, .btn-green, .btn-lg, .btn-nav, .nav-cta,
+.ff-tab, .tab, .kp-pill, .rfbtn, .pr-toggle button, .cpmap-ctrls button,
+.wp-block-button__link, .wp-element-button{
+  border-radius:var(--pill) !important;
+}
+/* Primary action. The one true coral #F2593F only holds white at 3.35:1, which
+   is legal for large bold type but NOT for a normal-sized button label, and the
+   site's .btn-primary is ~15px. So the button takes the vivid action coral
+   (4.72:1 with white) and pure coral is reserved for display-size moments. */
+.btn-primary{
+  background:var(--terra-deep) !important; color:#fff !important;
+  border-color:transparent !important; font-weight:800;
+  box-shadow:0 12px 26px -16px rgba(208,64,40,.7) !important;
+}
+.btn-primary:hover{ background:var(--terra-deep) !important; filter:brightness(1.07); }
+/* small pills carrying white type take the vivid action coral (4.72:1) */
+.nav .btn-nav, .nav-cta .btn-nav, .wp-block-button__link, .wp-element-button{
+  background:var(--terra-deep) !important; border-color:transparent !important;
+  color:#fff !important; font-weight:800;
+}
+.nav .btn-nav:hover{ background:var(--terra-deep) !important; filter:brightness(1.07); }
+/* The ghost button's outline must not be flattened to the page hairline: on the
+   coral book-slab that hairline measures 1.2:1 and the control disappears. Only
+   set the neutral border where the button sits on a light ground, and give the
+   ones on a coloured slab a white outline (≥3:1, the UI floor). */
+.btn-ghost{ border-radius:var(--pill) !important; }
+.pad .btn-ghost, .wrap > .btn-ghost, section:not([style*="background"]) .btn-ghost{
+  border-color:var(--line);
+}
+[style*="background:var(--terra)"] .btn-ghost,
+[style*="background:var(--ink)"] .btn-ghost,
+[style*="background:#F2593F"] .btn-ghost,
+.xw .btn-ghost{ border-color:rgba(255,255,255,.85) !important; color:#fff !important; }
+.btn-green{ background:var(--blue-deep) !important; color:#fff !important; border-color:transparent !important; }
+
+/* nav links become capsules */
+.nav .nav-links a{
+  border-radius:var(--pill); padding-inline:14px;
+  transition:background .16s ease, color .16s ease;
+}
+.nav .nav-links a:hover{ background:var(--paper2); color:var(--blue-deep); }
+.nav .nav-links a.active{ color:var(--blue-deep) !important; background:var(--blue-wash); }
+
+/* cards + surfaces */
+.card, .uc-card, .qcard, .artcard, .tcard, .kp-card, .kph-card, .ff-card,
+.rfcard, .lp-card, .mp-tile, .sev-c, .xw-c, .dk-card, .cpvenn-panel{
+  border-radius:var(--r-md) !important;
+  box-shadow:var(--shadow);
+}
+/* the standing ruling: no coloured edge rules, anywhere */
+.ff-card{ border-left:1px solid var(--line) !important; }
+
+/* chips / stickers / eyebrows */
+.sticker, .chip, .kp-pill, .tc-badge, .uc-stats .s span{ border-radius:var(--pill) !important; }
+/* Eyebrows are 11–12px labels and they sit on every ground the site has: white,
+   the page ground, the wash and the sky panel. Coral-as-text is only legal on
+   white (#D04028 is 4.72:1 there but 3.98:1 on the panel), and the deep brick
+   that used to carry them is retired by decision. So the label itself takes ink2
+   — 6.6:1 on the worst ground — and the coral stays as the numeral's dot-sized
+   graphic, where the 3:1 UI floor applies. */
+.eyebrow{ font-family:var(--mono); letter-spacing:.14em; color:var(--ink2) !important; }
+.eyebrow.green, .case-eyebrow, .ab-eyebrow, .xw .eb, .artcard .hd .eb{ color:var(--ink2) !important; }
+.sec-head .eyebrow .no{ color:var(--terra-deep) !important; }
+/* the pill that carries a coral wash needs ink type, not coral-on-coral */
+.kp-pill{ color:var(--ink) !important; background:var(--coral-wash) !important; }
+
+/* ── 4 · the four tasks, one mapping everywhere ─────────────────────────── */
+/* the site coded tasks as terra/gold/sky/green; they now wear the quartet.    */
+.sticker.terra{ background:var(--t-imagine) !important; color:#fff !important; }
+.sticker.gold { background:var(--t-test)    !important; color:#fff !important; }
+.sticker.sky  { background:var(--t-shape)   !important; color:#fff !important; }
+.sticker.green{ background:var(--t-improve) !important; color:#fff !important; }
+.sticker.paper{ background:var(--paper) !important; color:var(--ink) !important;
+  border:1px solid var(--line) !important; }
+/* The homepage category tabs carry their hue as an inline --fc. Match on the
+   tab's own data-f instead of the inline value: --sky and --green were both
+   repointed to blue above, so a value-based match left Shape and Improve
+   identical. data-f is the task itself and cannot drift. */
+.ff-tab[data-f="imagine"], .ff-tagline[data-f="imagine"]{ --fc:var(--t-imagine) !important; }
+.ff-tab[data-f="test"],    .ff-tagline[data-f="test"]   { --fc:var(--t-test)    !important; }
+.ff-tab[data-f="shape"],   .ff-tagline[data-f="shape"]  { --fc:var(--t-shape)   !important; }
+.ff-tab[data-f="improve"], .ff-tagline[data-f="improve"]{ --fc:var(--t-improve) !important; }
+.ff-tab[style*="--fc:var(--terra)"]{ --fc:var(--t-imagine) !important; }
+.ff-tab[style*="--fc:var(--gold)"] { --fc:var(--t-test)    !important; }
+.ff-tab[style*="--fc:var(--sky)"]  { --fc:var(--t-shape)   !important; }
+.ff-tab[style*="--fc:var(--green)"]{ --fc:var(--t-improve) !important; }
+/* the panel taglines are keyed the same way */
+.ff-panel[data-f="imagine"] .ff-tagline{ --fc:var(--t-imagine) !important; }
+.ff-panel[data-f="test"]    .ff-tagline{ --fc:var(--t-test)    !important; }
+.ff-panel[data-f="shape"]   .ff-tagline{ --fc:var(--t-shape)   !important; }
+.ff-panel[data-f="improve"] .ff-tagline{ --fc:var(--t-improve) !important; }
+.ff-tagline[style*="--fc:var(--terra)"]{ --fc:var(--t-imagine) !important; }
+.ff-tagline[style*="--fc:var(--gold)"] { --fc:var(--t-test)    !important; }
+.ff-tagline[style*="--fc:var(--sky)"]  { --fc:var(--t-shape)   !important; }
+.ff-tagline[style*="--fc:var(--green)"]{ --fc:var(--t-improve) !important; }
+
+/* /use-cases/ filter chips + band heads: the dot, the active fill and the band
+   marker all carried the retired terra/gold/sky/green set. One mapping, so a
+   chip, its band and its cards can never disagree about a task's colour. */
+/* The band head's marker is an inline-styled <span> with no class, so it has to
+   be reached positionally — `.dt` alone matches nothing there and the markers
+   kept the retired hues while their cards had already moved. */
+.fchip[data-a="Imagine"] .dt,
+.uc-band[data-a="Imagine"] .uc-band-head > span:first-child{ background:var(--t-imagine) !important; }
+.fchip[data-a="Test"] .dt,
+.uc-band[data-a="Test"]    .uc-band-head > span:first-child{ background:var(--t-test)    !important; }
+.fchip[data-a="Shape"] .dt,
+.uc-band[data-a="Shape"]   .uc-band-head > span:first-child{ background:var(--t-shape)   !important; }
+.fchip[data-a="Improve"] .dt,
+.uc-band[data-a="Improve"] .uc-band-head > span:first-child{ background:var(--t-improve) !important; }
+.fchip.active[data-a="Imagine"]{ background:var(--t-imagine) !important; color:#fff !important; }
+.fchip.active[data-a="Test"]   { background:var(--t-test)    !important; color:#fff !important; }
+.fchip.active[data-a="Shape"]  { background:var(--t-shape)   !important; color:#fff !important; }
+.fchip.active[data-a="Improve"]{ background:var(--t-improve) !important; color:#fff !important; }
+.fchip.active[data-a="all"]{ background:var(--ink) !important; color:#fff !important; }
+/* the chips are display type on the old face; give them the body face at a
+   readable weight, and the capsule geometry */
+.fchip{ font-family:var(--body) !important; border-radius:var(--pill) !important; }
+
+/* ── 4b · coral as display emphasis, off white ───────────────────────────
+   The one true coral #F2593F measures 3.35:1 on pure white — legal for large
+   bold type — but only 2.82:1 on the sky panel, which fails even the 3:1
+   large-text floor. Where the emphasis word sits on a tinted band it takes the
+   vivid action coral (4.10:1 there), keeping the accent without the failure. */
+.mquote .q .hl, .pull .hl, .ab-h2 .lm, .xw h2 .lm, span.hand,
+[style*="background:var(--canvas2)"] .hl,
+.tint .hl, .tint .lm{ color:var(--terra-deep) !important; }
+
+/* ── 5 · a person's words ───────────────────────────────────────────────── */
+/* the voice corner + coral italic; the serif voice retires with Fraunces */
+blockquote, .quote, .mquote .q{ font-family:var(--disp); }
+.ff-card .ou, .uc-quote, .case-quote{
+  font-family:var(--body); font-style:italic; color:var(--terra-deep);
+}
+
+/* ── 6 · the venn keeps its meaning, in the new roles ───────────────────── */
+:root{
+  --v-stk:#F2593F;   /* stakeholders — people        */
+  --v-ins:#0B1B3F;   /* institutions — the ink       */
+  --v-ai:#2D6CFF;    /* AI agents — the bubble blue  */
+}
+
+/* ── 7 · the map ────────────────────────────────────────────────────────── */
+:root{ --cpmap-pin:var(--terra); }
+.cpmap-land{ fill:#D8E6EC !important; stroke:rgba(15,32,54,.14) !important; }
+.cpmap-grat{ stroke:rgba(15,32,54,.10) !important; }
+.cpmap-stage{ border-radius:var(--r-md); overflow:hidden; background:var(--paper2); }
+.cpmap-tip{ border-radius:16px 16px 16px 4px !important; box-shadow:var(--shadow) !important; }
+
+/* ── 8 · the stock pages' leftover chrome ───────────────────────────────── */
+footer.site-footer .wp-block-group.has-background,
+.wp-site-blocks > footer .wp-block-group.has-background{
+  background-color:var(--canvas2) !important; color:var(--ink) !important;
+  border-top:1px solid var(--line) !important;
+}
+.wp-block-post-terms a, .wp-block-tag-cloud a{
+  border-radius:var(--pill) !important; background:var(--paper2);
+  padding:5px 12px; font-family:var(--mono); font-size:11.5px;
+  letter-spacing:.06em; color:var(--ink2) !important;
+}
+
+/* ── 9 · focus, selection, motion ───────────────────────────────────────── */
+::selection{ background:var(--coral-wash); color:var(--ink); }
+:focus-visible{ outline:2.5px solid var(--blue); outline-offset:3px; border-radius:var(--pill); }
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; animation:none !important; } }
+
+/* ── 10 · /use-cases/ · the case wall ────────────────────────────────────
+   Damiano, 2026-08-27: "make the card significantly smaller and the website
+   full width and just add a top filter for the 4 types so it does not create
+   a huge scroll". The filter bar already existed; what was missing was the
+   density. Cards are now the homepage's card — a padded plate, the photograph
+   inset, the country's flag in the scooped corner, the task riding the picture
+   as a translucent bubble, and NOTHING under the image but the project's name.
+   Scoped entirely to .uc-* markup, which exists only on /use-cases/.         */
+section.uc-wide{ padding-inline:max(0px, calc((100% - 1680px) / 2)) !important; }
+section.uc-wide > .wrap{ max-width:1680px !important; }
+
+.uc-grid{ grid-template-columns:repeat(auto-fill, minmax(198px, 1fr)) !important;
+          gap:12px !important; }
+.uc-grid.list{ grid-template-columns:minmax(0,1fr) !important; }
+
+.uc-card{ padding:8px 8px 12px !important; border-radius:16px !important;
+          gap:8px !important; border:0 !important; overflow:visible !important; }
+.uc-card .uc-thumb{ aspect-ratio:16/11 !important; border-radius:11px;
+                    overflow:visible !important; position:relative; }
+.uc-card .uc-thumb > img{ border-radius:11px; width:100%; height:100%;
+                          object-fit:cover; display:block; }
+.uc-card .uc-body{ padding:0 4px !important; gap:0 !important; flex:0 0 auto !important; }
+/* only the project's name survives at this size */
+.uc-card .uc-body > div:not(:first-of-type),
+.uc-card .uc-body p,
+.uc-card .uc-stats,
+.uc-card .uc-body > div:first-of-type > span{ display:none !important; }
+.uc-card .uc-body > div:first-of-type{ display:block !important; }
+.uc-card .uc-body strong{ font-weight:600; font-size:13px; line-height:1.3;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+  overflow:hidden; min-height:2.6em; }
+
+/* the task, on the picture, translucent */
+.uc-card .uc-thumb .sticker{ position:absolute !important; left:8px !important;
+  top:auto !important; right:auto !important; bottom:8px !important;
+  background:rgba(255,255,255,.82) !important;
+  -webkit-backdrop-filter:blur(7px); backdrop-filter:blur(7px);
+  font-size:8px !important; letter-spacing:.1em !important; padding:5px 10px !important;
+  border-radius:var(--pill) !important; box-shadow:0 1px 6px rgba(15,32,54,.14) !important; }
+.uc-card[data-a="Imagine"] .uc-thumb .sticker{ color:var(--t-imagine) !important; }
+.uc-card[data-a="Test"]    .uc-thumb .sticker{ color:var(--t-test)    !important; }
+.uc-card[data-a="Shape"]   .uc-thumb .sticker{ color:var(--t-shape)   !important; }
+.uc-card[data-a="Improve"] .uc-thumb .sticker{ color:var(--t-improve) !important; }
+
+/* the scoop, and the flag that sits in it */
+.uc-thumb > .uc-notch{ position:absolute; top:0; right:0; width:40px; height:36px;
+  z-index:3; background:var(--cc-paper,#fff); border-bottom-left-radius:17px; }
+.uc-thumb > .uc-notch::before, .uc-thumb > .uc-notch::after{ content:""; position:absolute;
+  width:11px; height:11px;
+  background:radial-gradient(circle at 0 100%, transparent 10.5px, var(--cc-paper,#fff) 11px); }
+.uc-thumb > .uc-notch::before{ top:0; right:100%; }
+.uc-thumb > .uc-notch::after{ top:100%; right:0; }
+.uc-thumb > .uc-notch > .uc-flag{ position:absolute; top:1px; right:1px; width:28px;
+  height:21px; border-radius:5px; overflow:hidden;
+  box-shadow:0 0 0 1px rgba(15,32,54,.13); }
+.uc-thumb > .uc-notch > .uc-flag img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+/* the list view keeps its own shape — the density fix is for the grid */
+.uc-grid.list .uc-card{ padding:10px !important; }
+.uc-grid.list .uc-card .uc-body p{ display:block !important; }
+.uc-grid.list .uc-card .uc-thumb{ width:210px; }
+
+/* an absent photograph is a designed panel, never a blank plate */
+.uc-thumb.uc-noimg{ background:color-mix(in srgb, var(--tc) 9%, #fff) !important; }
+.uc-thumb.uc-noimg > .uc-ghost{ position:absolute; right:-6px; bottom:-8px; width:86px; height:86px;
+  opacity:.16; pointer-events:none; }
+.uc-thumb.uc-noimg > .uc-ghost svg{ width:100%; height:100%; display:block; }

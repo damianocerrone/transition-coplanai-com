@@ -1,0 +1,292 @@
+(function ($) {
+  'use strict'
+
+  function generalFunctions() {
+    // Start Marquee
+    $('.marquee').each(function () {
+      var $this = $(this); // Store the current .marquee
+      for(var i = 0; i < 1; i++) {
+        var $cloneOfGroup = $this.find('.marquee__group:first').clone(); // Clone the first .marquee__group
+        // Add aria-hidden to all elements in the clone
+        $cloneOfGroup.find('*').attr('aria-hidden', 'true');
+        // Append the clone to the current .marquee
+        $this.append($cloneOfGroup);
+      }
+    });
+    $('.marquee .marquee__group').each(function () {
+      var $this = $(this); // Store the current .marquee__group
+      for(var i = 0; i < 1; i++) {
+        var $cloneOfText = $this.contents().clone().attr('aria-hidden', 'true'); // Clone the text and add aria-hidden
+        // Append the cloned text to the current .marquee__group
+        $this.append($cloneOfText);
+      }
+    });
+
+    // Filters Panel
+    // Initially hide the filters-panel
+    $(".filters-panel").css({
+      'right': '-100%',
+      'position': 'fixed'
+    });
+    // Open the filters-panel
+    $(".product-filter-button").click(function() {
+      $(".filters-panel").animate({
+        right: '0'
+      });
+    });
+    // Close the filters-panel
+    $(".product-filter-close").click(function() {
+      $(".filters-panel").animate({
+        right: '-100%'
+      });
+    });
+
+    // Tiled gallery captions
+    $('.tiled-gallery__gallery a:has(img[data-image-caption])').each(function() {
+      // Extract the caption from the data attribute
+      var caption = $(this).find('img').attr('data-image-caption');
+
+      // Check if the caption exists and is not empty
+      if (caption && caption.trim() !== '') {
+        // Create a new <div> element to hold the caption text
+        // You can replace <div> with <p> or any other tag as needed
+        var captionEl = $('<div>', {
+          class: 'image-caption', // Add a class for possible styling
+          html: caption // Set the inner HTML to the caption text
+        });
+
+        // Insert the caption element directly after the <a> tag
+        $(this).after(captionEl);
+      }
+    });
+
+    // Portfolio list pattern image reveal
+    $('.wp-block-post').hover(function(e) {
+      // Find the hidden image within this list item
+      var $hiddenImage = $(this).find('.wp-block-post-featured-image.hidden');
+      var offset = 24; // Offset from the cursor
+      var imageWidth = 480; // Define the image width
+      var imageHeight; // Variable to store the image height, to be calculated
+  
+      // Show the hidden image and apply initial styling
+      $hiddenImage.css({
+          'display': 'block', // Show the image
+          'position': 'absolute',
+          'z-index': '99', // Ensure it appears above other content
+          'pointer-events': 'none', // Allows mouse events to pass through it
+          'min-width': imageWidth + 'px', // Set min width to control image size
+          'max-width': imageWidth + 'px', // Set max width to control image size
+          'height': 'auto' // Maintain aspect ratio
+      });
+  
+      // Calculate the image height dynamically after it is displayed
+      imageHeight = $hiddenImage.outerHeight();
+  
+      // Move the image with the cursor
+      $(document).mousemove(function(e) {
+          var xPosition = e.pageX + offset;
+          var yPosition = e.pageY + offset;
+  
+          // Adjust the x position if the image goes beyond the right edge of the window
+          if (xPosition + imageWidth > $(window).width()) {
+              xPosition = e.pageX - imageWidth - offset;
+          }
+  
+          // Adjust the y position if the image goes beyond the bottom edge of the window
+          if (yPosition + imageHeight > $(window).height()) {
+              yPosition = e.pageY - imageHeight - offset;
+          }
+  
+          // Apply the adjusted position
+          $hiddenImage.offset({
+              top: yPosition,
+              left: xPosition
+          });
+      });
+    }, function() {
+        // On hover out, hide the image
+        $(this).find('.wp-block-post-featured-image.hidden').css('display', 'none');
+        $(document).off('mousemove'); // Remove mousemove event listener to prevent multiple bindings
+    });  
+  }
+
+  /* Mobile Submenu Dropdowns --------------------- */
+  function subMenuSetup() {
+    $('.wp-block-navigation__responsive-container-open').click(function() {
+      if ($(".wp-block-navigation__container .dropdown-arrow").length === 0) {
+        $(".wp-block-navigation__container .wp-block-navigation-submenu").append("<span class='dropdown-arrow'><i class='fas fa-chevron-down'></i></span>");
+      }
+
+      var subMenuToggle = $('.wp-block-navigation__container .wp-block-navigation-submenu > .dropdown-arrow').unbind();
+      subMenuToggle.on('click touchstart', function(e) {
+        e.preventDefault();
+
+        var submenu = $(this).parent().children('.wp-block-navigation__submenu-container');
+        if ($(submenu).is(':hidden')) {
+          $(submenu).slideDown(200);
+        } else {
+          $(submenu).slideUp(200);
+        }
+      });
+    });
+
+    $('.wp-block-navigation__responsive-container-close').click(function() {
+      $(".wp-block-navigation__container .dropdown-arrow").remove();
+    });
+  }
+
+  $(document)
+    .ready(generalFunctions)
+
+  $(window)
+    .on('load', subMenuSetup)
+})(jQuery)
+;
+/* global subscriptionData */
+document.addEventListener( 'DOMContentLoaded', function () {
+	const modal = document.getElementsByClassName( 'jetpack-subscription-modal' )[ 0 ];
+
+	if ( ! modal ) {
+		return;
+	}
+
+	const close = document.getElementsByClassName( 'jetpack-subscription-modal__close' )[ 0 ];
+
+	let redirectUrl = '';
+	let hasLoaded = false;
+
+	function reloadOnCloseSubscriptionModal( customUrl ) {
+		const destinationUrl = customUrl ? new URL( customUrl ) : new URL( redirectUrl );
+
+		// Prevent redirect to external sites.
+		if ( destinationUrl.hostname !== window.location.hostname ) {
+			return;
+		}
+
+		try {
+			localStorage.setItem(
+				'jetpack-subscription-modal-on-comment-scroll-to',
+				destinationUrl.hash
+			);
+		} catch {
+			// Ok if we can't set it.
+		}
+
+		// Add cache-busting parameter
+		destinationUrl.searchParams.set( '_ctn', Date.now() );
+		window.location.href = destinationUrl.toString();
+	}
+
+	function JetpackSubscriptionModalOnCommentMessageListener( event ) {
+		let message = event && event.data;
+		if ( typeof message === 'string' ) {
+			try {
+				message = JSON.parse( message );
+			} catch {
+				return;
+			}
+		}
+
+		const type = message && message.type;
+		const data = message && message.data;
+
+		if ( type !== 'subscriptionModalShow' || typeof data.url === 'undefined' ) {
+			return;
+		}
+
+		if ( subscriptionData.homeUrl !== event.origin ) {
+			return;
+		}
+
+		if ( data.email ) {
+			const emailInput = document.querySelector(
+				'.jetpack-subscription-modal__modal-content input[type="email"]'
+			);
+			if ( ! emailInput ) {
+				reloadOnCloseSubscriptionModal( data.url );
+				return;
+			}
+
+			const appSource = document.querySelector(
+				'.jetpack-subscription-modal__modal-content input[name="app_source"]'
+			);
+			if ( ! appSource ) {
+				reloadOnCloseSubscriptionModal( data.url );
+				return;
+			}
+
+			emailInput.value = data.email;
+			if ( data.is_logged_in ) {
+				emailInput.setAttribute( 'readonly', 'readonly' );
+				appSource.value = 'atomic-subscription-modal-li';
+			}
+		}
+
+		if ( ! hasLoaded ) {
+			try {
+				const storedCount = parseInt(
+					sessionStorage.getItem( 'jetpack-subscription-modal-shown-count' )
+				);
+				const showCount = ( isNaN( storedCount ) ? 0 : storedCount ) + 1;
+				sessionStorage.setItem( 'jetpack-subscription-modal-shown-count', showCount );
+
+				if ( showCount > 5 ) {
+					new Image().src =
+						document.location.protocol +
+						'//pixel.wp.com/g.gif?v=wpcom-no-pv&x_jetpack-subscribe-modal-comm=hidden_views_limit&r=' +
+						Math.random();
+
+					reloadOnCloseSubscriptionModal( data.url );
+					return;
+				}
+			} catch {
+				// Ignore any errors.
+			}
+
+			new Image().src =
+				document.location.protocol +
+				'//pixel.wp.com/g.gif?v=wpcom-no-pv&x_jetpack-subscribe-modal-comm=showed&r=' +
+				Math.random();
+
+			modal.classList.toggle( 'open' );
+			hasLoaded = true;
+			redirectUrl = data.url;
+		}
+	}
+
+	window.addEventListener( 'message', JetpackSubscriptionModalOnCommentMessageListener );
+
+	if ( close ) {
+		close.onclick = function ( event ) {
+			event.preventDefault();
+			modal.classList.toggle( 'open' );
+			reloadOnCloseSubscriptionModal();
+		};
+	}
+
+	window.onclick = function ( event ) {
+		if ( event.target === modal ) {
+			modal.style.display = 'none';
+			reloadOnCloseSubscriptionModal();
+		}
+	};
+
+	window.addEventListener( 'load', () => {
+		// Scroll to the last comment.
+		const subscriptionScroll = localStorage.getItem(
+			'jetpack-subscription-modal-on-comment-scroll-to'
+		);
+
+		if ( subscriptionScroll ) {
+			window.location.hash = subscriptionScroll;
+			localStorage.removeItem( 'jetpack-subscription-modal-on-comment-scroll-to' );
+
+			const comment = document.querySelector( subscriptionScroll );
+			if ( comment ) {
+				comment.scrollIntoView( { block: 'center', behavior: 'smooth' } );
+			}
+		}
+	} );
+} );
+;
+(()=>{var e=[],t=!1,i=[],n=new Promise(e=>{"loading"!==document.readyState?e():window.addEventListener("DOMContentLoaded",()=>e())});function o(e,t){if("string"==typeof e)try{e=JSON.parse(e)}catch{return}if(t&&"function"==typeof t.postMessage)try{t.postMessage(JSON.stringify({type:"likesMessage",data:e}),"*")}catch{}}function s(){const t=[];document.querySelectorAll("div.jetpack-likes-widget-unloaded").forEach(i=>{if(!(e.indexOf(i.id)>-1)&&c(i)){e.push(i.id);var n,o=/like-(post|comment)-wrapper-(\d+)-(\d+)-(\w+)/.exec(i.id);o&&5===o.length&&(n={blog_id:o[2],width:i.width},"post"===o[1]?n.post_id=o[3]:"comment"===o[1]&&(n.comment_id=o[3]),n.obj_id=o[4],t.push(n))}}),t.length>0&&o({event:"initialBatch",requests:t},window.frames["likes-master"])}function a(){const e=document.querySelector("#likes-other-gravatars");if(e){e.style.display="none",e.setAttribute("aria-hidden","true");const t=e.__resizeHandler;t&&(window.removeEventListener("resize",t),delete e.__resizeHandler)}}function r(){var e;if(t){!function(){for(let e=i.length-1;e>=0;e--){const t=i[e];if(!c(t)){const n=t&&t.parentElement&&t.parentElement.parentElement;n.classList.remove("jetpack-likes-widget-loaded"),n.classList.remove("jetpack-likes-widget-loading"),n.classList.add("jetpack-likes-widget-unloaded"),i.splice(e,1),t.remove()}}}();var n=[...document.querySelectorAll("div.jetpack-likes-widget-unloaded")].filter(e=>c(e));n.length>0&&s();for(var o=0,a=n.length;o<=a-1;o++)(e=n[o].id)&&l(e)}else setTimeout(r,500)}function l(e){if(void 0===e)return;const t=document.querySelector("#"+e);t.querySelectorAll("iframe").forEach(e=>e.remove());const n=t.querySelector(".likes-widget-placeholder");if(n&&n.classList.contains("post-likes-widget-placeholder")){const e=document.createElement("iframe");e.classList.add("post-likes-widget","jetpack-likes-widget"),e.name=t.dataset.name,e.src=t.dataset.src,e.height="55px",e.width="100%",e.frameBorder="0",e.scrolling="no",e.title=t.dataset.title,n.after(e)}if(n.classList.contains("comment-likes-widget-placeholder")){const e=document.createElement("iframe");e.class="comment-likes-widget-frame jetpack-likes-widget-frame",e.name=t.dataset.name,e.src=t.dataset.src,e.height="18px",e.width="100%",e.frameBorder="0",e.scrolling="no",t.querySelector(".comment-like-feedback").after(e),i.push(e)}t.classList.remove("jetpack-likes-widget-unloaded"),t.classList.add("jetpack-likes-widget-loading"),t.querySelector("iframe").addEventListener("load",e=>{o({event:"loadLikeWidget",name:e.target.name,width:e.target.width},window.frames["likes-master"]),t.classList.remove("jetpack-likes-widget-loading"),t.classList.add("jetpack-likes-widget-loaded")})}function c(e){const t=e.getBoundingClientRect().top,i=e.getBoundingClientRect().bottom;return t+2e3>=0&&i<=window.innerHeight+2e3}window.addEventListener("message",function(e){let i=e&&e.data;if("string"==typeof i)try{i=JSON.parse(i)}catch{return}const r=i&&i.type,l=i&&i.data;if("likesMessage"!==r||void 0===l.event)return;if("https://widgets.wp.com"===e.origin)switch(l.event){case"masterReady":n.then(()=>{t=!0;const e={event:"injectStyles"},i=document.querySelector(".sd-text-color"),n=document.querySelector(".sd-link-color"),a=i&&getComputedStyle(i)||{},r=n&&getComputedStyle(n)||{};document.body.classList.contains("single")&&o({event:"reblogsEnabled"},window.frames["likes-master"]),e.textStyles={color:a.color,fontFamily:a["font-family"],fontSize:a["font-size"],direction:a.direction,fontWeight:a["font-weight"],fontStyle:a["font-style"],textDecoration:a["text-decoration"]},e.linkStyles={color:r.color,fontFamily:r["font-family"],fontSize:r["font-size"],textDecoration:r["text-decoration"],fontWeight:r["font-weight"],fontStyle:r["font-style"]},o(e,window.frames["likes-master"]),s()});break;case"showLikeWidget":case"showCommentLikeWidget":break;case"killCommentLikes":document.querySelectorAll(".jetpack-comment-likes-widget-wrapper").forEach(e=>e.remove());break;case"clickReblogFlair":wpcom_reblog&&"function"==typeof wpcom_reblog.toggle_reblog_box_flair&&wpcom_reblog.toggle_reblog_box_flair(l.obj_id);break;case"hideOtherGravatars":a();break;case"showOtherGravatars":{const e=document.querySelector("#likes-other-gravatars");if(!e)break;const t=e.querySelector("ul");e.style.display="none",t.innerHTML="",e.querySelectorAll(".likes-text span").forEach(e=>e.textContent=l.totalLikesLabel),(l.likers||[]).forEach(async(e,i)=>{if("http"!==e.profile_URL.substr(0,4))return;const n=document.createElement("li");t.append(n);const s=encodeURI(e.profile_URL),r=encodeURI(e.avatar_URL);n.innerHTML=`<a href="${s}" rel="nofollow" target="_parent" class="wpl-liker">\n\t\t\t\t\t\t<img src="${r}"\n\t\t\t\t\t\t\talt=""\n\t\t\t\t\t\t\tstyle="width: 28px; height: 28px;" />\n\t\t\t\t\t\t<span></span>\n\t\t\t\t\t</a>`,n.classList.add(e.css_class),n.querySelector("img").alt=l.avatarAltTitle.replace("%s",e.name),n.querySelector("span").innerText=e.name,i===l.likers.length-1&&n.addEventListener("keydown",e=>{"Tab"!==e.key||e.shiftKey||(e.preventDefault(),a(),o({event:"focusLikesCount",parent:l.parent},window.frames["likes-master"]))})});const i=function(){const t="rtl"===getComputedStyle(e).direction,i=document.querySelector(`*[name='${l.parent}']`),n=i.getBoundingClientRect(),o=i.ownerDocument.defaultView,s=n.top+o.pageYOffset,a=n.left+o.pageXOffset;let r;if(e.style.top=s+l.position.top-1+"px",t){const t=l&&l.likers?Math.min(l.likers.length,5):0;r=a+l.position.left+24*t+4,e.style.transform="translateX(-100%)"}else r=a+l.position.left;e.style.left=r+"px",e.style.left="-9999px",e.style.display="block";const c=e.offsetWidth;r+c>o.innerWidth&&(r=n.right-c),e.style.left=r+"px",e.setAttribute("aria-hidden","false")};i(),e.focus();const n=function(e,t){var i;return function(){var n=this,o=arguments;clearTimeout(i),i=setTimeout(function(){e.apply(n,o)},t)}},s=n(i,100);e.__resizeHandler=s,window.addEventListener("resize",s),e.focus()}}}),document.addEventListener("click",a);var d,f,m,p=(d=250,f=r,function(){clearTimeout(m),m=setTimeout(f,d)});r(),window.addEventListener("scroll",p,!0)})();;

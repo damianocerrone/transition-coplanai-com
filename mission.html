@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-type="commons-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CoPlanAI · Mission</title>
+<meta name="coplan:release" content="public">
+<link rel="canonical" href="https://coplanai.com/mission.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CoPlanAI">
+<meta property="og:title" content="CoPlanAI · Mission">
+<meta property="og:description" content="Build the mandate to mediate urban change. Why we plan with the people who will live with the result, how coplanning works, and the research it rests on.">
+<meta property="og:url" content="https://coplanai.com/mission.html">
+<meta property="og:image" content="https://coplanai.com/img/pairs/vienna--vie-street.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="Build the mandate to mediate urban change. Why we plan with the people who will live with the result, how coplanning works, and the research it rests on.">
+<!-- 1 · type preset before first paint (keep FIRST in <head>) -->
+<!-- 2 · fonts: the same link on every page (FOUNDATION.md §2) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500..700&family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=Onest:wght@800&family=Schibsted+Grotesk:ital,wght@0,400..700;1,400..700&display=swap">
+<!-- 3 · the shared foundation -->
+<link rel="stylesheet" href="assets/site.css">
+<!-- 4 · Mission-only components. Type from role tokens, colour from tokens. -->
+<style>
+/* ---------- the opening: the mission statement ---------- */
+.m-open{padding-top:clamp(40px,6vw,96px)}
+.m-open .eyebrow{margin-bottom:clamp(22px,2.4vw,30px)}
+.m-open .display{max-width:12.6em}
+.m-open__row{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(28px,3.4vw,64px);margin-top:clamp(28px,3vw,44px);align-items:start}
+.m-open .lede{max-width:33em}
+.m-open .stats{margin-top:clamp(24px,2.6vw,34px);max-width:600px}
+.m-open__why{margin-top:clamp(30px,3.2vw,44px)}
+.m-open__why .body{max-width:36em}
+.m-open__why .body + .body{margin-top:.9em}
+.m-open__side{display:flex;flex-direction:column;gap:clamp(24px,2.6vw,34px)}
+
+/* vocabulary plate: "mandate" in its two senses */
+.vocab .lab + .name{margin-top:6px}
+.vocab__g{margin-top:4px;font-family:var(--f-q);font-style:italic;font-size:17px;color:var(--ink-3)}
+.vocab dl{margin:16px 0 0}
+.vocab dt{font-family:var(--f-label);font-weight:var(--w-label);font-size:var(--fs-label);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-label);margin-top:14px}
+.vocab dd{margin:4px 0 0;font-size:calc(var(--fs-text) - 1px);line-height:1.55;color:var(--c-text)}
+
+/* the two facts */
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px clamp(18px,2vw,32px)}
+.fact{padding-top:14px;border-top:1px solid var(--rule-soft)}
+.fact .num{display:flex;align-items:baseline;gap:.22em;flex-wrap:wrap}
+.fact .num small{font-size:.42em;letter-spacing:0;color:var(--ink-3)}
+.fact p:not(.num){margin-top:8px;font-size:calc(var(--fs-text) - 1.5px);line-height:1.5;color:var(--ink-3)}
+.src{margin-top:14px;max-width:40em}
+.human-src{margin-top:18px!important}
+.src i{text-transform:none;letter-spacing:.02em;font-style:italic}
+
+/* ---------- the chapter layout: a sticky index beside the reading column ---------- */
+.m-body{display:grid;grid-template-columns:196px minmax(0,1fr);column-gap:clamp(40px,4.6vw,84px);align-items:start;margin-top:clamp(56px,6vw,96px)}
+.m-index{position:sticky;top:calc(var(--header-h) + 32px);padding-top:clamp(30px,3vw,44px)}
+.m-index__t{margin-bottom:12px}
+.m-index ol{list-style:none;border-left:1px solid var(--rule)}
+.m-index a{position:relative;display:flex;align-items:baseline;gap:10px;padding:7px 0 7px 16px;font-family:var(--f-ui);font-weight:var(--w-ui);font-size:15px;line-height:1.3;letter-spacing:0;color:var(--ink-3);text-decoration:none;transition:color .2s}
+.m-index a .n{flex:none;min-width:1.9em;font-family:var(--f-label);font-weight:var(--w-label);font-size:var(--fs-label);letter-spacing:.04em;color:var(--ink-4)}
+.m-index a::before{content:"";position:absolute;left:-1.5px;top:5px;bottom:5px;width:2px;border-radius:2px;background:var(--amber);transform:scaleY(var(--p,0));transform-origin:50% 0}
+.m-index a:hover{color:var(--ink)}
+.m-index a[aria-current="true"]{color:var(--ink)}
+.m-index a[aria-current="true"] .n{color:var(--amber)}
+.m-index a:focus-visible{outline-offset:1px}
+.m-index__foot{margin-top:22px;padding-left:17px}
+
+/* a chapter */
+.ch{padding-top:clamp(30px,3vw,44px);padding-bottom:clamp(64px,7vw,108px)}
+.ch + .ch{border-top:1px solid var(--rule)}
+.ch__no{display:flex;align-items:baseline;gap:.9em}
+.ch__no b{font-weight:inherit;color:var(--amber)}
+.ch .h2{margin-top:16px;max-width:17.5em}
+.ch__lead{margin-top:clamp(22px,2.4vw,32px)}
+.ch__lead .lede{max-width:36em}
+.ch-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(28px,3.4vw,56px);margin-top:clamp(28px,3vw,44px);align-items:start}
+.prose > * + *{margin-top:.9em}
+.prose .body,.prose .lede{max-width:36em}
+.cap-link{display:inline-block;margin-top:8px;font-size:15px}
+
+/* ch01 · changing your choice */
+.epigraph{margin-top:clamp(28px,3vw,40px)!important;padding:clamp(20px,2.2vw,28px);border-radius:var(--r-plate);max-width:34em}
+.epigraph .it{font-family:var(--f-q);font-style:italic;font-size:clamp(19px,1.5vw,21px);line-height:1.36;color:var(--ink)}
+.epigraph .en{margin-top:10px;font-size:calc(var(--fs-text) - 1px);line-height:1.5;color:var(--ink-2)}
+.epigraph .lab{margin-top:12px}
+/* the order of an informed choice: four stations on a rule, and an arc back to the first */
+.order-wrap{margin-top:clamp(52px,5.4vw,76px)}
+.order-wrap > .lab{margin-bottom:clamp(58px,5vw,66px)}
+.order{position:relative;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule)}
+.order li{position:relative;padding:18px clamp(14px,1.8vw,28px) 0 0;min-width:0}
+.order li::before{content:"";position:absolute;top:-4.5px;left:0;width:8px;height:8px;border-radius:50%;background:var(--ink)}
+.order li:last-child::before{background:var(--amber)}
+.order .lab{display:block}
+.order .name{margin-top:6px}
+.order li:last-child .name{color:var(--amber)}
+.order .small{margin-top:6px;color:var(--c-text)}
+.order::before{content:"";position:absolute;left:4px;width:75%;bottom:100%;height:36px;border:1.5px solid var(--amber);border-bottom:0;border-radius:20px 20px 0 0;opacity:.8}
+.order::after{content:"";position:absolute;left:-.5px;bottom:calc(100% + 5px);border-left:5px solid transparent;border-right:5px solid transparent;border-top:8px solid var(--amber)}
+.order-box{position:relative}
+.order__back{position:absolute;left:calc(4px + 37.5%);top:-36px;transform:translate(-50%,-50%);padding:0 12px;background:var(--ground);font-family:var(--f-q);font-style:italic;font-size:17px;line-height:1.2;color:var(--amber);white-space:nowrap}
+
+/* ch02 · the medium: the participant loop and who takes part */
+.loop{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-top:clamp(32px,3.4vw,48px)}
+.loop li{position:relative;padding:14px 14px 16px;border-radius:14px;background:var(--field);min-width:0}
+.loop li .lab{display:block}
+.loop li p.name{margin-top:6px;font-size:clamp(17px,1.35vw,19.5px);line-height:1.2}
+.loop li:last-child{background:color-mix(in srgb,var(--ice) 11%,var(--ground))}
+.loop-note{margin-top:14px}
+.trio{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px clamp(20px,2.2vw,32px);margin-top:clamp(28px,3vw,40px)}
+.trio li{padding-top:16px;border-top:1px solid var(--rule-soft);min-width:0}
+.trio .name{margin-top:6px}
+.trio .body{margin-top:8px;font-size:calc(var(--fs-text) - 1px);line-height:1.55}
+.trio-head{margin-top:clamp(48px,5vw,72px)}
+.trio-head + .trio{margin-top:14px}
+
+/* ch03 · collaboration: who sits at the table */
+.table-head{margin-top:28px!important}
+.table-list{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.table-list li{font-family:var(--f-ui);font-weight:var(--w-ui);font-size:15px;line-height:1.2;color:var(--ink-2);padding:8px 14px 8px;border-radius:var(--r-pill);box-shadow:inset 0 0 0 1px var(--rule)}
+.table-list li.in{background:color-mix(in srgb,var(--violet) 8%,var(--ground));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--violet) 30%,transparent);color:var(--ink)}
+.table-note{margin-top:10px}
+
+/* ch03 · top-down, bottom-up: both struck, one sentence that bridges them (the chapter's close) */
+.tdbu{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,3.4vw,56px);align-items:center;margin-top:clamp(56px,6vw,88px);padding-top:clamp(34px,3.6vw,52px);border-top:1px solid var(--rule-soft)}
+.tdbu__terms{display:flex;flex-direction:column;gap:.06em;font-family:var(--f-display);font-weight:var(--w-display);font-variation-settings:var(--fvs-display);font-size:var(--fs-h2);line-height:1.08;letter-spacing:var(--ls-h2);color:var(--ink-4)}
+.tdbu__terms s{text-decoration-line:line-through;text-decoration-color:var(--amber);text-decoration-thickness:max(2px,.05em);text-decoration-skip-ink:none}
+.tdbu__text .say{max-width:22em}
+.tdbu__text .body{margin-top:14px;max-width:34em}
+
+/* ch03 · coplanning: the Venn and its key */
+.cp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,3.6vw,64px);margin-top:clamp(40px,4.4vw,60px);align-items:start}
+.cp__fig{position:sticky;top:calc(var(--header-h) + 28px)}
+.venn{display:block;width:100%;height:auto;max-width:500px;margin-inline:auto}
+.venn .r{transition:opacity .3s}
+.venn.is-on .r:not(.on){opacity:.4}
+.venn .hl > *{fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linejoin:round;opacity:0;transition:opacity .25s}
+.venn .hl > .on{opacity:.8}
+.venn .s-a0{stop-color:var(--venn-stake);stop-opacity:.95}.venn .s-a1{stop-color:var(--venn-stake);stop-opacity:.34}
+.venn .s-b0{stop-color:var(--venn-inst);stop-opacity:.95}.venn .s-b1{stop-color:var(--venn-inst);stop-opacity:.34}
+.venn .s-c0{stop-color:var(--venn-ai);stop-opacity:.95}.venn .s-c1{stop-color:var(--venn-ai);stop-opacity:.34}
+.venn .s-k0{stop-color:var(--venn-core);stop-opacity:1}.venn .s-k1{stop-color:var(--venn-core);stop-opacity:1}.venn .s-k2{stop-color:var(--venn-glow);stop-opacity:1}
+.venn .s-h0{stop-color:var(--venn-core);stop-opacity:.85}.venn .s-h1{stop-color:var(--venn-core);stop-opacity:0}
+.venn .f-ab{fill:var(--venn-si)}.venn .f-ac{fill:var(--venn-sa)}.venn .f-bc{fill:var(--venn-ia)}
+.venn .ring{fill:none;stroke-width:1.3;opacity:.75}
+.venn .ring-a{stroke:var(--venn-stake-ring)}.venn .ring-b{stroke:var(--venn-inst-ring)}.venn .ring-c{stroke:var(--venn-ai-ring)}
+.venn text{text-anchor:middle}
+.venn .t-name{font-family:var(--f-name);font-weight:var(--w-name);font-size:20px;letter-spacing:-.01em}
+.venn .t-role{font-family:var(--f-q);font-style:italic;font-size:14.5px}
+.venn .t-a{fill:var(--venn-ink-s)}.venn .t-b{fill:var(--venn-ink-i)}.venn .t-c{fill:var(--venn-ink-a)}
+/* the centre word: CoPlan (SITE.venn.c.word), never smaller than the circle names (24 Sept) */
+.venn .t-core{font-family:var(--f-name);font-weight:var(--w-name);font-size:22px;fill:var(--ink);letter-spacing:-.015em}
+.venn .labels{pointer-events:none}
+.cp__cap{margin-top:10px;text-align:center}
+.vk__g + .vk__g{margin-top:26px}
+.vk__g > .lab{padding-bottom:10px;border-bottom:1px solid var(--rule-soft)}
+.vk ul{list-style:none}
+.vk li{display:grid;grid-template-columns:18px minmax(0,1fr);gap:0 14px;padding:14px 10px 15px 0;border-bottom:1px solid var(--rule-soft);border-radius:2px;transition:background-color .25s}
+.vk li.on{background:linear-gradient(90deg,color-mix(in srgb,var(--ice) 10%,transparent),transparent 85%)}
+.vk .chip{width:16px;height:16px;margin-top:5px;border-radius:50%;box-shadow:0 0 0 1px var(--rule)}
+.chip--a{background:var(--venn-stake-ring)}.chip--b{background:var(--venn-inst-ring)}.chip--c{background:var(--venn-ai-ring)}
+.chip--ab{background:linear-gradient(90deg,var(--venn-stake-ring) 50%,var(--venn-inst-ring) 50%)}
+.chip--ac{background:linear-gradient(90deg,var(--venn-stake-ring) 50%,var(--venn-ai-ring) 50%)}
+.chip--bc{background:linear-gradient(90deg,var(--venn-inst-ring) 50%,var(--venn-ai-ring) 50%)}
+.chip--abc{background:radial-gradient(circle,var(--venn-core) 0 34%,transparent 36%),conic-gradient(var(--venn-stake-ring) 0 33.3%,var(--venn-inst-ring) 0 66.6%,var(--venn-ai-ring) 0)}
+.vk .name{font-size:clamp(19px,1.45vw,21px);line-height:1.2}
+.vk .role{margin-top:2px;font-family:var(--f-q);font-style:italic;font-size:16.5px;line-height:1.35}
+.vk .role--a{color:var(--venn-ink-s)}.vk .role--b{color:var(--venn-ink-i)}.vk .role--c{color:var(--venn-ink-a)}
+.vk .small{margin-top:6px;color:var(--c-text)}
+
+/* ch04 · the framework, simplest: two axes, four tasks */
+.fw-q{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px clamp(20px,2.4vw,40px);margin-top:clamp(28px,3vw,40px)}
+.fw-q > div{padding-top:16px;border-top:1px solid var(--rule-soft)}
+.fw-q .q{margin-top:8px}
+.fw{--rail:10px;position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-rows:auto auto auto;gap:14px;max-width:900px;margin:clamp(40px,4.4vw,60px) 0 0}
+.fw::before{content:"";grid-column:2;grid-row:1 / 4;justify-self:center;width:var(--rail);
+  background:linear-gradient(to bottom,transparent,color-mix(in oklab,var(--p-open) 72%,var(--amber)) 7%,var(--field-2) 50%,var(--p-defined) 93%,transparent);
+  clip-path:polygon(0 0,100% 0,58% 50%,100% 100%,0 100%,42% 50%)}
+.fw::after{content:"";grid-column:1 / 4;grid-row:2;align-self:center;height:var(--rail);
+  background:linear-gradient(to right,transparent,var(--p-respond) 7%,var(--field-2) 50%,var(--p-propose) 93%,transparent);
+  clip-path:polygon(0 0,50% 42%,100% 0,100% 100%,50% 58%,0 100%)}
+.fw > *{position:relative;z-index:1}
+.fw__c{display:flex;align-items:center;justify-content:center}
+.fw__c--t{grid-column:2;grid-row:1}
+.fw__c--b{grid-column:2;grid-row:3}
+.fw__c--l{grid-column:1;grid-row:2}
+.fw__c--r{grid-column:3;grid-row:2}
+.fw__c .cap{box-shadow:0 0 0 5px var(--ground)}
+.fw__c--l .cap,.fw__c--r .cap{writing-mode:vertical-rl;padding:12px 6px 12px 5px}
+.fw__c--l .cap{transform:rotate(180deg)}
+.fw__c--t .cap--open{box-shadow:0 0 0 5px var(--ground),inset 0 0 0 1px color-mix(in oklab,var(--p-open) 70%,var(--amber))}
+.fw__q{grid-column:2;grid-row:2;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:18px}
+.fw__t{display:flex;flex-direction:column;min-height:clamp(150px,14vw,210px);background:var(--ground)}
+.fw__t--b{justify-content:flex-end}
+.fw__t .name{color:var(--qi,var(--ink))}
+.fw__t .q{margin-top:8px;max-width:15em}
+
+/* ch05 · building the mandate */
+.build{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(36px,3.6vw,56px) clamp(24px,3vw,48px);margin-top:clamp(32px,3.4vw,48px)}
+.bcol{padding-top:18px;border-top:1px solid var(--rule)}
+.bcol .h3 + .lab{margin-top:8px}
+.bcol .body,.bcol .q{margin-top:14px}
+.bcol .figure{margin-top:24px}
+.pair{display:grid;grid-template-rows:auto auto;gap:3px;border-radius:var(--r-img);overflow:hidden}
+.pair > span{position:relative;display:block;aspect-ratio:2/1;overflow:hidden;background:var(--field)}
+.pair img{width:100%;height:100%;object-fit:cover}
+.pair .figure__tag{top:12px;left:12px}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;margin-top:20px}
+.steps li{padding:12px 10px 13px;border-radius:12px;background:var(--field);min-width:0}
+.steps li .lab{display:block;font-size:10.5px}
+.steps li span.st{display:block;margin-top:5px;font-family:var(--f-ui);font-weight:var(--w-ui);font-size:14.5px;line-height:1.2;color:var(--ink);overflow-wrap:break-word}
+.steps li.key{background:color-mix(in srgb,var(--ice) 13%,var(--ground))}
+.steps li.key .lab{color:var(--amber)}
+.steps-note{margin-top:10px}
+.rule-line{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2.4fr);gap:12px 32px;margin-top:clamp(44px,4.6vw,64px);padding-top:clamp(24px,2.6vw,34px);border-top:1px solid var(--rule);align-items:baseline}
+
+/* ch06 · what stays human */
+.human-fig .figure__media{aspect-ratio:4/3}
+.roles-lead{margin-top:clamp(48px,5vw,72px);max-width:24em}
+.roles{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px clamp(20px,2.2vw,32px);margin-top:clamp(22px,2.4vw,30px)}
+.roles li{padding-top:16px;border-top:1px solid var(--rule);min-width:0}
+.roles .h3{margin-top:6px}
+.roles .body{margin-top:10px;font-size:calc(var(--fs-text) - 1px);line-height:1.55}
+.roles li:nth-child(2) .h3{color:var(--amber)}
+
+/* ch06 · research */
+.authors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px clamp(20px,2.4vw,40px);margin-top:clamp(32px,3.4vw,48px)}
+.author{padding-top:18px;border-top:1px solid var(--rule)}
+.author .lab{margin-top:8px}
+.author .body{margin-top:12px;font-size:calc(var(--fs-text) - .5px)}
+.research-lead{margin-top:clamp(22px,2.4vw,32px);align-items:start}
+.work{padding:18px 20px 20px;border-radius:16px;background:color-mix(in srgb,var(--violet) 6%,var(--ground));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--violet) 16%,transparent)}
+.work .lab{margin:0 0 6px}
+.work .t{font-family:var(--f-q);font-style:italic;font-size:clamp(19px,1.5vw,21.5px);line-height:1.32;color:var(--ink);text-wrap:balance}
+.work .by{margin-top:10px;font-family:var(--f-name);font-weight:var(--w-name);font-size:16px;line-height:1.3;color:var(--ink)}
+.work .t a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em;text-decoration-color:var(--rule)}
+.work .t a:hover,.work .ref a:hover{color:var(--amber);text-decoration-color:var(--amber)}
+.work .ref{margin-top:12px;padding-top:12px;border-top:1px solid color-mix(in srgb,var(--violet) 16%,transparent);font-size:calc(var(--fs-text) - 3px);line-height:1.5;color:var(--ink-3);overflow-wrap:anywhere}
+.work .ref a{color:var(--ink-2);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--rule)}
+.trad-head{margin-top:clamp(44px,4.6vw,64px)}
+.trad{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px clamp(20px,2.2vw,32px);margin-top:12px}
+.trad li{padding-top:16px;border-top:1px solid var(--rule-soft);min-width:0}
+.trad .name{margin-top:6px}
+.trad .body{margin-top:8px;font-size:calc(var(--fs-text) - 1px);line-height:1.55}
+.qs{margin-top:clamp(44px,4.6vw,64px)}
+.qs > .lab{padding-bottom:10px;border-bottom:1px solid var(--rule-soft)}
+.qs ol{list-style:none}
+.qs li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:0 12px;padding:20px 0 22px;border-bottom:1px solid var(--rule-soft)}
+.qs li > .lab{padding-top:.3em}
+.qs .body{max-width:40em}
+.qs .body i{font-family:var(--f-q);font-style:italic;font-size:1.08em;color:var(--ink)}
+.shelf{margin-top:clamp(44px,4.6vw,64px)}
+.shelf > .lab{padding-bottom:10px;border-bottom:1px solid var(--rule-soft)}
+.shelf ol{list-style:none;columns:3;column-gap:clamp(20px,2.4vw,36px)}
+.shelf li{break-inside:avoid;display:grid;grid-template-columns:3.1em minmax(0,1fr);gap:0 10px;padding:10px 0;border-bottom:1px solid var(--rule-soft)}
+.shelf .y{font-family:var(--f-label);font-weight:var(--w-label);font-size:var(--fs-label);letter-spacing:.04em;color:var(--ink-4);padding-top:.3em}
+.shelf .a{display:block;font-family:var(--f-ui);font-weight:var(--w-ui);font-size:15.5px;line-height:1.3;color:var(--ink)}
+.shelf .b{display:block;font-family:var(--f-q);font-style:italic;font-size:16px;line-height:1.35;color:var(--ink-3)}
+.shelf-foot{margin-top:18px}
+.studio{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:16px 32px;margin-top:clamp(40px,4.4vw,60px);padding-top:22px}
+.studio .body{max-width:48em}
+
+/* ---------- responsive ---------- */
+@media (max-width:1180px){
+  .m-body{grid-template-columns:172px minmax(0,1fr);column-gap:40px}
+  .m-index a{font-size:14.5px}
+  .shelf ol{columns:2}
+}
+@media (max-width:1180px) and (min-width:981px){
+  .steps{grid-template-columns:minmax(0,1fr)}
+  .steps li{display:flex;align-items:baseline;gap:12px;padding:10px 14px}
+  .steps li span.st{margin-top:0}
+}
+@media (max-width:1100px){
+  .m-body{grid-template-columns:minmax(0,1fr);margin-top:clamp(40px,5vw,64px)}
+  .m-index{position:static;padding:20px 0 12px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  .m-index ol{columns:3;column-gap:28px;border-left:0}
+  .m-index li{break-inside:avoid}
+  .m-index a{padding-left:0}
+  .m-index a::before{display:none}
+  .m-index__foot{display:none}
+  .ch:first-of-type{padding-top:clamp(36px,4vw,56px)}
+  .cp__fig{top:calc(var(--header-h) + 20px)}
+}
+@media (max-width:980px){
+  .m-open__row,.ch-grid{grid-template-columns:minmax(0,1fr)}
+  .m-open__side{flex-direction:row;flex-wrap:wrap;align-items:flex-start}
+  .m-open__side > .vocab{flex:1 1 320px}
+  .m-open__side > .m-facts{flex:1 1 320px}
+  .cp{grid-template-columns:minmax(0,1fr)}
+  .cp__fig{position:relative;top:auto}
+  .cp__fig .venn{max-width:440px}
+  .loop{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .trio,.trad,.roles{grid-template-columns:minmax(0,1fr)}
+  .build{grid-template-columns:minmax(0,1fr)}
+  .rule-line{grid-template-columns:minmax(0,1fr)}
+  .tdbu{grid-template-columns:minmax(0,1fr);align-items:start}
+  .tdbu__terms{flex-direction:row;flex-wrap:wrap;gap:0 .5em}
+}
+@media (max-width:760px){
+  .m-index ol{columns:2}
+  .fw-q{grid-template-columns:minmax(0,1fr)}
+  .authors{grid-template-columns:minmax(0,1fr)}
+  .shelf ol{columns:1}
+  /* the order becomes a vertical rule, and the arc a line of text */
+  .order-wrap > .lab{margin-bottom:18px}
+  .order{grid-template-columns:minmax(0,1fr);border-top:0;border-left:1px solid var(--rule);margin-left:4px}
+  .order li{padding:0 0 22px 22px}
+  .order li::before{top:.35em;left:-4.5px}
+  .order::before,.order::after{display:none}
+  .order__back{position:static;transform:none;display:block;padding:0 0 0 22px;white-space:normal}
+  .order__back::before{content:"\21BA\00a0";font-style:normal}
+}
+@media (max-width:640px){
+  .facts{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .loop{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .loop li:last-child{grid-column:1/-1}
+  .steps{grid-template-columns:minmax(0,1fr)}
+  .steps li{display:flex;align-items:baseline;gap:12px;padding:10px 14px}
+  .steps li span.st{margin-top:0}
+  .qs li{grid-template-columns:34px minmax(0,1fr)}
+  .fw{gap:8px;--rail:7px}
+  .fw__q{gap:10px}
+  .fw__t{min-height:0;padding:14px 12px 16px}
+  .fw__t .name{font-size:17px;line-height:1.15}
+  .fw__t .q{font-size:15.5px;line-height:1.3}
+  .fw__c .cap{font-size:9.5px;letter-spacing:.1em}
+  .fw__c--t .cap,.fw__c--b .cap{padding:6px 10px 5px}
+  .fw__c--l .cap,.fw__c--r .cap{padding:10px 5px 10px 4px}
+  .venn .t-name{font-size:23px}
+  .venn .t-role{font-size:16px}
+  .venn .t-core{font-size:25px}
+}
+@media (max-width:420px){
+  .m-index ol{columns:1}
+  .facts{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-height:560px){
+  .cp__fig{position:relative;top:auto}
+}
+</style>
+</head>
+<body data-page="mission">
+
+<div data-site-header></div>
+
+<main id="main">
+
+<!-- ================= THE MISSION STATEMENT ================= -->
+<section class="wrap m-open" aria-labelledby="h1">
+  <p class="eyebrow">Mission</p>
+  <h1 class="display" id="h1">Build the mandate to <em>mediate</em> urban change.</h1>
+  <div class="m-open__row">
+    <div>
+      <p class="lede">Cities are changing their streets, squares and neighbourhoods to meet climate, housing and mobility goals. An institution decides each change, and people live with it. We help institutions build the mandate to work out that change in public: to put real options to the people affected, show what each would do, and decide with them while the choice is still open.</p>
+      <p class="stats"><span><b data-m="reach.engagements">95</b> engagements</span><span><b data-m="reach.cities">73</b> cities</span><span><b data-m="reach.countries">38</b> countries</span><span>since <b data-m="reach.since">2021</b></span></p>
+      <div class="m-open__why">
+        <p class="body">The Paris Agreement, the European Green Deal and the EU Mission on Adaptation all ask for change, and cities deliver much of it. Many more cities and countries have committed to it than ten years ago.</p>
+        <p class="body">Delivering change takes plans, permits and schedules. Mediating it takes two more things: a process in which the people who will live with a decision can try the options and see what each would do, and an institution with the standing to act on what they choose. That standing is the mandate. The mandate to deliver change keeps growing; the mandate to imagine it has to grow with it.</p>
+      </div>
+    </div>
+    <div class="m-open__side">
+      <aside class="plate plate--ice vocab" aria-label="From our vocabulary: mandate">
+        <p class="lab">From our vocabulary</p>
+        <p class="name">mandate</p>
+        <p class="vocab__g">noun · as we use it, in two senses</p>
+        <dl>
+          <dt>The condition</dt>
+          <dd>An institution’s standing to act on what comes out of an engagement, and to carry it into a decision.</dd>
+          <dt>The output</dt>
+          <dd>What coplanning leaves behind when it works: documented evidence of what a community can agree to want, and that a city can act on.</dd>
+        </dl>
+      </aside>
+      <div class="m-facts">
+        <div class="facts">
+          <div class="fact">
+            <p class="num num--s">20 <small>→</small> 32</p>
+            <p>countries with a national adaptation strategy, 2013 to 2023</p>
+          </div>
+          <div class="fact">
+            <p class="num num--s">4,500+</p>
+            <p>signatories to the Covenant of Mayors, up from a few hundred</p>
+          </div>
+        </div>
+        <p class="lab src">Source: European Environment Agency, <i>Urban adaptation in Europe: what works?</i> (EEA Report 14/2023)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap m-body">
+
+  <!-- the chapter index: sticky beside the text on desktop, a contents list above it on smaller screens -->
+  <nav class="m-index" aria-label="Chapters on this page">
+    <p class="lab m-index__t">On this page</p>
+    <ol>
+      <li><a href="#choice"><span class="n">01</span><span>Changing your choice</span></a></li>
+      <li><a href="#medium"><span class="n">02</span><span>The medium</span></a></li>
+      <li><a href="#collaboration"><span class="n">03</span><span>Collaboration</span></a></li>
+      <li><a href="#framework"><span class="n">04</span><span>The framework</span></a></li>
+      <li><a href="#mandate"><span class="n">05</span><span>Building the mandate</span></a></li>
+      <li><a href="#research"><span class="n">06</span><span>The research</span></a></li>
+    </ol>
+    <p class="m-index__foot"><a class="link" href="mailto:info@coplanai.com?subject=A%20first%20conversation">Write to us</a></p>
+  </nav>
+
+  <div class="m-main">
+
+<!-- ================= 01 · CHANGING YOUR CHOICE ================= -->
+<section class="ch" id="choice" aria-labelledby="choice-h">
+  <p class="eyebrow ch__no"><b>01</b> Changing your choice</p>
+  <h2 class="h2" id="choice-h">Democracy is not only about choice, but about being able to <em>change your choice</em>.</h2>
+  <div class="ch-grid">
+    <div class="prose">
+      <p class="lede">A vote records a choice at one moment. Planning can offer more: the chance to try an idea on the real place, see what it would do, compare it with the alternatives and choose again.</p>
+      <p class="body">An idea drawn into a photograph of your own street often changes before anyone votes on it: the render rewrites the wish. A changed mind at that point is the process doing its work.</p>
+      <p class="body">So we turn a plan into options that people can compare, contest and rate, and every option is evaluated before anyone is asked to choose. Good deliberation gives people the power of understanding, not only the power of choice.</p>
+      <blockquote class="epigraph plate plate--ice">
+        <p class="it" lang="it">«Perché una città è democratica quando mette in comune la conoscenza.»</p>
+        <p class="en">Because a city is democratic when it holds knowledge in common.</p>
+        <p class="lab">City of Bologna, TICO page</p>
+      </blockquote>
+    </div>
+    <figure class="figure figure--4x3">
+      <div class="figure__media"><img src="img/pool/2026-bologna--tico-boy.jpg" width="1800" height="1351" alt="A boy types on a large touchscreen that shows a photograph of a tree-lined street, an adult’s arm resting on his shoulder." loading="lazy"></div>
+      <figcaption class="figure__cap"><span class="lab">Bologna · TICO · 2026</span>A pupil tries a change on a photograph of a real street, at our station in TICO – Officina mobile della conoscenza, the City of Bologna’s workshop truck.<br><a class="link link--ext cap-link" href="https://partecipa.comune.bologna.it/partecipa/progetti/tico-officina-conoscenza?sect=didattico-tico-per-le-scuole" hreflang="it" data-case="2026-bologna" target="_blank" rel="noopener">TICO, Bologna<span class="sr"> (opens the project page in a new tab)</span></a></figcaption>
+    </figure>
+  </div>
+
+  <div class="order-wrap">
+    <p class="lab">What an informed choice takes</p>
+    <div class="order-box">
+    <ol class="order">
+      <li><span class="lab">01</span><p class="name name--s">Try an idea</p><p class="small">Drawn into a photograph of the real place, in the words of the person who had it.</p></li>
+      <li><span class="lab">02</span><p class="name name--s">See its impact</p><p class="small">Checked against the institution’s own rules, and for what it would do to the place and the people in it.</p></li>
+      <li><span class="lab">03</span><p class="name name--s">Decide</p><p class="small">With the options and what each would do side by side.</p></li>
+      <li><span class="lab">04</span><p class="name name--s">Change your choice</p><p class="small">After seeing more, or hearing the person next to you.</p></li>
+    </ol>
+    <p class="order__back">and back to the first step, as often as it takes</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 02 · THE MEDIUM ================= -->
+<section class="ch" id="medium" aria-labelledby="medium-h">
+  <p class="eyebrow ch__no"><b>02</b> The medium</p>
+  <h2 class="h2" id="medium-h">Bridging the <em>medium</em> imbalance.</h2>
+  <div class="ch-grid">
+    <div class="prose">
+      <p class="body">In planning, the drawing has long been the medium that produces decisions, and planners held it. Residents held the comment box. Whoever holds the decision-grade medium decides; everyone else annotates.</p>
+      <p class="body">Generative images give everyone the same medium. Anyone at the table can test an idea in images, without first learning to read a plan or to use design software. The loop below is all a participant needs to learn.</p>
+    </div>
+    <figure class="figure figure--4x3">
+      <div class="figure__media"><img src="img/pool/2023-undp-nusantara--table.jpg" width="1800" height="1200" alt="Participants at a round table with printed images, one standing and presenting." loading="lazy"></div>
+      <figcaption class="figure__cap"><span class="lab">Nusantara · Indonesia · 2023</span>Local communities co-designing Indonesia’s future capital, with printed images on the table.<br><a class="link link--ext cap-link" href="https://coplanai.com/portfolio/nusantara-2023/" data-case="2023-undp-nusantara" target="_blank" rel="noopener">Nusantara<span class="sr"> (opens the project page in a new tab)</span></a></figcaption>
+    </figure>
+  </div>
+
+  <ol class="loop" aria-label="The participant loop, in five steps">
+    <li><span class="lab">Step 1</span><p class="name">Start from a photo</p></li>
+    <li><span class="lab">Step 2</span><p class="name">Propose in plain words</p></li>
+    <li><span class="lab">Step 3</span><p class="name">See it, in seconds</p></li>
+    <li><span class="lab">Step 4</span><p class="name">Debate and compare</p></li>
+    <li><span class="lab">Step 5</span><p class="name">Rate and converge</p></li>
+  </ol>
+  <p class="small loop-note">One full loop takes about half a day, in the room or online. Each session is drawn from a library of sixteen workshop formats. <a class="link link--arrow" href="use-coplanai.html">Ways to work together</a></p>
+
+  <p class="lab trio-head">Who else can take part</p>
+  <ul class="trio">
+    <li>
+      <p class="lab">Children · 6 to 14</p>
+      <p class="name name--s">From Playgrounds to Planning</p>
+      <p class="body">With a research grant from the Architects’ Council of Europe, we built a version of the process fitted to how children think about space: drawing-guided for the youngest, tablets for the oldest. It was piloted with a school class in Finland and at a museum in Milan in 2023. <a href="https://coplanai.com/portfolio/playgrounds-to-planning/" data-case="2023-ace-children-playgrounds-to-planning" target="_blank" rel="noopener">The project<span class="sr"> (opens in a new tab)</span></a></p>
+    </li>
+    <li>
+      <p class="lab">In the street</p>
+      <p class="name name--s">Kiezlabor, Berlin</p>
+      <p class="body">CityLAB Berlin ran the Kiezlabor, a mobile pavilion touring Berlin’s neighbourhoods, for three summers (2023–2025). Passers-by, many of them children, tried changes to their own streets. CityLAB gave the tool its own names: Kiezvisionen, then Stadtvisionen. <a href="https://coplanai.com/portfolio/kiezlabor/" data-case="2025-berlin-kiezlabor" target="_blank" rel="noopener">The project<span class="sr"> (opens in a new tab)</span></a></p>
+    </li>
+    <li>
+      <p class="lab">More than human</p>
+      <p class="name name--s">BiodiverseCity?, Tallinn</p>
+      <p class="body">At the Estonian Museum of Natural History (2023), visitors reimagined communal areas as wilder, more biodiverse habitats. <a href="https://coplanai.com/portfolio/estonian-museum-of-natural-history/" data-case="2023-tallinn-biodiverse-city-museum" target="_blank" rel="noopener">The project<span class="sr"> (opens in a new tab)</span></a></p>
+    </li>
+  </ul>
+</section>
+
+<!-- ================= 03 · COLLABORATION ================= -->
+<!-- The Venn texts are SITE-BRIEF §9 verbatim (decided 23 Sept: "Foresight", with AI set small under it;
+     overlaps renamed). The page script refreshes every [data-venn] from SITE.venn (assets/site.js), shared
+     with the home page, so a later change is made in one place. -->
+<section class="ch" id="collaboration" aria-labelledby="cp-h">
+  <p class="eyebrow ch__no"><b>03</b> Collaboration</p>
+  <h2 class="h2" id="cp-h">From participation to <em>collaboration</em>.</h2>
+  <div class="prose ch__lead">
+    <p class="lede">Participatory planning invites stakeholders to react to a proposal someone else has framed. Collaborative planning has the parties to a decision author it together. We want to move away from inviting stakeholders to participate, toward having them coplan.</p>
+  </div>
+
+  <div class="ch-grid">
+    <div class="prose">
+      <p class="body">Stakeholders are more than residents. They include the planning office, the other departments of the same city, and the private sector: businesses, developers and the design offices that draw the result. The platform is also used inside institutions, so that departments work from the same images and the same evidence before a plan goes public.</p>
+      <p class="lab table-head">At the table</p>
+      <ul class="table-list" aria-label="Who coplans">
+        <li>Residents</li><li>Visitors</li><li>Local businesses</li><li class="in">The planning office</li><li class="in">Other city departments</li><li>Developers</li><li>Design offices</li><li>Researchers</li>
+      </ul>
+      <p class="small table-note">Tinted: inside the institution.</p>
+    </div>
+    <figure class="figure figure--3x2">
+      <div class="figure__media"><img src="img/pool/2021-jyvaskyla-recenter--table.jpg" width="1800" height="1200" alt="People seated around a long table covered in printed images and plans, under woven pendant lamps." loading="lazy"></div>
+      <figcaption class="figure__cap"><span class="lab">Jyväskylä · 2021</span>At the Re-Centre Jyväskylä workshop, merchants, city officials, planners and researchers worked together on the future of the Kauppakatu high street.<br><a class="link link--ext cap-link" href="https://coplanai.com/portfolio/jyvaskyla-recenter/" data-case="2021-jyvaskyla-recenter" target="_blank" rel="noopener">Re-Centre Jyväskylä<span class="sr"> (opens the project page in a new tab)</span></a></figcaption>
+    </figure>
+  </div>
+
+  <div class="cp">
+    <figure class="cp__fig">
+      <svg class="venn" id="venn" viewBox="30 40 500 480" role="img" aria-labelledby="venn-t venn-d">
+        <title id="venn-t">Coplanning</title>
+        <desc id="venn-d">Coplanning: Stakeholders, Institutions and Foresight with AI overlap; where all three meet is Coplanning.</desc>
+        <defs>
+          <clipPath id="vc-a"><circle cx="190" cy="200" r="150"/></clipPath>
+          <clipPath id="vc-b"><circle cx="370" cy="200" r="150"/></clipPath>
+          <radialGradient id="vg-a" gradientUnits="userSpaceOnUse" cx="190" cy="200" r="150" fx="96" fy="138"><stop offset="0" class="s-a0"/><stop offset="1" class="s-a1"/></radialGradient>
+          <radialGradient id="vg-b" gradientUnits="userSpaceOnUse" cx="370" cy="200" r="150" fx="464" fy="138"><stop offset="0" class="s-b0"/><stop offset="1" class="s-b1"/></radialGradient>
+          <radialGradient id="vg-c" gradientUnits="userSpaceOnUse" cx="280" cy="356" r="150" fx="280" fy="468"><stop offset="0" class="s-c0"/><stop offset="1" class="s-c1"/></radialGradient>
+          <radialGradient id="vg-k" gradientUnits="userSpaceOnUse" cx="280" cy="252" r="72"><stop offset="0" class="s-k0"/><stop offset=".62" class="s-k1"/><stop offset="1" class="s-k2"/></radialGradient>
+          <radialGradient id="vg-h" gradientUnits="userSpaceOnUse" cx="280" cy="252" r="128"><stop offset="0" class="s-h0"/><stop offset="1" class="s-h1"/></radialGradient>
+        </defs>
+        <!-- the three circles: tinted at their outer edge, fading toward the middle -->
+        <g class="r" data-r="a"><circle cx="190" cy="200" r="150" fill="url(#vg-a)"/></g>
+        <g class="r" data-r="b"><circle cx="370" cy="200" r="150" fill="url(#vg-b)"/></g>
+        <g class="r" data-r="c"><circle cx="280" cy="356" r="150" fill="url(#vg-c)"/></g>
+        <!-- the overlaps: lighter, not darker (light passing through) -->
+        <g class="r" data-r="ab" clip-path="url(#vc-a)"><circle class="f-ab" cx="370" cy="200" r="150"/></g>
+        <g class="r" data-r="ac" clip-path="url(#vc-a)"><circle class="f-ac" cx="280" cy="356" r="150"/></g>
+        <g class="r" data-r="bc" clip-path="url(#vc-b)"><circle class="f-bc" cx="280" cy="356" r="150"/></g>
+        <circle cx="280" cy="252" r="128" fill="url(#vg-h)" pointer-events="none"/>
+        <!-- the centre: a luminous white core -->
+        <g class="r" data-r="abc" clip-path="url(#vc-a)"><g clip-path="url(#vc-b)"><circle cx="280" cy="356" r="150" fill="url(#vg-k)"/></g></g>
+        <g aria-hidden="true" pointer-events="none">
+          <circle class="ring ring-a" cx="190" cy="200" r="150"/>
+          <circle class="ring ring-b" cx="370" cy="200" r="150"/>
+          <circle class="ring ring-c" cx="280" cy="356" r="150"/>
+        </g>
+        <!-- the outline of whatever is being pointed at -->
+        <g class="hl" aria-hidden="true" pointer-events="none">
+          <circle data-h="a" cx="190" cy="200" r="150"/>
+          <circle data-h="b" cx="370" cy="200" r="150"/>
+          <circle data-h="c" cx="280" cy="356" r="150"/>
+          <path data-h="ab" d="M280 80A150 150 0 0 1 280 320A150 150 0 0 1 280 80Z"/>
+          <path data-h="ac" d="M131.1 337.9A150 150 0 0 1 338.9 218.1A150 150 0 0 1 131.1 337.9Z"/>
+          <path data-h="bc" d="M428.9 337.9A150 150 0 0 1 221.1 218.1A150 150 0 0 1 428.9 337.9Z"/>
+          <path data-h="abc" d="M280 320A150 150 0 0 0 338.9 218.1A150 150 0 0 0 221.1 218.1A150 150 0 0 0 280 320Z"/>
+        </g>
+        <g class="labels" aria-hidden="true">
+          <text class="t-name t-a" x="128" y="182" data-venn="s.title">Stakeholders</text>
+          <text class="t-role t-a" x="128" y="205" data-venn="s.line">hold the agency</text>
+          <text class="t-name t-b" x="432" y="182" data-venn="i.title">Institutions</text>
+          <text class="t-role t-b" x="432" y="205" data-venn="i.line">hold the mandate</text>
+          <text class="t-name t-c" x="280" y="424" data-venn="a.title">Foresight</text>
+          <text class="t-role t-c" x="280" y="447" data-venn="a.line">with AI</text>
+          <text class="t-core" x="280" y="262" data-venn="c.word">CoPlan</text>
+        </g>
+      </svg>
+      <figcaption class="lab cp__cap">Point at a part of the diagram, or at a line of the key</figcaption>
+    </figure>
+
+    <div class="vk" id="venn-key">
+      <div class="vk__g">
+        <p class="lab">Who holds what</p>
+        <ul>
+          <li data-r="a"><span class="chip chip--a" aria-hidden="true"></span><div><h3 class="name" data-venn="s.title">Stakeholders</h3><p class="role role--a" data-venn="s.line">hold the agency</p><p class="small" data-venn="s.text">Residents, businesses and visitors: the people who live with the outcome. They bring lived expertise, what they value and what a place is actually for.</p></div></li>
+          <li data-r="b"><span class="chip chip--b" aria-hidden="true"></span><div><h3 class="name" data-venn="i.title">Institutions</h3><p class="role role--b" data-venn="i.line">hold the mandate</p><p class="small" data-venn="i.text">City offices, planners and funders: the bodies that must decide and deliver. They hold the mandate and set the guardrails every option has to respect.</p></div></li>
+          <li data-r="c"><span class="chip chip--c" aria-hidden="true"></span><div><h3 class="name" data-venn="a.title">Foresight</h3><p class="role role--c" data-venn="a.line">with AI</p><p class="small" data-venn="a.text">AI turns people’s own words into scenarios of the real place and evaluates each against the institution’s policy, design guides and law, and for likely environmental and social impact. Scenarios, not forecasts: it shows what could happen; people decide what should.</p></div></li>
+        </ul>
+      </div>
+      <div class="vk__g">
+        <p class="lab">Where they overlap</p>
+        <ul>
+          <li data-r="ab"><span class="chip chip--ab" aria-hidden="true"></span><div><h3 class="name" data-venn="si.title">Public interest &amp; governance</h3><p class="small" data-venn="si.text">Where lived experience meets the legal mandate: the public enters while the options are still open, not after the plan is fixed, and what it wants is made accountable to those who must govern it.</p></div></li>
+          <li data-r="ac"><span class="chip chip--ac" aria-hidden="true"></span><div><h3 class="name" data-venn="sa.title">Seeing before choosing</h3><p class="small" data-venn="sa.text">A resident describes a change to one photograph, sees the scenario and what it would do, and keeps it or changes their mind. We do not know what we want until we see it.</p></div></li>
+          <li data-r="bc"><span class="chip chip--bc" aria-hidden="true"></span><div><h3 class="name" data-venn="ia.title">Checking before committing</h3><p class="small" data-venn="ia.text">Every scenario is evaluated against the institution’s own policy, design guides and law as it is made, so conflicts surface while a change is still easy, long before anything is committed.</p></div></li>
+        </ul>
+      </div>
+      <div class="vk__g">
+        <p class="lab">Where all three meet</p>
+        <ul>
+          <li data-r="abc"><span class="chip chip--abc" aria-hidden="true"></span><div><h3 class="name" data-venn="c.title">Coplanning</h3><p class="small" data-venn="c.text">One process rather than three: the institution holds the mandate and the guardrails, people bring what they know and value, and foresight turns both into scenarios everyone can see, weigh and agree on.</p></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="tdbu">
+    <p class="tdbu__terms"><span aria-hidden="true"><s>Top-down</s></span><span aria-hidden="true"><s>Bottom-up</s></span><span class="sr">Top-down and bottom-up, both struck through.</span></p>
+    <div class="tdbu__text">
+      <p class="say say--s">Collaborative urban planning bridges the dichotomy: top-down and bottom-up <em>work together</em>.</p>
+      <p class="body">From below, the experts of everyday life propose and evaluate. From above, the institution sets the guardrails and takes the decision. In between, designers turn wishes and needs into design, and keep their creative freedom. Every step that makes something visible is followed by one where people weigh it: propose, then judge; render, then decide.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 04 · THE FRAMEWORK (the simplest version: two axes, four tasks) ================= -->
+<section class="ch" id="framework" aria-labelledby="fw-h">
+  <p class="eyebrow ch__no"><b>04</b> The framework</p>
+  <h2 class="h2" id="fw-h">Two questions, <em>four tasks</em>.</h2>
+  <div class="fw-q">
+    <div>
+      <p class="lab">Open brief or defined brief</p>
+      <p class="q" data-ax="vertical">Could this engagement still change what will be done, or only how?</p>
+    </div>
+    <div>
+      <p class="lab">Respond or propose</p>
+      <p class="q" data-ax="horizontal">Will people bring material you do not have yet, or respond to material you provide?</p>
+    </div>
+  </div>
+
+  <figure class="fw" aria-labelledby="fw-cap">
+    <figcaption class="sr" id="fw-cap">The engagement framework. The vertical axis runs from open brief at the top to defined brief at the bottom; the horizontal axis from respond on the left to propose on the right. Four tasks: Scenario planning top left, Futuring top right, Design review bottom left, Co-design bottom right.</figcaption>
+    <p class="fw__c fw__c--t" aria-hidden="true"><span class="cap cap--sm cap--open">Open brief</span></p>
+    <p class="fw__c fw__c--l" aria-hidden="true"><span class="cap cap--sm cap--respond">Respond</span></p>
+    <ul class="fw__q">
+      <li class="fw__t plate plate--test" style="--qi:var(--qi-test)"><span class="sr">Open brief, respond: </span><h3 class="name" data-qt="test.label">Scenario planning</h3><p class="q" data-qt="test.question">What if this happened here?</p></li>
+      <li class="fw__t plate plate--imagine" style="--qi:var(--qi-imagine)"><span class="sr">Open brief, propose: </span><h3 class="name" data-qt="imagine.label">Futuring</h3><p class="q" data-qt="imagine.question">What could this place become?</p></li>
+      <li class="fw__t fw__t--b plate plate--improve" style="--qi:var(--qi-improve)"><span class="sr">Defined brief, respond: </span><h3 class="name" data-qt="improve.label">Design review</h3><p class="q" data-qt="improve.question">What would make this better?</p></li>
+      <li class="fw__t fw__t--b plate plate--shape" style="--qi:var(--qi-shape)"><span class="sr">Defined brief, propose: </span><h3 class="name" data-qt="shape.label">Co-design</h3><p class="q" data-qt="shape.question">How should it look and work?</p></li>
+    </ul>
+    <p class="fw__c fw__c--r" aria-hidden="true"><span class="cap cap--sm cap--propose">Propose</span></p>
+    <p class="fw__c fw__c--b" aria-hidden="true"><span class="cap cap--sm cap--defined">Defined brief</span></p>
+  </figure>
+</section>
+
+<!-- ================= 05 · BUILDING THE MANDATE ================= -->
+<section class="ch" id="mandate" aria-labelledby="mandate-h">
+  <p class="eyebrow ch__no"><b>05</b> Building the mandate</p>
+  <h2 class="h2" id="mandate-h">Sometimes the mandate exists in pieces. Sometimes it has to be <em>built</em>.</h2>
+  <div class="prose ch__lead">
+    <p class="lede">The mandate decides what the imagining can become, so we look for it before anything else.</p>
+  </div>
+
+  <div class="build">
+    <div class="bcol">
+      <h3 class="h3">Assembled</h3>
+      <p class="lab">Bologna · Vienna</p>
+      <p class="body">The rules a city already has are put together. In Bologna, they were EU nature-based-solutions policy and the city’s design guide; in Vienna, the <a href="https://coplanai.com/portfolio/vienna-supergraetzl/" data-case="2026-vienna" target="_blank" rel="noopener">Supergrätzl standard<span class="sr"> (opens the Vienna project page in a new tab)</span></a>. The platform holds such rules as lenses and evaluates every scenario against them as it is made, while an image is still easy to change.</p>
+      <figure class="figure">
+        <div class="pair">
+          <span><img src="img/pool/2026-bologna--street-before.jpg" width="1200" height="605" alt="A Bologna street with a wide carriageway, parked cars and a zebra crossing, as photographed." loading="lazy"><span class="figure__tag">As photographed</span></span>
+          <span><img src="img/pool/2026-bologna--street-after.jpg" width="1200" height="605" alt="The same street as a scenario: a red cycle lane, brick benches, planting and people walking." loading="lazy"><span class="figure__tag">Reworked</span></span>
+        </div>
+        <figcaption class="figure__cap"><span class="lab">Bologna Verde · 2026</span>The street as residents photographed it, and as the workshop reworked it: a cycle lane, benches and planting, evaluated against EU policy and the city’s own design guide.</figcaption>
+      </figure>
+    </div>
+
+    <div class="bcol">
+      <h3 class="h3">Built</h3>
+      <p class="lab">Singapore · Estonia · Dubai</p>
+      <p class="q">How do you build the mandate from scratch?</p>
+      <p class="body">Where there is nothing to assemble, the mandate has to be built before anyone is invited to imagine: with Singapore’s Urban Redevelopment Authority, with Estonia’s Ministry of Climate, and in Dubai, where it took three years, in five steps.</p>
+      <ol class="steps" aria-label="Dubai, in five steps">
+        <li><span class="lab">01</span><span class="st">Exploration</span></li>
+        <li><span class="lab">02</span><span class="st">Outreach</span></li>
+        <li class="key"><span class="lab">03</span><span class="st">A mandate</span></li>
+        <li><span class="lab">04</span><span class="st">A pilot</span></li>
+        <li><span class="lab">05</span><span class="st">Integration</span></li>
+      </ol>
+      <p class="lab steps-note">The mandate came before the pilot, and integration only after both</p>
+      <figure class="figure">
+        <div class="pair">
+          <span><img src="img/pairs/dubai--d4-site.jpg" width="1400" height="606" alt="An empty sandy plot between low buildings." loading="lazy" style="object-position:30% 50%"><span class="figure__tag">The plot</span></span>
+          <span><img src="img/pairs/dubai--d4-a.jpg" width="1400" height="606" alt="The park residents designed for the plot in focus groups: lawns, paths, play structures and palms." loading="lazy" style="object-position:40% 50%"><span class="figure__tag">The park</span></span>
+        </div>
+        <figcaption class="figure__cap"><span class="lab">Dubai</span>A plot, and the park residents designed for it in focus groups.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="rule-line">
+    <p class="lab">The rule we work by</p>
+    <p class="say">Build the mandate <em>before the pilot.</em></p>
+  </div>
+</section>
+
+<!-- ================= 06 · THE RESEARCH ================= -->
+<section class="ch" id="research" aria-labelledby="research-h">
+  <p class="eyebrow ch__no"><b>06</b> The research</p>
+  <h2 class="h2" id="research-h">The research behind <em>the method</em>.</h2>
+  <div class="ch-grid research-lead">
+    <p class="lede">We study our own engagements against the literature on planning, participation and generative AI. The research asks who gains power when AI enters planning, what has to stay with people, and what the AI cannot see.</p>
+    <div class="work">
+      <p class="lab">Further reading</p>
+      <p class="t"><a href="https://doi.org/10.1080/17535069.2026.2730986" target="_blank" rel="noopener">‘Participating with AI: how generative visualisations are changing participatory planning’<span class="sr"> (opens in a new tab)</span></a></p>
+      <p class="by">Sampo Ruoppila and Konsta Anastasiou</p>
+      <p class="ref">Ruoppila, S. and Anastasiou, K. (2026) ‘Participating with AI: how generative visualisations are changing participatory planning’, <i>Urban Research &amp; Practice</i>, 1–27. Open access, published online 16 September 2026. <a href="https://doi.org/10.1080/17535069.2026.2730986" target="_blank" rel="noopener">doi.org/10.1080/17535069.2026.2730986<span class="sr"> (opens in a new tab)</span></a></p>
+    </div>
+  </div>
+
+  <div class="authors">
+    <div class="author">
+      <h3 class="name">Sampo Ruoppila</h3>
+      <p class="lab">Co-founder · research and policy lead</p>
+      <p class="body">PhD and docent in urban studies. Professor of Practice, University of Vaasa; senior researcher, University of Helsinki.</p>
+    </div>
+    <div class="author">
+      <h3 class="name">Damiano Cerrone</h3>
+      <p class="lab">Co-founder · product design and innovation lead</p>
+      <p class="body">Doctoral dissertation on collaborative planning with generative AI, 2026.</p>
+    </div>
+  </div>
+
+  <p class="lab trad-head">Three ideas the method rests on</p>
+  <ul class="trad">
+    <li>
+      <p class="lab">1988</p>
+      <p class="name name--s">Pelle Ehn</p>
+      <p class="body"><i>Work-Oriented Design of Computer Artifacts</i>, and the UTOPIA and DEMOS projects: tacit skill cannot be gathered by asking for requirements, only exercised.</p>
+    </li>
+    <li>
+      <p class="lab">1970</p>
+      <p class="name name--s">Giancarlo De Carlo</p>
+      <p class="body">Architecture has a client who commissions it and a public who lives with the result.</p>
+    </li>
+    <li>
+      <p class="lab">1962</p>
+      <p class="name name--s">Bachrach and Baratz</p>
+      <p class="body">The second face of power is deciding what is decidable.</p>
+    </li>
+  </ul>
+
+  <div class="qs">
+    <p class="lab">Three questions from our research</p>
+    <ol>
+      <li><span class="lab">01</span><p class="body"><i>Does AI shift power, or re-tool the organisers?</i> Mostly it re-tools the organisers: synthesis and framing move into the model, and so to whoever configures it. In the Helsinki market squares engagement, about 3,385 generated images were cut to about 80 for residents to vote on. Power moved to residents only where something was handed over outside the tool.</p></li>
+      <li><span class="lab">02</span><p class="body"><i>What is the most important role of humans?</i> The sorting can be shared with a machine: a UK government consultation tool matched expert reviewers about as closely as two reviewers match each other. What is left for people is deciding what counts, answering for it under a name, and changing our minds together.</p></li>
+      <li><span class="lab">03</span><p class="body"><i>What can AI discover, and what can it not see?</i> It can surface a preference people did not know they held. It also pulls preferences toward what it draws well: in Turku, people dropped standing deadwood because the model could not render it. The model’s defaults have a geography.</p></li>
+    </ol>
+  </div>
+
+  <div class="shelf">
+    <p class="lab">Reading that shaped the method</p>
+    <ol>
+      <li><span class="y">1962</span><span><span class="a">Bachrach &amp; Baratz</span><span class="b">Two faces of power</span></span></li>
+      <li><span class="y">1964</span><span><span class="a">Koestler</span><span class="b">The Act of Creation</span></span></li>
+      <li><span class="y">1969</span><span><span class="a">Arnstein</span><span class="b">A ladder of citizen participation</span></span></li>
+      <li><span class="y">1970</span><span><span class="a">De Carlo</span><span class="b">Architecture’s public</span></span></li>
+      <li><span class="y">1988</span><span><span class="a">Ehn</span><span class="b">Work-Oriented Design of Computer Artifacts</span></span></li>
+      <li><span class="y">1990</span><span><span class="a">Ostrom</span><span class="b">Governing the Commons</span></span></li>
+      <li><span class="y">1997</span><span><span class="a">Healey</span><span class="b">Collaborative Planning</span></span></li>
+      <li><span class="y">1997</span><span><span class="a">Lévy</span><span class="b">Collective Intelligence</span></span></li>
+      <li><span class="y">2010</span><span><span class="a">Innes &amp; Booher</span><span class="b">Planning with Complexity</span></span></li>
+      <li><span class="y">2013</span><span><span class="a">McCullough</span><span class="b">Ambient Commons</span></span></li>
+      <li><span class="y">2017</span><span><span class="a">Mulgan</span><span class="b">Big Mind</span></span></li>
+      <li><span class="y">2018</span><span><span class="a">Sennett</span><span class="b">Building and Dwelling</span></span></li>
+      <li><span class="y">2019</span><span><span class="a">Rushkoff</span><span class="b">Team Human</span></span></li>
+    </ol>
+    <p class="shelf-foot"><a class="link link--arrow" href="signals.html">Research, media and news in Signals</a></p>
+  </div>
+
+  <div class="studio hair-soft">
+    <p class="body">Built and run in Helsinki by SPIN Unit Lab Oy since 2018.</p>
+    <a class="link link--arrow" href="about.html">About: company, ethics and data</a>
+  </div>
+</section>
+
+  </div><!-- /.m-main -->
+</div><!-- /.m-body -->
+
+</main>
+
+<div data-site-invite></div>
+
+<div data-site-footer></div>
+
+<script src="data/matrix.js"></script>
+<script src="data/case-links.js"></script>
+<script src="assets/site.js"></script>
+<script>
+SITE.ready(function(){
+  'use strict';
+  var doc=document, C=window.COPLAN;
+
+  /* The Venn: SITE.venn (assets/site.js) is the one source, shared with the home page (SITE-BRIEF §9). */
+  var V=SITE.venn;
+  if(V){
+    doc.querySelectorAll('[data-venn]').forEach(function(el){
+      var p=el.getAttribute('data-venn').split('.'), v=V[p[0]]&&V[p[0]][p[1]]; if(typeof v==='string') el.textContent=v;
+    });
+    var vd=doc.getElementById('venn-d'); if(vd) vd.textContent=V.label;
+  }
+
+  /* 1 · case links in captions: the live case page from data/case-links.js; unknown slugs keep the written URL */
+  doc.querySelectorAll('[data-case]').forEach(function(a){ var u=SITE.liveUrl(a.getAttribute('data-case')); if(u) a.href=u; });
+
+  /* 2 · the framework: task names and questions from data/matrix.js (the axis questions are filled by SITE.fillAxes) */
+  if(C&&C.data&&C.data.quadrants){
+    var Q={}; C.data.quadrants.forEach(function(q){ Q[q.key]=q; });
+    doc.querySelectorAll('[data-qt]').forEach(function(el){
+      var p=el.getAttribute('data-qt').split('.'), q=Q[p[0]]; if(q&&typeof q[p[1]]==='string') el.textContent=q[p[1]];
+    });
+  }
+
+  /* 3 · the chapter index: marks the chapter being read and fills its rail as you read it */
+  var chapters=[].slice.call(doc.querySelectorAll('.m-main > .ch[id]'));
+  var links={}; doc.querySelectorAll('.m-index a[href^="#"]').forEach(function(a){ links[a.getAttribute('href').slice(1)]=a; });
+  var ticking=false;
+  function track(){
+    ticking=false;
+    var line=window.innerHeight*0.32, active=null;
+    chapters.forEach(function(ch){
+      var r=ch.getBoundingClientRect(), a=links[ch.id]; if(!a) return;
+      var p=(line-r.top)/Math.max(1,r.height); p=p<0?0:(p>1?1:p);
+      a.style.setProperty('--p',p.toFixed(3));
+      if(r.top<=line) active=ch.id;
+    });
+    Object.keys(links).forEach(function(id){ if(id===active) links[id].setAttribute('aria-current','true'); else links[id].removeAttribute('aria-current'); });
+  }
+  function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(track); } }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+  doc.addEventListener('site:type',onScroll);
+  track();
+
+  /* 4 · the Venn and its key light each other up (pointer only; every text is always visible) */
+  var venn=doc.getElementById('venn'), key=doc.getElementById('venn-key');
+  if(venn&&key){
+    var PARTS={a:['a','ab','ac','abc'],b:['b','ab','bc','abc'],c:['c','ac','bc','abc'],ab:['ab','abc'],ac:['ac','abc'],bc:['bc','abc'],abc:['abc']};
+    var regions=[].slice.call(venn.querySelectorAll('.r')), items=[].slice.call(key.querySelectorAll('li[data-r]')), outlines=[].slice.call(venn.querySelectorAll('.hl [data-h]'));
+    var cur=null;
+    function light(k){
+      if(k===cur) return; cur=k;
+      venn.classList.toggle('is-on',!!k);
+      regions.forEach(function(r){ r.classList.toggle('on',!!k&&PARTS[k].indexOf(r.getAttribute('data-r'))>-1); });
+      items.forEach(function(li){ li.classList.toggle('on',li.getAttribute('data-r')===k); });
+      outlines.forEach(function(o){ o.classList.toggle('on',o.getAttribute('data-h')===k); });
+    }
+    venn.addEventListener('pointermove',function(e){ var r=e.target.closest&&e.target.closest('.r'); light(r?r.getAttribute('data-r'):null); });
+    venn.addEventListener('pointerleave',function(){ light(null); });
+    items.forEach(function(li){
+      li.addEventListener('pointerenter',function(){ light(li.getAttribute('data-r')); });
+      li.addEventListener('pointerleave',function(){ light(null); });
+    });
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-type="commons-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CoPlanAI · Use CoPlanAI</title>
+<meta name="coplan:release" content="public">
+<link rel="canonical" href="https://coplanai.com/use-coplanai.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CoPlanAI">
+<meta property="og:title" content="CoPlanAI · Use CoPlanAI">
+<meta property="og:description" content="Five ways to work with us, from a first workshop to how your institution decides: Subscriber, Capacity Builder, Innovation Partner, Governance Transformation and the Multiplier Programme. The platform, sixteen workshop formats and our safeguards.">
+<meta property="og:url" content="https://coplanai.com/use-coplanai.html">
+<meta property="og:image" content="https://coplanai.com/img/pairs/vienna--vie-street.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="Five ways to work with us, from a first workshop to how your institution decides: Subscriber, Capacity Builder, Innovation Partner, Governance Transformation and the Multiplier Programme. The platform, sixteen workshop formats and our safeguards.">
+<!-- type preset before first paint: ?type=<key> → saved choice → the attribute above. Keep this first in <head>. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500..700&family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=Onest:wght@800&family=Schibsted+Grotesk:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<!-- page-specific components only (Use CoPlanAI): the before/after, the staircase and its plans,
+     the screen viewer, the format library, the safeguards and the "what is already decided?" close.
+     Role tokens for type, token colours only. -->
+<style>
+/* ---------- page head ---------- */
+.uc-head{padding-bottom:clamp(40px,4.5vw,64px)}
+.uc-head .display{max-width:12.4em}
+.uc-head__row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:28px 32px;margin-top:clamp(26px,2.8vw,40px);align-items:start}
+.uc-head__text{grid-column:1/8}
+.uc-head__text .lede{margin-top:0}
+.uc-head__text .actions{margin-top:clamp(26px,2.6vw,34px)}
+.uc-head__text .stats{margin-top:clamp(34px,3.4vw,46px);max-width:34em}
+.uc-toc{grid-column:9/13;padding-top:4px}
+.uc-toc .lab{margin-bottom:10px}
+.uc-toc ol{list-style:none;counter-reset:toc}
+.uc-toc li{counter-increment:toc;border-top:1px solid var(--rule-soft)}
+.uc-toc li:last-child{border-bottom:1px solid var(--rule-soft)}
+.uc-toc a{display:flex;align-items:baseline;gap:14px;padding:11px 0 10px;text-decoration:none;color:var(--ink);font-family:var(--f-ui);font-weight:var(--w-ui);font-size:16px;line-height:1.3;transition:color .2s}
+.uc-toc a::before{content:counter(toc,decimal-leading-zero);font-family:var(--f-label);font-weight:var(--w-label);font-size:var(--fs-label);letter-spacing:var(--ls-label);color:var(--c-label);min-width:2.2em}
+.uc-toc a:hover{color:var(--amber)}
+
+/* ---------- before / after ---------- */
+.ba-row{align-items:center}
+.ba__stage{--pos:50%;position:relative;aspect-ratio:1200/605;overflow:hidden;border-radius:var(--r-img);background:var(--field);touch-action:pan-y;cursor:ew-resize;user-select:none;-webkit-user-select:none}
+.ba__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba__after{clip-path:inset(0 0 0 var(--pos))}
+.ba__line{position:absolute;top:0;bottom:0;left:var(--pos);z-index:2;width:2px;margin-left:-1px;background:var(--ground);pointer-events:none}
+.ba__knob{position:absolute;top:50%;left:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:var(--ground);display:grid;place-items:center;box-shadow:0 2px 12px color-mix(in srgb,var(--ink) 20%,transparent);font-family:var(--f-ui);font-size:18px;line-height:1;color:var(--ink);letter-spacing:.14em}
+.ba__stage.is-focus .ba__knob,.ba__stage:has(.ba__range:focus-visible) .ba__knob{box-shadow:0 0 0 3px var(--ground),0 0 0 5px var(--focus)}
+.ba__tag{position:absolute;top:14px;z-index:2;font-family:var(--f-label);font-weight:var(--w-label);font-size:10.5px;line-height:1;letter-spacing:var(--ls-label);text-transform:uppercase;padding:8px 12px 7px;border-radius:var(--r-pill);background:color-mix(in srgb,var(--ground) 94%,transparent);color:var(--ink);pointer-events:none}
+.ba__tag--l{left:14px}
+.ba__tag--r{right:14px}
+.ba-note .h3{margin-top:14px}
+.ba-note .body{margin-top:14px}
+.ba-note .figure__cap{margin-top:18px}
+.ba-note .link{display:inline-block;margin-top:18px}
+
+/* ---------- five ways: the staircase ---------- */
+.commit{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:16px;align-items:center;margin-bottom:16px}
+/* every step is the same row height; each one rises a fixed 32px above the last, whatever its text length
+   (the preset changes the text's height, so the rise must not depend on it) */
+.stair{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;align-items:stretch}
+.stair > li{display:flex;min-width:0}
+.st{--bg:color-mix(in srgb,var(--v-inst) 4.5%,transparent);position:relative;flex:1;min-width:0;display:flex;flex-direction:column;gap:8px;min-height:var(--h,280px);margin-top:var(--rise,0px);padding:22px 20px 20px;border-radius:18px;background:var(--bg);color:inherit;text-decoration:none;transition:background-color .2s,box-shadow .2s}
+.stair > li:nth-child(1) .st{--h:278px;--rise:128px}
+.stair > li:nth-child(2) .st{--h:310px;--rise:96px;--bg:color-mix(in srgb,var(--v-inst) 7.5%,transparent)}
+.stair > li:nth-child(3) .st{--h:342px;--rise:64px;--bg:color-mix(in srgb,var(--v-inst) 10.5%,transparent)}
+.stair > li:nth-child(4) .st{--h:374px;--rise:32px;--bg:color-mix(in srgb,var(--v-inst) 13.5%,transparent)}
+.stair > li:nth-child(5) .st{--h:406px;--rise:0px;--bg:color-mix(in srgb,var(--v-inst) 16.5%,transparent)}
+.st:hover{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--v-inst) 40%,transparent)}
+.st:focus-visible{outline-offset:4px;border-radius:18px}
+.st-no{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.st-name{display:block;margin-top:8px;font-family:var(--f-name);font-weight:var(--w-name);font-size:clamp(19px,1.5vw,22px);line-height:1.12;letter-spacing:var(--ls-name);color:var(--ink);text-wrap:balance}
+.st-mode{display:block;font-family:var(--f-q);font-style:italic;font-weight:var(--w-q);font-size:17px;line-height:1.3;color:var(--ink)}
+.st-d{display:block;font-size:15.5px;line-height:1.5;color:var(--ink-2)}
+.st-dur{display:block;margin-top:auto;padding-top:14px;border-top:1px solid color-mix(in srgb,var(--v-inst) 22%,transparent)}
+.st-dur b{display:block;font-family:var(--f-num);font-weight:var(--w-num);font-size:26px;line-height:1.05;letter-spacing:var(--ls-num);color:var(--ink)}
+.st-dur > span{display:block;margin-top:5px;font-family:var(--f-label);font-weight:var(--w-label);font-size:10.5px;line-height:1.4;letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-label)}
+.st-go{display:none}
+/* tab mode (wide screens, set by the page script) */
+.ways-tabs .st{cursor:pointer}
+.ways-tabs .st[aria-selected="true"]{--bg:color-mix(in srgb,var(--v-inst) 20%,transparent);box-shadow:inset 0 0 0 1.5px var(--v-inst)}
+.ways-tabs .st[aria-selected="true"]::after{content:"";position:absolute;left:50%;bottom:-13px;width:14px;height:14px;margin-left:-7px;background:var(--v-inst);clip-path:polygon(0 0,100% 0,50% 100%)}
+.ways-tabs .st-go{display:block;font-family:var(--f-ui);font-weight:var(--w-ui);font-size:14px;color:var(--v-inst);margin-top:10px}
+.ways-tabs .st[aria-selected="true"] .st-go{visibility:hidden}
+
+/* ---------- five ways: the plans ---------- */
+.ways{margin-top:clamp(28px,3vw,40px)}
+.way{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:36px 32px;padding-top:clamp(34px,3.4vw,48px);padding-bottom:clamp(20px,2vw,28px);border-top:1px solid var(--rule)}
+.way + .way{margin-top:clamp(40px,4vw,56px)}
+.ways-tabs .way + .way{margin-top:0}
+.way:focus-visible{outline-offset:8px;border-radius:6px}
+.way__main{grid-column:1/6}
+.way__plan{grid-column:7/13}
+.way__kicker{display:flex;align-items:center;gap:12px}
+.way__kicker .st-bar i{width:12px}
+.way .h3{margin-top:14px}
+.way .lede{margin-top:12px;max-width:28em}
+.way__dl{margin:26px 0 0;display:grid;gap:22px}
+.way__dl dt{margin-bottom:8px}
+.way__dl dd{margin:0;font-size:calc(var(--fs-text) - 1px);line-height:1.55;color:var(--c-text);max-width:32em}
+.way .actions{margin-top:28px}
+.way__note{margin-top:clamp(28px,3vw,40px);padding:20px 22px 20px;border-radius:16px;background:color-mix(in srgb,var(--v-inst) 6%,transparent);font-size:calc(var(--fs-text) - 1.5px);line-height:1.55;color:var(--c-text);max-width:32em}
+.way__note .lab{display:block;margin-bottom:4px}
+.way__plan .way__note{max-width:none}
+.inuse{list-style:none;display:flex;flex-wrap:wrap;gap:8px 8px}
+.inuse li{display:inline-flex;align-items:baseline;gap:8px;padding:7px 13px 6px;border-radius:var(--r-pill);background:var(--field);font-size:14.5px;line-height:1.3;color:var(--ink)}
+.inuse li .lab{font-size:10px}
+.inuse a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule)}
+.inuse a:hover{color:var(--amber);border-color:var(--amber)}
+.inuse a::after{content:"\2197";margin-left:.3em;font-size:.85em;color:var(--ink-4)}
+
+/* the plan: a timeline of the live step table */
+.way__dur{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 14px;padding-bottom:16px}
+.way__dur b{font-family:var(--f-num);font-weight:var(--w-num);font-size:clamp(34px,3vw,44px);line-height:1;letter-spacing:var(--ls-num);color:var(--ink)}
+.gantt-wrap{--n:6;--g-cols:6.6em minmax(0,1.15fr) minmax(0,1fr)}
+.g-scale{display:grid;grid-template-columns:var(--g-cols);gap:0 20px;padding-bottom:8px}
+.g-ticks{position:relative;height:16px;grid-column:3}
+.g-unit{font-family:var(--f-label);font-weight:var(--w-label);font-size:10px;line-height:1.6;letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-label)}
+.g-ticks i{position:absolute;top:0;left:calc(var(--at) / var(--n) * 100%);font-style:normal;font-family:var(--f-label);font-weight:var(--w-label);font-size:10px;line-height:1.4;letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-label);white-space:nowrap;padding-left:3px;border-left:1px solid var(--rule)}
+.gantt{list-style:none}
+.g-row{display:grid;grid-template-columns:var(--g-cols);gap:4px 20px;align-items:center;padding:13px 0 14px;border-top:1px solid var(--rule-soft)}
+.g-row:last-child{border-bottom:1px solid var(--rule-soft)}
+.g-when{display:flex;flex-direction:column;gap:6px}
+.g-when .lab{color:var(--ink)}
+.g-who{display:inline-flex;align-items:center;gap:7px;font-family:var(--f-label);font-weight:var(--w-label);font-size:10px;line-height:1.3;letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-label)}
+.g-who::before,.g-sw{content:"";display:inline-block;width:10px;height:10px;flex:none;border-radius:3px;background:var(--g-c)}
+.g-step b{display:block;font-family:var(--f-name);font-weight:var(--w-name);font-size:17px;line-height:1.25;letter-spacing:var(--ls-name);color:var(--ink)}
+.g-step span{display:block;margin-top:3px;font-size:14.5px;line-height:1.45;color:var(--ink-3)}
+.g-track{position:relative;height:16px;border-radius:8px;background-color:var(--field);background-image:repeating-linear-gradient(90deg,var(--rule-soft) 0 1px,transparent 1px calc(100% / var(--n)))}
+.g-track i{position:absolute;top:0;bottom:0;left:calc(var(--s) / var(--n) * 100%);width:calc((var(--e) - var(--s)) / var(--n) * 100%);border-radius:8px;background:var(--g-c)}
+.g-row.g--open .g-track i{background:linear-gradient(90deg,var(--g-c) 45%,color-mix(in srgb,var(--g-c) 0%,transparent))}
+.g--joint{--g-c:color-mix(in srgb,var(--violet) 58%,var(--ground))}
+.g--us{--g-c:color-mix(in srgb,var(--gold) 78%,var(--ground))}
+.g--you{--g-c:color-mix(in srgb,var(--ice) 60%,var(--ground))}
+.g-legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:14px}
+.g-legend span{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-label);font-weight:var(--w-label);font-size:var(--fs-label);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-label)}
+
+.way__steps > summary{display:none;list-style:none;cursor:pointer;width:max-content;margin:2px 0 18px}
+.way__steps > summary::-webkit-details-marker{display:none}
+.way__steps[open] > summary .link--arrow::after{transform:rotate(90deg)}
+/* a narrow plan column (tablets): the bar drops under the step */
+.way__plan{container-type:inline-size;min-width:0}
+@container (max-width:600px){
+  .gantt-wrap{--g-cols:6.6em minmax(0,1fr)}
+  .g-scale > span:nth-child(2){display:none}
+  .g-scale .g-ticks,.g-track{grid-column:2}
+  .g-row{row-gap:10px}
+}
+/* the multiplier: train the trainers */
+.fan{display:grid;gap:0;justify-items:center;padding:clamp(22px,2.4vw,32px);border-radius:var(--r-plate);background:color-mix(in srgb,var(--v-inst) 5%,transparent)}
+.fan__tier{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.fan__node{display:inline-flex;flex-direction:column;align-items:center;text-align:center;gap:4px;padding:14px 18px 13px;border-radius:14px;background:var(--ground);box-shadow:0 0 0 1px var(--rule-soft);min-width:9.5em}
+.fan__node b{font-family:var(--f-name);font-weight:var(--w-name);font-size:17px;line-height:1.2;letter-spacing:var(--ls-name);color:var(--ink)}
+.fan__node .lab{font-size:10px}
+.fan__node--us{background:color-mix(in srgb,var(--ice) 13%,var(--ground));box-shadow:none}
+.fan__node--you{background:color-mix(in srgb,var(--violet) 18%,var(--ground));box-shadow:none}
+.fan__link{width:1.5px;height:26px;background:color-mix(in srgb,var(--v-inst) 45%,transparent)}
+.fan__branch{position:relative;width:100%;height:22px}
+.fan__branch::before{content:"";position:absolute;left:16.6%;right:16.6%;top:0;height:22px;border:1.5px solid color-mix(in srgb,var(--v-inst) 45%,transparent);border-bottom:0;border-radius:10px 10px 0 0}
+.fan__branch::after{content:"";position:absolute;left:50%;top:0;width:1.5px;height:22px;margin-left:-.75px;background:color-mix(in srgb,var(--v-inst) 45%,transparent)}
+.fan__tier--3{width:100%;flex-wrap:nowrap}
+.fan__tier--3 .fan__node{min-width:0;flex:1 1 0;padding-inline:10px}
+.fan-cap{margin-top:14px;font-size:14.5px;line-height:1.5;color:var(--ink-3)}
+/* governance transformation: what institutional change can take (canonical wording, FACT-AUDIT §7.13),
+   a band across the whole panel */
+.way .gt-note{grid-column:1/-1;max-width:none;margin-top:clamp(4px,1vw,12px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:22px clamp(28px,3.4vw,56px);align-items:center;padding:clamp(22px,2.6vw,36px);border-radius:var(--r-plate)}
+.gt-note__text > p:not(.lab){max-width:30em}
+.gt-steps{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin:0}
+.gt-steps li{position:relative;display:flex;flex-direction:column;gap:6px;min-width:0;padding:14px 12px 13px 14px;border-radius:14px;background:var(--ground)}
+.gt-steps li:not(:last-child)::after{content:"";position:absolute;right:-10px;top:50%;width:10px;height:1.5px;background:color-mix(in srgb,var(--v-inst) 45%,transparent)}
+.gt-steps .lab{display:block;margin:0;font-size:10px;line-height:1.4}
+.gt-steps b{font-family:var(--f-name);font-weight:var(--w-name);font-size:16px;line-height:1.2;letter-spacing:var(--ls-name);color:var(--ink)}
+.gt-steps .gt-key{box-shadow:inset 0 0 0 1.5px var(--v-inst)}
+.gt-steps .gt-key .lab{color:var(--v-inst)}
+@media (max-width:1120px){
+  .way .gt-note{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  .gt-steps{grid-template-columns:minmax(0,1fr);gap:6px}
+  .gt-steps li{flex-direction:row;align-items:baseline;gap:14px;padding:11px 14px}
+  .gt-steps li:not(:last-child)::after{right:auto;left:23px;top:auto;bottom:-6px;width:1.5px;height:6px}
+}
+
+/* beyond the plans */
+.beyond{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:28px 32px;margin-top:clamp(56px,6vw,88px);padding-top:clamp(32px,3.2vw,44px);border-top:1px solid var(--rule)}
+.beyond__head{grid-column:1/6}
+.beyond__head .h3{margin-top:14px}
+.beyond__head .body{margin-top:14px}
+.beyond__head .link{display:inline-block;margin-top:20px}
+.beyond__list{grid-column:7/13;list-style:none}
+.beyond__list li{display:grid;grid-template-columns:3em minmax(0,1fr);gap:4px 12px;padding:18px 0 20px;border-top:1px solid var(--rule-soft)}
+.beyond__list li:last-child{border-bottom:1px solid var(--rule-soft)}
+.beyond__list .lab{padding-top:5px}
+.beyond__list .small{grid-column:2;margin-top:4px}
+
+/* ---------- the platform ---------- */
+.eq-trio{margin-top:var(--sp-head)}
+.eq{display:flex;flex-direction:column;gap:10px;padding-top:20px;border-top:2px solid var(--eq-c,var(--ink))}
+.eq:nth-child(1){--eq-c:var(--gold)}
+.eq:nth-child(2){--eq-c:var(--violet)}
+.eq:nth-child(3){--eq-c:var(--ice)}
+.eq .body{font-size:calc(var(--fs-text) - 1px)}
+.eq-steps{list-style:none;counter-reset:eq;margin-top:6px}
+.eq-steps li{counter-increment:eq;display:flex;gap:12px;padding:8px 0 7px;border-top:1px solid var(--rule-soft);font-size:15px;line-height:1.4;color:var(--ink-2)}
+.eq-steps li::before{content:counter(eq,decimal-leading-zero);flex:none;min-width:1.9em;font-family:var(--f-label);font-weight:var(--w-label);font-size:10.5px;line-height:2;letter-spacing:var(--ls-label);color:var(--c-label)}
+
+.viewer{margin-top:clamp(56px,6vw,88px)}
+.viewer__head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px 32px}
+.viewer__head .h3{margin-top:14px}
+.seg{display:inline-flex;gap:4px;padding:4px;border-radius:var(--r-pill);background:var(--field)}
+.seg button{display:inline-flex;align-items:baseline;gap:8px;border:0;background:transparent;padding:11px 18px 10px;border-radius:var(--r-pill);font-family:var(--f-ui);font-weight:var(--w-ui);font-size:15.5px;line-height:1.1;color:var(--ink-2);transition:background-color .2s,color .2s}
+.seg button small{font-family:var(--f-q);font-style:italic;font-weight:var(--w-q);font-size:14.5px;color:var(--ink-3)}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-selected="true"]{background:var(--ground);color:var(--ink);box-shadow:0 0 0 1px var(--rule-soft)}
+.seg button:focus-visible{border-radius:var(--r-pill)}
+.viewer__body{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px 32px;margin-top:24px;align-items:start}
+.screen{grid-column:1/9}
+.screen__stage{--plate-c:var(--ice);--pos:30% 0%;padding:clamp(14px,2vw,28px)}
+.screen__frame{position:relative;aspect-ratio:1800/1003;overflow:hidden;border-radius:12px;background:var(--ground);box-shadow:0 0 0 1px var(--rule-soft)}
+.screen__frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;transition:opacity .25s}
+.screen__frame.is-loading img{opacity:.35}
+.screen__cap{display:flex;justify-content:space-between;align-items:flex-start;gap:12px 24px;margin-top:12px;font-size:15px;line-height:1.5;color:var(--ink-3)}
+.screen__cap .lab{display:block;margin-bottom:2px}
+.screen__cap .link{flex:none;font-size:14.5px}
+.viewer__steps{grid-column:9/13}
+.vsteps{list-style:none}
+.vsteps li + li{margin-top:6px}
+.vstep{display:grid;grid-template-columns:2.4em minmax(0,1fr);gap:2px 10px;width:100%;text-align:left;border:0;background:transparent;padding:14px 16px 15px 14px;border-radius:14px;color:inherit;transition:background-color .2s}
+.vstep:hover{background:var(--field)}
+.vstep[aria-pressed="true"]{background:color-mix(in srgb,var(--ice) 11%,transparent)}
+.vstep:focus-visible{border-radius:14px}
+.vstep__n{grid-row:1/3;font-family:var(--f-label);font-weight:var(--w-label);font-size:var(--fs-label);letter-spacing:var(--ls-label);line-height:1.9;color:var(--c-label)}
+.vstep[aria-pressed="true"] .vstep__n{color:var(--v-ai)}
+.vstep__t{font-family:var(--f-name);font-weight:var(--w-name);font-size:18px;line-height:1.25;letter-spacing:var(--ls-name);color:var(--ink)}
+.vstep__d{font-size:14.5px;line-height:1.48;color:var(--ink-3)}
+.vloop{margin:16px 14px 0;padding-top:14px;border-top:1px solid var(--rule-soft)}
+
+/* ---------- formats ---------- */
+.lib{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.aud{display:flex;flex-direction:column;padding:22px 20px 20px}
+.aud--citizens{--plate-c:var(--gold)}
+.aud--children{--plate-c:var(--q-shape)}
+.aud--mth{--plate-c:var(--q-test)}
+.aud--experts{--plate-c:var(--violet)}
+.aud--online{--plate-c:var(--ice)}
+.aud__n{display:flex;align-items:baseline;gap:8px}
+.aud__n b{font-family:var(--f-num);font-weight:var(--w-num);font-size:34px;line-height:1;letter-spacing:var(--ls-num);color:var(--ink)}
+.aud .name{margin-top:14px}
+.aud .aud__who{margin-top:6px;font-family:var(--f-q);font-style:italic;font-weight:var(--w-q);font-size:16.5px;line-height:1.35;color:var(--ink-2)}
+.aud ol{list-style:none;margin-top:18px}
+@media (min-width:1121px){.aud .aud__who{min-height:2.7em}}
+.aud li{display:grid;grid-template-columns:2.1em minmax(0,1fr);gap:8px;padding:10px 0 9px;border-top:1px solid color-mix(in srgb,var(--ink) 11%,transparent);font-size:15.5px;line-height:1.38;color:var(--ink)}
+.aud li .lab{line-height:1.9;font-size:10.5px}
+.aud li small{display:block;font-size:13.5px;line-height:1.4;color:var(--ink-3)}
+.field-row{margin-top:clamp(48px,5vw,72px)}
+.field-row__head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 24px;margin-bottom:18px}
+.field-row .figure__tag{font-size:10px}
+
+/* ---------- safeguards ---------- */
+.safe{align-items:stretch}
+.safe__card{display:flex;flex-direction:column;gap:14px;padding:clamp(24px,2.8vw,40px)}
+.safe__card .ticks{margin-top:6px}
+.safe__card--gov{--pos:12% 10%}
+.safe__card--data{--pos:88% 10%}
+.chain{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:6px 0 4px}
+.chain li{position:relative;display:flex;flex-direction:column;gap:3px;padding:14px 14px 13px;border-radius:14px;background:color-mix(in srgb,var(--ground) 82%,transparent)}
+.chain li:not(:last-child)::after{content:"\2192";position:absolute;right:-11px;top:50%;z-index:1;width:16px;height:16px;margin-top:-8px;display:grid;place-items:center;font-size:13px;line-height:1;color:var(--ink-3)}
+.chain b{font-family:var(--f-name);font-weight:var(--w-name);font-size:17px;line-height:1.2;letter-spacing:var(--ls-name);color:var(--ink)}
+.chain span{font-size:13.5px;line-height:1.35;color:var(--ink-3)}
+.safe__card .q{margin-top:auto;padding-top:16px;border-top:1px solid color-mix(in srgb,var(--ink) 10%,transparent);font-size:clamp(18px,1.4vw,20px)}
+.rec{margin:4px 0 0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 20px}
+.rec dt,.rec dd{margin:0;padding:9px 0 8px;border-top:1px solid color-mix(in srgb,var(--ink) 10%,transparent)}
+.rec dt{font-family:var(--f-label);font-weight:var(--w-label);font-size:var(--fs-label);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-label);line-height:1.9}
+.rec dd{font-size:15px;line-height:1.5;color:var(--ink)}
+.safe__card .link{align-self:flex-start;margin-top:auto}
+.safe-more{margin-top:clamp(36px,4vw,52px)}
+.safe-more > div{display:flex;flex-direction:column;gap:10px;padding-top:18px;border-top:1px solid var(--rule)}
+.safe-more .name{margin-top:2px}
+.safe-more .link{align-self:flex-start;margin-top:6px}
+
+/* ---------- the close: what is already decided? ---------- */
+.decide-sec{padding-top:clamp(64px,7vw,104px);padding-bottom:clamp(72px,8vw,112px)}
+.decide{border-radius:var(--r-plate);background:var(--ground);box-shadow:0 0 0 1px var(--rule-soft);padding:clamp(24px,3.6vw,56px)}
+.decide__top{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:20px clamp(24px,5vw,88px);align-items:end}
+.decide__eyebrow{margin-bottom:16px}
+.decide__top .body{max-width:28em}
+#decide-h em{padding-right:.07em} /* the italic d otherwise touches the question mark */
+.decide fieldset{border:0;margin:clamp(28px,3.4vw,44px) 0 0;padding:0;min-width:0}
+.decide legend{padding:0;margin:0 0 14px}
+.opts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.opt{position:relative;min-width:0}
+.opt input{position:absolute;left:20px;top:22px;width:1px;height:1px;margin:0;opacity:0;pointer-events:none}
+.opt label{display:grid;grid-template-columns:18px minmax(0,1fr);align-content:start;gap:4px 12px;height:100%;padding:18px 18px 20px;border-radius:16px;background:var(--field);cursor:pointer;transition:background-color .2s,box-shadow .2s}
+.opt label:hover{box-shadow:inset 0 0 0 1px var(--rule)}
+.opt .dot{width:18px;height:18px;margin-top:3px;border-radius:50%;background:var(--ground);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--ink) 40%,transparent);display:grid;place-items:center}
+.opt .dot::after{content:"";width:8px;height:8px;border-radius:50%;background:transparent}
+.opt b{font-family:var(--f-name);font-weight:var(--w-name);font-size:19px;line-height:1.22;letter-spacing:var(--ls-name);color:var(--ink)}
+.opt small{grid-column:2;font-size:14.5px;line-height:1.45;color:var(--ink-3)}
+.opt input:checked + label{background:color-mix(in srgb,var(--qc) 28%,var(--ground));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--qi) 55%,transparent)}
+.opt input:checked + label .dot{box-shadow:inset 0 0 0 1.5px var(--qi)}
+.opt input:checked + label .dot::after{background:var(--qi)}
+.opt input:focus-visible + label{outline:2px solid var(--focus);outline-offset:3px}
+.result{margin-top:10px;min-height:200px;padding:clamp(22px,2.8vw,40px);border-radius:18px;background:var(--field);transition:background .35s}
+.result.on{background:radial-gradient(120% 140% at 100% 0%,color-mix(in srgb,var(--qc) 38%,var(--ground)) 0%,color-mix(in srgb,var(--qc) 14%,var(--ground)) 55%,var(--ground) 100%)}
+.result__empty{display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:center;min-height:120px}
+.result__empty .body{max-width:34em}
+.glyph{display:grid;grid-template-columns:repeat(2,26px);gap:5px}
+.glyph i{width:26px;height:26px;border-radius:50%;background:var(--c)}
+.result__full{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(24px,4vw,64px)}
+.result__full[hidden],.result__empty[hidden]{display:none}
+.named{display:flex;align-items:center;flex-wrap:wrap;gap:12px}
+.result .q{margin-top:18px;font-size:clamp(25px,2.3vw,34px);line-height:1.16}
+.result .sum{margin-top:12px;max-width:30em}
+.result dl{margin:0;display:grid;gap:18px;align-content:start}
+.result dt{margin-bottom:5px}
+.result dd{margin:0;font-size:16px;line-height:1.5;color:var(--c-text)}
+.result dd.step{font-family:var(--f-name);font-weight:var(--w-name);font-size:clamp(18px,1.4vw,20px);line-height:1.38;letter-spacing:var(--ls-name);color:var(--ink)}
+.result .actions{margin-top:24px}
+.decide__after{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:10px 24px;margin-top:22px;padding-top:18px;border-top:1px solid var(--rule-soft)}
+.decide__after p{font-family:var(--f-q);font-style:italic;font-size:17px;line-height:1.4;color:var(--ink-2);max-width:40em}
+.decide__after p a{color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:color-mix(in srgb,var(--ink) 40%,transparent)}
+.decide__after p a:hover{color:var(--amber);text-decoration-color:var(--amber)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1120px){
+  .stair{grid-template-columns:minmax(0,1fr);gap:10px}
+  .st{display:grid;grid-template-columns:minmax(0,13em) minmax(0,1fr) 9.5em;grid-template-areas:"no d dur" "name d dur" "mode d dur";column-gap:26px;row-gap:3px;align-items:start;padding:18px 22px 20px}
+  .stair > li:nth-child(n) .st{min-height:0;--rise:0px}
+  .stair > li:nth-child(2){margin-left:3%}.stair > li:nth-child(3){margin-left:6%}.stair > li:nth-child(4){margin-left:9%}.stair > li:nth-child(5){margin-left:12%}
+  .st-no{grid-area:no;justify-content:flex-start;gap:14px}
+  .st-name{grid-area:name;margin-top:4px}
+  .st-mode{grid-area:mode}
+  .st-d{grid-area:d}
+  .st-dur{grid-area:dur;margin-top:0;padding-top:0;border-top:0;border-left:1px solid color-mix(in srgb,var(--v-inst) 22%,transparent);padding-left:18px}
+  .lib{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .aud{grid-column:span 2}
+  .aud:nth-child(n+4){grid-column:span 3}
+  .viewer__body{grid-template-columns:minmax(0,1fr)}
+  .screen,.viewer__steps{grid-column:1/-1}
+  .vsteps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .vsteps li + li{margin-top:0}
+}
+@media (max-width:980px){
+  .uc-head__text,.uc-toc,.way__main,.way__plan,.beyond__head,.beyond__list{grid-column:1/-1}
+  .uc-head__row,.way,.beyond{grid-template-columns:minmax(0,1fr)}
+  .uc-toc{max-width:30em}
+  .decide__top,.result__full{grid-template-columns:minmax(0,1fr)}
+  .opts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:760px){
+  .way__steps > summary{display:block}
+  .lib{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .aud,.aud:nth-child(n+4){grid-column:auto}
+  .aud:last-child{grid-column:1/-1}
+  .safe-more{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  .st{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"no no" "name dur" "mode dur" "d d";column-gap:16px;padding:16px 18px 18px}
+  .stair > li:nth-child(n){margin-left:0}
+  .st-dur{border-left:0;padding-left:0;text-align:right}
+  .st-dur b{font-size:22px}
+  .st-d{margin-top:6px}
+  .gantt-wrap{--g-cols:minmax(0,1fr)}
+  .g-scale > span:not(.g-ticks):not(.g-unit){display:none}
+  .g-scale{grid-template-columns:auto minmax(0,1fr);gap:0 12px}
+  .g-ticks{grid-column:2}
+  .g-row{grid-template-columns:minmax(0,1fr);gap:8px}
+  .g-when{flex-direction:row;align-items:center;gap:12px}
+  .lib{grid-template-columns:minmax(0,1fr)}
+  .aud:last-child{grid-column:auto}
+  .vsteps{grid-template-columns:minmax(0,1fr)}
+  .seg{display:flex;width:100%}
+  .seg button{flex:1;flex-direction:column;align-items:center;gap:2px;padding:10px 10px 9px}
+  .chain{grid-template-columns:minmax(0,1fr)}
+  .chain li:not(:last-child)::after{content:"\2193";right:auto;left:50%;top:auto;bottom:-12px;margin:0 0 0 -8px}
+  .opts{grid-template-columns:minmax(0,1fr)}
+  .result__empty{grid-template-columns:minmax(0,1fr)}
+  .ba__tag{font-size:9.5px;padding:7px 10px 6px;top:10px}
+  .ba__tag--l{left:10px}.ba__tag--r{right:10px}
+  .ba__knob{width:40px;height:40px;margin:-20px 0 0 -20px;font-size:16px}
+  .fan__tier--3 .fan__node{flex-basis:100%;max-width:none}
+  .fan__branch{display:none}
+  .fan__tier--3{flex-direction:column;align-items:stretch;width:100%}
+  .fan__tier--3::before{content:"";align-self:center;width:1.5px;height:22px;background:color-mix(in srgb,var(--v-inst) 45%,transparent)}
+}
+@media (prefers-reduced-motion:reduce){
+  .screen__frame img{transition:none}
+}
+</style>
+</head>
+<body data-page="use-coplanai">
+
+<div data-site-header></div>
+
+<main id="main">
+
+<!-- ============ PAGE HEAD ============ -->
+<section class="wrap page-head uc-head" aria-labelledby="h1">
+  <p class="eyebrow">Use CoPlanAI · five ways to work together</p>
+  <h1 class="display" id="h1">From one workshop to how your institution <em>decides</em>.</h1>
+  <div class="uc-head__row">
+    <div class="uc-head__text">
+      <p class="lede">Start with the platform and your own facilitators, or go as far as changing your institution’s own processes. Each way below says who it suits, what it involves and how long it takes.</p>
+      <div class="actions">
+        <a class="btn" href="mailto:info@coplanai.com?subject=Working%20with%20CoPlanAI">Write to us</a>
+        <a class="link" href="#start">Start with one question: what is already decided?</a>
+      </div>
+      <p class="stats"><span>Our work since <b data-m="reach.since">2021</b></span><span><b data-m="reach.engagements">95</b> engagements</span><span><b data-m="reach.cities">73</b> cities</span><span><b data-m="reach.countries">38</b> countries</span></p>
+    </div>
+    <nav class="uc-toc" aria-label="On this page">
+      <p class="lab">On this page</p>
+      <ol>
+        <li><a href="#ways">Five ways to work together</a></li>
+        <li><a href="#equipment">The platform</a></li>
+        <li><a href="#formats">Sixteen workshop formats</a></li>
+        <li><a href="#safeguards">Safeguards</a></li>
+        <li><a href="#start">What is already decided?</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- ============ BEFORE / AFTER (the live page's Bologna pair) ============ -->
+<section class="section section--flush-top" aria-labelledby="ba-h">
+  <div class="wrap">
+    <div class="grid-12 ba-row">
+      <figure class="span-8" data-ba>
+        <div class="ba__stage">
+          <img class="ba__img" src="img/pool/2026-bologna--street-before.jpg" width="1200" height="605" alt="A Bologna street as photographed: a wide carriageway, parked cars and a pedestrian crossing.">
+          <img class="ba__img ba__after" src="img/pool/2026-bologna--street-after.jpg" width="1200" height="605" alt="The same street as a scenario from the workshop: a red cycle lane, benches and planting.">
+          <span class="ba__tag ba__tag--l" aria-hidden="true">As photographed</span>
+          <span class="ba__tag ba__tag--r" aria-hidden="true">A scenario</span>
+          <span class="ba__line" aria-hidden="true"><span class="ba__knob">&lsaquo;&rsaquo;</span></span>
+          <input class="ba__range sr" type="range" min="0" max="100" step="1" value="50" aria-label="Compare the street as photographed, on the left, with the scenario, on the right">
+        </div>
+      </figure>
+      <div class="ba-note span-4">
+        <p class="eyebrow">From a real street to a shared plan</p>
+        <h2 class="h3" id="ba-h">Try it on the real street, <em>before</em> anyone commits to it.</h2>
+        <p class="body">An image puts an idea on the place itself, where everyone in the room can compare it with what is there today. Most of us only know what we want once we see it.</p>
+        <p class="figure__cap"><span class="lab">Bologna · 2026</span>The street as photographed, and one scenario proposed in the workshop: a red cycle lane, benches and planting. Drag the line, or use the arrow keys, to compare.</p>
+        <a class="link link--ext" data-case="2026-bologna" href="https://partecipa.comune.bologna.it/partecipa/progetti/tico-officina-conoscenza?sect=didattico-tico-per-le-scuole" hreflang="it" target="_blank" rel="noopener">The Bologna project<span class="sr"> (opens in a new tab)</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FIVE WAYS TO WORK TOGETHER ============ -->
+<section class="section section--flush-top" id="ways" aria-labelledby="ways-h">
+  <div class="wrap">
+    <div class="head hair hair-pad">
+      <div class="head__main">
+        <p class="eyebrow">Five ways to work together</p>
+        <h2 class="h2" id="ways-h">Each step up asks more of <em>both</em> sides.</h2>
+      </div>
+      <p class="body head__aside">At the first step, your facilitators use the platform on their own. At the fourth, collaborative planning becomes standard practice across the institution. At the fifth, your staff train others to run it. Durations are typical. Choose a step to see its plan.</p>
+    </div>
+
+    <div class="commit" aria-hidden="true"><span class="lab">Self-service</span><span class="wedge"></span><span class="lab lab--ink">Institutional change</span></div>
+
+    <ol class="stair" data-stair>
+      <li><a class="st" id="tab-subscriber" href="#subscriber" data-way="subscriber" aria-label="Subscriber: self-service, 1 to 2 days to activation">
+        <span class="st-no"><span class="lab">Step 1</span><span class="st-bar" aria-hidden="true"><i class="f"></i><i></i><i></i><i></i><i></i></span></span>
+        <span class="st-name">Subscriber</span>
+        <span class="st-mode">Self-service</span>
+        <span class="st-d">Platform access. Your own facilitators run the workshops.</span>
+        <span class="st-dur"><b>1–2 days</b><span>to activation</span></span>
+        <span class="st-go" aria-hidden="true">See the plan ↓</span>
+      </a></li>
+      <li><a class="st" id="tab-capacity" href="#capacity" data-way="capacity" aria-label="Capacity Builder: guided launch, 4 to 6 weeks to independence">
+        <span class="st-no"><span class="lab">Step 2</span><span class="st-bar" aria-hidden="true"><i class="f"></i><i class="f"></i><i></i><i></i><i></i></span></span>
+        <span class="st-name">Capacity Builder</span>
+        <span class="st-mode">Guided launch</span>
+        <span class="st-d">A bootcamp, training in the platform and in facilitation, and a first workshop set up with you. Then you run it yourselves.</span>
+        <span class="st-dur"><b>4–6 weeks</b><span>to independence</span></span>
+        <span class="st-go" aria-hidden="true">See the plan ↓</span>
+      </a></li>
+      <li><a class="st" id="tab-innovation" href="#innovation" data-way="innovation" aria-label="Innovation Partner: co-creation, 2 to 4 months">
+        <span class="st-no"><span class="lab">Step 3</span><span class="st-bar" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i></span></span>
+        <span class="st-name">Innovation Partner</span>
+        <span class="st-mode">Co-creation</span>
+        <span class="st-d">A programme built around your question: the method and a tailored instance, with monitoring and evaluation.</span>
+        <span class="st-dur"><b>2–4 months</b><span>programme</span></span>
+        <span class="st-go" aria-hidden="true">See the plan ↓</span>
+      </a></li>
+      <li><a class="st" id="tab-governance" href="#governance" data-way="governance" aria-label="Governance Transformation: strategic partnership, 3 to 12 months">
+        <span class="st-no"><span class="lab">Step 4</span><span class="st-bar" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i></span></span>
+        <span class="st-name">Governance Transformation</span>
+        <span class="st-mode">Strategic partnership</span>
+        <span class="st-d">Change how your institution decides: its processes, governance model and culture, with collaborative planning built in.</span>
+        <span class="st-dur"><b>3–12 months</b><span>partnership</span></span>
+        <span class="st-go" aria-hidden="true">See the plan ↓</span>
+      </a></li>
+      <li><a class="st" id="tab-multiplier" href="#multiplier" data-way="multiplier" aria-label="Multiplier Programme: train the trainers, 2 to 3 months to first rollout">
+        <span class="st-no"><span class="lab">Step 5</span><span class="st-bar" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></span></span>
+        <span class="st-name">Multiplier Programme</span>
+        <span class="st-mode">Train the trainers</span>
+        <span class="st-d">Your staff become certified facilitators who onboard partner organisations, municipalities or grantees.</span>
+        <span class="st-dur"><b>2–3 months</b><span>to first rollout</span></span>
+        <span class="st-go" aria-hidden="true">See the plan ↓</span>
+      </a></li>
+    </ol>
+
+    <div class="ways" data-ways>
+
+      <!-- 01 · SUBSCRIBER -->
+      <article class="way" id="subscriber" aria-labelledby="way-subscriber-h">
+        <div class="way__main">
+          <p class="way__kicker"><span class="lab">Step 1 · Self-service</span><span class="st-bar" aria-hidden="true"><i class="f"></i><i></i><i></i><i></i><i></i></span></p>
+          <h3 class="h3" id="way-subscriber-h">Subscriber</h3>
+          <p class="lede">A subscription to the platform. Your team runs its own collaborative planning workshops, when it needs them.</p>
+          <dl class="way__dl">
+            <div><dt class="lab">Who it is for</dt><dd>Planning teams, agencies, studios and universities that have their own facilitators and want to run the workshops themselves.</dd></div>
+            <div><dt class="lab">What you get</dt><dd><ul class="ticks">
+              <li><b>The whole platform:</b> scenarios, evaluation and deliberation in one place.</li>
+              <li><b>Workshops on your own schedule,</b> as many as you need on your subscribed site.</li>
+              <li><b>A record of every project:</b> what was proposed, how it was evaluated and what people chose, ready to export.</li>
+              <li><b>Facilitator templates and guides,</b> so a first-time facilitator can run a session alone.</li>
+              <li><b>Support and product updates</b> for the length of your subscription.</li>
+            </ul></dd></div>
+            <div><dt class="lab">In use with</dt><dd><ul class="inuse">
+              <li>Humankind, Rotterdam <span class="lab">2024</span></li>
+              <li>University of Milan <span class="lab">2024</span></li>
+            </ul></dd></div>
+          </dl>
+          <div class="actions"><a class="link link--arrow" href="mailto:info@coplanai.com?subject=Subscriber%20plan">Write to us about a Subscriber plan</a></div>
+        </div>
+        <div class="way__plan">
+          <p class="way__dur"><span class="lab">How it works</span><b>1–2 days</b><span class="lab">to activation</span></p>
+          <details class="way__steps" open><summary><span class="link link--arrow">Day by day</span></summary>
+          <div class="gantt-wrap" style="--n:3">
+            <div class="g-scale" aria-hidden="true"><span class="g-unit">Day</span><span></span><span class="g-ticks"><i style="--at:0">1</i><i style="--at:1">2</i><i style="--at:2">Ongoing</i></span></div>
+            <ol class="gantt" aria-label="Subscriber, step by step">
+              <li class="g-row g--joint" style="--s:0;--e:1"><span class="g-when"><span class="lab">Day 1</span><span class="g-who">Joint</span></span><span class="g-step"><b>Subscribe and access</b><span>Plan chosen, workspace created, credentials issued.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--you" style="--s:0;--e:2"><span class="g-when"><span class="lab">Day 1–2</span><span class="g-who">Your team</span></span><span class="g-step"><b>Configure your environment</b><span>Site photos, scenario and evaluation settings, prompts, participant interface.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--you g--open" style="--s:2;--e:3"><span class="g-when"><span class="lab">Ongoing</span><span class="g-who">Your team</span></span><span class="g-step"><b>Run workshops independently</b><span>As many sessions as your plan allows, on your own timeline.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+            </ol>
+            <p class="g-legend" aria-hidden="true"><span><i class="g-sw g--joint"></i>Joint</span><span><i class="g-sw g--us"></i>We lead</span><span><i class="g-sw g--you"></i>Your team</span></p>
+          </div></details>
+          <p class="way__note"><span class="lab">Plans and pricing</span>Each subscription is scoped to what your team needs. Tell us, and we will send you a plan and a price.</p>
+        </div>
+      </article>
+
+      <!-- 02 · CAPACITY BUILDER -->
+      <article class="way" id="capacity" aria-labelledby="way-capacity-h">
+        <div class="way__main">
+          <p class="way__kicker"><span class="lab">Step 2 · Guided launch</span><span class="st-bar" aria-hidden="true"><i class="f"></i><i class="f"></i><i></i><i></i><i></i></span></p>
+          <h3 class="h3" id="way-capacity-h">Capacity Builder</h3>
+          <p class="lede">We train your own team to run CoPlanAI, from the first set-up to the debrief.</p>
+          <dl class="way__dl">
+            <div><dt class="lab">Who it is for</dt><dd>Cities and public bodies that want their own staff to run collaborative planning, instead of buying it in each time.</dd></div>
+            <div><dt class="lab">What you get</dt><dd><ul class="ticks">
+              <li><b>Hands-on training</b> for your facilitators, planners and communications staff.</li>
+              <li><b>A playbook</b> tailored to your context, your mandate and your languages.</li>
+              <li><b>Your sites and workshops</b> set up and configured with you on the platform.</li>
+              <li><b>A way to train new staff</b> as your team changes.</li>
+              <li><b>A direct support line</b> through your first live engagements.</li>
+            </ul></dd></div>
+            <div><dt class="lab">In use with</dt><dd><ul class="inuse">
+              <li><a data-case="2023-forum-virium" href="https://coplanai.com/portfolio/forum-virium-helsinki/" target="_blank" rel="noopener">Forum Virium Helsinki<span class="sr"> (opens in a new tab)</span></a> <span class="lab">2023</span></li>
+              <li><a data-case="2025-berlin-kiezlabor" href="https://coplanai.com/portfolio/kiezlabor/" target="_blank" rel="noopener">CityLAB Berlin<span class="sr"> (opens in a new tab)</span></a> <span class="lab">2023–25</span></li>
+              <li><a data-case="2024-civitas-athens" href="https://coplanai.com/portfolio/athens-civinet/" target="_blank" rel="noopener">CIVINET, Athens<span class="sr"> (opens in a new tab)</span></a> <span class="lab">2024</span></li>
+              <li><a data-case="2024-giz-manila" href="https://coplanai.com/portfolio/manila-feminist-cities/" target="_blank" rel="noopener">GIZ, Manila<span class="sr"> (opens in a new tab)</span></a> <span class="lab">2024</span></li>
+            </ul></dd></div>
+          </dl>
+          <div class="actions"><a class="link link--arrow" href="mailto:info@coplanai.com?subject=A%20short%20training%20session">Ask for a free short training session for your team</a></div>
+        </div>
+        <div class="way__plan">
+          <p class="way__dur"><span class="lab">How it works</span><b>4–6 weeks</b><span class="lab">to independence</span></p>
+          <details class="way__steps" open><summary><span class="link link--arrow">Week by week</span></summary>
+          <div class="gantt-wrap" style="--n:6">
+            <div class="g-scale" aria-hidden="true"><span class="g-unit">Week</span><span></span><span class="g-ticks"><i style="--at:0">1</i><i style="--at:1">2</i><i style="--at:2">3</i><i style="--at:3">4</i><i style="--at:4">5</i><i style="--at:5">6</i></span></div>
+            <ol class="gantt" aria-label="Capacity Builder, step by step">
+              <li class="g-row g--joint" style="--s:0;--e:1"><span class="g-when"><span class="lab">Week 1</span><span class="g-who">Joint</span></span><span class="g-step"><b>Discovery and alignment</b><span>Goals, stakeholders, and the scope of your first workshop.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--us" style="--s:1;--e:2"><span class="g-when"><span class="lab">Week 2</span><span class="g-who">We lead</span></span><span class="g-step"><b>Bootcamp</b><span>Cases from our record; your team picks a model to follow.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--us" style="--s:1;--e:3"><span class="g-when"><span class="lab">Week 2–3</span><span class="g-who">We lead</span></span><span class="g-step"><b>Platform and facilitation training</b><span>Scenario and evaluation settings, prompts, participant setup, facilitation technique.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--us" style="--s:2;--e:4"><span class="g-when"><span class="lab">Week 3–4</span><span class="g-who">We lead</span></span><span class="g-step"><b>First workshop set-up</b><span>We build your first session from your site materials.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--joint" style="--s:3;--e:5"><span class="g-when"><span class="lab">Week 4–5</span><span class="g-who">Joint</span></span><span class="g-step"><b>Supported first engagement</b><span>Your facilitators run it; we support them live.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--joint" style="--s:4;--e:6"><span class="g-when"><span class="lab">Week 5–6</span><span class="g-who">Joint</span></span><span class="g-step"><b>Debrief and handover</b><span>What worked, what to refine. Then you run it on your own.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+            </ol>
+            <p class="g-legend" aria-hidden="true"><span><i class="g-sw g--joint"></i>Joint</span><span><i class="g-sw g--us"></i>We lead</span><span><i class="g-sw g--you"></i>Your team</span></p>
+          </div></details>
+        </div>
+      </article>
+
+      <!-- 03 · INNOVATION PARTNER -->
+      <article class="way" id="innovation" aria-labelledby="way-innovation-h">
+        <div class="way__main">
+          <p class="way__kicker"><span class="lab">Step 3 · Co-creation</span><span class="st-bar" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i></span></p>
+          <h3 class="h3" id="way-innovation-h">Innovation Partner</h3>
+          <p class="lede">We develop new methods and research with you, often inside funded research and innovation projects.</p>
+          <dl class="way__dl">
+            <div><dt class="lab">Who it is for</dt><dd>Research consortia, funded programmes, universities and cities that want to test something new in collaborative planning.</dd></div>
+            <div><dt class="lab">The programme</dt><dd>Built around your question: the method, a tailored instance with its own interface and purpose-built AI, and monitoring and evaluation from start to end.</dd></div>
+            <div><dt class="lab">What you get</dt><dd><ul class="ticks">
+              <li><b>Joint method design,</b> around your research questions.</li>
+              <li><b>New platform capabilities</b> prototyped around your pilots.</li>
+              <li><b>A partner</b> who can co-write and co-deliver funded work packages.</li>
+              <li><b>Shared results:</b> publications and open outputs, where they fit.</li>
+            </ul></dd></div>
+            <div><dt class="lab">In use with</dt><dd><ul class="inuse">
+              <li><a data-case="2024-paces-stockholm" href="https://coplanai.com/portfolio/paces-stockholm/" target="_blank" rel="noopener">Cloudberry × Vinnova, Stockholm<span class="sr"> (opens in a new tab)</span></a> <span class="lab">2024</span></li>
+              <li><a data-case="2025-turku-biodiversity-park" href="https://coplanai.com/portfolio/turku-biodiversity-parks/" target="_blank" rel="noopener">University of Turku<span class="sr"> (opens in a new tab)</span></a> <span class="lab">2025</span></li>
+              <li>Urban Redevelopment Authority, Singapore <span class="lab">2023</span></li>
+              <li><a data-case="2023-undp-batumi" href="https://coplanai.com/portfolio/batumi-future-fit-cities/" target="_blank" rel="noopener">UNDP, Batumi<span class="sr"> (opens in a new tab)</span></a> <span class="lab">2023</span></li>
+            </ul></dd></div>
+          </dl>
+          <div class="actions"><a class="link link--arrow" href="mailto:info@coplanai.com?subject=Innovation%20Partner">Write to us about a research or innovation project</a></div>
+        </div>
+        <div class="way__plan">
+          <p class="way__dur"><span class="lab">How it works</span><b>2–4 months</b><span class="lab">programme</span></p>
+          <details class="way__steps" open><summary><span class="link link--arrow">Week by week</span></summary>
+          <div class="gantt-wrap" style="--n:16">
+            <div class="g-scale" aria-hidden="true"><span class="g-unit">Week</span><span></span><span class="g-ticks"><i style="--at:0">1</i><i style="--at:3">4</i><i style="--at:7">8</i><i style="--at:11">12</i><i style="--at:15">16</i></span></div>
+            <ol class="gantt" aria-label="Innovation Partner, step by step">
+              <li class="g-row g--joint" style="--s:0;--e:2"><span class="g-when"><span class="lab">Week 1–2</span><span class="g-who">Joint</span></span><span class="g-step"><b>Scoping</b><span>What you want to achieve, and whether a new model is needed.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--us" style="--s:1;--e:3"><span class="g-when"><span class="lab">Week 2–3</span><span class="g-who">We lead</span></span><span class="g-step"><b>Landscape review</b><span>Precedents and current practice, reviewed together.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--joint" style="--s:2;--e:5"><span class="g-when"><span class="lab">Week 3–5</span><span class="g-who">Joint</span></span><span class="g-step"><b>Co-design bootcamp</b><span>We shape the participation framework and session flow together.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--us" style="--s:4;--e:8"><span class="g-when"><span class="lab">Week 5–8</span><span class="g-who">We lead</span></span><span class="g-step"><b>Custom platform development</b><span>A tailored interface and flows, and purpose-built AI for scenarios and evaluation.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--joint" style="--s:6;--e:9"><span class="g-when"><span class="lab">Week 7–9</span><span class="g-who">Joint</span></span><span class="g-step"><b>Facilitator training and rehearsal</b><span>Training, and a dry run of the new format.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--joint" style="--s:8;--e:12"><span class="g-when"><span class="lab">Week 9–12</span><span class="g-who">Joint</span></span><span class="g-step"><b>Launch and supported deployment</b><span>The first cycle runs live with our team alongside.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--joint" style="--s:11;--e:16"><span class="g-when"><span class="lab">Week 12–16</span><span class="g-who">Joint</span></span><span class="g-step"><b>Monitoring and refinement</b><span>Outcomes analysed, method refined, ownership transferred.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+            </ol>
+            <p class="g-legend" aria-hidden="true"><span><i class="g-sw g--joint"></i>Joint</span><span><i class="g-sw g--us"></i>We lead</span><span><i class="g-sw g--you"></i>Your team</span></p>
+          </div></details>
+        </div>
+      </article>
+
+      <!-- 04 · GOVERNANCE TRANSFORMATION -->
+      <article class="way" id="governance" aria-labelledby="way-governance-h">
+        <div class="way__main">
+          <p class="way__kicker"><span class="lab">Step 4 · Strategic partnership</span><span class="st-bar" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i></span></p>
+          <h3 class="h3" id="way-governance-h">Governance Transformation</h3>
+          <p class="lede">Collaborative planning leaves the one-off workshop and becomes part of how the institution works, across the departments that shape a place.</p>
+          <dl class="way__dl">
+            <div><dt class="lab">Who it is for</dt><dd>Governments, cities and international organisations whose leaders want public imagination to be a standing part of how decisions are made.</dd></div>
+            <div><dt class="lab">What is redesigned</dt><dd>The institution’s internal processes, its governance model and its culture, around collaborative planning with AI.</dd></div>
+            <div><dt class="lab">What changes</dt><dd><ul class="ticks">
+              <li><b>Where the public enters.</b> People come in earlier, while the options are still open.</li>
+              <li><b>Your statutory and consultation moments,</b> with collaborative planning built into them.</li>
+              <li><b>Work across departments.</b> Teams inside the institution work on the same scenarios and evaluations as the public.</li>
+              <li><b>Governance, data and accountability</b> that stand up to public scrutiny.</li>
+              <li><b>A long-term partnership</b> while the practice becomes standard.</li>
+            </ul></dd></div>
+          </dl>
+          <div class="actions"><a class="link link--arrow" href="mailto:info@coplanai.com?subject=Governance%20Transformation">Write to us about a governance partnership</a></div>
+        </div>
+        <div class="way__plan">
+          <p class="way__dur"><span class="lab">How it works</span><b>3–12 months</b><span class="lab">partnership</span></p>
+          <details class="way__steps" open><summary><span class="link link--arrow">Month by month</span></summary>
+          <div class="gantt-wrap" style="--n:12">
+            <div class="g-scale" aria-hidden="true"><span class="g-unit">Month</span><span></span><span class="g-ticks"><i style="--at:0">1</i><i style="--at:2">3</i><i style="--at:5">6</i><i style="--at:8">9</i><i style="--at:11">12</i></span></div>
+            <ol class="gantt" aria-label="Governance Transformation, step by step">
+              <li class="g-row g--joint" style="--s:0;--e:1"><span class="g-when"><span class="lab">Month 1</span><span class="g-who">Joint</span></span><span class="g-step"><b>Institutional diagnostic</b><span>A joint review of how you involve people today, inside the institution and outside it.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--joint" style="--s:0;--e:2"><span class="g-when"><span class="lab">Month 1–2</span><span class="g-who">Joint</span></span><span class="g-step"><b>Opportunity mapping</b><span>The decisions where collaborative planning with AI should enter first.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--joint" style="--s:1;--e:3"><span class="g-when"><span class="lab">Month 2–3</span><span class="g-who">Joint</span></span><span class="g-step"><b>Technology bootcamp</b><span>Staff test the tools and adapt them to their own work.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--joint" style="--s:2;--e:4"><span class="g-when"><span class="lab">Month 3–4</span><span class="g-who">Joint</span></span><span class="g-step"><b>New process co-design</b><span>A blueprint for the new way of working.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--us" style="--s:3;--e:6"><span class="g-when"><span class="lab">Month 4–6</span><span class="g-who">We lead</span></span><span class="g-step"><b>Custom platform build</b><span>A dedicated instance built to put the blueprint to work.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--joint" style="--s:4;--e:7"><span class="g-when"><span class="lab">Month 5–7</span><span class="g-who">Joint</span></span><span class="g-step"><b>Staff training and piloting</b><span>Training plus pilots that test the redesign in real conditions.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--joint" style="--s:5;--e:10"><span class="g-when"><span class="lab">Month 6–10</span><span class="g-who">Joint</span></span><span class="g-step"><b>Scaled deployment and iteration</b><span>Rollout across the organisation, with us alongside as advisers.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+              <li class="g-row g--joint" style="--s:9;--e:12"><span class="g-when"><span class="lab">Month 10–12</span><span class="g-who">Joint</span></span><span class="g-step"><b>Evaluation and handover</b><span>Impact measured; you take full ownership.</span></span><span class="g-track" aria-hidden="true"><i></i></span></li>
+            </ol>
+            <p class="g-legend" aria-hidden="true"><span><i class="g-sw g--joint"></i>Joint</span><span><i class="g-sw g--us"></i>We lead</span><span><i class="g-sw g--you"></i>Your team</span></p>
+          </div></details>
+        </div>
+        <div class="way__note gt-note">
+          <div class="gt-note__text">
+            <p class="lab">What it can take</p>
+            <p>The partnership runs for 3 to 12 months. The change around it can take longer. In Dubai it took three years, in five steps, and the mandate came before the pilot.</p>
+          </div>
+          <ol class="gt-steps" aria-label="Dubai, in five steps">
+            <li><span class="lab">01</span><b>Exploration</b></li>
+            <li><span class="lab">02</span><b>Outreach</b></li>
+            <li class="gt-key"><span class="lab">03</span><b>A mandate</b></li>
+            <li><span class="lab">04</span><b>A pilot</b></li>
+            <li><span class="lab">05</span><b>Integration</b></li>
+          </ol>
+        </div>
+      </article>
+
+      <!-- 05 · MULTIPLIER PROGRAMME -->
+      <article class="way" id="multiplier" aria-labelledby="way-multiplier-h">
+        <div class="way__main">
+          <p class="way__kicker"><span class="lab">Step 5 · Train the trainers</span><span class="st-bar" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></span></p>
+          <h3 class="h3" id="way-multiplier-h">Multiplier Programme</h3>
+          <p class="lede">We train the trainers. Your staff become certified facilitators, who then onboard partner organisations, municipalities or grantees.</p>
+          <dl class="way__dl">
+            <div><dt class="lab">Who it is for</dt><dd>Organisations that work through others, such as development agencies, networks of municipalities and grant programmes, and teaching institutions that train planners.</dd></div>
+            <div><dt class="lab">What you get</dt><dd><ul class="ticks">
+              <li><b>Training and certification</b> for your staff as facilitators.</li>
+              <li><b>A rollout plan</b> for the organisations they will onboard.</li>
+              <li><b>Our support</b> until the first rollout.</li>
+            </ul></dd></div>
+          </dl>
+          <div class="actions"><a class="link link--arrow" href="mailto:info@coplanai.com?subject=Multiplier%20Programme">Write to us about training others to run it</a></div>
+        </div>
+        <div class="way__plan">
+          <p class="way__dur"><span class="lab">How it works</span><b>2–3 months</b><span class="lab">to first rollout</span></p>
+          <div class="fan" role="img" aria-label="We train your staff; your staff, as certified facilitators, onboard partner organisations, municipalities or grantees.">
+            <div class="fan__tier"><span class="fan__node fan__node--us"><span class="lab">We</span><b>Train and certify</b></span></div>
+            <span class="fan__link" aria-hidden="true"></span>
+            <div class="fan__tier"><span class="fan__node fan__node--you"><span class="lab">Your staff</span><b>Certified facilitators</b></span></div>
+            <span class="fan__branch" aria-hidden="true"></span>
+            <div class="fan__tier fan__tier--3"><span class="fan__node"><span class="lab">They onboard</span><b>Partner organisations</b></span><span class="fan__node"><span class="lab">They onboard</span><b>Municipalities</b></span><span class="fan__node"><span class="lab">They onboard</span><b>Grantees</b></span></div>
+          </div>
+          <p class="fan-cap">We plan each programme with the organisation that runs it.</p>
+        </div>
+      </article>
+    </div>
+
+    <!-- beyond the plans -->
+    <div class="beyond">
+      <div class="beyond__head">
+        <p class="eyebrow">Beyond the plans</p>
+        <h3 class="h3">Custom builds and white-label deployments, on <em>your</em> infrastructure.</h3>
+        <p class="body">We add features when clients ask for them, and every deployment receives them. With Innovation Partners and Governance Transformation partners we also build private, white-labelled versions of CoPlanAI, designed together and deployed on the partner’s own terms.</p>
+        <a class="link link--arrow" href="mailto:info@coplanai.com?subject=Custom%20deployment">Write to us about a custom deployment</a>
+      </div>
+      <ol class="beyond__list">
+        <li><span class="lab">01</span><h4 class="name name--s">Customised to your practice</h4><p class="small">Workflows, languages, themes, evaluation criteria and integrations, built to your request and kept up to date as the product develops.</p></li>
+        <li><span class="lab">02</span><h4 class="name name--s">Private and white-labelled</h4><p class="small">Your name, your brand, your instance: a dedicated platform for your institution, as we have built for a city government. Only the institution sees it.</p></li>
+        <li><span class="lab">03</span><h4 class="name name--s">Your servers, your models</h4><p class="small">Deployed on institutional infrastructure or regional servers for data residency and compliance, running the generative models your policy prefers.</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE PLATFORM: equipment ============ -->
+<section class="section section--flush-top" id="equipment" aria-labelledby="eq-h">
+  <div class="wrap">
+    <div class="head hair hair-pad">
+      <div class="head__main">
+        <p class="eyebrow">The platform</p>
+        <h2 class="h2" id="eq-h">One engagement, three surfaces, <em>one record</em>.</h2>
+      </div>
+      <p class="body head__aside">The AI does two jobs. It generates scenarios from people’s own words, on the real place. And it evaluates them, against the institution’s own policy, design guides and law, and for their likely environmental and social impact. People deliberate; the institution decides.</p>
+    </div>
+
+    <div class="eq-trio grid-3">
+      <article class="eq" aria-labelledby="eq-studio">
+        <p class="lab">Desktop · planning teams</p>
+        <h3 class="name" id="eq-studio">CoPlan Studio</h3>
+        <p class="body">The desktop workspace where a planning team turns a written brief into checked, rendered design options.</p>
+        <ol class="eq-steps">
+          <li>It starts with an image and your brief</li>
+          <li>Twenty variations from one brief</li>
+          <li>Checked against the planning documents</li>
+          <li>Favourites compared at one scale</li>
+          <li>Renders from stored cameras</li>
+          <li>Before and after, same frame</li>
+        </ol>
+      </article>
+      <article class="eq" aria-labelledby="eq-config">
+        <p class="lab">Desktop · whoever sets the engagement up</p>
+        <h3 class="name" id="eq-config">The Configurator</h3>
+        <p class="body">Where an engagement is set up: what is asked, of whom, and what the participant’s phone will show.</p>
+        <ol class="eq-steps">
+          <li>The four tasks, on two axes: Futuring, Scenario planning, Co-design, Design review</li>
+          <li>Who takes part</li>
+          <li>How much ground it covers</li>
+          <li>Theme selection</li>
+        </ol>
+      </article>
+      <article class="eq" aria-labelledby="eq-app">
+        <p class="lab">Phone, tablet or kiosk · residents and stakeholders</p>
+        <h3 class="name" id="eq-app">The participant app</h3>
+        <p class="body">What a resident holds: a street, a question, and their own idea coming back as a picture, with no account at any point.</p>
+        <ol class="eq-steps">
+          <li>In with a QR code, no account</li>
+          <li>Say it in your own words</li>
+          <li>Your words become a picture</li>
+          <li>One picture, six seats, live</li>
+          <li>Sift what everyone made</li>
+          <li>Kept in your own words</li>
+          <li>Your places, kept on your phone</li>
+        </ol>
+      </article>
+    </div>
+
+    <!-- the screen viewer: behind the room, and in it -->
+    <div class="viewer" data-viewer>
+      <div class="viewer__head">
+        <div>
+          <p class="eyebrow">The working screens</p>
+          <h3 class="h3">Behind the room, and <em>in</em> it.</h3>
+        </div>
+        <div class="seg" role="tablist" aria-label="Whose screens">
+          <button type="button" role="tab" id="lane-org-tab" aria-controls="lane-org" aria-selected="true">Behind the room <small>the organiser</small></button>
+          <button type="button" role="tab" id="lane-room-tab" aria-controls="lane-room" aria-selected="false" tabindex="-1">In the room <small>the participant</small></button>
+        </div>
+      </div>
+      <div class="viewer__body">
+        <figure class="screen">
+          <div class="plate screen__stage">
+            <div class="screen__frame" id="scr-frame">
+              <img id="scr-img" src="img/platform/studio-image-transform.jpg" width="1800" height="1003" alt="The organiser’s console, Image and Transform tab: images come from an upload, a library or a map, and people reshape them by theme, by drawing or by prompt.">
+            </div>
+          </div>
+          <figcaption class="screen__cap"><span class="screen__txt" id="scr-cap" aria-live="polite"><span class="lab" id="scr-lab">Behind the room · 1 of 4</span><span id="scr-t">Source and transform</span></span><a class="link link--ext" id="scr-full" href="img/platform/studio-image-transform.jpg" target="_blank" rel="noopener">Full size<span class="sr"> (opens the screen in a new tab)</span></a></figcaption>
+        </figure>
+        <div class="viewer__steps">
+          <ol class="vsteps" id="lane-org" role="tabpanel" aria-labelledby="lane-org-tab">
+            <li><button type="button" class="vstep" aria-pressed="true" aria-controls="scr-frame" data-src="img/platform/studio-image-transform.jpg" data-w="1800" data-h="1003" data-alt="The organiser’s console, Image and Transform tab: images come from an upload, a library or a map, and people reshape them by theme, by drawing or by prompt."><span class="vstep__n">01</span><span class="vstep__t">Source and transform</span><span class="vstep__d">Choose where images come from (upload, library or map) and how people reshape them: theme, draw or prompt.</span></button></li>
+            <li><button type="button" class="vstep" aria-pressed="false" aria-controls="scr-frame" data-src="img/platform/studio-themes.jpg" data-w="1800" data-h="1003" data-alt="The organiser’s console, Themes tab: five themes, each with a picture and its own prompt: urban park, parklets, bioswale, cycle lane and pedestrian street."><span class="vstep__n">02</span><span class="vstep__t">Set the themes</span><span class="vstep__d">Each direction on the table gets a prompt, a description and its expected impacts.</span></button></li>
+            <li><button type="button" class="vstep" aria-pressed="false" aria-controls="scr-frame" data-src="img/platform/studio-ai-customisation.jpg" data-w="1800" data-h="1003" data-alt="The organiser’s console, AI customisation tab: the main goal of the redesign, the image style, a visual style reference, and who uses the space."><span class="vstep__n">03</span><span class="vstep__t">Aim the system</span><span class="vstep__d">The goal of the redesign, the style of the images and who uses the place. Keep it close to local rules, or give it a free hand.</span></button></li>
+            <li><button type="button" class="vstep" aria-pressed="false" aria-controls="scr-frame" data-src="img/platform/impact-evaluator.jpg" data-w="1800" data-h="866" data-alt="The live gallery: a street corner transformed with parklets, and beside it an assessment of its impact, its trade-offs, and who gains and who loses."><span class="vstep__n">04</span><span class="vstep__t">Steer it live</span><span class="vstep__d">A live gallery shows each scenario with its impact assessment, so you can moderate the discussion as it happens.</span></button></li>
+          </ol>
+          <ol class="vsteps" id="lane-room" role="tabpanel" aria-labelledby="lane-room-tab">
+            <li><button type="button" class="vstep" aria-pressed="false" aria-controls="scr-frame" data-src="img/platform/app-map-select-image.jpg" data-w="1800" data-h="1003" data-alt="The participant’s screen: choosing a photograph from a map of Europe, with image pins."><span class="vstep__n">01</span><span class="vstep__t">Start from a photo</span><span class="vstep__d">A photograph of a real place, chosen from a map or brought by the room.</span></button></li>
+            <li><button type="button" class="vstep" aria-pressed="false" aria-controls="scr-frame" data-src="img/platform/app-choose-transformation.jpg" data-w="1800" data-h="1003" data-alt="The participant’s screen: three ways to change the image: a theme, drawing on the image, or a prompt."><span class="vstep__n">02</span><span class="vstep__t">Choose how to change it</span><span class="vstep__d">Pick a theme, draw on the image, or propose the change in plain words.</span></button></li>
+            <li><button type="button" class="vstep" aria-pressed="false" aria-controls="scr-frame" data-src="img/platform/app-choose-theme.jpg" data-w="1800" data-h="1003" data-alt="The participant’s screen: a city street as photographed, with five themes to choose from below it."><span class="vstep__n">03</span><span class="vstep__t">Try a direction</span><span class="vstep__d">The street as it is, with the themes the organisers set for the session.</span></button></li>
+            <li><button type="button" class="vstep" aria-pressed="false" aria-controls="scr-frame" data-src="img/platform/app-iterate-impact.jpg" data-w="1800" data-h="1099" data-alt="The participant’s screen: the same street transformed, with a panel on its impact and trade-offs, and suggestions for the next change."><span class="vstep__n">04</span><span class="vstep__t">See it, and what it would do</span><span class="vstep__d">The idea on the real street in seconds, with its impact and trade-offs beside it. Keep it, change it, or change your mind.</span></button></li>
+          </ol>
+          <p class="small vloop" id="vloop">Screens from the platform, July 2026. In the room, people then compare, debate and choose, with no plans to read and no software to learn. One full loop takes about half a day.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SIXTEEN FORMATS ============ -->
+<section class="section section--flush-top" id="formats" aria-labelledby="fmt-h">
+  <div class="wrap">
+    <div class="head hair hair-pad">
+      <div class="head__main">
+        <p class="eyebrow">Workshop formats</p>
+        <h2 class="h2" id="fmt-h">Sixteen formats, fitted to <em>who is in the room</em>.</h2>
+      </div>
+      <p class="body head__aside">Every engagement draws on one method library, grouped by who takes part. Children work with methods made for their age.</p>
+    </div>
+
+    <div class="lib">
+      <div class="plate aud aud--citizens">
+        <p class="aud__n"><b>4</b><span class="lab">formats</span></p>
+        <h3 class="name name--s">Citizens</h3>
+        <p class="aud__who">Residents, neighbours and local businesses.</p>
+        <ol>
+          <li><span class="lab">01</span><span>Photo-to-scenario</span></li>
+          <li><span class="lab">02</span><span>Rate and rank options</span></li>
+          <li><span class="lab">03</span><span>Citizen committee</span></li>
+          <li><span class="lab">04</span><span>Co-design with businesses</span></li>
+        </ol>
+      </div>
+      <div class="plate aud aud--children">
+        <p class="aud__n"><b>3</b><span class="lab">formats</span></p>
+        <h3 class="name name--s">Children and youth</h3>
+        <p class="aud__who">From six years old, and whole classes.</p>
+        <ol>
+          <li><span class="lab">05</span><span>Drawing-guided ideation<small>ages 6–9</small></span></li>
+          <li><span class="lab">06</span><span>Tablet co-design<small>ages 10–14</small></span></li>
+          <li><span class="lab">07</span><span>School climate futures</span></li>
+        </ol>
+      </div>
+      <div class="plate aud aud--mth">
+        <p class="aud__n"><b>2</b><span class="lab">formats</span></p>
+        <h3 class="name name--s">More-than-human</h3>
+        <p class="aud__who">Species, habitats and the city’s ecology.</p>
+        <ol>
+          <li><span class="lab">08</span><span>More-than-human parameters<small>biodiversity, species corridors</small></span></li>
+          <li><span class="lab">09</span><span>Museum and exhibit mode</span></li>
+        </ol>
+      </div>
+      <div class="plate aud aud--experts">
+        <p class="aud__n"><b>4</b><span class="lab">formats</span></p>
+        <h3 class="name name--s">Experts and officials</h3>
+        <p class="aud__who">The people who must act on it.</p>
+        <ol>
+          <li><span class="lab">10</span><span>Policy visualisation</span></li>
+          <li><span class="lab">11</span><span>Regulatory pre-evaluation</span></li>
+          <li><span class="lab">12</span><span>Cross-department alignment</span></li>
+          <li><span class="lab">13</span><span>Supervised professional workshop</span></li>
+        </ol>
+      </div>
+      <div class="plate aud aud--online">
+        <p class="aud__n"><b>3</b><span class="lab">formats</span></p>
+        <h3 class="name name--s">Online</h3>
+        <p class="aud__who">Anyone who could not come to the room.</p>
+        <ol>
+          <li><span class="lab">14</span><span>Online deliberation campaign</span></li>
+          <li><span class="lab">15</span><span>Map-based online proposals</span></li>
+          <li><span class="lab">16</span><span>Expo and kiosk mode</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field-row__head">
+        <p class="eyebrow">Formats in the field</p>
+        <a class="link link--arrow" href="use-cases.html">See every engagement</a>
+      </div>
+      <div class="grid-4">
+        <a class="figure figure--4x3" data-case="2026-bologna" href="https://partecipa.comune.bologna.it/partecipa/progetti/tico-officina-conoscenza?sect=didattico-tico-per-le-scuole" hreflang="it" target="_blank" rel="noopener">
+          <div class="figure__media"><img src="img/pool/2026-bologna--tico-schools.jpg" width="1230" height="900" alt="Children on chairs inside the TICO truck, one hand raised, a screen at the front." loading="lazy" decoding="async"><span class="figure__tag">Children and youth</span></div>
+          <p class="figure__cap"><span class="lab">Bologna · 2026</span>A class at our station in TICO, the City of Bologna’s workshop truck.<span class="sr"> Opens the project in a new tab.</span></p>
+        </a>
+        <a class="figure figure--4x3" data-case="2025-turku-biodiversity-park" href="https://coplanai.com/portfolio/turku-biodiversity-parks/" target="_blank" rel="noopener">
+          <div class="figure__media"><img src="img/pool/2025-turku-biodiversity-park--workshop.jpg" width="1800" height="1013" alt="Residents and practitioners at laptops with element cards, a park scenario on the screen." loading="lazy" decoding="async"><span class="figure__tag">More-than-human</span></div>
+          <p class="figure__cap"><span class="lab">Turku · 2025</span>Urban biodiversity parks, worked through with residents and practitioners.<span class="sr"> Opens the project in a new tab.</span></p>
+        </a>
+        <a class="figure figure--4x3" data-case="2023-tallinn-biodiverse-city-museum" href="https://coplanai.com/portfolio/estonian-museum-of-natural-history/" target="_blank" rel="noopener">
+          <div class="figure__media"><img src="img/pool/2023-tallinn-biodiverse-city-museum--room.jpg" width="900" height="675" alt="The exhibition room: a projected city scenario, low seats and a wall of printed images." loading="lazy" decoding="async"><span class="figure__tag">Exhibit mode</span></div>
+          <p class="figure__cap"><span class="lab">Tallinn · 2023</span>At the Estonian Museum of Natural History, visitors used the kiosk on their own.<span class="sr"> Opens the project in a new tab.</span></p>
+        </a>
+        <a class="figure figure--4x3" data-case="2023-east-cleveland-connect" href="https://coplanai.com/portfolio/connect-east-cleveland/" target="_blank" rel="noopener">
+          <div class="figure__media"><img src="img/pool/2023-east-cleveland-connect--residents.jpg" width="1800" height="1200" alt="Residents at a table with a facilitator and a laptop, talking and laughing." loading="lazy" decoding="async"><span class="figure__tag">Citizens</span></div>
+          <p class="figure__cap"><span class="lab">East Cleveland · 2023</span>Residents at the table with a facilitator, at Connect East Cleveland.<span class="sr"> Opens the project in a new tab.</span></p>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SAFEGUARDS ============ -->
+<section class="section section--flush-top" id="safeguards" aria-labelledby="safe-h">
+  <div class="wrap">
+    <div class="head hair hair-pad">
+      <div class="head__main">
+        <p class="eyebrow">Safeguards</p>
+        <h2 class="h2" id="safe-h">Governance, data and energy, <em>in brief</em>.</h2>
+      </div>
+      <p class="body head__aside">An institution that brings AI into planning should know how the AI is governed, where the data goes and how much energy it uses.</p>
+    </div>
+
+    <div class="grid-2 safe">
+      <article class="plate plate--ice safe__card safe__card--gov" aria-labelledby="gov-h">
+        <p class="lab">AI governance · limited risk</p>
+        <h3 class="name" id="gov-h">Our commitments, and yours.</h3>
+        <p class="body">We set out who does what, four commitments on how the AI is used, and how we curate the model’s bias. We ask every partner organisation to write its own commitments.</p>
+        <p class="q">AI can imagine anything. Only a community can give it a mandate.</p>
+        <a class="link link--arrow" href="about.html#ethics" style="margin-top:0">Ethics and AI governance</a>
+      </article>
+      <article class="plate plate--violet safe__card safe__card--data" aria-labelledby="data-h">
+        <p class="lab">Data and compliance · Europe</p>
+        <h3 class="name" id="data-h">Hosted in Europe. The outputs are yours.</h3>
+        <ul class="ticks" style="--tick:var(--v-inst)">
+          <li><b>GDPR compliant.</b> Personal data is processed only where the service needs it.</li>
+          <li><b>Facial analysis: none.</b> The platform neither collects nor analyses facial features in uploaded images.</li>
+          <li><b>You own every output.</b> All generated content and aggregated preference data remain the client’s exclusive property.</li>
+          <li><b>Encrypted</b> in transit and at rest, on AWS infrastructure.</li>
+          <li><b>EU AI Act, limited risk.</b> A decision-support tool with transparency, human oversight and bias mitigation built in.</li>
+        </ul>
+        <dl class="rec">
+          <dt>Hosting</dt><dd>AWS, Europe regions</dd>
+          <dt>Data processor</dt><dd>AWS, under GDPR</dd>
+          <dt>Frameworks</dt><dd>GDPR · EU-US Data Privacy Framework</dd>
+          <dt>Your outputs</dt><dd>Client property, unrestricted use</dd>
+          <dt>AI Act class</dt><dd>Limited risk</dd>
+        </dl>
+        <a class="link link--arrow" href="mailto:governance@coplanai.com?subject=Data%20and%20compliance%20sheet">Request the full data and server sheet</a>
+      </article>
+    </div>
+
+    <div class="grid-3 safe-more">
+      <div>
+        <p class="lab">Energy and footprint</p>
+        <h3 class="name name--s">Computing only while a workshop runs.</h3>
+        <p class="small">The model generates an image in seconds, then stands down. We use existing foundation models at workshop scale and train no large models of our own.</p>
+      </div>
+      <div>
+        <p class="lab">Service level</p>
+        <h3 class="name name--s">What partners can count on.</h3>
+        <p class="small">99.5% availability per month, during business hours. A critical response within 2 business hours, or 1 hour during a live workshop on standby. Daily backups. Support by email, 09:00–17:00 EET, Monday to Friday.</p>
+        <a class="link" href="mailto:governance@coplanai.com?subject=Support">governance@coplanai.com</a>
+      </div>
+      <div>
+        <p class="lab">In full</p>
+        <h3 class="name name--s">Ethics, data and the company.</h3>
+        <p class="small">The people, the company and its register details, and the full ethics and compliance record.</p>
+        <a class="link link--arrow" href="about.html">About CoPlanAI</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ THE CLOSE: what is already decided? (this page keeps its own chooser instead of the shared invitation) ============ -->
+<section class="wash-closing decide-sec" id="start" aria-labelledby="decide-h">
+  <div class="wrap">
+    <div class="decide">
+      <div class="decide__top">
+        <div>
+          <p class="eyebrow decide__eyebrow">Where to start</p>
+          <h2 class="h2" id="decide-h">What is <em>already decided</em>?</h2>
+        </div>
+        <p class="body">If your city is about to decide something, start with this question. The answer names the kind of work, what comes out of it and what to send us first.</p>
+      </div>
+      <fieldset>
+        <legend class="lab">Choose the one closest to yours</legend>
+        <div class="opts" id="opts">
+          <div class="opt" style="--qc:var(--q-imagine);--qi:var(--qi-imagine)"><input type="radio" name="decided" id="opt-imagine" value="imagine"><label for="opt-imagine"><span class="dot" aria-hidden="true"></span><b>Nothing yet</b><small>We want ideas about what this place could become.</small></label></div>
+          <div class="opt" style="--qc:var(--q-test);--qi:var(--qi-test)"><input type="radio" name="decided" id="opt-test" value="test"><label for="opt-test"><span class="dot" aria-hidden="true"></span><b>The question</b><small>We have options to put to people.</small></label></div>
+          <div class="opt" style="--qc:var(--q-shape);--qi:var(--qi-shape)"><input type="radio" name="decided" id="opt-shape" value="shape"><label for="opt-shape"><span class="dot" aria-hidden="true"></span><b>What we will build</b><small>But not yet how it looks.</small></label></div>
+          <div class="opt" style="--qc:var(--q-improve);--qi:var(--qi-improve)"><input type="radio" name="decided" id="opt-improve" value="improve"><label for="opt-improve"><span class="dot" aria-hidden="true"></span><b>The design</b><small>We want it better before it is final.</small></label></div>
+        </div>
+      </fieldset>
+      <div class="result" id="result" aria-live="polite">
+        <div class="result__empty" id="result-empty">
+          <div class="glyph" aria-hidden="true"><i style="--c:var(--q-test)"></i><i style="--c:var(--q-imagine)"></i><i style="--c:var(--q-improve)"></i><i style="--c:var(--q-shape)"></i></div>
+          <p class="body">You need three things: one real question, a place or a plan, and the people. Choose an answer above, or write to <a href="mailto:info@coplanai.com">info@coplanai.com</a>.</p>
+        </div>
+        <div class="result__full" id="result-full" hidden>
+          <div>
+            <p class="named"><span class="lab">That is</span><span class="cap cap--sm" id="r-cap">Futuring</span></p>
+            <p class="q" id="r-q"></p>
+            <p class="body sum" id="r-sum"></p>
+          </div>
+          <div>
+            <dl>
+              <div><dt class="lab">A first step</dt><dd class="step" id="r-step"></dd></div>
+              <div><dt class="lab">What comes out</dt><dd id="r-out"></dd></div>
+            </dl>
+            <div class="actions"><a class="btn" id="r-mail" href="mailto:info@coplanai.com">Write to us about this</a><a class="link" id="r-where" href="use-cases.html">See where it has been done</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="decide__after">
+        <p>Teaching how to plan together, at a school, a university or in a training programme? Start with the <a href="#subscriber">Subscriber</a> plan or the <a href="#multiplier">Multiplier Programme</a>.</p>
+        <a class="link" href="mailto:info@coplanai.com">info@coplanai.com</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div data-site-footer></div>
+
+<script src="data/matrix.js"></script>
+<script src="data/case-links.js"></script>
+<script src="assets/site.js"></script>
+<script>
+SITE.ready(function(){
+  'use strict';
+  var doc=document, C=window.COPLAN;
+  var params; try{ params=new URLSearchParams(location.search); }catch(e){ params={get:function(){return null;}}; }
+
+  /* ---------- live case pages: static hrefs are the fallback; refresh from data/case-links.js ---------- */
+  doc.querySelectorAll('[data-case]').forEach(function(a){
+    var u=SITE.liveUrl(a.getAttribute('data-case'));
+    if(typeof u==='string'&&/^https:\/\//.test(u)) a.href=u;
+  });
+
+  /* ---------- before / after ---------- */
+  doc.querySelectorAll('[data-ba]').forEach(function(fig){
+    var stage=fig.querySelector('.ba__stage'), range=fig.querySelector('.ba__range'), dragging=false;
+    function set(v){
+      v=Math.max(0,Math.min(100,v)); stage.style.setProperty('--pos',v+'%'); range.value=Math.round(v);
+      range.setAttribute('aria-valuetext',Math.round(v)<=2?'Only the scenario':Math.round(v)>=98?'Only the street as photographed':Math.round(v)+'% as photographed, the rest the scenario');
+    }
+    function fromX(x){ var r=stage.getBoundingClientRect(); return (x-r.left)/r.width*100; }
+    stage.addEventListener('pointerdown',function(e){ if(e.button>0) return; dragging=true; try{stage.setPointerCapture(e.pointerId);}catch(_){} set(fromX(e.clientX)); });
+    stage.addEventListener('pointermove',function(e){ if(dragging) set(fromX(e.clientX)); });
+    ['pointerup','pointercancel','lostpointercapture'].forEach(function(t){ stage.addEventListener(t,function(){ dragging=false; }); });
+    range.addEventListener('input',function(){ set(+range.value); });
+    range.addEventListener('focus',function(){ stage.classList.add('is-focus'); });
+    range.addEventListener('blur',function(){ stage.classList.remove('is-focus'); });
+    var q=parseFloat(params.get('ba')); set(isNaN(q)?50:q);
+  });
+
+  /* ---------- the staircase: tabs on wide screens, anchors + all plans on narrow ones ---------- */
+  (function(){
+    var stair=doc.querySelector('[data-stair]'); if(!stair) return;
+    var tabs=[].slice.call(stair.querySelectorAll('.st'));
+    var panels=tabs.map(function(t){ return doc.getElementById(t.getAttribute('data-way')); });
+    var mq=window.matchMedia('(min-width:1121px)'), mode=null, cur=0;
+    function idxOf(id){ for(var i=0;i<panels.length;i++){ if(panels[i]&&panels[i].id===id) return i; } return -1; }
+    var start=idxOf(params.get('way')||''); if(start<0) start=idxOf((location.hash||'').slice(1)); if(start>=0) cur=start;
+    function select(i,focus,remember){
+      cur=i;
+      tabs.forEach(function(t,k){ var on=k===i; t.setAttribute('aria-selected',on?'true':'false'); t.tabIndex=on?0:-1; panels[k].hidden=!on; });
+      if(focus) tabs[i].focus();
+      if(remember){ try{ history.replaceState(null,'','#'+panels[i].id); }catch(e){} }
+    }
+    function setMode(on){
+      if(on===mode) return; mode=on;
+      if(on){
+        doc.documentElement.classList.add('ways-tabs');
+        stair.setAttribute('role','tablist'); stair.setAttribute('aria-label','Five ways to work together');
+        [].forEach.call(stair.children,function(li){ li.setAttribute('role','presentation'); });
+        tabs.forEach(function(t,k){ t.setAttribute('role','tab'); t.setAttribute('aria-controls',panels[k].id); panels[k].setAttribute('role','tabpanel'); panels[k].setAttribute('aria-labelledby',t.id); panels[k].tabIndex=0; });
+        select(cur,false,false);
+      }else{
+        doc.documentElement.classList.remove('ways-tabs');
+        stair.removeAttribute('role'); stair.removeAttribute('aria-label');
+        [].forEach.call(stair.children,function(li){ li.removeAttribute('role'); });
+        tabs.forEach(function(t,k){ ['role','aria-controls','aria-selected','tabindex'].forEach(function(a){ t.removeAttribute(a); }); panels[k].hidden=false; panels[k].removeAttribute('role'); panels[k].setAttribute('aria-labelledby','way-'+panels[k].id+'-h'); panels[k].removeAttribute('tabindex'); });
+      }
+    }
+    stair.addEventListener('click',function(e){ var t=e.target.closest('.st'); if(!t||!mode) return; e.preventDefault(); select(tabs.indexOf(t),false,true); });
+    stair.addEventListener('keydown',function(e){
+      if(!mode) return; var i=tabs.indexOf(doc.activeElement); if(i<0) return;
+      var n=tabs.length, k=null;
+      if(e.key==='ArrowRight'||e.key==='ArrowDown') k=(i+1)%n; else if(e.key==='ArrowLeft'||e.key==='ArrowUp') k=(i-1+n)%n; else if(e.key==='Home') k=0; else if(e.key==='End') k=n-1;
+      if(k!==null){ e.preventDefault(); select(k,true,true); }
+    });
+    function reveal(i){ panels[i].scrollIntoView({block:'start',behavior:SITE.reduceMotion?'auto':'smooth'}); }
+    window.addEventListener('hashchange',function(){ var i=idxOf((location.hash||'').slice(1)); if(i>=0&&mode){ select(i,false,false); reveal(i); } });
+    /* in-page links to a way (the close's teaching line, a shared door): in tab mode the target panel may be
+       hidden, so open it first, then scroll to it */
+    doc.addEventListener('click',function(e){
+      var a=e.target.closest&&e.target.closest('a[href^="#"]'); if(!a||!mode||stair.contains(a)) return;
+      var i=idxOf(a.getAttribute('href').slice(1)); if(i<0) return;
+      e.preventDefault(); select(i,false,true); reveal(i);
+    });
+    function onMQ(){ setMode(mq.matches); }
+    if(mq.addEventListener) mq.addEventListener('change',onMQ); else if(mq.addListener) mq.addListener(onMQ);
+    onMQ();
+  })();
+
+  /* ---------- the week-by-week timelines: open on wide screens, folded on phones ---------- */
+  (function(){
+    var ds=[].slice.call(doc.querySelectorAll('.way__steps')); if(!ds.length) return;
+    var mq=window.matchMedia('(max-width:760px)');
+    function sync(){ ds.forEach(function(d){ d.open=!mq.matches; }); }
+    if(mq.addEventListener) mq.addEventListener('change',sync); else if(mq.addListener) mq.addListener(sync);
+    sync();
+  })();
+
+  /* ---------- the screen viewer ---------- */
+  (function(){
+    var V=doc.querySelector('[data-viewer]'); if(!V) return;
+    var laneTabs=[].slice.call(V.querySelectorAll('[role="tab"]'));
+    var frame=doc.getElementById('scr-frame'), img=doc.getElementById('scr-img'), lab=doc.getElementById('scr-lab'), ttl=doc.getElementById('scr-t'), full=doc.getElementById('scr-full');
+    var NAMES={'lane-org':'Behind the room','lane-room':'In the room'}, token=0;
+    function steps(list){ return [].slice.call(list.querySelectorAll('.vstep')); }
+    function show(btn){
+      var list=btn.closest('.vsteps'), all=steps(list), i=all.indexOf(btn);
+      all.forEach(function(b){ b.setAttribute('aria-pressed',b===btn?'true':'false'); });
+      lab.textContent=NAMES[list.id]+' · '+(i+1)+' of '+all.length;
+      ttl.textContent=btn.querySelector('.vstep__t').textContent;
+      var src=btn.getAttribute('data-src'); full.href=src; if(img.getAttribute('src')===src){ img.alt=btn.getAttribute('data-alt'); return; }
+      var my=++token, pre=new Image(); frame.classList.add('is-loading');
+      pre.onload=pre.onerror=function(){ if(my!==token) return; img.src=src; img.width=+btn.getAttribute('data-w'); img.height=+btn.getAttribute('data-h'); img.alt=btn.getAttribute('data-alt'); frame.classList.remove('is-loading'); };
+      pre.src=src;
+    }
+    function lane(i,focus){
+      laneTabs.forEach(function(t,k){ var on=k===i, p=doc.getElementById(t.getAttribute('aria-controls')); t.setAttribute('aria-selected',on?'true':'false'); t.tabIndex=on?0:-1; p.hidden=!on; });
+      if(focus) laneTabs[i].focus();
+      var p=doc.getElementById(laneTabs[i].getAttribute('aria-controls'));
+      var pressed=p.querySelector('.vstep[aria-pressed="true"]')||p.querySelector('.vstep'); show(pressed);
+    }
+    laneTabs.forEach(function(t,i){
+      t.addEventListener('click',function(){ lane(i,false); });
+      t.addEventListener('keydown',function(e){
+        var k=null; if(e.key==='ArrowRight'||e.key==='ArrowLeft') k=(i+1)%2; else if(e.key==='Home') k=0; else if(e.key==='End') k=1;
+        if(k!==null){ e.preventDefault(); lane(k,true); }
+      });
+    });
+    V.addEventListener('click',function(e){ var b=e.target.closest('.vstep'); if(b) show(b); });
+    /* warm the cache for the next screens without blocking the page */
+    V.addEventListener('pointerover',function(e){ var b=e.target.closest('.vstep'); if(b&&!b._warm){ b._warm=1; var p=new Image(); p.src=b.getAttribute('data-src'); } });
+    /* review states: ?lane=room&step=4 */
+    var ql=params.get('lane'), qs=parseInt(params.get('step'),10);
+    var li=(ql==='room')?1:0; lane(li,false);
+    if(qs>0){ var st=steps(doc.getElementById(li?'lane-room':'lane-org'))[qs-1]; if(st) show(st); }
+  })();
+
+  /* ---------- the close: what is already decided? (read from data/matrix.js) ---------- */
+  (function(){
+    var opts=doc.getElementById('opts'); if(!opts) return;
+    var NL='\r\n', MAIL='info@coplanai.com';
+    var FALLBACK={
+      imagine:{key:'imagine',label:'Futuring',question:'What could this place become?',decided:'Nothing yet. We want ideas about what this place could become.',summary:'Everything is still open. People bring the future they want for a place, and it becomes the raw material of the brief.',produces:'A bank of desired futures, clustered into directions and principles.'},
+      test:{key:'test',label:'Scenario planning',question:'What if this happened here?',decided:'The question, not the answer. We have options to put to people.',summary:'A scenario or a policy idea goes to people before anything is decided, and we learn what they could live with.',produces:'A reading of the public response per scenario: appetite, red lines, support.'},
+      shape:{key:'shape',label:'Co-design',question:'How should it look and work?',decided:'What we will build, but not yet how it looks.',summary:'What will happen is decided: a street, a square, a building. How it takes shape is open, and what people propose feeds the design.',produces:'Design proposals and priorities that feed the design.'},
+      improve:{key:'improve',label:'Design review',question:'What would make this better?',decided:'The design. We want it better before it is final.',summary:'The design exists. People react to the actual drawings while there is still time to revise.',produces:'Issues and improvements the design team can act on before the drawing is final.'}
+    };
+    var QD={}; Object.keys(FALLBACK).forEach(function(k){ QD[k]=FALLBACK[k]; });
+    if(C&&C.data&&C.data.quadrants){ C.data.quadrants.forEach(function(q){ QD[q.key]=q; }); }
+    var SHORT={imagine:'Nothing yet',test:'The question',shape:'What we will build',improve:'The design'};
+    var FIRST={
+      imagine:'Tell us the place, and who should help imagine its future. The open question can then be agreed together, before anyone is invited.',
+      test:'Send us the options or the policy idea you want to put to people, and when the decision is due.',
+      shape:'Tell us what will be built, and which parts of its design are still open.',
+      improve:'Send us the drawings as they stand, and the date they become final.'
+    };
+    function restOf(decided,short){
+      var s=decided||'', i=s.indexOf('. ');
+      if(i>-1&&i<40) return s.slice(i+2);
+      if(s.toLowerCase().indexOf(short.toLowerCase())===0){ s=s.slice(short.length).replace(/^[,.\s]+/,''); return s.charAt(0).toUpperCase()+s.slice(1); }
+      return s;
+    }
+    /* refresh the option texts from the data, so a change in matrix.js flows through */
+    Object.keys(SHORT).forEach(function(k){
+      var el=doc.getElementById('opt-'+k); if(!el) return; var lb=el.nextElementSibling;
+      lb.querySelector('b').textContent=SHORT[k]; lb.querySelector('small').textContent=restOf(QD[k].decided,SHORT[k]);
+    });
+    var res=doc.getElementById('result'), empty=doc.getElementById('result-empty'), full=doc.getElementById('result-full');
+    function mailto(subject,body){ return 'mailto:'+MAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body); }
+    function pick(k){
+      var q=QD[k]; if(!q) return;
+      res.classList.add('on'); res.style.setProperty('--qc','var(--q-'+k+')');
+      empty.hidden=true; full.hidden=false;
+      var cap=doc.getElementById('r-cap'); cap.className='cap cap--sm cap--'+k; cap.textContent=q.label;
+      doc.getElementById('r-q').textContent=q.question;
+      doc.getElementById('r-sum').textContent=q.summary;
+      doc.getElementById('r-step').textContent=FIRST[k];
+      doc.getElementById('r-out').textContent=q.produces;
+      var body=['Hello,','','What is already decided: '+q.decided,'','The place:','','','Who should be in the room:','',''].join(NL);
+      var a=doc.getElementById('r-mail'); a.href=mailto(q.label+': a first conversation',body);
+      a.setAttribute('aria-label','Write to us about '+q.label+' (opens your email)');
+      var w=doc.getElementById('r-where'); if(w) w.href='use-cases.html?task='+encodeURIComponent(k); /* the catalogue opens filtered to this task */
+    }
+    opts.addEventListener('change',function(e){ if(e.target&&e.target.name==='decided') pick(e.target.value); });
+    var qp=(params.get('pick')||'').toLowerCase(), map={'1':'imagine','2':'test','3':'shape','4':'improve'};
+    Object.keys(QD).forEach(function(k){ map[k]=k; map[String(QD[k].label).toLowerCase()]=k; });
+    if(map[qp]){ var r=doc.getElementById('opt-'+map[qp]); if(r){ r.checked=true; pick(map[qp]); } }
+  })();
+
+  /* ---------- review helper: ?scroll=<id> jumps to a section (for screenshots) ---------- */
+  var sc=params.get('scroll'); if(sc){ var el=doc.getElementById(sc); if(el){ setTimeout(function(){ el.scrollIntoView({block:'start'}); },60); } }
+
+  SITE.bind(doc);
+});
+</script>
+</body>
+</html>

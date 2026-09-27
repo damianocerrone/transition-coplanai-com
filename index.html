@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-type="commons-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CoPlanAI · The mandate to imagine</title>
+<meta name="coplan:release" content="public">
+<link rel="canonical" href="https://coplanai.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CoPlanAI">
+<meta property="og:title" content="CoPlanAI · The mandate to imagine">
+<meta property="og:description" content="Collaborative planning from Helsinki. People evaluate ideas and scenarios on real places, understand their impact, take an informed decision, and can still change their choice.">
+<meta property="og:url" content="https://coplanai.com/">
+<meta property="og:image" content="https://coplanai.com/img/pairs/vienna--vie-street.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="Collaborative planning from Helsinki. People evaluate ideas and scenarios on real places, understand their impact, take an informed decision, and can still change their choice.">
+<!-- type preset before first paint: ?type=<key> → saved choice → the attribute above (keep first in <head>) -->
+<!-- choreography gate before first paint: the scroll scenes run only on a normal desktop viewport,
+     never with reduced motion or ?static=1 (the page script re-checks on resize) -->
+<script>(function(){var d=document.documentElement,s=false,r=false;try{s=new URLSearchParams(location.search).get("static")==="1"}catch(e){}try{r=matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}var w=innerWidth,h=innerHeight;d.classList.add("js");if(!s&&!r){if(w>=1024&&h>=600&&h<=1400)d.classList.add("hv-on");if(h>=480&&h<=1400)d.classList.add("fw-on")}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500..700&family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=Onest:wght@800&family=Schibsted+Grotesk:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+/* =====================================================================
+   Home · page components only. Type from the role tokens, colour from the
+   tokens in site.css. Page components: the hero → Venn scene, the principle
+   (four lines, the Vienna slider), the framework scroll story (steps 00–06),
+   the map (Stipple), the five ways with the institutional-change plate.
+   ===================================================================== */
+
+/* ---------- shared bits ---------- */
+.sec-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px 32px;align-items:end}
+.sec-head > .l{grid-column:1/8}
+.sec-head > .r{grid-column:8/13}
+.sec-head--full > .l{grid-column:1/-1}
+.sec-head .eyebrow + .h2{margin-top:18px}
+.ext::after{content:"\2197";display:inline-block;margin-left:.3em;font-size:.86em;color:var(--ink-3)}
+.where{display:block}
+.sub-cap{margin-top:10px}
+
+/* =====================================================================
+   1 · The hero, then the interactive Venn
+   Static by default (reduced motion, phones, very tall windows):
+   hero text + panel on the left, the Venn on the right (sticky).
+   html.hv-on: a tall scene with a sticky stage. The hero text leaves on
+   the first scroll, the Venn stays and draws its three stubs, the panel
+   on the left follows the pointer. Progress is written by the script as
+   --pa (hero out) and --pb (panel in) on .hv.
+   ===================================================================== */
+.hv{position:relative}
+.hv__grid{display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);gap:24px clamp(28px,4.4vw,72px);align-items:start;padding-top:clamp(28px,4.6vw,64px);padding-bottom:clamp(56px,6vw,96px)}
+.hv__left{display:flex;flex-direction:column;gap:clamp(56px,6vw,88px);min-width:0}
+.hv__hero .eyebrow{margin-bottom:clamp(22px,2.4vw,30px)}
+.hv__frame{margin-top:clamp(26px,2.6vw,36px);max-width:22em}
+.hv__hero .lede{margin-top:18px;max-width:31em}
+.hv__hero .actions{margin-top:clamp(28px,3vw,40px)}
+.hv__hero .stats{margin-top:clamp(30px,3.2vw,44px);max-width:520px}
+.hv__cue{display:none}
+.hv__venn{position:sticky;top:calc(var(--header-h) + 20px);margin:0;min-width:0}
+.hv__venn svg{display:block;width:100%;height:auto;overflow:visible;-webkit-tap-highlight-color:transparent}
+
+/* the scene */
+.hv-on .hv{height:calc(100vh * 2.8)}
+.hv-on .hv__stage{position:sticky;top:var(--header-h);height:calc(100vh - var(--header-h));overflow:hidden}
+.hv-on .hv__grid{height:100%;align-items:stretch;padding-top:clamp(10px,2vh,28px);padding-bottom:clamp(18px,3.6vh,44px)}
+.hv-on .hv__left{display:grid;align-items:center;gap:0}
+.hv-on .hv__hero,.hv-on .hv__panel{grid-area:1/1;min-width:0}
+.hv-on .hv__hero{transform:translate3d(0,calc(var(--pa,0) * -14vh),0);opacity:calc(1 - var(--pa,0) * 1.3)}
+.hv-on .hv__panel{transform:translate3d(0,calc((1 - var(--pb,0)) * 5vh),0);opacity:var(--pb,0)}
+.hv-on .hv[data-panel-off] .hv__panel{visibility:hidden}
+.hv-on .hv[data-hero-off] .hv__hero{visibility:hidden}
+.hv-on .hv[data-phase="a"] .hv__panel{pointer-events:none}
+.hv-on .hv__grid{grid-template-columns:minmax(0,.84fr) minmax(0,1.16fr)}
+.hv-on .hv__venn{position:relative;top:auto;height:100%;margin-right:calc(-1 * var(--gut) + 12px)}
+.hv-on .hv__venn svg{height:100%}
+.hv-on .tri{padding-top:0}
+.hv-on .hv__cue{display:flex;align-items:center;gap:12px;margin-top:clamp(26px,4vh,48px)}
+.hv__cue i{display:block;width:1px;height:28px;background:linear-gradient(to bottom,var(--rule),var(--amber))}
+.hv-on .hv[data-phase="a"] .vn .vreg,.hv-on .hv[data-phase="a"] .vn .stub{pointer-events:none}
+
+/* the panel: what each part of the Venn holds */
+.vp{min-height:var(--vp-h,0px);display:flex;flex-direction:column;justify-content:flex-start}
+.vp__kick{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.vp__kick i{display:inline-block;width:11px;height:11px;border-radius:50%;flex:none}
+.vp__t{margin-top:16px;color:var(--vp-ink,var(--ink))}
+.vp__t em{color:var(--amber)}
+.vp__role{margin-top:10px;color:var(--ink-2)}
+.vp__x{margin-top:18px;max-width:31em}
+.vp__nav{display:flex;flex-wrap:wrap;align-items:center;gap:12px 14px;margin-top:clamp(22px,2.6vw,32px);padding-top:16px;border-top:1px solid var(--rule-soft);max-width:31em}
+.vp__btn{flex:none;width:42px;height:42px;border:0;border-radius:50%;background:var(--ground);box-shadow:inset 0 0 0 1px var(--rule);display:grid;place-items:center;font-family:var(--f-ui);font-weight:var(--w-ui);font-size:17px;line-height:1;color:var(--ink);transition:box-shadow .2s,color .2s}
+.vp__btn:hover{box-shadow:inset 0 0 0 1px var(--ink)}
+.vp__btn:focus-visible{border-radius:50%}
+.vp__count{min-width:6.2em;text-align:center}
+.vp__over{margin-left:auto;background:none;border-width:0 0 1px;padding:6px 0 3px;cursor:pointer}
+.vp__over[hidden]{display:none}
+.vp__hint{margin-top:14px;max-width:31em}
+
+/* the Venn drawing (built by the script from content/venn-texts.md §0) */
+.vn text{pointer-events:none}
+.vn .t-name{font-family:var(--f-name);font-weight:var(--w-name);letter-spacing:-.012em;fill:var(--ink)}
+.vn .t-role{font-family:var(--f-label);font-weight:var(--w-label);letter-spacing:.13em;text-transform:uppercase;fill:var(--ink-2)}
+.vn.is-narrow .t-role{letter-spacing:.09em}
+.vn .t-core{font-family:var(--f-name);font-weight:var(--w-name);letter-spacing:-.015em;fill:var(--ink)}
+.vn .t-stub{font-family:var(--f-name);font-weight:var(--w-name);letter-spacing:-.01em}
+.vn .ico{fill:var(--ink);stroke:var(--ink)}
+.vn .veil{fill:var(--ground);opacity:0;transition:opacity .35s;pointer-events:none}
+.vn.has-on .veil{opacity:.55}
+.vn.has-on .veil.is-on{opacity:0}
+.vn .vout{fill:none;stroke:var(--ink);opacity:0;transition:opacity .2s;pointer-events:none}
+.vn .vout.is-on{opacity:.9}
+.vn .vreg{cursor:pointer;outline:none}
+.vn .vreg path{fill:transparent}
+.vn .vreg:focus-visible path{stroke:var(--focus);stroke-dasharray:14 10}
+.vn .stub{cursor:pointer;transition:opacity .3s}
+.vn.has-on .stub:not(.is-on){opacity:.4}
+.vn .stub .hit{fill:transparent;pointer-events:all}
+.vn .stub .ln{fill:none;stroke-linecap:round}
+
+/* =====================================================================
+   2 · Images let us try our ideas: Damiano's sentence in four lines.
+   No image on the home is a link (SITE-BRIEF R1.4): captions name the project.
+   ===================================================================== */
+.tri{padding-top:clamp(40px,5vw,72px)}
+.tri__h{max-width:14em}
+.lines{list-style:none;margin:clamp(48px,5.4vw,84px) 0 0;padding:0;position:relative}
+.line{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,4.4vw,64px);padding-bottom:clamp(64px,6.8vw,112px);align-items:start}
+.line:last-child{padding-bottom:0}
+.line--wide{grid-template-columns:minmax(0,4.3fr) minmax(0,7.7fr)}
+.lt{position:relative;min-width:0}
+.lt .say{font-size:clamp(28px,2.6vw,38px);line-height:1.14;text-wrap:balance}
+.lt .where{margin-top:20px}
+.lt .body{margin-top:8px;max-width:34em}
+.lt .also{margin-top:26px;padding-top:18px;border-top:1px solid var(--rule-soft)}
+.lt .also .body{margin-top:6px}
+.lm{min-width:0;margin:0}
+.lm .figure__media{border-radius:var(--r-img)}
+.cap-l{display:block;margin-top:12px}
+.vn:focus,.fw-svg:focus{outline:none}
+
+/* Vienna: the same corner, as it is and as a scenario, on one slider */
+.ba{position:relative;aspect-ratio:1070/713;border-radius:var(--r-img);overflow:hidden;background:var(--field);--pos:50%;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba .ba__after{clip-path:inset(0 0 0 var(--pos))}
+.ba__tag{position:absolute;top:14px;z-index:2;font-family:var(--f-label);font-weight:700;font-size:11px;line-height:1;letter-spacing:.14em;text-transform:uppercase;padding:8px 12px 7px;border-radius:var(--r-pill);background:rgba(255,255,255,.94);color:var(--ink);pointer-events:none;transition:opacity .25s}
+.ba__tag--l{left:14px}
+.ba__tag--r{right:14px}
+.ba[data-side="after"] .ba__tag--l,.ba[data-side="before"] .ba__tag--r{opacity:0}
+.ba__line{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;margin-left:-1px;background:var(--ground);box-shadow:0 0 0 .5px color-mix(in srgb,var(--ink) 18%,transparent);pointer-events:none;z-index:2}
+.ba__knob{position:absolute;top:50%;left:50%;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;background:var(--ground);box-shadow:0 6px 18px -6px color-mix(in srgb,var(--ink) 45%,transparent);display:grid;place-items:center;font-family:var(--f-ui);font-size:15px;line-height:1;letter-spacing:-.06em;color:var(--ink)}
+/* the range carries the keyboard and the screen reader; the pointer drags the whole picture (see the script) */
+.ba__range{position:absolute;inset:0;z-index:3;width:100%;height:100%;margin:0;opacity:0;pointer-events:none;-webkit-appearance:none;appearance:none;background:transparent}
+.ba.is-live{cursor:ew-resize}
+.ba:has(.ba__range:focus) .ba__knob{outline:2px solid var(--focus);outline-offset:3px}   /* the range takes focus only from the keyboard: the pointer never reaches it */
+.vie-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
+.vie-pair figure{margin:0;min-width:0}
+.vie-pair img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:var(--r-img-s)}
+.vie-pair figcaption{margin-top:8px}
+
+/* the impact evaluator, framed on white, and what it reads, legible */
+.ev{display:block;padding:clamp(8px,1vw,14px);border-radius:calc(var(--r-img) + 6px);background:var(--ground);box-shadow:0 0 0 1px var(--rule-soft),0 18px 44px -24px color-mix(in srgb,var(--ink) 30%,transparent)}
+.ev img{display:block;width:100%;height:auto;border-radius:var(--r-img-s);aspect-ratio:1800/866;object-fit:cover}
+.readout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:18px clamp(24px,3vw,44px);margin-top:22px;padding-top:18px;border-top:1px solid var(--rule-soft)}
+.readout > div > .lab{display:block;margin-bottom:10px}
+.readout ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.readout li{position:relative;padding-left:16px;font-size:calc(var(--fs-text) - 2px);line-height:1.45;color:var(--ink-2)}
+.readout li::before{content:"";position:absolute;left:0;top:.52em;width:7px;height:7px;border-radius:50%;background:var(--dot,var(--v-inst))}
+.readout li b{color:var(--ink);font-weight:var(--w-strong)}
+.readout .gain{--dot:var(--v-ai)}
+.readout .loss{--dot:var(--amber)}
+
+/* Munich: 3,000+ ideas, one chosen, built */
+.stage-n{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.ideas{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-bottom:16px}
+.ideas img{width:100%;aspect-ratio:3/2;object-fit:cover;border-radius:8px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pair img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px}
+.kp{margin:16px 0 0;max-width:460px}
+.kp .pair img{aspect-ratio:16/9;border-radius:10px}
+.sub-cap{display:block;margin-top:10px}
+/* TICO: education and democratic collaboration */
+.tico{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);gap:10px}
+.tico img{display:block;width:100%;height:100%;object-fit:cover;border-radius:14px}
+.tico .big{aspect-ratio:4/3}
+.tico .side{display:grid;grid-template-rows:1fr 1fr;gap:10px;min-height:0}
+.tico .side span{position:relative;display:block;min-height:0;overflow:hidden;border-radius:14px}
+.tico .side img{position:absolute;inset:0}
+.epi{margin-top:26px;padding-top:18px;border-top:1px solid var(--rule-soft);max-width:34em}
+.epi .it{display:block;margin-top:8px}
+.epi .lab{display:block;margin-top:10px}
+
+/* =====================================================================
+   3 · The engagement framework, as a scroll story (after 22 and 32)
+   A sticky figure on the right is rebuilt step by step from data/matrix.js.
+   html.fw-on: sticky figure + tall steps. Otherwise the figure is shown
+   complete above the steps, which read as a normal list.
+   ===================================================================== */
+.fw{padding-top:var(--sp-section);padding-bottom:clamp(40px,5vw,80px)}
+.fw-build{display:grid;grid-template-columns:minmax(0,4.3fr) minmax(0,6.7fr);column-gap:clamp(32px,4.4vw,72px);margin-top:clamp(28px,3vw,44px)}
+.fw-steps{grid-column:1;grid-row:1;min-width:0;padding:4vh 0 6vh}
+.fw-stage-col{grid-column:2;grid-row:1;min-width:0}
+.fw-stage{margin:0;display:flex;flex-direction:column}
+@media (min-width:901px){.fw-stage{position:sticky;top:calc(var(--header-h) + 16px)}}
+.fw-fig{min-height:0}
+.fw-svg{display:block;width:100%;height:auto;overflow:visible}
+.fw-cap{margin-top:10px;min-height:2.6em}
+.fw-step{position:relative;padding:28px 0 34px;border-top:1px solid var(--rule-soft)}
+.fw-step:first-child{border-top:0;padding-top:0}
+.fw-no{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;margin-bottom:16px}
+.fw-no .n{display:inline-grid;place-items:center;min-width:40px;height:26px;padding:0 9px;border-radius:var(--r-pill);box-shadow:inset 0 0 0 1px var(--rule);font-family:var(--f-label);font-weight:var(--w-label);font-size:11.5px;letter-spacing:.06em;color:var(--ink);transition:background-color .3s,color .3s,box-shadow .3s}
+.fw-step.is-active .fw-no .n{background:var(--ink);color:var(--ground);box-shadow:none}
+.fw-step .h3{color:var(--qi,var(--ink))}
+.fw-step .h3 + .q{margin-top:10px}
+.fw-step .body{margin-top:14px;max-width:33em}
+.fw-decided{margin-top:18px;padding:13px 16px 14px;border-radius:12px;background:var(--qt,var(--field));max-width:33em}
+.fw-decided .lab{display:block;color:var(--qi,var(--c-label));margin-bottom:3px}
+.fw-decided p{font-size:calc(var(--fs-text) - 1.5px);line-height:1.5;color:var(--ink)}
+.defn{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:14px 22px;max-width:33em}
+.defn .lab{grid-column:1/-1}
+.defn .hw{font-family:var(--f-q);font-style:italic;font-size:20px;line-height:1.2;color:var(--ink)}
+.defn .d{margin-top:5px;font-size:calc(var(--fs-text) - 2px);line-height:1.5;color:var(--ink-3)}
+.feat{list-style:none;padding:0;margin:22px 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 12px;max-width:33em}
+.feat .pj{display:block;color:var(--ink)}
+.feat .ph{display:block;aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--qs,var(--field));box-shadow:0 0 0 3px var(--ground),0 0 0 4px var(--rule-soft)}
+.feat .ph img{width:100%;height:100%;object-fit:cover}
+.feat .ph .ini{display:grid;place-items:center;width:100%;height:100%;font-family:var(--f-name);font-weight:var(--w-name);font-size:18px;color:var(--qc,var(--ink))}
+.feat .ft{display:block;margin-top:10px;font-family:var(--f-name);font-weight:var(--w-name);font-size:14.5px;line-height:1.22;letter-spacing:var(--ls-name)}
+.feat .fp{display:block;margin-top:3px;font-size:10.5px}
+.fw-end .fw-close{margin-top:22px;padding-top:18px;border-top:1px solid var(--rule-soft);max-width:33em}
+.fw-end .actions{margin-top:20px}
+.fw-tip{position:fixed;z-index:70;max-width:290px;background:var(--ground);border-radius:12px;padding:11px 14px 12px;box-shadow:0 0 0 1px var(--rule-soft),0 12px 32px color-mix(in srgb,var(--ink) 14%,transparent);pointer-events:none}
+.fw-tip .tt{font-family:var(--f-name);font-weight:var(--w-name);font-size:16px;line-height:1.25;color:var(--ink)}
+.fw-tip .lab{display:block;margin-top:5px;font-size:10.5px}
+/* the figure's type (SVG) */
+.fw-svg text{pointer-events:none}
+.fw-svg .t-name{font-family:var(--f-name);font-weight:var(--w-name);letter-spacing:-.012em}
+.fw-svg .t-q{font-family:var(--f-q);font-style:italic}
+.fw-svg .t-lab{font-family:var(--f-label);font-weight:var(--w-label);text-transform:uppercase}
+.fw-svg .t-text{font-family:var(--f-text);font-weight:var(--w-text)}
+.fw-svg .t-cap{font-family:var(--f-label);font-weight:700;text-transform:uppercase}
+.fw-svg .lay{opacity:0;transition:opacity .55s ease}
+.fw-svg .lay.on{opacity:1}
+.fw-svg .railv,.fw-svg .railh{opacity:0;transform-box:fill-box;transform-origin:center;transition:transform 1s cubic-bezier(.3,.7,.2,1),opacity .5s ease}
+.fw-svg .railv{transform:scaleY(.02)}
+.fw-svg .railh{transform:scaleX(.02)}
+.fw-svg .railv.on,.fw-svg .railh.on{opacity:1;transform:none}
+.fw-svg .ghost{opacity:0;transition:opacity .5s ease}
+.fw-svg .ghost.on{opacity:1}
+.fw-svg .dk{opacity:0;transform:scale(.45);transform-box:fill-box;transform-origin:center;transition:opacity .45s ease,transform .55s cubic-bezier(.2,.8,.2,1)}
+.fw-svg .dgrp.on .dk{opacity:1;transform:none}
+.fw-svg .dgrp:not(.on) .dk{pointer-events:none;visibility:hidden}
+.fw-svg .dk{cursor:default;outline:none}
+.fw-svg .dk .hlr{opacity:0;transition:opacity .2s}
+.fw-svg .dk:hover .hlr,.fw-svg .dk:focus-visible .hlr,.fw-svg .dk.is-tip .hlr{opacity:1}
+
+/* the story, on a normal viewport */
+.fw-on .fw-steps{padding:8vh 0 12vh}
+.fw-on .fw-step{min-height:78vh;padding:5vh 0 4vh;border-top:0;scroll-margin-top:calc(var(--header-h) + 6vh)}
+.fw-on .fw-step:first-child{min-height:52vh;padding-top:2vh}
+.fw-on .fw-step:last-child{min-height:72vh}
+.fw-on .fw-stage{position:sticky;top:var(--header-h);height:calc(100vh - var(--header-h));justify-content:center;padding:14px 0 12px}
+.fw-on .fw-fig{flex:1 1 auto;display:flex;align-items:center;justify-content:center}
+.fw-on .fw-svg{height:100%;max-height:calc(100vh - var(--header-h) - 150px)}
+.fw-on .fw-step:not(.is-active){opacity:.55;transition:opacity .4s}
+.fw-on .fw-step.is-active{opacity:1;transition:opacity .4s}
+
+/* =====================================================================
+   4 · Where we have worked: the map (assets/map.js)
+   ===================================================================== */
+.where-s .sec-head .h2{max-width:12em}
+.map-fig{margin:clamp(32px,3.6vw,52px) 0 0}
+.map-box{border-radius:var(--r-img-s);min-height:120px}
+.map-key{display:flex;flex-wrap:wrap;align-items:center;gap:10px 24px;margin-top:18px}
+.map-key > span{display:inline-flex;align-items:center;gap:8px}
+.map-key .sw{display:inline-block;width:12px;height:12px;border-radius:50%;flex:none}
+.map-key .sz{display:inline-flex;align-items:center;gap:6px}
+.map-key .sz i{display:inline-block;border-radius:50%;background:var(--ink-3)}
+.map-note{margin-top:12px;max-width:52em}
+.map-beyond{margin-top:8px}
+
+/* =====================================================================
+   5 · What stays human · working with us · research
+   ===================================================================== */
+.human{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;align-items:start}
+.human > .l{grid-column:1/7}
+.human > .r{grid-column:8/13}
+.human .h2{max-width:15em}
+.findings{list-style:none;margin:32px 0 0;padding:0}
+.finding{padding:16px 0 18px;border-top:1px solid var(--rule-soft);display:grid;grid-template-columns:2.4em minmax(0,1fr);gap:0 12px}
+.finding .n{padding-top:6px}
+.finding .say{font-size:clamp(21px,1.75vw,24px);line-height:1.28}
+.finding .small{grid-column:2;margin-top:6px}
+.finding--last .say{font-style:italic;color:var(--amber)}
+.human .r figure{margin:0}
+.human .r .q{margin-top:26px}
+.human .r .body{margin-top:14px}
+.human .r .say{margin-top:22px;padding-top:18px;border-top:1px solid var(--rule-soft)}
+
+/* the five ways (Working with us): B3 "Five drawings", one card per way, exactly as colour 6
+   "Five quiet hues" (work-b3-study.html #b3-colour-6): B3's own we/you drawings in each card's hues,
+   with their three-part key above the cards. On wide screens the five cards share one subgrid, so
+   every row (step, name, mode, words, facts) lines up across them whatever wraps. Fill 2 "Deeper foot"
+   (five-ways-fills-study.html #v2): What changes sits on a deeper shade of its card's hue
+   (--wk-deep = color-mix(in oklab, ground, we-fill 42%), fixed as hex), and the card carries the
+   Venn studies' still grain: a zero-mean noise tile, overlay, .247 (95 % of .26) at 0.5 px.
+   The invitation below is the one that invites.
+   Every selector sits under #work; the five hues are local to this section, not site tokens.
+   Inks on their grounds 6.1:1 or more (hover grounds included), 5.9:1 on the deeper foot; labels and --ink-2 7:1 or more. */
+#work .wk-list{list-style:none;margin:clamp(28px,3vw,40px) 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+#work .wk-c{position:relative;display:flex;flex-direction:column;gap:8px;min-width:0;padding:20px 20px 20px;border-radius:18px;background:var(--wk-gnd);transition:background-color .2s}
+#work .wk-c:nth-child(1){--wk-gnd:#EDF6EB;--wk-gndh:#E6F1E4;--wk-ink:#3E5F37;--wk-bar0:#C6D5C3;--wk-rl:#CAD8C7;--wk-wef:#CAE1C5;--wk-lens:#96B191;--wk-deep:#DEEDDB}
+#work .wk-c:nth-child(2){--wk-gnd:#E8F7F1;--wk-gndh:#E0F2EB;--wk-ink:#1D6350;--wk-bar0:#BBD6CE;--wk-rl:#BFD9D1;--wk-wef:#BCE3D6;--wk-lens:#85B4A5;--wk-deep:#D6EFE6}
+#work .wk-c:nth-child(3){--wk-gnd:#E6F6F8;--wk-gndh:#DEF2F4;--wk-ink:#076169;--wk-bar0:#B5D5D9;--wk-rl:#B9D8DB;--wk-wef:#B7E2E7;--wk-lens:#7FB3B9;--wk-deep:#D2EEF1}
+#work .wk-c:nth-child(4){--wk-gnd:#E9F5FD;--wk-gndh:#E1F0FA;--wk-ink:#275B7A;--wk-bar0:#BED3E0;--wk-rl:#C2D6E3;--wk-wef:#BEDEF4;--wk-lens:#88AEC8;--wk-deep:#D7EBF9}
+#work .wk-c:nth-child(5){--wk-gnd:#EDF3FF;--wk-gndh:#E6EEFC;--wk-ink:#3E557F;--wk-bar0:#C6D0E3;--wk-rl:#CAD3E5;--wk-wef:#C9DAF8;--wk-lens:#96A9CC;--wk-deep:#DEE8FC}
+#work .wk-c:hover{background:var(--wk-gndh)}
+#work .wk-c{isolation:isolate}
+#work .wk-c::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:url(assets/grain-256.png) 0 0/128px 128px;mix-blend-mode:overlay;opacity:.247}
+#work .wk-c::before{z-index:-1;pointer-events:none;background:var(--wk-deep)}
+/* a rule of its own: a browser without :has() would drop the whole selector list, hover included */
+#work .wk-c:has(.wk-name a:focus-visible){background:var(--wk-gndh)}
+#work .wk-legend{display:flex;flex-wrap:wrap;align-items:center;gap:8px 26px;margin:clamp(28px,3vw,40px) 0 0;font-family:var(--f-label);font-weight:var(--w-label);font-size:var(--fs-label);line-height:1.4;letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-label)}
+#work .wk-legend > span{display:inline-flex;align-items:center;gap:9px}
+#work .wk-legend b{font-weight:inherit;color:var(--ink)}
+#work .wk-sw{display:inline-block;width:14px;height:14px;flex:none;border-radius:50%}
+#work .wk-sw--we{background:conic-gradient(#3E5F37 0% 20%,#1D6350 20% 40%,#076169 40% 60%,#275B7A 60% 80%,#3E557F 80% 100%)}
+#work .wk-sw--you{background:#FFFFFF;box-shadow:inset 0 0 0 1.5px var(--ink-2)}
+#work .wk-sw--oth{width:10px;height:10px;background:#FFFFFF;box-shadow:inset 0 0 0 1.2px var(--ink-4)}
+#work .wk-legend + .wk-list{margin-top:20px}
+#work .wk-g{display:block;width:100%;height:auto;margin:0 0 6px;overflow:visible}
+#work .wk-g .we{fill:var(--wk-wef);stroke:var(--wk-ink);stroke-width:1.5}
+#work .wk-g .you{fill:#FFFFFF;stroke:var(--ink-2);stroke-width:1.5}
+#work .wk-g .nf{fill:none}
+#work .wk-g .dep{fill:#FFFFFF;stroke:var(--ink-3);stroke-width:1.2}
+#work .wk-g .lens{fill:var(--wk-lens);stroke:none}
+#work .wk-g .oth{fill:#FFFFFF;stroke:var(--ink-4);stroke-width:1.2}
+#work .wk-g .ln{fill:none;stroke:var(--ink-4);stroke-width:1.2}
+#work .wk-g .ar{fill:var(--ink-4);stroke:none}
+#work .wk-g text{font-family:var(--f-q);font-style:italic;font-size:14px;fill:var(--ink-2);stroke:none;text-anchor:middle;dominant-baseline:central}
+#work .wk-g text.w{fill:var(--wk-ink)}
+#work .wk-no{display:flex;justify-content:space-between;align-items:center;margin:0}
+#work .wk-no .st-bar i{background:var(--wk-bar0)}
+#work .wk-no .st-bar i.f{background:var(--wk-ink)}
+#work .wk-name{margin-top:6px;font-size:clamp(19px,1.5vw,22px)}
+#work .wk-name a{color:inherit;text-decoration:none;transition:color .2s}
+#work .wk-name a::after{content:"";position:absolute;inset:0;border-radius:18px}
+#work .wk-name a:focus-visible{outline:none}
+#work .wk-name a:focus-visible::after{outline:2px solid var(--focus);outline-offset:3px}
+#work .wk-c:hover .wk-name a{color:var(--amber)}
+#work .wk-mode{font-size:17px}
+#work .wk-d{color:var(--ink-2)}
+#work .wk-foot{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin:auto 0 0;padding-top:14px;border-top:1px solid var(--wk-rl)}
+#work .wk-foot .lab{display:block;font-size:10.5px}
+#work .wk-foot .wk-k{color:var(--wk-ink)}
+#work .wk-chg{display:block;margin-top:4px;font-family:var(--f-name);font-weight:var(--w-name);font-size:16px;line-height:1.2;letter-spacing:var(--ls-name);color:var(--ink)}
+#work .wk-dur{display:block;font-family:var(--f-num);font-weight:var(--w-num);font-size:24px;line-height:1.05;letter-spacing:-.015em;color:var(--ink);white-space:nowrap}
+#work .wk-dur + .lab{margin-top:4px}
+#work .wk-go{font-family:var(--f-ui);font-weight:var(--w-ui);font-size:14.5px;line-height:1.3;color:var(--wk-ink);padding-top:4px}
+#work .wk-go::after{content:"\2192";display:inline-block;margin-left:.4em;transition:transform .2s}
+#work .wk-c:hover .wk-go::after{transform:translateX(3px)}
+#work .wk-more{margin-top:28px}
+/* wide: the five cards share seven row tracks (drawing, step, name, mode, words, facts, link),
+   so a name that wraps (Governance Transformation) moves every card's mode down with it */
+@media (min-width:1181px){
+  @supports (grid-template-rows:subgrid){
+    #work .wk-list{row-gap:0}
+    #work .wk-c{display:grid;grid-row:span 7;grid-template-rows:subgrid;row-gap:8px}
+    #work .wk-c > *{grid-column:1}
+    #work .wk-g{grid-row:1}
+    #work .wk-no{grid-row:2}
+    #work .wk-name{grid-row:3}
+    #work .wk-mode{grid-row:4}
+    #work .wk-d{grid-row:5}
+    #work .wk-foot{grid-row:6;margin:0;border-top-color:transparent}
+    #work .wk-go{grid-row:7}
+    #work .wk-c::before{content:"";grid-column:1;grid-row:6/8;margin:0 -20px -20px;border-radius:0 0 18px 18px}
+  }
+}
+/* one column of rows: pictogram, then the words, then the two facts in a ruled column */
+@media (max-width:1180px){
+  #work .wk-list{grid-template-columns:minmax(0,1fr);gap:10px}
+  #work .wk-c{display:grid;grid-template-columns:minmax(0,190px) minmax(0,1fr) minmax(0,11em);grid-template-areas:"g no foot" "g name foot" "g mode foot" "g d foot" "g go foot";grid-template-rows:auto auto auto 1fr auto;column-gap:28px;row-gap:4px;align-items:start;padding:20px 24px}
+  #work .wk-g{grid-area:g;margin:0;align-self:center}
+  #work .wk-no{grid-area:no;justify-content:flex-start;gap:14px}
+  #work .wk-name{grid-area:name}
+  #work .wk-mode{grid-area:mode}
+  #work .wk-d{grid-area:d;max-width:34em}
+  #work .wk-go{grid-area:go}
+  #work .wk-foot{grid-area:foot;align-content:start;align-self:stretch;margin:0;padding:2px 0 0 18px;border-top:0;border-left:1px solid transparent}
+  #work .wk-c::before{content:"";grid-area:foot;align-self:stretch;margin:-20px -24px -20px 0;border-radius:0 18px 18px 0}
+}
+/* phone: pictogram on top, then the words; the two facts side by side */
+@media (max-width:640px){
+  #work .wk-c{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"g g" "no no" "name name" "mode mode" "d d" "foot foot" "go go";grid-template-rows:none;row-gap:6px;padding:18px 20px 20px}
+  #work .wk-g{max-width:250px;margin:0 0 6px;justify-self:start}
+  #work .wk-foot{grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin-top:8px;padding:12px 0 0;border-left:0;border-top:0}
+  #work .wk-c::before{grid-column:1/-1;grid-row:6/8;margin:0 -20px -20px;border-radius:0 0 18px 18px}
+}
+@media (prefers-reduced-motion:reduce){
+  #work .wk-c,#work .wk-name a,#work .wk-go::after{transition:none}
+  #work .wk-c:hover .wk-go::after{transform:none}
+}
+
+.research{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px}
+.research .lead{grid-column:1/5}
+.research .lead .h3{margin-top:16px}
+.research .lead .body{margin-top:16px;color:var(--ink-3);max-width:26em}
+.research .lead .actions{margin-top:24px}
+.cite{margin:24px 0 0;padding:18px 0 0;border-top:1px solid var(--rule);max-width:26em}
+.cite .lab{display:block}
+.cite__t{display:block;margin-top:10px;font-family:var(--f-q);font-weight:var(--w-q);font-style:italic;font-size:clamp(20px,1.6vw,23px);line-height:1.28;color:var(--ink);text-wrap:balance}
+.cite__a{display:block;margin-top:10px;font-family:var(--f-name);font-weight:var(--w-name);font-size:16px;line-height:1.3;color:var(--ink-2)}
+.cite__t a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em;text-decoration-color:var(--rule)}
+.cite__t a:hover{color:var(--amber);text-decoration-color:var(--amber)}
+.cite__s{display:block;margin-top:4px;font-size:calc(var(--fs-text) - 2.5px);line-height:1.45;color:var(--ink-3)}
+.people{grid-column:5/9;display:grid;gap:26px;align-content:start}
+.person .name{font-size:24px}
+.person .lab{margin-top:6px;color:var(--amber)}
+.person .small{margin-top:8px;color:var(--ink-2)}
+.shelf{grid-column:9/13}
+.shelf ul{list-style:none;margin:12px 0 0;padding:0}
+.shelf li{display:grid;grid-template-columns:8.2em 1fr;gap:12px;padding:8px 0;border-top:1px solid var(--rule-soft);align-items:baseline}
+.shelf li .b{font-family:var(--f-q);font-style:italic;font-size:17px;line-height:1.35;color:var(--ink)}
+.shelf li.span{grid-template-columns:1fr}
+
+/* the latest, from the field */
+.latest .signals{margin-top:clamp(28px,3vw,40px)}
+.signal__title .arr{display:inline-block;margin-left:.3em;font-size:.8em;color:var(--ink-3);transition:transform .2s,color .2s}
+a.signal:hover .signal__title .arr{color:var(--amber);transform:translate(2px,-2px)}
+.signal__meta .lab + .lab::before{content:"· ";}
+.latest-foot{display:flex;justify-content:flex-end;margin-top:8px}
+
+/* =====================================================================
+   Responsive
+   ===================================================================== */
+@media (max-width:1180px){
+  .line--wide{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
+}
+@media (max-width:1023px){
+  .hv__grid{grid-template-columns:minmax(0,1fr);gap:28px}
+  .hv__left{display:contents}
+  .hv__hero{order:1}
+  .hv__venn{order:2;position:relative;top:auto;max-width:620px;width:100%;justify-self:center;margin-top:8px}
+  .hv__panel{order:3;max-width:640px}
+}
+@media (max-width:980px){
+  .sec-head{grid-template-columns:minmax(0,1fr);gap:18px}
+  .sec-head > .l,.sec-head > .r{grid-column:1/-1}
+  .human,.research{grid-template-columns:minmax(0,1fr);gap:20px}
+  .human > *,.research > *{grid-column:1/-1!important}
+  .human .r{max-width:640px}
+  .cite{max-width:34em}
+}
+@media (max-width:900px){
+  .line{grid-template-columns:minmax(0,1fr);gap:22px}
+  .line--has-also{gap:0}
+  .line--has-also .lt{display:contents}
+  .line--has-also .lm{order:1;margin-top:22px}
+  .line--has-also .also{order:2;margin-top:34px}
+  /* the framework: one column; the figure rides on top while the steps pass under it */
+  .fw-build{grid-template-columns:minmax(0,1fr)}
+  .fw-steps,.fw-stage-col{grid-column:1}
+  .fw-stage-col{grid-row:1;margin-bottom:24px}
+  .fw-steps{grid-row:2}
+  .fw-on .fw-stage-col{position:sticky;top:var(--header-h);z-index:5;height:46vh;min-height:300px;background:var(--ground);margin:0 calc(-1 * var(--gut));padding:0 var(--gut);border-bottom:1px solid var(--rule-soft)}
+  .fw-on .fw-stage{position:relative;top:auto;height:100%;padding:8px 0 6px}
+  .fw-on .fw-svg{max-height:none}
+  .fw-on .fw-cap{display:none}
+  .fw-on .fw-step{min-height:62vh;padding:28px 0 30px;scroll-margin-top:calc(var(--header-h) + 46vh + 8px)}
+  .fw-on .fw-step:first-child{min-height:40vh}
+  .fw-on .fw-step:last-child{min-height:50vh}
+  .fw{background:var(--ground)}
+}
+@media (max-width:760px){
+  .readout{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:640px){
+  .lt .say{font-size:clamp(26px,7.4vw,30px)}
+  .ba__knob{width:40px;height:40px;margin:-20px 0 0 -20px}
+  .ba__tag{top:10px;font-size:10px;padding:7px 10px 6px}
+  .ba__tag--l{left:10px}.ba__tag--r{right:10px}
+  .vie-pair{gap:8px}
+  .ideas{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .ideas img:nth-child(5){display:none}
+  .kp{max-width:none}
+  .pair{gap:8px}
+  .tico{grid-template-columns:minmax(0,1fr)}
+  .tico .side{grid-template-rows:none;grid-template-columns:1fr 1fr}
+  .tico .side span{aspect-ratio:4/3}
+  .defn{grid-template-columns:minmax(0,1fr)}
+  .feat{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 8px}
+  .feat .ft{font-size:13px}
+  .feat .fp{display:none}
+  .shelf li{grid-template-columns:7.4em 1fr}
+  .vp__over{margin-left:0}
+}
+@media (prefers-reduced-motion:reduce){
+  .fw-svg .lay,.fw-svg .dk,.fw-svg .railv,.fw-svg .railh,.ba__tag{transition:none}
+}
+</style>
+</head>
+<body data-page="home">
+
+<div data-site-header></div>
+
+<main id="main">
+
+<!-- =====================================================================
+     1 · HERO → THE INTERACTIVE VENN
+     Texts of the seven parts: SITE-BRIEF §9 (decided 23 Sept: "Foresight",
+     with AI set small under it; overlaps renamed), read from SITE.venn in
+     assets/site.js, which Mission shares.
+     ===================================================================== -->
+<section class="hv" id="top" aria-labelledby="h1">
+  <div class="hv__stage">
+    <div class="wrap hv__grid">
+      <div class="hv__left">
+
+        <div class="hv__hero" id="hv-hero">
+          <p class="eyebrow">Collaborative planning · Helsinki · since <span data-m="reach.since">2021</span></p>
+          <h1 class="display" id="h1">The mandate to <em>imagine</em>.</h1>
+          <p class="q q--l hv__frame">A city with no mandate to imagine its future can only administer it.</p>
+          <p class="lede">We help cities try ideas with the people who live there while the brief is still open, and build the mandate to act on what comes out. We also run educational programmes for schools, universities and professional training.</p>
+          <div class="actions">
+            <a class="btn" href="use-cases.html">See the use cases</a>
+            <a class="link" href="#framework">Read the framework</a>
+          </div>
+          <p class="stats"><span><b data-m="reach.engagements">95</b> engagements</span><span><b data-m="reach.cities">73</b> cities</span><span><b data-m="reach.countries">38</b> countries</span></p>
+          <p class="hv__cue lab" aria-hidden="true"><i></i>Scroll, and the diagram opens</p>
+        </div>
+
+        <div class="hv__panel" id="hv-panel">
+          <h2 class="sr">Coplanning: who holds what</h2>
+          <div class="vp" id="vp" aria-live="polite" aria-atomic="true">
+            <p class="lab vp__kick" id="vp-kick">Coplanning</p>
+            <p class="h2 vp__t" id="vp-t">Where three kinds of knowledge <em>meet</em>.</p>
+            <p class="q q--l vp__role" id="vp-role" hidden></p>
+            <p class="lede vp__x" id="vp-x">Participation asked experts of planning to imagine everyday life, and experts of everyday life to comment on planning documents. Coplanning reverses this: residents imagine and evaluate, and planners turn that into design.</p>
+          </div>
+          <div class="vp__nav">
+            <button type="button" class="vp__btn" id="vp-prev" aria-label="Previous part of the diagram">←</button>
+            <span class="lab vp__count" id="vp-count">7 parts</span>
+            <button type="button" class="vp__btn" id="vp-next" aria-label="Next part of the diagram">→</button>
+            <button type="button" class="link vp__over" id="vp-over" hidden>Back to the overview</button>
+          </div>
+          <p class="lab vp__hint" id="vp-hint">Point at a circle, an overlap or the centre · or tab to it</p>
+        </div>
+
+      </div>
+      <figure class="hv__venn" id="hv-venn">
+        <svg class="vn" id="vn" role="group" aria-labelledby="vn-title vn-desc" tabindex="-1">
+          <title id="vn-title">Coplanning: Stakeholders, Institutions and Foresight with AI overlap; where all three meet is Coplanning.</title>
+          <desc id="vn-desc">Seven parts: three circles, three overlaps and the centre. Choose one to read what it holds, beside the diagram.</desc>
+        </svg>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- =====================================================================
+     2 · IMAGES LET US TRY OUR IDEAS (no intro: it follows the Venn)
+     Damiano's sentence in four parts (SITE-BRIEF R1.2), none opening with
+     what something is not. No image is a link (R1.4); captions name the
+     project. No Panama on the home (R1.5).
+     ===================================================================== -->
+<section class="section tri" id="principle" aria-labelledby="pr-h">
+  <div class="wrap">
+    <h2 class="sr" id="pr-h">Images let us try our ideas</h2>
+
+    <ol class="lines">
+      <!-- 1 · Vienna: evaluate ideas and scenarios -->
+      <li class="line">
+        <div class="lt">
+          <p class="say">Collaborative planning is the opportunity to evaluate ideas and scenarios,</p>
+          <p class="lab where">Vienna · Supergrätzl · 2026</p>
+          <p class="body">The same street corner, as it is and as a scenario, with trees and planting where cars were parked. For the Supergrätzl, residents weighed generated images of their own streets: printed, pegged to a line and marked with dots.</p>
+          <p class="body">Every image carried the city’s own label: <span lang="de">„KI-generiertes Beispielbild, kein Planungs-Rendering“</span>, an AI-generated example image, not a planning rendering.</p>
+        </div>
+        <figure class="lm" aria-labelledby="vie-cap">
+          <div class="ba" id="vie-ba" data-side="both">
+            <img src="img/pairs/vienna--vie-before.jpg" alt="A street corner in Vienna as it is: asphalt, parked cars and a corner café." loading="lazy">
+            <img class="ba__after" src="img/pairs/vienna--vie-after.jpg" alt="The same corner as a scenario: trees, planting and benches along a paved street, people walking and cycling, and the city’s label: an AI-generated example image, not a planning rendering." loading="lazy">
+            <span class="ba__tag ba__tag--l" aria-hidden="true">As it is</span>
+            <span class="ba__tag ba__tag--r" aria-hidden="true">Scenario</span>
+            <span class="ba__line" aria-hidden="true"><span class="ba__knob">‹ ›</span></span>
+            <input class="ba__range" id="vie-range" type="range" min="0" max="100" step="1" value="50" aria-label="Compare the corner as it is with the scenario" aria-valuetext="Half and half">
+          </div>
+          <div class="vie-pair">
+            <figure><img src="img/pairs/vienna--vie-street.jpg" alt="Children and adults in the street looking up at printed scenarios pegged to a line." loading="lazy"><figcaption class="lab">Scenarios on the line</figcaption></figure>
+            <figure><img src="img/pairs/vienna--vie-vote.jpg" style="object-position:50% 40%" alt="A hand holding a printed scenario, a street with water play and planting, marked with coloured dots." loading="lazy"><figcaption class="lab">A choice, in dots</figcaption></figure>
+          </div>
+          <figcaption class="lab cap-l" id="vie-cap">Vienna Supergrätzl · drag to compare</figcaption>
+        </figure>
+      </li>
+
+      <!-- 2 · the impact evaluator -->
+      <li class="line line--wide">
+        <div class="lt">
+          <p class="say">understand their impact,</p>
+          <p class="lab where">The impact evaluator · on the platform</p>
+          <p class="body">A street corner with parklets tried on it, and beside it the evaluation: what the change would do, who gains and who loses.</p>
+          <p class="body">Each scenario is checked as it is made: against the institution’s own rules, and for its likely environmental and social impact. The evaluation informs the choice. People make it.</p>
+        </div>
+        <figure class="lm" aria-labelledby="ev-cap">
+          <span class="ev"><img src="img/platform/impact-evaluator.jpg" alt="The impact evaluator on the platform: a city-centre street corner with parklets, planting and benches tried on it, and beside it the impact assessment and its trade-offs." loading="lazy"></span>
+          <div class="readout">
+            <div>
+              <span class="lab">Impact</span>
+              <ul>
+                <li class="gain"><b>Improved social space.</b> Parklets and benches make room to sit and meet.</li>
+                <li class="gain"><b>Climate resilience.</b> Native planting adds shade, biodiversity and stormwater capture.</li>
+                <li class="loss"><b>Transit interface.</b> The tram stop stays, but boarding gets more crowded at peak times.</li>
+              </ul>
+            </div>
+            <div>
+              <span class="lab">Trade-offs</span>
+              <ul>
+                <li class="gain"><b>Gains.</b> Residents, parents and older adults: seating, shade, social space.</li>
+                <li class="loss"><b>Loses.</b> Kerbside deliveries and motor traffic: space and loading.</li>
+              </ul>
+            </div>
+          </div>
+          <figcaption class="lab cap-l" id="ev-cap">A scenario and its evaluation, side by side</figcaption>
+        </figure>
+      </li>
+
+      <!-- 3 · Munich (+ Kaarina): take an informed decision -->
+      <li class="line line--has-also">
+        <div class="lt">
+          <p class="say">take an informed decision</p>
+          <p class="lab where">Munich · Zamanand festival · 2024</p>
+          <p class="body">Visitors put more than 3,000 ideas for a car-free space around the Siegestor into images; about 300 votes chose one, and it was built there as a walkable prototype four months later. A vote is as informed as what people can see when they cast it.</p>
+          <div class="also">
+            <p class="lab where">Kaarina · with Sweco · 2024</p>
+            <p class="body">Residents generated scenarios for the market square in a workshop and voted on 28 of them. The vision plan was approved in late 2024, and water, art and a stage were built on the square.</p>
+            <figure class="kp">
+              <span class="pair">
+                <span><img src="img/pairs/kaarina--asked-stage.jpg" alt="Generated in the workshop: a timber stage with orange steps, standing on the square while it was still an open gravel lot." loading="lazy"><span class="lab sub-cap">Asked in the room</span></span>
+                <span><img src="img/pairs/kaarina--built-stage.jpg" alt="The stage as built on the finished square: tiered seating, planting and a band setting up." loading="lazy"><span class="lab sub-cap">Built on the square</span></span>
+              </span>
+              <figcaption class="lab cap-l">Kaarina Market Square</figcaption>
+            </figure>
+          </div>
+        </div>
+        <figure class="lm">
+          <span class="stage-n"><span class="num num--s">3,000+</span><span class="lab">ideas · a few of them</span></span>
+          <span class="ideas">
+            <img src="img/pairs/munich--strip-s02.jpg" alt="Idea: a brightly painted street with clipped trees." loading="lazy">
+            <img src="img/pairs/munich--strip-s04.jpg" alt="Idea: a lawn with a family on a bench." loading="lazy">
+            <img src="img/pairs/munich--strip-s06.jpg" alt="Idea: a timber path across the grass, with people cycling along it." loading="lazy">
+            <img src="img/pairs/munich--strip-s08.jpg" alt="Idea: a water channel lined with planting." loading="lazy">
+            <img src="img/pairs/munich--strip-s10.jpg" alt="Idea: a playground with slides." loading="lazy">
+          </span>
+          <span class="pair">
+            <span><img src="img/pool/2024-zamanand-munich--winner.jpg" alt="The winning image: the Siegestor with a stream and a flower meadow in place of the road." loading="lazy"><span class="lab sub-cap">Chosen by about 300 votes</span></span>
+            <span><img src="img/pool/2024-zamanand-munich--prototype.jpg" alt="The walkable prototype built at the Siegestor: planters, a timber deck and people walking through." loading="lazy"><span class="lab sub-cap">Built, four months later</span></span>
+          </span>
+          <figcaption class="lab cap-l">Re-imagining the car-free city, Munich</figcaption>
+        </figure>
+      </li>
+
+      <!-- 4 · TICO, Bologna: education and democratic collaboration -->
+      <li class="line line--last">
+        <div class="lt">
+          <p class="say"><em>— and even change your choice.</em></p>
+          <p class="lab where">Bologna · TICO – Officina mobile della conoscenza · 2026</p>
+          <p class="body">TICO is the City of Bologna’s workshop truck. It travels through the city’s neighbourhoods, from Borgo Panigale-Reno to Savena, and ours is one station in it. Pupils, families and neighbours try an idea on a real street, see what it would change, and talk it through with whoever is standing next to them.</p>
+          <p class="body">Changing your mind after seeing more is part of learning. It is also part of democracy.</p>
+          <div class="epi">
+            <p class="say say--s">Because a city is democratic when it holds knowledge in common.</p>
+            <span class="q it" lang="it">«Perché una città è democratica quando mette in comune la conoscenza.»</span>
+            <span class="lab">City of Bologna, TICO page</span>
+          </div>
+        </div>
+        <figure class="lm">
+          <div class="tico">
+            <img class="big" src="img/pool/2026-bologna--tico-generations.jpg" alt="An older woman and a younger woman reading a street image together on the touchscreen." loading="lazy">
+            <div class="side">
+              <span><img src="img/pool/2026-bologna--tico-schools.jpg" alt="A school class on TICO chairs inside the truck, one hand raised, a screen at the front." loading="lazy"></span>
+              <span><img src="img/pool/2026-bologna--tico-truck.jpg" alt="The TICO workshop truck parked in a Bologna neighbourhood, people climbing its steps." loading="lazy"></span>
+            </div>
+          </div>
+          <figcaption class="lab cap-l">TICO, Bologna</figcaption>
+        </figure>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- =====================================================================
+     3 · THE ENGAGEMENT FRAMEWORK, AS A SCROLL STORY
+     Built from data/matrix.js: two questions, four tasks, every engagement
+     a disc. No mandate counts, no dimming, no links on the discs (R1.4).
+     Ends at step 06 and hands over to the use cases page (R1.6).
+     ===================================================================== -->
+<section class="fw wash-commons" id="framework" aria-labelledby="fw-h">
+  <div class="wrap">
+    <div class="sec-head sec-head--full">
+      <div class="l">
+        <p class="eyebrow">The engagement framework · how we work</p>
+        <h2 class="h2" id="fw-h">The four tasks of <em>coplanning</em>.</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="fw-build" id="fw-build">
+      <div class="fw-stage-col">
+        <figure class="fw-stage" id="fw-stage" aria-labelledby="fw-figcap">
+          <div class="fw-fig">
+            <svg class="fw-svg" id="fw-svg" role="group" aria-labelledby="fw-title fw-desc" viewBox="0 0 800 760" preserveAspectRatio="xMidYMid meet" tabindex="-1">
+              <title id="fw-title">The engagement framework, built from our work</title>
+              <desc id="fw-desc">Two axes, open brief to defined brief and respond to propose, make four tasks: scenario planning top left, futuring top right, design review bottom left, co-design bottom right. Each disc is one engagement.</desc>
+            </svg>
+          </div>
+          <figcaption class="sr fw-cap" id="fw-figcap">The engagement framework, built from our work since <span data-m="reach.since">2021</span>.</figcaption>
+          <p class="sr" id="fw-live" aria-live="polite"></p>
+        </figure>
+      </div>
+
+      <div class="fw-steps">
+        <article class="fw-step" id="step-0" data-step="0" aria-labelledby="s0h">
+          <p class="fw-no"><span class="n">00</span><span class="lab">Before the build</span></p>
+          <h3 class="h3" id="s0h">Two questions place every engagement.</h3>
+          <p class="body">Any engagement that asks a public something can be placed with them: a workshop, a museum kiosk, a festival vote, a truck touring the neighbourhoods.</p>
+          <p class="body">The figure is built from our own work: each disc is one of the <span data-m="total">82</span> engagements in which people were asked. Talks, trainings and research grants are left off.</p>
+        </article>
+
+        <article class="fw-step" id="step-1" data-step="1" aria-labelledby="s1h">
+          <p class="fw-no"><span class="n">01</span><span class="lab">The vertical axis</span></p>
+          <h3 class="h3" id="s1h">Open brief, or defined brief</h3>
+          <p class="q q--l" data-ax="vertical">Could this engagement still change what will be done, or only how?</p>
+          <p class="body">At the top, the brief is open: nothing is fixed yet, and what people say can change the plan itself. At the bottom, it is defined: what will be built is settled, and people shape how it looks and works. Each end promises something different, and a city should know which one it is offering before it asks.</p>
+          <div class="defn">
+            <p class="lab">From our vocabulary</p>
+            <div><p class="hw">open brief</p><p class="d">What will be done is not yet decided, so an engagement can still change what happens, not only how.</p></div>
+            <div><p class="hw">defined brief</p><p class="d">What will be done is already decided. An engagement can still change how it is done, but not whether.</p></div>
+          </div>
+        </article>
+
+        <article class="fw-step" id="step-2" data-step="2" aria-labelledby="s2h">
+          <p class="fw-no"><span class="n">02</span><span class="lab">The horizontal axis</span></p>
+          <h3 class="h3" id="s2h">Respond, or propose</h3>
+          <p class="q q--l" data-ax="horizontal">Will people bring material you do not have yet, or respond to material you provide?</p>
+          <p class="body">On the left, people respond: to a scenario, a policy idea, a drawing someone else made. On the right, people propose: they bring the photograph, the wish, the first image of what could be there. Where the two questions cross, four tasks appear.</p>
+          <div class="defn">
+            <p class="lab">From our vocabulary</p>
+            <div><p class="hw">respond</p><p class="d">People respond to material we provide: a scenario, a drawing, a policy idea.</p></div>
+            <div><p class="hw">propose</p><p class="d">People bring material we do not have yet: a wish, an idea, a photograph of their own street.</p></div>
+          </div>
+        </article>
+
+        <article class="fw-step" id="step-3" data-step="3" data-task="test" aria-labelledby="s3h" style="--qi:var(--qi-test);--qt:var(--qt-test);--qs:var(--qs-test);--qc:var(--qc-test)">
+          <p class="fw-no"><span class="n">03</span><span class="lab">Open brief · respond</span></p>
+          <h3 class="h3" id="s3h" data-qt="test.label">Scenario planning</h3>
+          <p class="q q--l" data-qt="test.question">What if this happened here?</p>
+          <div class="fw-decided"><span class="lab">Already decided</span><p data-qt="test.decided">The question, not the answer. We have options to put to people.</p></div>
+          <p class="body" data-qt="test.summary">A scenario or a policy idea goes to people before anything is decided, and we learn what they could live with.</p>
+          <p class="body">In Enschede, residents of Twekkelerveld added trees, benches and water to photographs of their own streets. At the Estonian Museum of Natural History, a kiosk with no facilitator let visitors try a more biodiverse city on real sites. TICO in Bologna, above, sits here too.</p>
+          <ul class="feat" data-feat="test" aria-label="Scenario planning: four of the engagements"></ul>
+        </article>
+
+        <article class="fw-step" id="step-4" data-step="4" data-task="imagine" aria-labelledby="s4h" style="--qi:var(--qi-imagine);--qt:var(--qt-imagine);--qs:var(--qs-imagine);--qc:var(--qc-imagine)">
+          <p class="fw-no"><span class="n">04</span><span class="lab">Open brief · propose</span></p>
+          <h3 class="h3" id="s4h" data-qt="imagine.label">Futuring</h3>
+          <p class="q q--l" data-qt="imagine.question">What could this place become?</p>
+          <div class="fw-decided"><span class="lab">Already decided</span><p data-qt="imagine.decided">Nothing yet. We want ideas about what this place could become.</p></div>
+          <p class="body" data-qt="imagine.summary">Everything is still open. People bring the future they want for a place, and it becomes the raw material of the brief.</p>
+          <p class="body">In Lahti, 66 images made by residents and stakeholders at an open-house station fed the City Centre Vision 2040, which the city adopted in spring 2024. In Luleå, children photographed real places and reimagined them on their own terms.</p>
+          <ul class="feat" data-feat="imagine" aria-label="Futuring: four of the engagements"></ul>
+        </article>
+
+        <article class="fw-step" id="step-5" data-step="5" data-task="improve" aria-labelledby="s5h" style="--qi:var(--qi-improve);--qt:var(--qt-improve);--qs:var(--qs-improve);--qc:var(--qc-improve)">
+          <p class="fw-no"><span class="n">05</span><span class="lab">Defined brief · respond</span></p>
+          <h3 class="h3" id="s5h" data-qt="improve.label">Design review</h3>
+          <p class="q q--l" data-qt="improve.question">What would make this better?</p>
+          <div class="fw-decided"><span class="lab">Already decided</span><p data-qt="improve.decided">The design. We want it better before it is final.</p></div>
+          <p class="body" data-qt="improve.summary">The design exists. People react to the actual drawings while there is still time to revise.</p>
+          <p class="body">Vienna’s Supergrätzl and Munich’s Siegestor, both above, sit here. So do Helsinki’s market squares and Liivalaia Street in Tallinn.</p>
+          <ul class="feat" data-feat="improve" aria-label="Design review: four of the engagements"></ul>
+        </article>
+
+        <article class="fw-step fw-end" id="step-6" data-step="6" data-task="shape" aria-labelledby="s6h" style="--qi:var(--qi-shape);--qt:var(--qt-shape);--qs:var(--qs-shape);--qc:var(--qc-shape)">
+          <p class="fw-no"><span class="n">06</span><span class="lab">Defined brief · propose</span></p>
+          <h3 class="h3" id="s6h" data-qt="shape.label">Co-design</h3>
+          <p class="q q--l" data-qt="shape.question">How should it look and work?</p>
+          <div class="fw-decided"><span class="lab">Already decided</span><p data-qt="shape.decided">What we will build, but not yet how it looks.</p></div>
+          <p class="body" data-qt="shape.summary">What will happen is decided: a street, a square, a building. How it takes shape is open, and what people propose feeds the design.</p>
+          <p class="body">Helsinki Summer Streets, 2023, sits here. So do Kaarina’s market square, above, and Jyväskylä, where culture and real-estate actors imagined new uses for the interiors of the main library.</p>
+          <ul class="feat" data-feat="shape" aria-label="Co-design: four of the engagements"></ul>
+          <div class="fw-close">
+            <p class="body">That is the whole framework: <span data-m="total">82</span> engagements, four tasks, two questions. The use cases page holds every one of them, with a filter for each task.</p>
+            <div class="actions">
+              <a class="btn" href="use-cases.html">See the use cases</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+  <div class="fw-tip" id="fw-tip" role="tooltip" hidden></div>
+</section>
+
+<!-- =====================================================================
+     4 · WHERE WE HAVE WORKED · the map (assets/map.js, the Stipple fill only: R1.7)
+     ===================================================================== -->
+<section class="section where-s" id="where" aria-labelledby="map-h">
+  <div class="wrap">
+    <div class="sec-head sec-head--full">
+      <div class="l">
+        <p class="eyebrow">Where we have worked</p>
+        <h2 class="h2" id="map-h">Everything we know was learned <em>somewhere</em>.</h2>
+      </div>
+    </div>
+
+    <figure class="map-fig" aria-labelledby="map-cap">
+      <div class="map-box" id="map-box"></div>
+      <figcaption id="map-cap">
+        <div class="legend map-key" id="map-key" aria-label="Key"></div>
+        <p class="small map-note">One disc per city, sized by the number of engagements held there and coloured by the task most often run there; grey where none of them is on the framework yet. The land is drawn in dots, denser along the coasts and closest to where we have worked. Point at a city to read it. Positions are approximate. Land: Natural Earth.</p>
+        <p class="lab map-beyond" id="map-beyond" hidden></p>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- =====================================================================
+     7 · FIVE WAYS TO WORK TOGETHER (R1.9)
+     B3 "Five drawings" (work-study.html #concept-b3): one card per way, each card one link
+     to its way on use-coplanai.html. Colour 6 "Five quiet hues" as drawn in work-b3-study.html
+     (#b3-colour-6), with B3's own drawings of who does the work: handed over · trained ·
+     made together · built in · passed on. The section explains; the shared invitation
+     at the foot of the page invites (its five doors link to the same ways).
+     ===================================================================== -->
+<section class="section section--flush-top" id="work" aria-labelledby="work-h">
+  <div class="wrap">
+    <div class="sec-head hair hair-pad">
+      <div class="l">
+        <p class="eyebrow">Working with us</p>
+        <h2 class="h2" id="work-h">Five ways to work together. Each step up asks more of <em>both</em> sides.</h2>
+      </div>
+      <p class="body r">Choose by what you want to change. The durations are typical.</p>
+    </div>
+    <p class="wk-legend" aria-hidden="true">
+      <span><i class="wk-sw wk-sw--we"></i><b>We</b>&nbsp;CoPlanAI</span>
+      <span><i class="wk-sw wk-sw--you"></i><b>You</b>&nbsp;your team or institution</span>
+      <span><i class="wk-sw wk-sw--oth"></i>Partners, municipalities, grantees</span>
+    </p>
+    <ol class="wk-list">
+      <li class="wk-c">
+        <svg class="wk-g" viewBox="0 0 200 110" aria-hidden="true" focusable="false"><line class="ln" x1="80" y1="55" x2="104" y2="55"/><polygon class="ar" points="103,50.5 111,55 103,59.5"/><circle class="we" cx="58" cy="55" r="20"/><text class="w" x="58" y="55">we</text><circle class="you" cx="146" cy="55" r="32"/><text x="146" y="55">you</text></svg>
+        <p class="wk-no"><span class="lab">Step 1</span><span class="st-bar" aria-hidden="true"><i class="f"></i><i></i><i></i><i></i><i></i></span></p>
+        <h3 class="name wk-name"><a href="use-coplanai.html#subscriber">Subscriber</a></h3>
+        <p class="q wk-mode">Self-service</p>
+        <p class="small wk-d">You bring the facilitators; we provide the platform.</p>
+        <p class="wk-foot"><span><span class="lab wk-k">What changes</span><span class="wk-chg">Your tools</span></span><span><span class="wk-dur">1–2 days</span><span class="lab">to activation</span></span></p>
+        <span class="wk-go" aria-hidden="true">See the plan</span>
+      </li>
+      <li class="wk-c">
+        <svg class="wk-g" viewBox="0 0 200 110" aria-hidden="true" focusable="false"><defs><clipPath id="wk-clip2"><circle cx="46" cy="55" r="22"/></clipPath></defs><circle class="you" cx="76" cy="55" r="22"/><circle class="we" cx="46" cy="55" r="22"/><circle class="lens" cx="76" cy="55" r="22" clip-path="url(#wk-clip2)"/><circle class="you nf" cx="76" cy="55" r="22"/><circle class="we nf" cx="46" cy="55" r="22"/><text class="w" x="38" y="55">we</text><text x="83" y="55">you</text><line class="ln" x1="108" y1="55" x2="124" y2="55"/><polygon class="ar" points="123,50.5 131,55 123,59.5"/><circle class="you" cx="162" cy="55" r="27"/><text x="162" y="55">you</text></svg>
+        <p class="wk-no"><span class="lab">Step 2</span><span class="st-bar" aria-hidden="true"><i class="f"></i><i class="f"></i><i></i><i></i><i></i></span></p>
+        <h3 class="name wk-name"><a href="use-coplanai.html#capacity">Capacity Builder</a></h3>
+        <p class="q wk-mode">Guided launch</p>
+        <p class="small wk-d">A bootcamp from the case library, training on the platform and in facilitation, and a first workshop set up with you. Then your team carries on independently.</p>
+        <p class="wk-foot"><span><span class="lab wk-k">What changes</span><span class="wk-chg">Your team’s skills</span></span><span><span class="wk-dur">4–6 weeks</span><span class="lab">guided</span></span></p>
+        <span class="wk-go" aria-hidden="true">See the plan</span>
+      </li>
+      <li class="wk-c">
+        <svg class="wk-g" viewBox="0 0 200 110" aria-hidden="true" focusable="false"><defs><clipPath id="wk-clip3"><circle cx="80" cy="55" r="36"/></clipPath></defs><circle class="you" cx="120" cy="55" r="36"/><circle class="we" cx="80" cy="55" r="36"/><circle class="lens" cx="120" cy="55" r="36" clip-path="url(#wk-clip3)"/><circle class="you nf" cx="120" cy="55" r="36"/><circle class="we nf" cx="80" cy="55" r="36"/><text class="w" x="62" y="55">we</text><text x="139" y="55">you</text></svg>
+        <p class="wk-no"><span class="lab">Step 3</span><span class="st-bar" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i></span></p>
+        <h3 class="name wk-name"><a href="use-coplanai.html#innovation">Innovation Partner</a></h3>
+        <p class="q wk-mode">Co-creation</p>
+        <p class="small wk-d">A programme built around your question: the method, a tailored instance, custom interface and purpose-built AI, with monitoring and evaluation.</p>
+        <p class="wk-foot"><span><span class="lab wk-k">What changes</span><span class="wk-chg">The method itself</span></span><span><span class="wk-dur">2–4 months</span><span class="lab">programme</span></span></p>
+        <span class="wk-go" aria-hidden="true">See the plan</span>
+      </li>
+      <li class="wk-c">
+        <svg class="wk-g" viewBox="0 0 200 110" aria-hidden="true" focusable="false"><defs><clipPath id="wk-clip4"><circle cx="126" cy="55" r="45"/></clipPath></defs><circle class="you" cx="126" cy="55" r="45"/><circle class="we" cx="64" cy="55" r="22"/><circle class="lens" cx="64" cy="55" r="22" clip-path="url(#wk-clip4)"/><circle class="you nf" cx="126" cy="55" r="45"/><circle class="we nf" cx="64" cy="55" r="22"/><line class="ln" x1="113" y1="35" x2="142" y2="40"/><line class="ln" x1="142" y1="40" x2="124" y2="72"/><line class="ln" x1="124" y1="72" x2="113" y2="35"/><circle class="dep" cx="113" cy="35" r="7.5"/><circle class="dep" cx="142" cy="40" r="7.5"/><circle class="dep" cx="124" cy="72" r="7.5"/><text class="w" x="58" y="55">we</text><text x="152" y="73">you</text></svg>
+        <p class="wk-no"><span class="lab">Step 4</span><span class="st-bar" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i></span></p>
+        <h3 class="name wk-name"><a href="use-coplanai.html#governance">Governance Transformation</a></h3>
+        <p class="q wk-mode">Strategic partnership</p>
+        <p class="small wk-d">Internal processes, governance models and institutional culture, redesigned around collaborative planning. For governments and international organisations.</p>
+        <p class="wk-foot"><span><span class="lab wk-k">What changes</span><span class="wk-chg">The institution</span></span><span><span class="wk-dur">3–12 months</span><span class="lab">partnership</span></span></p>
+        <span class="wk-go" aria-hidden="true">See the plan</span>
+      </li>
+      <li class="wk-c">
+        <svg class="wk-g" viewBox="0 0 200 110" aria-hidden="true" focusable="false"><line class="ln" x1="92" y1="55" x2="166" y2="22"/><line class="ln" x1="92" y1="55" x2="176" y2="55"/><line class="ln" x1="92" y1="55" x2="166" y2="88"/><line class="ln" x1="46" y1="55" x2="62" y2="55"/><polygon class="ar" points="61,50.5 69,55 61,59.5"/><circle class="we" cx="28" cy="55" r="17"/><text class="w" x="28" y="55">we</text><circle class="you" cx="92" cy="55" r="22"/><text x="92" y="55">you</text><circle class="oth" cx="166" cy="22" r="11"/><circle class="oth" cx="176" cy="55" r="11"/><circle class="oth" cx="166" cy="88" r="11"/></svg>
+        <p class="wk-no"><span class="lab">Step 5</span><span class="st-bar" aria-hidden="true"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></span></p>
+        <h3 class="name wk-name"><a href="use-coplanai.html#multiplier">Multiplier Programme</a></h3>
+        <p class="q wk-mode">Train the trainers</p>
+        <p class="small wk-d">Your staff become certified facilitators, who then onboard partner organisations, municipalities or grantees.</p>
+        <p class="wk-foot"><span><span class="lab wk-k">What changes</span><span class="wk-chg">Who else can run it</span></span><span><span class="wk-dur">2–3 months</span><span class="lab">to first rollout</span></span></p>
+        <span class="wk-go" aria-hidden="true">See the plan</span>
+      </li>
+    </ol>
+    <p class="wk-more"><a class="link link--arrow" href="use-coplanai.html">Ways to work together, and the platform</a></p>
+  </div>
+</section>
+
+<!-- =====================================================================
+     9 · THE LATEST, FROM THE FIELD (the live home's nine, in its order)
+     Rendered from data/signals-public.js (h = position 1–9); the list below
+     is the fallback and matches it.
+     ===================================================================== -->
+<section class="section section--flush-top latest" id="latest" aria-labelledby="latest-h">
+  <div class="wrap">
+    <div class="sec-head hair hair-pad">
+      <div class="l">
+        <p class="eyebrow">Signals</p>
+        <h2 class="h2" id="latest-h">The latest, <em>from the field</em>.</h2>
+      </div>
+      <p class="body r">Press, reports and talks from the cities, institutions and partners we work with. Each one opens at its source.</p>
+    </div>
+    <div class="signals" id="signals">
+      <a class="signal" href="https://www.connective-cities.net/en/media-center/ai-based-visualisation-for-affordable-housing-and-informal-settlement-upgrading/" target="_blank" rel="noopener"><p class="signal__meta"><span class="lab">Connective Cities (GIZ / Engagement Global)</span><span class="lab">May 2026</span></p><h3 class="signal__title">AI-based Visualisation for Affordable Housing and Informal Settlement Upgrading<span class="arr" aria-hidden="true">↗</span></h3></a>
+      <a class="signal" href="https://partecipa.comune.bologna.it/partecipa/progetti/tico-officina-conoscenza?sect=didattico-tico-per-le-scuole" target="_blank" rel="noopener"><p class="signal__meta"><span class="lab">City of Bologna</span><span class="lab">Apr 2026</span></p><h3 class="signal__title" lang="it">TICO – Officina mobile della conoscenza, Bologna<span class="arr" aria-hidden="true">↗</span></h3></a>
+      <a class="signal" href="https://meetingorganizer.copernicus.org/ICUC12/ICUC12-1094.html" target="_blank" rel="noopener"><p class="signal__meta"><span class="lab">Copernicus / ICUC12</span><span class="lab">Jul 2025</span></p><h3 class="signal__title">Engaging Vulnerable Urban Populations in Co-Designing Climate-Resilient Public Spaces<span class="arr" aria-hidden="true">↗</span></h3></a>
+      <a class="signal" href="https://www.connective-cities.net/en/media-center/ai-based-visualisation-for-sustainable-affordable-housing/" target="_blank" rel="noopener"><p class="signal__meta"><span class="lab">Connective Cities (GIZ / Engagement Global)</span><span class="lab">Jan 2026</span></p><h3 class="signal__title">AI-based Visualisation for Sustainable &amp; Affordable Housing<span class="arr" aria-hidden="true">↗</span></h3></a>
+      <a class="signal" href="https://www.ulalabs.eu/post/ulalabs-distributed-learning-workshop-on-twekkelerveld-enschede" target="_blank" rel="noopener"><p class="signal__meta"><span class="lab">ULA Labs</span><span class="lab">Dec 2025</span></p><h3 class="signal__title">ULA Labs distributed-learning workshop on Twekkelerveld, Enschede<span class="arr" aria-hidden="true">↗</span></h3></a>
+      <a class="signal" href="https://citylab-berlin.org/de/blog/stadtmoebel-gemeinsam-gebaut-wie-beteiligung-im-kiez-sichtbar-bleibt/" target="_blank" rel="noopener"><p class="signal__meta"><span class="lab">CityLAB Berlin</span><span class="lab">Oct 2025</span></p><h3 class="signal__title" lang="de">Stadtmöbel gemeinsam gebaut: Wie Beteiligung im Kiez sichtbar bleibt<span class="arr" aria-hidden="true">↗</span></h3></a>
+      <a class="signal" href="https://sites.utu.fi/landscape/wp-content/uploads/sites/1234/2025/09/UBP_UrbanistAI_UTUraportti_.pdf" target="_blank" rel="noopener"><p class="signal__meta"><span class="lab">University of Turku</span><span class="lab">Sep 2025</span></p><h3 class="signal__title">Envisioning Nature-Integrated Urban Spaces<span class="arr" aria-hidden="true">↗</span></h3></a>
+      <a class="signal" href="https://arxiv.org/abs/2508.19256" target="_blank" rel="noopener"><p class="signal__meta"><span class="lab">arXiv</span><span class="lab">Aug 2025</span></p><h3 class="signal__title">WeDesign: Generative AI-Facilitated Community Consultations<span class="arr" aria-hidden="true">↗</span></h3></a>
+      <a class="signal" href="https://www.uwasa.fi/en/newshub/news/urban-studies-expert-sampo-ruoppila-appointed-professor-practice-university-vaasa" target="_blank" rel="noopener"><p class="signal__meta"><span class="lab">University of Vaasa</span><span class="lab">Aug 2025</span></p><h3 class="signal__title">Urban studies expert Sampo Ruoppila appointed Professor of Practice<span class="arr" aria-hidden="true">↗</span></h3></a>
+    </div>
+    <p class="latest-foot"><a class="link link--arrow" href="signals.html">All signals</a></p>
+  </div>
+</section>
+
+</main>
+
+<!-- the shared closing invitation (SITE-BRIEF R1.1; rendered by assets/site.js, FOUNDATION.md §5) -->
+<div data-site-invite></div>
+
+<div data-site-footer></div>
+
+<script src="data/matrix.js"></script>
+<script src="data/signals-public.js"></script>
+<script src="data/land.js"></script>
+<script src="data/places.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/map.js"></script>
+<script>
+SITE.ready(function(){
+  'use strict';
+  var doc=document, root=doc.documentElement, esc=SITE.esc, C=window.COPLAN;
+  var QS=(function(){try{return new URLSearchParams(location.search);}catch(e){return {get:function(){return null;}};}})();
+  var FORCE_STATIC=QS.get('static')==='1';
+  var reduce=SITE.reduceMotion;
+  function clamp(v,a,b){return v<a?a:v>b?b:v;}
+  function ease(t){return t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;}
+  function throttleRAF(fn){var t=false;return function(){if(t)return;t=true;requestAnimationFrame(function(){t=false;fn();});};}
+  var SVGNS='http://www.w3.org/2000/svg';
+  function E(tag,attrs,parent,text){var e=doc.createElementNS(SVGNS,tag);if(attrs)for(var k in attrs){if(attrs[k]!=null)e.setAttribute(k,attrs[k]);}if(text!=null)e.textContent=text;if(parent)parent.appendChild(e);return e;}
+  function clean(t){return String(t).replace(/\s+-\s+/g,', ').replace(/\s*[—–]\s*/g,' – ').trim();}
+  function initials(t){var w=clean(t).replace(/[^A-Za-zÀ-ÿ0-9 ]/g,' ').split(/\s+/).filter(function(x){return x&&!/^(of|the|and|for|in|a|an|to|de|della|x)$/i.test(x);});return ((w[0]||'')[0]||'').toUpperCase()+((w[1]||'')[0]||'').toUpperCase();}
+  function city(c){return String(c.place||'').split(',')[0].replace(/\s*\(.*\)/,'');}
+  /* display names: the live case page's own title where the ledger title is long or carries a typo */
+  var SHORT={'2026-lulea':'Children reimagine Luleå','2024-zamanand-munich':'Re-imagining the car-free city, Munich','2026-bologna':'TICO, Bologna'};
+  function nameC(c){return SHORT[c.slug]||clean(c.title);}
+  /* initials where two titles would give the same pair side by side (the two Mayors for Economic Growth workshops) */
+  var INITIALS={'2024-undp-m4eg-kutaisi':'MK','2024-undp-m4eg-chisinau':'MC'};
+  function iniC(c){return INITIALS[c.slug]||initials(c.title);}
+
+  /* No image on the home is a link (SITE-BRIEF R1.4), and no Panama (R1.5): the framework keeps
+     Panama's discs, because every count is bound to data/matrix.js, but draws them without a photograph. */
+  var NO_PHOTO={'2024-undp-panama-betania':1};
+  /* the featured four per task, as data/matrix.js lists them, with Panama's place taken by Turku, and
+     Pristina's by Liivalaia, so the Design review row shows the four cases its text names (QA, 24 Sept) */
+  var FEAT_SWAP={'2024-undp-panama-betania':'2025-turku-biodiversity-park','2023-pristina-cluster':'2023-tallinn-ministry-liivalaia'};
+  function photo(c){return (c&&c.image&&!NO_PHOTO[c.slug])?c.image:null;}
+
+  /* ---------- modes: the two scroll scenes run only on a normal viewport ---------- */
+  function wantHV(){return !FORCE_STATIC&&!reduce&&innerWidth>=1024&&innerHeight>=600&&innerHeight<=1400;}
+  function wantFW(){return !FORCE_STATIC&&!reduce&&innerHeight>=480&&innerHeight<=1400;}
+
+  /* =================================================================
+     1 · THE VENN
+     ================================================================= */
+  /* Titles, lines, stubs and texts: SITE.venn (assets/site.js), the §9 table verbatim, shared with Mission.
+     Colours: the --venn-* tokens in site.css, chosen 24 Sept 2026 (venn-studies.html, "Chosen for the site"). */
+  var V=SITE.venn;
+  var VENN={
+    regions:[
+      {k:'s', title:V.s.title, kick:'Who holds what', role:V.s.line, ink:'var(--venn-ink-s)', dot:'var(--venn-ink-s)', text:V.s.text},
+      {k:'i', title:V.i.title, kick:'Who holds what', role:V.i.line, ink:'var(--venn-ink-i)', dot:'var(--venn-ink-i)', text:V.i.text},
+      {k:'a', title:V.a.title, kick:'Who holds what', role:V.a.line, ink:'var(--venn-ink-a)', dot:'var(--venn-ink-a)', text:V.a.text},
+      {k:'si', title:V.si.title, stub:V.si.stub, kick:'Where two meet', pair:['s','i'], ink:'var(--venn-ink-si)', text:V.si.text},
+      {k:'sa', title:V.sa.title, stub:V.sa.stub, kick:'Where two meet', pair:['s','a'], ink:'var(--venn-ink-sa)', text:V.sa.text},
+      {k:'ia', title:V.ia.title, stub:V.ia.stub, kick:'Where two meet', pair:['i','a'], ink:'var(--venn-ink-ia)', text:V.ia.text},
+      {k:'c', title:V.c.title, kick:'Where all three meet', role:null, ink:'var(--ink)', dot:'var(--amber)', text:V.c.text}
+    ]
+  };
+  var RG={}; VENN.regions.forEach(function(r,i){r.i=i;RG[r.k]=r;});
+  function nameOf(k){return RG[k].title;}
+
+  /* geometry of the keynote artwork (units of img/brand/venn-white.svg) */
+  var CS=[2471,1512.32], CI=[3329,1512.32], CA=[2900,2255.37], R=780;
+  var PATH={
+    s:'M2900 860.89A780 780 0 1 0 2121.36 2209.56A780 780 0 0 1 2550.36 1558.13A780 780 0 0 1 2900 860.89Z',
+    i:'M2900 860.89A780 780 0 1 1 3678.64 2209.56A780 780 0 0 0 3249.64 1558.13A780 780 0 0 0 2900 860.89Z',
+    a:'M2121.36 2209.56A780 780 0 1 0 3678.64 2209.56A780 780 0 0 0 2900 2163.75A780 780 0 0 0 2121.36 2209.56Z',
+    si:'M2900 860.89A780 780 0 0 1 3249.64 1558.13A780 780 0 0 0 2550.36 1558.13A780 780 0 0 1 2900 860.89Z',
+    sa:'M2121.36 2209.56A780 780 0 0 1 2550.36 1558.13A780 780 0 0 0 2900 2163.75A780 780 0 0 1 2121.36 2209.56Z',
+    ia:'M3678.64 2209.56A780 780 0 0 0 3249.64 1558.13A780 780 0 0 1 2900 2163.75A780 780 0 0 0 3678.64 2209.56Z',
+    c:'M2900 2163.75A780 780 0 0 0 3249.64 1558.13A780 780 0 0 0 2550.36 1558.13A780 780 0 0 0 2900 2163.75Z'
+  };
+  var VC=[2900,1883.5];          /* the centre of the three discs' bounding box */
+  /* the two fixes (venn-studies.html): each upper circle's icon, name and role start at START and move out
+     until they stay 12 px inside the other circle's rim (HOME is where the keynote drew them); the centre word
+     must fit inside the centre, whose width at height y (below its two upper corners) is centreW(y) */
+  var HOME={s:2286.31, i:3557.7}, START={s:2220, i:3582};
+  function centreW(y){var d=y-CS[1]; return 2*(Math.sqrt(Math.max(0,R*R-d*d))-(CI[0]-2900));}
+  var DISCS_W=2418, DISCS_H=2303;
+  /* stubs: 'wide' puts the labels beside the discs, as the keynote did; 'narrow' (phones) puts two of them underneath */
+  var STUBS={
+    wide:{
+      si:{pts:[[2900,1195],[2900,640]], x:2900, anchor:'middle', stack:'up', y:585},
+      sa:{pts:[[2425,2025],[2040,2250],[1840,2250]], x:1840, anchor:'end', stack:'up', y:2212},
+      ia:{pts:[[3375,2025],[3760,2250],[3960,2250]], x:3960, anchor:'start', stack:'up', y:2212}
+    },
+    narrow:{
+      si:{pts:[[2900,1195],[2900,640]], x:2900, anchor:'middle', stack:'up', y:585},
+      sa:{pts:[[2425,2025],[2030,2330],[2030,3120]], x:1720, anchor:'start', stack:'down', y:3120},
+      ia:{pts:[[3375,2025],[3770,2330],[3770,3120]], x:4080, anchor:'end', stack:'down', y:3120}
+    }
+  };
+
+  var vn=doc.getElementById('vn'), hv=doc.getElementById('top'), stage=hv.querySelector('.hv__stage');
+  var vnState={layout:null, t:1, art:null, stubs:{}, veils:{}, regs:{}, out:null, scale:1};
+
+  function gradStops(g, stops){stops.forEach(function(s){E('stop',{offset:s[0],style:'stop-color:'+s[1]+(s[2]!=null?';stop-opacity:'+s[2]:'')},g);});}
+
+  function buildVenn(){
+    var layout=(vn.clientWidth||600)<460?'narrow':'wide';
+    vnState.layout=layout; vn.classList.toggle('is-narrow',layout==='narrow');
+    [].slice.call(vn.childNodes).forEach(function(n){if(n.nodeName!=='title'&&n.nodeName!=='desc')vn.removeChild(n);});
+    var defs=E('defs',null,vn);
+    /* the discs: 31's open washes (tint toward the centre, white toward the rim) */
+    function discGrad(id,x1,y1,x2,y2,col){var g=E('linearGradient',{id:id,gradientUnits:'userSpaceOnUse',x1:x1,y1:y1,x2:x2,y2:y2},defs);gradStops(g,[[0,'var('+col+')'],[.3,'var('+col+')'],[.62,'color-mix(in srgb,var('+col+') 32%,var(--ground))'],[.85,'var(--ground)'],[1,'var(--ground)']]);}
+    discGrad('vg-s',3146.5,1902.32,1795.5,1122.32,'--venn-stake');
+    discGrad('vg-i',2653.5,1902.32,4004.5,1122.32,'--venn-inst');
+    discGrad('vg-a',2900,1475.37,2900,3035.37,'--venn-ai');
+    function ringGrad(id,x1,y1,x2,y2,col){var g=E('linearGradient',{id:id,gradientUnits:'userSpaceOnUse',x1:x1,y1:y1,x2:x2,y2:y2},defs);gradStops(g,[[0,'var('+col+')',.8],[.31,'var('+col+')',.8],[.54,'var('+col+')',.41],[.77,'var('+col+')',.04],[.85,'var('+col+')',0],[1,'var('+col+')',0]]);}
+    ringGrad('vr-s',3146.5,1902.32,1795.5,1122.32,'--venn-stake-ring');
+    ringGrad('vr-i',2653.5,1902.32,4004.5,1122.32,'--venn-inst-ring');
+    ringGrad('vr-a',2900,1475.37,2900,3035.37,'--venn-ai-ring');
+    /* the overlaps: light passing through (SITE-BRIEF §6): each lens brightens from its tip toward the centre */
+    function lensGrad(id,x1,y1,x2,y2,tip){var g=E('linearGradient',{id:id,gradientUnits:'userSpaceOnUse',x1:x1,y1:y1,x2:x2,y2:y2},defs);gradStops(g,[[0,'var('+tip+')'],[1,'var(--ground)']]);}
+    lensGrad('vl-si',2900,861,2900,1600,'--venn-si');
+    lensGrad('vl-sa',2121,2209,2720,1860,'--venn-sa');
+    lensGrad('vl-ia',3678,2209,3080,1860,'--venn-ia');
+    var core=E('radialGradient',{id:'vc-core',gradientUnits:'userSpaceOnUse',cx:2900,cy:1780,r:560},defs);
+    gradStops(core,[[0,'var(--ground)',1],[.45,'var(--ground)',1],[1,'var(--ground)',0]]);
+    var f=E('filter',{id:'vc-glow',x:'-60%',y:'-60%',width:'220%',height:'220%'},defs); E('feGaussianBlur',{stdDeviation:70},f);
+
+    var art=E('g',{class:'vn-art'},vn); vnState.art=art;
+    var iso=E('g',{style:'isolation:isolate'},art);
+    [['vg-s',CS],['vg-i',CI],['vg-a',CA]].forEach(function(d){E('circle',{cx:d[1][0],cy:d[1][1],r:R,fill:'url(#'+d[0]+')',style:'mix-blend-mode:multiply'},iso);});
+    [['vr-s',CS],['vr-i',CI],['vr-a',CA]].forEach(function(d){E('circle',{cx:d[1][0],cy:d[1][1],r:R,fill:'none',stroke:'url(#'+d[0]+')','stroke-width':7.2},art);});
+    E('path',{d:PATH.si,fill:'url(#vl-si)'},art); E('path',{d:PATH.sa,fill:'url(#vl-sa)'},art); E('path',{d:PATH.ia,fill:'url(#vl-ia)'},art);
+    E('path',{d:PATH.c,style:'fill:var(--venn-glow)',filter:'url(#vc-glow)',opacity:.9},art);
+    E('path',{d:PATH.c,style:'fill:var(--venn-core)'},art);
+    E('circle',{cx:2900,cy:1760,r:560,fill:'url(#vc-core)',opacity:.55},art);
+    /* veils dim the parts that are not being read */
+    vnState.veils={};
+    VENN.regions.forEach(function(r){vnState.veils[r.k]=E('path',{d:PATH[r.k],class:'veil'},art);});
+
+    /* icons and names (the keynote's own marks; one group per circle, so each icon moves with its name) */
+    var ic=E('g',{class:'ico','aria-hidden':'true'},art);
+    vnState.ico={s:E('g',null,ic), i:E('g',null,ic), a:E('g',null,ic)};
+    [[2286.31,1209.69],[2353.63,1209.69],[2319.97,1267.99],[2252.65,1267.99],[2218.99,1209.69],[2252.65,1151.39],[2319.97,1151.39]].forEach(function(p){E('circle',{cx:p[0],cy:p[1],r:15.81,stroke:'none'},vnState.ico.s);});
+    ['M3504.66 1110.84L3469.98 1110.84L3469.98 1145.52','M3504.66 1257.72L3469.98 1257.72L3469.98 1223.04','M3610.74 1110.84L3645.42 1110.84L3645.42 1145.52','M3610.74 1257.72L3645.42 1257.72L3645.42 1223.04'].forEach(function(d){E('path',{d:d,fill:'none','stroke-width':13.77,'stroke-linecap':'square'},vnState.ico.i);});
+    [[2810.24,2398.67,2989.76,2398.67],[2836.53,2335.2,2963.47,2462.14],[2900,2308.91,2900,2488.43],[2963.47,2335.2,2836.53,2462.14]].forEach(function(l){E('line',{x1:l[0],y1:l[1],x2:l[2],y2:l[3],'stroke-width':13.77},vnState.ico.a);});
+
+    var labs=E('g',{'aria-hidden':'true'},art);
+    vnState.names=[
+      E('text',{x:2286.31,y:1451.69,'text-anchor':'middle',class:'t-name'},labs,RG.s.title),
+      E('text',{x:3557.7,y:1426.28,'text-anchor':'middle',class:'t-name'},labs,RG.i.title),
+      E('text',{x:2900,y:2640.67,'text-anchor':'middle',class:'t-name'},labs,RG.a.title)
+    ];
+    vnState.roles=[
+      E('text',{x:2286.31,y:1530,'text-anchor':'middle',class:'t-role'},labs,RG.s.role),
+      E('text',{x:3557.7,y:1505,'text-anchor':'middle',class:'t-role'},labs,RG.i.role),
+      E('text',{x:2900,y:2718,'text-anchor':'middle',class:'t-role'},labs,RG.a.role)   /* "with AI", set small under Foresight */
+    ];
+    /* the centre word: CoPlan (SITE.venn.c.word), never smaller than the circle names, fitted inside the centre */
+    vnState.core=E('text',{x:2900,y:1806,'text-anchor':'middle',class:'t-core',style:'font-kerning:normal'},labs,V.c.word||'CoPlan');
+
+    /* the three stubs (leader line, a dot where it starts, the name) */
+    var sg=E('g',{class:'stubs'},art); vnState.stubs={};
+    ['si','sa','ia'].forEach(function(k){
+      var s=STUBS[layout][k], r=RG[k];
+      var g=E('g',{class:'stub','data-r':k,'aria-hidden':'true'},sg);
+      var d='M'+s.pts.map(function(p){return p[0]+' '+p[1];}).join('L');
+      var ln=E('path',{class:'ln',d:d,style:'stroke:'+r.ink,pathLength:1,'stroke-dasharray':'1 1','stroke-dashoffset':0},g);
+      var dot=E('circle',{cx:s.pts[0][0],cy:s.pts[0][1],r:16,style:'fill:'+r.ink},g);
+      var hit=E('rect',{class:'hit'},g);
+      var tx=E('text',{class:'t-stub','text-anchor':s.anchor,style:'fill:'+r.ink},g);
+      r.stub.forEach(function(line,i){E('tspan',{x:s.x},tx,line);});
+      vnState.stubs[k]={g:g,ln:ln,dot:dot,tx:tx,hit:hit,spec:s};
+    });
+
+    /* the seven parts, as buttons (hit shapes on top) */
+    var hits=E('g',{class:'regs'},vn); vnState.regs={};
+    VENN.regions.forEach(function(r){
+      var g=E('g',{class:'vreg',role:'button',tabindex:0,'data-r':r.k,'aria-pressed':'false','aria-label':regionLabel(r)},hits);
+      E('path',{d:PATH[r.k]},g);
+      vnState.regs[r.k]=g;
+    });
+    vnState.out=E('path',{class:'vout',d:''},vn);
+    sizeVenn();
+  }
+  function regionLabel(r){
+    if(r.pair) return r.title+': where '+nameOf(r.pair[0])+' and '+nameOf(r.pair[1])+' overlap';
+    if(r.k==='c') return 'Coplanning: where all three meet';
+    return r.title+': '+r.role;
+  }
+
+  /* type sizes follow the drawn scale, so the labels stay readable at every width */
+  function sizeVenn(){
+    var st=vnState, layout=st.layout, box=vn.getBoundingClientRect();
+    var W=box.width||600, H=(root.classList.contains('hv-on')&&layout==='wide')?(box.height||600):Infinity;
+    var sc=0.18;
+    st.core.setAttribute('font-size',100); var w100=st.core.getComputedTextLength()||0;
+    for(var pass=0;pass<3;pass++){
+      /* on phones the names are 17 px and the roles 10 px, so CoPlan can be larger than the names and the
+         names clear the overlaps without running off their own circle */
+      var fsName=clamp((layout==='narrow'?17:19)/sc,118,200), fsRole=clamp((layout==='narrow'?10:10.6)/sc,52,96), fsStub=clamp(layout==='narrow'?14.5/sc:15.5/sc,86,150);
+      st.names.forEach(function(t,i){t.setAttribute('font-size',fsName); var ry=+t.getAttribute('y')+fsName*0.3+fsRole*1.02; st.roles[i].setAttribute('y',ry.toFixed(1));});
+      st.roles.forEach(function(t){t.setAttribute('font-size',fsRole);});
+      clearNames(st,sc);
+      fitCore(st,w100,fsName);
+      Object.keys(st.stubs).forEach(function(k){
+        var s=st.stubs[k], sp=s.spec, lines=s.tx.querySelectorAll('tspan'), lh=fsStub*1.08;
+        s.tx.setAttribute('font-size',fsStub);
+        for(var i=0;i<lines.length;i++){
+          var y=sp.stack==='up'? sp.y-(lines.length-1-i)*lh : sp.y+fsStub*1.1+i*lh;
+          lines[i].setAttribute('y',y); lines[i].setAttribute('x',sp.x);
+        }
+        s.ln.setAttribute('stroke-width',Math.max(4,1.4/sc)); s.dot.setAttribute('r',Math.max(14,3.2/sc));
+      });
+      /* viewBox from what is drawn; wide stays centred on the discs */
+      var bb=st.art.getBBox(), pad=Math.min(160,14/sc);
+      var x0=bb.x-pad, x1=bb.x+bb.width+pad, y0=bb.y-pad, y1=bb.y+bb.height+pad;
+      if(layout==='wide'){var half=Math.max(2900-x0,x1-2900); x0=2900-half; x1=2900+half;}
+      st.vb=[x0,y0,x1-x0,y1-y0];
+      sc=Math.min(W/st.vb[2], H/st.vb[3]);
+    }
+    st.scale=sc;
+    Object.keys(st.stubs).forEach(function(k){var s=st.stubs[k], b=s.tx.getBBox(), pd=10/sc; s.hit.setAttribute('x',b.x-pd); s.hit.setAttribute('y',b.y-pd); s.hit.setAttribute('width',b.width+2*pd); s.hit.setAttribute('height',b.height+2*pd);});
+    vn.setAttribute('viewBox',st.vb.map(function(v){return Math.round(v);}).join(' '));
+    vn.setAttribute('preserveAspectRatio','xMidYMid meet');
+    st.out.setAttribute('stroke-width',2/sc);
+    Object.keys(st.regs).forEach(function(k){st.regs[k].firstChild.setAttribute('stroke-width',2/sc);});
+    applyVennT(st.t);
+  }
+  /* the names clear of the overlaps: each upper circle's icon, name and role move out together until the name
+     and the role stay 12 screen px inside the other circle's rim, where that rim comes nearest */
+  function placeName(st,k,x){
+    var j=k==='s'?0:1;
+    st.names[j].setAttribute('x',x.toFixed(1)); st.roles[j].setAttribute('x',x.toFixed(1));
+    st.ico[k].setAttribute('transform','translate('+(x-HOME[k]).toFixed(2)+' 0)');
+  }
+  function clearNames(st,sc){
+    var m=12/sc, sh={s:0,i:0};
+    placeName(st,'s',START.s); placeName(st,'i',START.i);
+    [[0,'s',CI,-1],[1,'i',CS,1]].forEach(function(q){
+      [st.names[q[0]],st.roles[q[0]]].forEach(function(t){
+        var b=t.getBBox(), y=clamp(q[2][1],b.y,b.y+b.height), h=Math.sqrt(R*R-(y-q[2][1])*(y-q[2][1]));
+        sh[q[1]]=Math.max(sh[q[1]], q[3]<0 ? b.x+b.width-(q[2][0]-h-m) : (q[2][0]+h+m)-b.x);
+      });
+    });
+    placeName(st,'s',START.s-sh.s); placeName(st,'i',START.i+sh.i);
+  }
+  /* CoPlan: 460 units wide (500 on phones), never below 1.1 x the circle names, and never wider than the
+     centre at its baseline less 90 units; the baseline sits at 1760 + 0.33 x size */
+  function fitCore(st,w100,fsName){
+    if(!w100){ st.core.setAttribute('font-size',(1.1*fsName).toFixed(1)); return; }
+    var fs=Math.max(100*(st.layout==='narrow'?500:460)/w100, 1.1*fsName), k=0;
+    while(k<80 && fs*w100/100>centreW(1760+.33*fs)-90){ fs*=.99; k++; }
+    st.core.setAttribute('font-size',fs.toFixed(1)); st.core.setAttribute('y',(1760+.33*fs).toFixed(1));
+    st.coreFs=fs; st.nameFs=fsName;
+  }
+
+  /* t: 0 = hero (the discs alone, a little larger), 1 = interactive (stubs drawn) */
+  function applyVennT(t){
+    var st=vnState; st.t=t; if(!st.art) return;
+    var vb=st.vb, sc=st.scale;
+    var fitS=Math.min(vb[2]*0.84/DISCS_W, vb[3]*0.9/DISCS_H);
+    var s0=clamp(fitS,1,1.22), s=s0+(1-s0)*ease(t);
+    var cx0=vb[0]+vb[2]/2, cy0=vb[1]+vb[3]/2, cx=cx0+(VC[0]-cx0)*ease(t), cy=cy0+(VC[1]-cy0)*ease(t);
+    var tr=(t>=1)?null:'translate('+(cx-s*VC[0]).toFixed(1)+' '+(cy-s*VC[1]).toFixed(1)+') scale('+s.toFixed(4)+')';
+    [st.art,vn.querySelector('.regs'),st.out].forEach(function(n){if(!n)return; if(tr) n.setAttribute('transform',tr); else n.removeAttribute('transform');});
+    ['si','sa','ia'].forEach(function(k,i){
+      var s2=st.stubs[k]; if(!s2) return;
+      var tt=clamp((t-i*0.12)/0.64,0,1);
+      s2.ln.setAttribute('stroke-dashoffset',(1-tt).toFixed(3));
+      s2.dot.setAttribute('opacity',tt>0?1:0);
+      s2.tx.setAttribute('opacity',clamp((tt-0.55)/0.45,0,1).toFixed(3));
+      s2.g.style.pointerEvents=tt>0.8?'':'none';
+    });
+  }
+
+  /* ---------- the panel ---------- */
+  var vp=doc.getElementById('vp'), vpKick=doc.getElementById('vp-kick'), vpT=doc.getElementById('vp-t'), vpRole=doc.getElementById('vp-role'), vpX=doc.getElementById('vp-x');
+  var vpCount=doc.getElementById('vp-count'), vpOver=doc.getElementById('vp-over'), vpHint=doc.getElementById('vp-hint');
+  try{ if(matchMedia('(hover: none)').matches) vpHint.textContent='Tap a circle, an overlap or the centre'; }catch(e){}
+  var IDLE={kick:'Coplanning', t:'Where three kinds of knowledge <em>meet</em>.', x:vpX.textContent};
+  var pinned=null, shown=null;
+  function panelHTML(k){
+    if(!k) return {kick:esc(IDLE.kick), t:IDLE.t, role:null, x:esc(IDLE.x), ink:null};
+    var r=RG[k], kick;
+    if(r.pair) kick='<i style="background:'+RG[r.pair[0]].dot+'"></i><i style="background:'+RG[r.pair[1]].dot+'"></i><span>'+esc(r.kick)+' · '+esc(nameOf(r.pair[0]))+' and '+esc(nameOf(r.pair[1]))+'</span>';
+    else if(k==='c') kick='<i style="background:'+RG.s.dot+'"></i><i style="background:'+RG.i.dot+'"></i><i style="background:'+RG.a.dot+'"></i><span>'+esc(r.kick)+'</span>';
+    else kick='<i style="background:'+r.dot+'"></i><span>'+esc(r.kick)+'</span>';
+    return {kick:kick, t:esc(r.title), role:r.role?esc(r.role)+(r.k==='a'?'':'.'):null, x:esc(r.text), ink:r.ink};
+  }
+  function renderPanel(k){
+    var h=panelHTML(k);
+    vpKick.innerHTML=h.kick; vpT.innerHTML=h.t; vpX.innerHTML=h.x;
+    vpT.style.setProperty('--vp-ink',h.ink||'var(--ink)');
+    if(h.role){vpRole.hidden=false; vpRole.innerHTML=h.role;} else vpRole.hidden=true;
+    vpCount.textContent=k?(RG[k].i+1)+' of 7':'7 parts';
+    vpOver.hidden=!k;
+  }
+  function highlight(k){
+    var st=vnState;
+    vn.classList.toggle('has-on',!!k);
+    Object.keys(st.veils).forEach(function(x){st.veils[x].classList.toggle('is-on',x===k);});
+    Object.keys(st.stubs).forEach(function(x){st.stubs[x].g.classList.toggle('is-on',x===k);});
+    st.out.setAttribute('d',k?PATH[k]:''); st.out.classList.toggle('is-on',!!k);
+  }
+  function show(k){ if(k===shown) return; shown=k; renderPanel(k); highlight(k); }
+  function pin(k){
+    pinned=k;
+    Object.keys(vnState.regs).forEach(function(x){vnState.regs[x].setAttribute('aria-pressed',String(x===k));});
+    show(k);
+  }
+  /* reserve the panel's tallest state, so the page never jumps */
+  function measurePanel(){
+    vp.setAttribute('aria-live','off');
+    vp.style.setProperty('--vp-h','0px');
+    var keep=shown, max=0;
+    [null].concat(VENN.regions.map(function(r){return r.k;})).forEach(function(k){renderPanel(k); max=Math.max(max,vp.offsetHeight);});
+    renderPanel(keep);
+    vp.style.setProperty('--vp-h',max+'px');
+    vp.setAttribute('aria-live','polite');
+  }
+
+  vn.addEventListener('pointerover',function(e){var t=e.target.closest&&e.target.closest('[data-r]'); if(t&&e.pointerType!=='touch') show(t.getAttribute('data-r'));});
+  vn.addEventListener('pointerleave',function(){show(pinned);});
+  vn.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-r]'); if(!t) return; pin(t.getAttribute('data-r'));});
+  vn.addEventListener('focusin',function(e){var t=e.target.closest&&e.target.closest('.vreg'); if(!t) return; ensureInteractive(); show(t.getAttribute('data-r'));});
+  vn.addEventListener('focusout',function(e){ if(!vn.contains(e.relatedTarget)) show(pinned); });
+  vn.addEventListener('keydown',function(e){
+    var t=e.target.closest&&e.target.closest('.vreg'); if(!t) return;
+    var k=t.getAttribute('data-r'), i=RG[k].i;
+    if(e.key==='Enter'||e.key===' '){e.preventDefault(); pin(k); return;}
+    if(e.key==='Escape'){e.preventDefault(); pin(null); return;}
+    var n=null;
+    if(e.key==='ArrowRight'||e.key==='ArrowDown') n=VENN.regions[(i+1)%7].k;
+    else if(e.key==='ArrowLeft'||e.key==='ArrowUp') n=VENN.regions[(i+6)%7].k;
+    if(n){e.preventDefault(); vnState.regs[n].focus();}
+  });
+  doc.getElementById('vp-prev').addEventListener('click',function(){var i=pinned?RG[pinned].i:0; pin(VENN.regions[(i+6)%7].k);});
+  doc.getElementById('vp-next').addEventListener('click',function(){var i=pinned?RG[pinned].i:-1; pin(VENN.regions[(i+1)%7].k);});
+  vpOver.addEventListener('click',function(){pin(null); var f=doc.getElementById('vp-next'); if(f) f.focus();});
+
+  /* ---------- the scene: progress → hero out, stubs in, panel in ---------- */
+  var HOLD=0.4;
+  function sceneTotal(){return Math.max(1,hv.offsetHeight-stage.offsetHeight);}
+  function onScene(){
+    if(!root.classList.contains('hv-on')){ hv.removeAttribute('data-phase'); hv.removeAttribute('data-hero-off'); hv.removeAttribute('data-panel-off'); hv.style.removeProperty('--pa'); hv.style.removeProperty('--pb'); applyVennT(1); return; }
+    var p=clamp(-hv.getBoundingClientRect().top/sceneTotal(),0,1);
+    var pa=ease(clamp((p-0.02)/0.22,0,1)), pb=ease(clamp((p-0.14)/0.18,0,1)), vt=clamp((p-0.08)/0.28,0,1);
+    hv.style.setProperty('--pa',pa.toFixed(4)); hv.style.setProperty('--pb',pb.toFixed(4));
+    var ph=pb<0.5?'a':'b';
+    if(ph==='a'&&hv.getAttribute('data-phase')==='b') show(pinned);
+    hv.setAttribute('data-phase',ph);
+    hv.toggleAttribute('data-hero-off',pa>0.985);
+    hv.toggleAttribute('data-panel-off',pb<0.015);
+    applyVennT(vt);
+  }
+  /* a keyboard user who tabs into the diagram is taken to the point where it can be read */
+  function ensureInteractive(){
+    if(!root.classList.contains('hv-on')) return;
+    var p=clamp(-hv.getBoundingClientRect().top/sceneTotal(),0,1);
+    if(p<HOLD){ var top=hv.getBoundingClientRect().top+scrollY+sceneTotal()*(HOLD+0.04); scrollTo({top:top,behavior:'auto'}); onScene(); }
+  }
+  var sceneTick=throttleRAF(onScene);
+  addEventListener('scroll',sceneTick,{passive:true});
+
+  /* =================================================================
+     2 · Vienna: the same corner, as it is and as a scenario
+     The range input carries the keyboard (arrows, Home, End) and the screen
+     reader; a pointer drags anywhere on the picture. Vertical swipes still
+     scroll the page on a phone (touch-action: pan-y on .ba).
+     ================================================================= */
+  (function(){
+    var ba=doc.getElementById('vie-ba'), rg=doc.getElementById('vie-range'); if(!ba||!rg) return;
+    function set(v){
+      v=clamp(Math.round(v),0,100); rg.value=v;
+      ba.style.setProperty('--pos',v+'%');
+      ba.setAttribute('data-side',v<=8?'after':(v>=92?'before':'both'));
+      rg.setAttribute('aria-valuetext',v<=8?'The scenario':(v>=92?'The corner as it is':(v===50?'Half and half':v+'% as it is, the rest the scenario')));
+    }
+    rg.addEventListener('input',function(){set(+rg.value);});
+    var drag=false;
+    function at(e){var r=ba.getBoundingClientRect(); return (e.clientX-r.left)/r.width*100;}
+    /* a mouse jumps to where it presses; a finger moves the line only once it moves sideways */
+    ba.addEventListener('pointerdown',function(e){ if(e.button>0) return; drag=true; try{ba.setPointerCapture(e.pointerId);}catch(err){} if(e.pointerType==='mouse') set(at(e)); });
+    ba.addEventListener('pointermove',function(e){ if(drag) set(at(e)); });
+    function end(){drag=false;}
+    ba.addEventListener('pointerup',end); ba.addEventListener('pointercancel',end); ba.addEventListener('lostpointercapture',end);
+    ba.classList.add('is-live');
+    set(50);
+  })();
+
+  /* =================================================================
+     3 · THE FRAMEWORK, AS A SCROLL STORY
+     ================================================================= */
+  var FW=(function(){
+    if(!C||!C.data) return null;
+    var D=C.data, QD={}; D.quadrants.forEach(function(q){QD[q.key]=q;});
+    var KEYS=['test','imagine','improve','shape'];
+    var APPEAR={test:3,imagine:4,improve:5,shape:6};
+    var LAST=6;   /* the story ends on Co-design, the framework complete (SITE-BRIEF R1.6) */
+    var TITLES=['Two questions','Open or defined','Respond or propose',QD.test.label,QD.imagine.label,QD.improve.label,QD.shape.label];
+    var LAY={
+      wide:{W:800,H:760,cx:400,cy:380,gap:16,left:44,top:52,pad:20,label:27,q:19,dec:14.5,hdr:150,r:14,pitch:33,count:11.5,capH:28,capF:11.5,capPad:16,railW:10,rx:18},
+      compact:{W:360,H:340,cx:180,cy:170,gap:8,left:22,top:24,pad:8,label:14,q:0,dec:0,hdr:28,r:8.6,pitch:19,count:8.6,capH:17,capF:8.4,capPad:9,railW:6,rx:10}
+    };
+    var svg=doc.getElementById('fw-svg'), build=doc.getElementById('fw-build'), stageFig=svg.parentNode;
+    var tip=doc.getElementById('fw-tip');
+    var mqNarrow=matchMedia('(max-width:900px)');
+    var state={step:-1}, mode=null;
+    var canvas=doc.createElement('canvas'), cx2=canvas.getContext('2d');
+    function cssVar(n){return getComputedStyle(root).getPropertyValue(n).trim();}
+    function textW(txt,font){cx2.font=font;return cx2.measureText(txt).width;}
+    function wrap(txt,font,maxW){var words=String(txt).split(/\s+/),lines=[],cur='';words.forEach(function(w){var t=cur?cur+' '+w:w; if(textW(t,font)>maxW&&cur){lines.push(cur);cur=w;} else cur=t;}); if(cur) lines.push(cur); return lines;}
+    function inRange(spec,n){return String(spec).split(',').some(function(r){var p=r.split('-'),a=+p[0],b=p.length>1?+p[1]:a;return n>=a&&n<=b;});}
+    function byQ(k){return C.byTask(k).slice().sort(function(a,b){return (photo(b)?1:0)-(photo(a)?1:0)||a.year-b.year;});}
+    function plateXY(L,k){var pw=L.cx-L.gap/2-L.left, ph=L.cy-L.gap/2-L.top; var x=(k==='test'||k==='improve')?L.left:L.cx+L.gap/2; var y=(k==='test'||k==='imagine')?L.top:L.cy+L.gap/2; return {x:x,y:y,w:pw,h:ph};}
+
+    function render(){
+      mode=(mqNarrow.matches||stageFig.clientWidth<560)?'compact':'wide';
+      build.classList.toggle('fw-wide',mode==='wide');
+      var L=LAY[mode], wide=mode==='wide';
+      [].slice.call(svg.childNodes).forEach(function(n){if(n.nodeName!=='title'&&n.nodeName!=='desc')svg.removeChild(n);});
+      svg.setAttribute('viewBox','0 0 '+L.W+' '+L.H);
+      var defs=E('defs',null,svg);
+      var cp=E('clipPath',{id:'fw-dclip',clipPathUnits:'objectBoundingBox'},defs); E('circle',{cx:.5,cy:.5,r:.5},cp);
+      var gv=E('linearGradient',{id:'fw-gv',x1:0,y1:0,x2:0,y2:1},defs);
+      gradStops(gv,[[0,'color-mix(in oklab,var(--p-open) 72%,var(--amber))',0],[.07,'color-mix(in oklab,var(--p-open) 72%,var(--amber))',1],[.5,'var(--field-2)',.9],[.93,'var(--p-defined)',1],[1,'var(--p-defined)',0]]);
+      var gh=E('linearGradient',{id:'fw-gh',x1:0,y1:0,x2:1,y2:0},defs);
+      gradStops(gh,[[0,'var(--p-respond)',0],[.07,'var(--p-respond)',1],[.5,'var(--field-2)',.9],[.93,'var(--p-propose)',1],[1,'var(--p-propose)',0]]);
+      var corner={test:[0,0],imagine:[1,0],improve:[0,1],shape:[1,1]};
+      KEYS.forEach(function(k){
+        var rg=E('radialGradient',{id:'fw-w-'+k,cx:corner[k][0],cy:corner[k][1],r:1.25,fx:corner[k][0],fy:corner[k][1]},defs);
+        var dark=(k==='shape'||k==='improve');
+        gradStops(rg,[[0,'var(--q-'+k+')',dark?.24:.42],[.75,'var(--q-'+k+')',dark?.08:.14],[1,'var(--q-'+k+')',dark?.06:.1]]);
+      });
+      /* ghost plan: where each task will stand */
+      KEYS.forEach(function(k){var p=plateXY(L,k); E('rect',{x:p.x+.5,y:p.y+.5,width:p.w-1,height:p.h-1,rx:L.rx,fill:'none',style:'stroke:var(--rule)','stroke-dasharray':wide?'3 5':'2 4',class:'ghost','data-show':'0-'+(APPEAR[k]-1)},svg);});
+      var g0=E('g',{class:'ghost','data-show':'0'},svg);
+      E('circle',{cx:L.cx,cy:L.cy,r:wide?3:2,style:'fill:var(--ink-4)'},g0);
+      /* rails: taper toward each pole, neutral where they cross */
+      var hw=L.railW/2, th=.8;
+      E('polygon',{class:'railv','data-show':'1-'+LAST,fill:'url(#fw-gv)',points:[L.cx-hw,0,L.cx+hw,0,L.cx+th,L.cy,L.cx+hw,L.H,L.cx-hw,L.H,L.cx-th,L.cy].join(' ')},svg);
+      E('polygon',{class:'railh','data-show':'2-'+LAST,fill:'url(#fw-gh)',points:[0,L.cy-hw,0,L.cy+hw,L.cx,L.cy+th,L.W,L.cy+hw,L.W,L.cy-hw,L.cx,L.cy-th].join(' ')},svg);
+      KEYS.forEach(function(k){plate(L,k,wide);});
+      capsule(L,'Open brief',L.cx,L.top/2,0,'open','1-'+LAST);
+      capsule(L,'Defined brief',L.cx,L.H-L.top/2,0,'defined','1-'+LAST);
+      capsule(L,'Respond',L.left/2,L.cy,-90,'respond','2-'+LAST);
+      capsule(L,'Propose',L.W-L.left/2,L.cy,90,'propose','2-'+LAST);
+      var st=state; state={step:-1}; apply(st.step<0?0:st.step,true);
+      roving();
+    }
+    function onPole(p){ return p==='defined'?'var(--ground)':'var(--ink)'; }
+    function capsule(L,txt,x,y,rot,pole,show){
+      var g=E('g',{class:'lay','data-show':show},svg);
+      var font='700 '+L.capF+'px '+cssVar('--f-label');
+      var w=textW(txt.toUpperCase(),font)+txt.length*L.capF*.14+L.capPad*2, h=L.capH;
+      var tr=rot?'rotate('+rot+' '+x+' '+y+')':null;
+      E('rect',{x:x-w/2,y:y-h/2,width:w,height:h,rx:h/2,style:'fill:var(--p-'+pole+')'+(pole==='open'?';stroke:color-mix(in oklab,var(--p-open) 70%,var(--amber));stroke-width:1':''),transform:tr},g);
+      E('text',{x:x+L.capF*.07,y:y+L.capF*.36,'text-anchor':'middle',class:'t-cap','font-size':L.capF,'letter-spacing':'.14em',style:'fill:'+onPole(pole),transform:tr},g,txt);
+    }
+    function plate(L,k,wide){
+      var p=plateXY(L,k), q=QD[k], a=APPEAR[k];
+      var g=E('g',{class:'lay','data-show':a+'-'+LAST},svg);
+      E('rect',{x:p.x,y:p.y,width:p.w,height:p.h,rx:L.rx,style:'fill:var(--ground)'},g);
+      E('rect',{x:p.x,y:p.y,width:p.w,height:p.h,rx:L.rx,fill:'url(#fw-w-'+k+')'},g);
+      var X=p.x+L.pad, maxW=p.w-L.pad*2;
+      E('text',{x:X,y:p.y+L.pad+(wide?24:12),class:'t-name','font-size':L.label,style:'fill:var(--qi-'+k+')'},g,q.label);
+      if(wide){
+        E('text',{x:X,y:p.y+L.pad+52,class:'t-q','font-size':L.q,style:'fill:var(--ink)'},g,q.question);
+        var gd=E('g',{class:'lay','data-show':a+'-'+LAST},g);
+        E('text',{x:X,y:p.y+L.pad+80,class:'t-lab','font-size':10,'letter-spacing':'.16em',style:'fill:var(--qi-'+k+')'},gd,'Already decided');
+        var fDec=L.dec+'px '+cssVar('--f-text');
+        wrap(q.decided,fDec,maxW).slice(0,2).forEach(function(line,i){E('text',{x:X,y:p.y+L.pad+99+i*18,class:'t-text','font-size':L.dec,style:'fill:var(--ink-2)'},gd,line);});
+      }
+      /* the count */
+      var keep=a+'-'+LAST;
+      var n=C.byTask(k).length, cy=p.y+p.h-(wide?L.pad-4:6);
+      E('text',{x:X,y:cy,class:'t-lab lay','data-show':keep,'font-size':L.count,'letter-spacing':wide?'.12em':'.06em',style:'fill:var(--ink-2)'},g,n+(wide?' engagements':''));
+      /* the discs: one engagement, one disc; named on hover and focus, never a link (R1.4) */
+      var list=byQ(k), r=L.r, pitch=L.pitch, availW=p.w-L.pad*2, availH=p.h-L.hdr-(wide?34:16), cols, rows;
+      for(var guard=0;guard<24;guard++){cols=Math.floor((availW-2*r)/pitch)+1; rows=Math.floor((availH-2*r)/pitch)+1; if(cols*rows>=list.length) break; r*=.92; pitch*=.92;}
+      var dg=E('g',{class:'dgrp','data-show':keep,'data-q':k,role:'list','aria-label':q.label+': '+list.length+' engagements'},g);
+      list.forEach(function(c,i){
+        var dx=X+r+(i%cols)*pitch, dy=p.y+L.hdr+r+Math.floor(i/cols)*pitch;
+        var name=nameC(c), img=photo(c);
+        var d=E('g',{class:'dk',role:'listitem','aria-label':name+', '+c.place+', '+c.year,'data-slug':c.slug,tabindex:-1,style:reduce?null:'transition-delay:'+Math.round(i*12)+'ms'},dg);
+        E('circle',{cx:dx,cy:dy,r:r,style:'fill:var(--qs-'+k+')'},d);
+        if(img) E('image',{href:img,x:dx-r,y:dy-r,width:2*r,height:2*r,preserveAspectRatio:'xMidYMid slice','clip-path':'url(#fw-dclip)'},d);
+        else E('text',{x:dx,y:dy+r*.3,'text-anchor':'middle',class:'t-name','font-size':r*.74,style:'fill:var(--qc-'+k+')'},d,iniC(c));
+        E('circle',{cx:dx,cy:dy,r:r,fill:'none',style:'stroke:var(--ground)','stroke-width':wide?1.6:1},d);
+        E('circle',{class:'hlr',cx:dx,cy:dy,r:r+(wide?4.5:2.8),fill:'none',style:'stroke:var(--ink)','stroke-width':wide?2:1.4},d);
+      });
+    }
+    /* keyboard: one tab stop per visible task, arrow keys inside it */
+    function roving(){
+      svg.querySelectorAll('.dgrp').forEach(function(g){
+        var on=g.classList.contains('on'), ds=g.querySelectorAll('.dk');
+        ds.forEach(function(d,i){d.setAttribute('tabindex',on&&i===0?0:-1);});
+      });
+    }
+    svg.addEventListener('keydown',function(e){
+      var d=e.target.closest&&e.target.closest('.dk'); if(!d) return;
+      var list=[].slice.call(d.parentNode.querySelectorAll('.dk')), i=list.indexOf(d), n=null;
+      if(e.key==='ArrowRight'||e.key==='ArrowDown') n=list[(i+1)%list.length];
+      else if(e.key==='ArrowLeft'||e.key==='ArrowUp') n=list[(i-1+list.length)%list.length];
+      else if(e.key==='Home') n=list[0]; else if(e.key==='End') n=list[list.length-1];
+      if(n){e.preventDefault(); list.forEach(function(x){x.setAttribute('tabindex',-1);}); n.setAttribute('tabindex',0); n.focus();}
+    });
+    /* tooltip */
+    var tcur=null;
+    function showTip(d){
+      var c=C.bySlug(d.getAttribute('data-slug')); if(!c) return;
+      if(tcur) tcur.classList.remove('is-tip'); tcur=d; d.classList.add('is-tip');
+      tip.innerHTML='<p class="tt">'+esc(nameC(c))+'</p><span class="lab">'+esc(c.place)+' · '+c.year+'</span><span class="lab" style="color:var(--qi-'+c.task+')">'+esc(QD[c.task].label)+'</span>';
+      tip.hidden=false;
+      var r=d.getBoundingClientRect(), w=tip.offsetWidth, h=tip.offsetHeight;
+      var x=clamp(r.left+r.width/2-w/2,8,innerWidth-w-8), y=r.top-h-10; if(y<(parseFloat(cssVar('--header-h'))||72)+8) y=r.bottom+10;
+      tip.style.left=x+'px'; tip.style.top=y+'px';
+    }
+    function hideTip(){tip.hidden=true; if(tcur) tcur.classList.remove('is-tip'); tcur=null;}
+    svg.addEventListener('mouseover',function(e){var d=e.target.closest&&e.target.closest('.dk'); if(d) showTip(d);});
+    svg.addEventListener('mouseout',function(e){var d=e.target.closest&&e.target.closest('.dk'); if(d&&!d.contains(e.relatedTarget)) hideTip();});
+    svg.addEventListener('focusin',function(e){var d=e.target.closest&&e.target.closest('.dk'); if(d) showTip(d);});
+    svg.addEventListener('focusout',hideTip);
+    addEventListener('scroll',function(){if(!tip.hidden) hideTip();},{passive:true});
+    doc.addEventListener('keydown',function(e){if(e.key==='Escape') hideTip();});
+
+    /* ---------- the steps ---------- */
+    var steps=[].slice.call(doc.querySelectorAll('.fw-step'));
+    var cap=doc.getElementById('fw-figcap'), live=doc.getElementById('fw-live');
+    function pad2(n){return (n<10?'0':'')+n;}
+    function caption(n){
+      var since=(D.reach&&D.reach.since)||2021;
+      if(n===0) return 'The engagement framework, built from our work since '+since+'. Each disc that arrives is one engagement.';
+      if(n===1) return 'Open brief at the top · defined brief at the bottom';
+      if(n===2) return 'Respond on the left · propose on the right';
+      if(n>=3&&n<LAST){var k=KEYS[n-3]; return '<b>'+esc(QD[k].label)+'</b>: '+C.byTask(k).length+' engagements. Point at a disc to read its name.';}
+      /* the closing sum is said once, in the last step's text (.fw-close), not again here;
+         without the story (reduced motion, very short or tall windows) the figure stands complete from the start */
+      if(!root.classList.contains('fw-on')) return 'The engagement framework, built from our work since '+since+': '+C.stats().total+' engagements. Point at a disc to read its name.';
+      return '<b>'+esc(QD.shape.label)+'</b>: '+C.byTask('shape').length+' engagements. Point at a disc to read its name.';
+    }
+    function apply(n,force){
+      if(!force&&n===state.step) return;
+      var changed=n!==state.step; state={step:n};
+      svg.querySelectorAll('[data-show]').forEach(function(e){e.classList.toggle('on',inRange(e.getAttribute('data-show'),n));});
+      steps.forEach(function(a){a.classList.toggle('is-active',+a.getAttribute('data-step')===n);});
+      cap.innerHTML=caption(n);
+      if(changed&&n>0&&root.classList.contains('fw-on')) live.textContent='Figure, step '+n+' of '+LAST+': '+TITLES[n]+'.';
+      roving();
+    }
+    var lock=false, lockT=null;
+    function lineY(){return mqNarrow.matches?innerHeight*.7:innerHeight*.5;}
+    function compute(){
+      if(lock) return;
+      if(!root.classList.contains('fw-on')){ apply(LAST); return; }
+      var y=lineY(), best=null;
+      for(var i=0;i<steps.length;i++){ if(steps[i].getBoundingClientRect().top<=y) best=steps[i]; }
+      apply(best?+best.getAttribute('data-step'):0);
+    }
+    function unlock(){lock=false; clearTimeout(lockT); compute();}
+    function go(n){
+      n=clamp(n,0,LAST); var el=doc.getElementById('step-'+n); if(!el) return;
+      lock=true; clearTimeout(lockT); apply(n);
+      el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});
+      if('onscrollend' in window){addEventListener('scrollend',unlock,{once:true}); lockT=setTimeout(unlock,1600);} else lockT=setTimeout(unlock,reduce?60:900);
+    }
+    addEventListener('scroll',throttleRAF(compute),{passive:true});
+
+    /* step texts bound to the data */
+    doc.querySelectorAll('[data-qt]').forEach(function(el){var p=el.getAttribute('data-qt').split('.'),q=QD[p[0]]; if(q&&q[p[1]]!=null) el.textContent=q[p[1]];});
+    /* the axis questions ([data-ax]) are filled by assets/site.js (SITE.fillAxes) */
+    /* featured engagements per task (data/matrix.js featured): named, never linked (R1.4) */
+    doc.querySelectorAll('[data-feat]').forEach(function(ul){
+      var k=ul.getAttribute('data-feat');
+      ul.innerHTML=(D.featured[k]||[]).map(function(slug){
+        var c=C.bySlug(FEAT_SWAP[slug]||slug); if(!c||c.hidden) return '';
+        var img=photo(c), ph=img?'<img src="'+esc(img)+'" alt="" loading="lazy">':'<span class="ini" aria-hidden="true">'+esc(iniC(c))+'</span>';
+        return '<li><span class="pj"><span class="ph">'+ph+'</span><span class="ft">'+esc(nameC(c))+'</span><span class="lab fp">'+esc(city(c))+' · '+c.year+'</span></span></li>';
+      }).join('');
+    });
+
+    render();
+    compute();
+    var rt=null, lastW=stageFig.clientWidth;
+    addEventListener('resize',function(){clearTimeout(rt); rt=setTimeout(function(){var w=stageFig.clientWidth; if(Math.abs(w-lastW)>2){lastW=w; render();} compute();},160);});
+    doc.addEventListener('site:type',function(){setTimeout(render,60);});
+    if(doc.fonts&&doc.fonts.ready) doc.fonts.ready.then(function(){render();});
+    return {apply:apply, compute:compute, render:render, go:go};
+  })();
+
+  /* =================================================================
+     4 · THE MAP
+     ================================================================= */
+  (function(){
+    var M=window.CoplanMap, box=doc.getElementById('map-box'); if(!M||!box) return;
+    /* a case marked "hidden" in data/matrix.js (a duplicate record) never reaches a tooltip */
+    (window.COPLAN_PLACES||[]).forEach(function(p){ if(p.cases) p.cases=p.cases.filter(function(sl){var c=C&&C.bySlug(sl); return !(c&&c.hidden);}); });
+    function crop(){return innerWidth<700?'europe':'keynote';}
+    var cur=crop();
+    function reserve(){ box.style.minHeight=Math.round(box.clientWidth/M.aspect(cur))+'px'; }
+    function render(){
+      reserve();
+      M.render(box,{fill:'stipple',crop:cur,marks:'task',labels:true,interactive:true,totals:true,onrender:function(c){
+        box.style.minHeight='';
+        var b=doc.getElementById('map-beyond');
+        /* the phone frame (Europe) leaves places out: count them rather than list them */
+        if(c.outside&&c.outside.length){
+          var cn={}; c.outside.forEach(function(p){cn[p.country]=1;}); var k=Object.keys(cn).length, m=c.outside.length;
+          b.hidden=false; b.textContent='Beyond this frame: '+m+(m===1?' more city':' more cities')+' in '+k+(k===1?' country':' countries')+'.';
+        }
+        else b.hidden=true;
+      }});
+    }
+    /* key: the task colours the discs use (derived from the four poles) */
+    var TC=M.taskColours();
+    doc.getElementById('map-key').innerHTML=['imagine','test','shape','improve'].map(function(k){return '<span><i class="sw" style="background:'+TC.mark[k]+'"></i>'+esc(TC.labels[k])+'</span>';}).join('')+
+      '<span><i class="sw" style="background:'+TC.mark.none+'"></i>'+esc(TC.labels.none)+'</span>';
+    /* draw when the section comes near, so the hero stays light */
+    var drawn=false;
+    function drawOnce(){ if(drawn) return; drawn=true; render(); }
+    reserve();
+    if('IntersectionObserver' in window){ var io=new IntersectionObserver(function(en){ if(en.some(function(x){return x.isIntersecting;})){ drawOnce(); io.disconnect(); } },{rootMargin:'600px 0px'}); io.observe(box); }
+    else drawOnce();
+    addEventListener('resize',function(){ var c=crop(); if(c!==cur){cur=c; if(drawn) render(); else reserve();} });
+  })();
+
+  /* =================================================================
+     5 · THE LATEST, FROM THE FIELD (data/signals-public.js, h = 1–9)
+     ================================================================= */
+  (function(){
+    var S=window.SIGNALS_PUBLIC, host=doc.getElementById('signals'); if(!S||!S.items||!host) return;
+    var nine=S.items.filter(function(x){return x.h;}).sort(function(a,b){return a.h-b.h;}).slice(0,9);
+    if(nine.length<3) return;
+    host.innerHTML=nine.map(function(x){
+      return '<a class="signal" href="'+esc(x.u)+'" target="_blank" rel="noopener">'+
+        '<p class="signal__meta"><span class="lab">'+esc(x.o)+'</span><span class="lab">'+esc(x.d)+'</span></p>'+
+        '<h3 class="signal__title"'+(x.l?' lang="'+esc(x.l)+'"':'')+'>'+esc(x.t)+'<span class="arr" aria-hidden="true">↗</span></h3>'+
+        '<span class="sr"> (opens at the source, in a new tab)</span></a>';
+    }).join('');
+  })();
+
+  /* =================================================================
+     boot the Venn + the scene, and keep both honest on resize / type
+     ================================================================= */
+  function setModes(){
+    var hvOn=wantHV(), fwOn=wantFW();
+    var changed=(root.classList.contains('hv-on')!==hvOn)||(root.classList.contains('fw-on')!==fwOn);
+    root.classList.toggle('hv-on',hvOn); root.classList.toggle('fw-on',fwOn);
+    return changed;
+  }
+  setModes();
+  buildVenn(); measurePanel(); onScene(); show(null);
+  var vw=vn.clientWidth, vh=vn.clientHeight, rz=null;
+  addEventListener('resize',function(){
+    clearTimeout(rz); rz=setTimeout(function(){
+      var ch=setModes();
+      var lay=(vn.clientWidth||600)<460?'narrow':'wide';
+      if(ch||lay!==vnState.layout){ buildVenn(); highlight(shown); }
+      else if(Math.abs(vn.clientWidth-vw)>2||Math.abs(vn.clientHeight-vh)>2) sizeVenn();
+      vw=vn.clientWidth; vh=vn.clientHeight;
+      measurePanel(); onScene(); if(FW) FW.compute();
+    },140);
+  });
+  doc.addEventListener('site:type',function(){ setTimeout(function(){ sizeVenn(); measurePanel(); },60); });
+  if(doc.fonts&&doc.fonts.ready) doc.fonts.ready.then(function(){ sizeVenn(); measurePanel(); onScene(); });
+
+  /* debug for review screenshots: ?venn=<part> shows one part; ?scene=<0..1> jumps into the hero scene */
+  var vq=QS.get('venn'); if(vq&&RG[vq]) pin(vq);
+  var sq=parseFloat(QS.get('scene')); if(!isNaN(sq)&&root.classList.contains('hv-on')){ scrollTo(0,hv.getBoundingClientRect().top+scrollY+sceneTotal()*clamp(sq,0,1)); onScene(); }
+
+  SITE.bind(doc);
+});
+</script>
+</body>
+</html>

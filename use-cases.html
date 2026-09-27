@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-type="commons-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CoPlanAI · Use cases</title>
+<meta name="coplan:release" content="public">
+<link rel="canonical" href="https://coplanai.com/use-cases.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CoPlanAI">
+<meta property="og:title" content="CoPlanAI · Use cases">
+<meta property="og:description" content="Our engagements since 2021, place by place. Filter by task, year and country, and open each case&#x27;s own page.">
+<meta property="og:url" content="https://coplanai.com/use-cases.html">
+<meta property="og:image" content="https://coplanai.com/img/pairs/vienna--vie-street.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="Our engagements since 2021, place by place. Filter by task, year and country, and open each case's own page.">
+<!-- type preset before first paint: ?type=<key> → saved choice → the attribute above. Keep this first in <head>. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500..700&family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=Onest:wght@800&family=Schibsted+Grotesk:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+/* =====================================================================
+   Use cases · page components only (type and colour come from site.css)
+   1 page head · 2 catalogue (filters, results bar, year groups, cards,
+   list, notes) · 3 the map · 4 provenance
+   Round 3 (SITE-BRIEF R3): no framework block, no classification marks,
+   no study links; partner photos and city maps for cases without a photo.
+   ===================================================================== */
+
+/* ---------- 1 · page head ---------- */
+.uc-head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:40px 32px;align-items:end}
+.uc-head__main{grid-column:1/9}
+.uc-head .lede b{color:var(--ink)}
+.uc-figs{grid-column:10/13}
+.uc-figs .eyebrow{margin-bottom:12px}
+.uc-figs dl{margin:0;display:grid}
+.uc-figs dl > div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:13px 0 11px;border-top:1px solid var(--rule-soft)}
+.uc-figs dl > div:last-child{border-bottom:1px solid var(--rule-soft)}
+.uc-figs dd{margin:0;font-size:clamp(32px,2.8vw,42px);text-align:right}
+
+/* ---------- 2 · catalogue ---------- */
+.uc-catalogue{padding-bottom:var(--sp-section)}
+.uc-cat{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(24px,2.6vw,40px) 32px;align-items:start}
+.uc-filters{grid-column:1/4;position:sticky;top:calc(var(--header-h) + 20px);max-height:calc(100vh - var(--header-h) - 40px);max-height:calc(100dvh - var(--header-h) - 40px);overflow-y:auto;overscroll-behavior:contain;padding:4px 8px 18px 4px;margin-left:-4px;scrollbar-width:thin}
+.uc-results{grid-column:4/13;min-width:0}
+.uc-f{display:grid;gap:22px}
+.uc-fb{display:grid;gap:8px;margin:0;padding:0;border:0;min-width:0}
+.uc-fb > legend{padding:0;margin:0 0 8px}
+.uc-fb label.lab{display:block}
+.uc-input,.uc-select{display:block;width:100%;height:42px;margin:0;border:1px solid transparent;border-radius:12px;background:var(--field);padding:0 14px;font-family:var(--f-ui);font-weight:var(--w-text);font-size:15.5px;line-height:1;letter-spacing:0;color:var(--ink);transition:background-color .2s,border-color .2s}
+.uc-input::placeholder{color:var(--ink-4);opacity:1}
+.uc-input:hover,.uc-select:hover{border-color:var(--rule)}
+.uc-input:focus-visible,.uc-select:focus-visible{outline:2px solid var(--focus);outline-offset:2px;background:var(--ground);border-color:var(--rule)}
+.uc-input::-webkit-search-cancel-button{cursor:pointer}
+.uc-sel{position:relative}
+.uc-sel::after{content:"";position:absolute;right:17px;top:50%;width:7px;height:7px;border-right:1.5px solid var(--ink-3);border-bottom:1.5px solid var(--ink-3);transform:translateY(-70%) rotate(45deg);pointer-events:none}
+.uc-select{appearance:none;-webkit-appearance:none;padding-right:40px;cursor:pointer}
+.uc-two{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+
+/* task options: a list with each task's question beside the results; chips on small screens */
+.uc-opts{display:grid;gap:2px}
+.uc-opt{position:relative;display:grid;grid-template-columns:12px minmax(0,1fr) auto;align-items:start;gap:0 12px;padding:9px 12px 9px;border-radius:10px;cursor:pointer;font-family:var(--f-ui);font-weight:var(--w-ui);font-size:15.5px;line-height:1.25;color:var(--ink-2);transition:background-color .15s,color .15s}
+.uc-opt input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.uc-opt .uc-dot{margin-top:4px}
+.uc-opt__t{display:grid;gap:3px;min-width:0}
+.uc-opt__q{font-family:var(--f-q);font-weight:var(--w-q);font-style:italic;font-size:15px;line-height:1.3;color:var(--ink-3)}
+.uc-opt:hover{background:color-mix(in srgb,var(--field) 60%,var(--ground))}
+.uc-opt:has(input:checked){background:var(--field);color:var(--ink);box-shadow:inset 0 0 0 1px var(--rule-soft)}
+.uc-opt:has(input:checked) .uc-opt__name{font-weight:var(--w-strong)}
+.uc-opt:has(input:checked) .uc-opt__q{color:var(--ink-2)}
+.uc-opt:has(input:focus-visible){outline:2px solid var(--focus);outline-offset:1px}
+.uc-opt:has(input:disabled){opacity:.42;cursor:default}
+.uc-opt:has(input:disabled) input{cursor:default}
+.uc-opt__n{padding-top:2px;font-family:var(--f-label);font-weight:var(--w-label);font-size:var(--fs-label);letter-spacing:.04em;color:var(--ink-3);font-variant-numeric:tabular-nums lining-nums}
+.uc-dot{display:block;width:12px;height:12px;flex:none;border-radius:50%;background:var(--ink-4)}
+.uc-dot--all{background:conic-gradient(var(--q-imagine) 0 25%,var(--q-shape) 0 50%,var(--q-improve) 0 75%,var(--q-test) 0)}
+.uc-dot--imagine{background:var(--q-imagine)}.uc-dot--test{background:var(--q-test)}
+.uc-dot--shape{background:var(--q-shape)}.uc-dot--improve{background:var(--q-improve)}
+.uc-taskq{display:none}
+.uc-how{justify-self:start;margin:8px 0 0 12px;font-size:14.5px}
+
+/* the audience toggle */
+.uc-check{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:10px;align-items:start;cursor:pointer;font-family:var(--f-ui);font-weight:var(--w-ui);font-size:15.5px;line-height:1.35;color:var(--ink-2)}
+.uc-check input{width:18px;height:18px;margin:1px 0 0;accent-color:var(--amber);cursor:pointer}
+.uc-check:has(input:disabled){opacity:.42;cursor:default}
+.uc-note{font-size:14px;line-height:1.45;color:var(--ink-4);margin-top:-2px;padding-left:30px}
+
+/* "More filters" folds on small screens; on wide screens it is always open */
+.uc-more{min-width:0}
+.uc-more > summary{display:none}
+.uc-more__in{display:grid;gap:22px}
+
+/* results bar: the count on the left, order and view on the right */
+.uc-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;padding-bottom:14px;border-bottom:1px solid var(--rule)}
+.uc-count{font-family:var(--f-label);font-weight:var(--w-label);font-size:var(--fs-label);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-label)}
+.uc-count b{color:var(--ink)}
+.uc-bar__ctl{display:flex;flex-wrap:wrap;gap:10px}
+.uc-seg{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:3px;padding:3px;margin:0;border:0;border-radius:var(--r-pill);background:var(--field);min-width:0}
+.uc-seg label{position:relative;display:flex;align-items:center;justify-content:center;height:32px;padding:0 15px;border-radius:var(--r-pill);font-family:var(--f-ui);font-weight:var(--w-ui);font-size:14.5px;line-height:1;color:var(--ink-3);cursor:pointer;white-space:nowrap;transition:background-color .15s,color .15s}
+.uc-seg input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.uc-seg label:hover{color:var(--ink)}
+.uc-seg label:has(input:checked){background:var(--ground);color:var(--ink);box-shadow:0 1px 3px color-mix(in srgb,var(--ink) 14%,transparent)}
+.uc-seg label:has(input:focus-visible){outline:2px solid var(--focus);outline-offset:1px}
+
+/* the filters in force, each removable */
+.uc-active{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding-top:14px}
+.uc-chip{display:inline-flex;align-items:center;gap:9px;min-height:32px;padding:5px 11px 5px 14px;border:0;border-radius:var(--r-pill);background:var(--field);font-family:var(--f-ui);font-weight:var(--w-ui);font-size:14.5px;line-height:1.2;color:var(--ink);text-align:left;transition:background-color .15s}
+.uc-chip:hover{background:var(--field-2)}
+.uc-chip:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:var(--r-pill)}
+.uc-chip__x{position:relative;display:block;width:10px;height:10px;flex:none}
+.uc-chip__x::before,.uc-chip__x::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.5px;background:var(--ink-3);transform:translate(-50%,-50%) rotate(45deg)}
+.uc-chip__x::after{transform:translate(-50%,-50%) rotate(-45deg)}
+.uc-active .link{margin-left:6px;font-size:14.5px}
+
+.uc-empty{padding:48px 0 24px}
+.uc-empty .say{max-width:18em}
+.uc-empty .actions{margin-top:22px}
+
+/* year groups */
+.uc-group{margin-top:clamp(26px,2.6vw,36px)}
+.uc-yh{position:sticky;top:var(--header-h);z-index:3;display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:24px;padding:14px 0 12px;background:var(--ground);border-bottom:1px solid var(--rule-soft)}
+.uc-yh__n{font-family:var(--f-num);font-weight:var(--w-num);letter-spacing:var(--ls-num);font-size:clamp(34px,3vw,44px);line-height:1;color:var(--ink);font-variant-numeric:lining-nums tabular-nums}
+
+/* cards: one engagement, one card */
+.uc-grid{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 24px}
+.uc-item{min-width:0}
+.uc-card{position:relative;height:100%;container-type:inline-size}
+.uc-card .card__media{aspect-ratio:3/2}
+.uc-card .card__title{font-size:clamp(19px,1.4vw,21.5px)}
+.uc-card .card__text{font-size:calc(var(--fs-text) - 2.5px);line-height:1.5}
+.uc-card .card__meta .lab{min-width:0}
+.uc-foot{margin-top:12px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px}
+.uc-go{font-family:var(--f-ui);font-weight:var(--w-ui);font-size:14.5px;line-height:1.3;color:var(--ink);border-bottom:1px solid color-mix(in srgb,var(--ink) 35%,transparent);padding-bottom:1px;transition:color .2s,border-color .2s}
+.uc-go::after{content:"\2197";display:inline-block;margin-left:.35em;font-size:.92em}
+a.uc-card:hover .uc-go,a.uc-row:hover .uc-go{color:var(--amber);border-color:var(--amber)}
+.uc-soon{font-family:var(--f-label);font-weight:var(--w-label);font-size:calc(var(--fs-label) - .5px);letter-spacing:var(--ls-label);text-transform:uppercase;line-height:1.4;color:var(--ink-4)}
+.uc-card--off .card__title{color:var(--ink)}
+.uc-card--off:focus{outline:none}
+
+/* image notes: "Scenario" on generated images; the credit of a partner image or a map, where maps credit it */
+.uc-tag{position:absolute;left:10px;top:10px;z-index:1;font-family:var(--f-label);font-weight:var(--w-label);font-size:10px;line-height:1;letter-spacing:.12em;text-transform:uppercase;padding:6px 9px 5px;border-radius:var(--r-pill);background:color-mix(in srgb,var(--ground) 92%,transparent);color:var(--ink)}
+.uc-credit{position:absolute;right:8px;top:calc(100cqw * 2 / 3 - 8px);transform:translateY(-100%);z-index:1;max-width:min(88%,calc(100% - 16px));padding:3px 7px 3px;border-radius:6px;background:color-mix(in srgb,var(--ground) 90%,transparent);font-family:var(--f-ui);font-weight:var(--w-text);font-size:11.5px;line-height:1.3;letter-spacing:0;color:var(--ink-3);text-align:right;text-wrap:balance;pointer-events:none}
+/* a map carries its city name bottom-left, so its credit sits top-right */
+.uc-credit--map{top:8px;transform:none}
+.uc-tag__s{display:none}
+/* a map is drawn on white: a hairline holds its edge */
+.uc-mapimg::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px var(--rule-soft);pointer-events:none}
+
+/* no image at all: a wash of the task's own pigment, from its corner */
+.uc-ph{--pc:var(--q-imagine);--pt:var(--qt-imagine);--pm:60%;--pos:84% 16%;display:flex;flex-direction:column;justify-content:flex-end;padding:18px 20px;background:
+  radial-gradient(circle at var(--pos),color-mix(in srgb,var(--pc) var(--pm),var(--ground)) 0,color-mix(in srgb,var(--pc) calc(var(--pm) - 14%),var(--ground)) 29%,transparent calc(29% + 1px)),
+  radial-gradient(circle at var(--pos),color-mix(in srgb,var(--pc) 24%,transparent) 0,transparent 66%),
+  var(--pt)}
+.uc-ph--test{--pc:var(--q-test);--pt:var(--qt-test);--pm:100%;--pos:16% 16%;align-items:flex-end;text-align:right}
+.uc-ph--shape{--pc:var(--q-shape);--pt:var(--qt-shape);--pos:84% 84%;justify-content:flex-start}
+.uc-ph--improve{--pc:var(--q-improve);--pt:var(--qt-improve);--pos:16% 84%;justify-content:flex-start;align-items:flex-end;text-align:right}
+.uc-ph__city{font-family:var(--f-name);font-weight:var(--w-name);font-size:clamp(22px,1.9vw,28px);line-height:1.05;letter-spacing:var(--ls-name);color:var(--ink);text-wrap:balance}
+.uc-ph__ini{display:none;font-family:var(--f-name);font-weight:var(--w-name);font-size:22px;line-height:1;color:var(--ink)}
+
+/* list view */
+.uc-list{list-style:none}
+.uc-yh:has(+ .uc-list){margin-bottom:0}
+.uc-list li{min-width:0}
+.uc-row{display:grid;grid-template-columns:12px minmax(0,1.7fr) minmax(0,1fr) 160px 124px;gap:10px 18px;align-items:center;padding:13px 6px 12px;border-bottom:1px solid var(--rule-soft);color:inherit;text-decoration:none;transition:background-color .15s}
+a.uc-row:hover{background:var(--field)}
+a.uc-row:focus-visible{outline:2px solid var(--focus);outline-offset:-2px;border-radius:6px}
+.uc-row__t{font-family:var(--f-name);font-weight:var(--w-name);font-size:17.5px;line-height:1.25;letter-spacing:var(--ls-name);color:var(--ink);text-wrap:pretty;transition:color .2s}
+a.uc-row:hover .uc-row__t{color:var(--amber)}
+.uc-row__p{font-size:15px;line-height:1.35;color:var(--ink-3)}
+.uc-row__go{justify-self:end;text-align:right}
+.uc-row .uc-go{font-size:14px}
+
+/* the notes under the results: more case pages, and where the images come from */
+.uc-notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 40px;margin-top:clamp(56px,6vw,80px);padding-top:22px;border-top:1px solid var(--rule)}
+.uc-notes .small{margin-top:8px;max-width:34em}
+.uc-notes ul{list-style:none;display:grid;gap:10px;margin-top:16px}
+.uc-tag-i{display:inline-block;vertical-align:.1em;font-family:var(--f-label);font-weight:var(--w-label);font-size:9.5px;line-height:1;letter-spacing:.12em;text-transform:uppercase;padding:5px 8px 4px;border-radius:var(--r-pill);box-shadow:inset 0 0 0 1px var(--rule);color:var(--ink)}
+.uc-notes .small a{color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:rgba(20,23,28,.4)}
+.uc-notes .small a:hover{color:var(--amber);text-decoration-color:var(--amber)}
+
+/* ---------- 3 · the map ---------- */
+.uc-map-row{align-items:start}
+.uc-map-row > .uc-map-text{grid-column:1/5}
+.uc-map-row > .uc-map-fig{grid-column:5/13}
+.uc-map-text .h2{margin-top:18px}
+.uc-map-text .body{margin-top:22px}
+.uc-legend{display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:24px}
+.uc-legend span{display:inline-flex;align-items:center;gap:8px}
+.uc-legend i{display:block;width:12px;height:12px;flex:none;border-radius:50%;border:1.25px solid var(--ground);box-shadow:0 0 0 1px var(--rule-soft)}
+.uc-map{position:relative;border-radius:var(--r-img)}
+.uc-map-note{margin-top:12px;font-size:14.5px;line-height:1.5;color:var(--ink-4)}
+
+/* ---------- 4 · provenance (SITE-BRIEF §10 / R3.5) ---------- */
+.uc-provenance{padding-bottom:clamp(48px,5vw,72px)}
+.uc-provenance__in{padding-top:clamp(24px,2.6vw,32px);max-width:48em}
+.uc-provenance .small + .small{margin-top:10px}
+.uc-provenance .actions{margin-top:16px}
+.uc-provenance .link{font-size:14.5px}
+
+/* ---------- responsive ---------- */
+@media (max-width:1180px){
+  .uc-head__main{grid-column:1/8}
+  .uc-figs{grid-column:9/13}
+  .uc-filters{grid-column:1/5}
+  .uc-results{grid-column:5/13}
+  .uc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .uc-row{grid-template-columns:12px minmax(0,1.6fr) minmax(0,1fr) 124px}
+  .uc-row__k{display:none}
+  .uc-notes{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:980px){
+  .uc-head{grid-template-columns:minmax(0,1fr)}
+  .uc-head__main,.uc-figs{grid-column:1/-1}
+  .uc-figs dl{grid-template-columns:repeat(3,minmax(0,1fr));gap:0 20px}
+  .uc-figs dl > div{flex-direction:column-reverse;align-items:flex-start;justify-content:flex-end;gap:6px;border-bottom:1px solid var(--rule-soft)}
+  .uc-figs dd{text-align:left}
+  .uc-cat{grid-template-columns:minmax(0,1fr)}
+  .uc-filters,.uc-results{grid-column:1/-1}
+  .uc-filters{position:static;max-height:none;overflow:visible;padding:0;margin-left:0}
+  .uc-f{gap:18px}
+  .uc-opts{display:flex;flex-wrap:wrap;gap:8px}
+  .uc-opt{grid-template-columns:10px auto auto;align-items:center;gap:8px;padding:10px 14px 9px;border-radius:var(--r-pill);background:var(--field);font-size:15px}
+  .uc-opt .uc-dot{width:10px;height:10px;margin-top:0}
+  .uc-opt__q{display:none}
+  .uc-opt__n{padding-top:0}
+  .uc-opt:hover{background:var(--field-2)}
+  .uc-opt:has(input:checked){background:var(--ink);color:var(--ground);box-shadow:none}
+  .uc-opt:has(input:checked) .uc-opt__n{color:color-mix(in srgb,var(--ground) 78%,transparent)}
+  .uc-opt:has(input:checked) .uc-dot{box-shadow:0 0 0 1.5px var(--ground)}
+  .uc-taskq{display:block;min-height:1.3em;margin-top:6px;font-size:15px;line-height:1.4;color:var(--ink-4)}
+  .uc-taskq .q{font-size:17px;color:var(--ink)}
+  .uc-how{margin:2px 0 0}
+  .uc-more{border-top:1px solid var(--rule-soft);border-bottom:1px solid var(--rule-soft)}
+  .uc-more > summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 2px 13px;cursor:pointer;list-style:none;font-family:var(--f-ui);font-weight:var(--w-ui);font-size:15.5px;color:var(--ink)}
+  .uc-more > summary::-webkit-details-marker{display:none}
+  .uc-more > summary::after{content:"";width:8px;height:8px;border-right:1.5px solid var(--ink-3);border-bottom:1.5px solid var(--ink-3);transform:translateY(-2px) rotate(45deg);transition:transform .2s}
+  .uc-more[open] > summary::after{transform:translateY(2px) rotate(-135deg)}
+  .uc-more > summary:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:6px}
+  .uc-more__in{padding:6px 0 20px}
+  .uc-two{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .uc-bar{margin-top:10px}
+  .uc-map-row > .uc-map-text,.uc-map-row > .uc-map-fig{grid-column:1/-1}
+}
+@media (max-width:640px){
+  .uc-figs dl{gap:0 14px}
+  .uc-two{grid-template-columns:minmax(0,1fr)}
+  .uc-bar__ctl{width:100%}
+  .uc-bar__ctl .uc-seg{flex:1 1 0}
+  .uc-yh{margin-bottom:6px;padding:12px 0 10px}
+  .uc-grid{grid-template-columns:minmax(0,1fr);gap:0}
+  .uc-item + .uc-item{border-top:1px solid var(--rule-soft)}
+  .uc-card{display:grid;grid-template-columns:92px minmax(0,1fr);grid-template-rows:auto 1fr;gap:0 16px;align-items:start;padding:16px 0}
+  .uc-card .card__media{grid-column:1;grid-row:1/span 2;aspect-ratio:1/1;border-radius:10px}
+  /* a city map prints its label bottom-left and keeps its dot left of x = 2/3: align the square crop left so both survive */
+  .uc-card .uc-mapimg img{object-position:0 50%}
+  .uc-card__b{grid-column:2;grid-row:1}
+  .uc-card .card__meta{margin-top:0}
+  .uc-card .card__title{margin-top:6px;font-size:18.5px}
+  .uc-card .card__text{margin-top:6px;font-size:15px}
+  .uc-foot{margin-top:10px}
+  .uc-credit,.uc-credit--map{position:static;grid-column:2;grid-row:2;transform:none;max-width:none;margin-top:8px;padding:0;background:none;text-align:left;font-size:12.5px;color:var(--ink-4)}
+  .uc-tag{left:5px;top:5px;font-size:8px;letter-spacing:.08em;padding:4px 6px 3px}
+  .uc-tag__l{display:none}
+  .uc-tag__s{display:inline}
+  .uc-ph{padding:0;align-items:center;justify-content:center}
+  .uc-ph__city{display:none}
+  .uc-ph__ini{display:block}
+  .uc-row{grid-template-columns:12px minmax(0,1fr);gap:4px 14px;padding:14px 2px 13px}
+  .uc-row__t,.uc-row__p,.uc-row__go{grid-column:2}
+  .uc-row__go{justify-self:start;text-align:left;margin-top:4px}
+  .uc-row .uc-dot{align-self:start;margin-top:5px}
+}
+</style>
+</head>
+<body data-page="use-cases">
+
+<div data-site-header></div>
+
+<main id="main">
+
+<!-- ============ 1 · PAGE HEAD ============ -->
+<section class="wrap page-head uc-head" aria-labelledby="h1">
+  <div class="uc-head__main">
+    <p class="eyebrow">Use cases</p>
+    <h1 class="display" id="h1">Where ideas have been <em>tried</em>.</h1>
+    <p class="lede">This catalogue holds <b data-m="total">82</b> of our <b data-m="reach.engagements">95</b> engagements. Each ran one of four tasks. The task depends on two things: how much was already decided, and whether people brought their own ideas or responded to material they were given. Where a case has its own page, its card opens it.</p>
+    <div class="actions">
+      <a class="link" href="#map">See the map</a>
+    </div>
+  </div>
+  <div class="uc-figs">
+    <p class="eyebrow" id="figs-h">Our work since <span data-m="reach.since">2021</span></p>
+    <dl aria-labelledby="figs-h">
+      <div><dt class="lab">Engagements</dt><dd class="num num--s" data-m="reach.engagements">95</dd></div>
+      <div><dt class="lab">Cities</dt><dd class="num num--s" data-m="reach.cities">73</dd></div>
+      <div><dt class="lab">Countries</dt><dd class="num num--s" data-m="reach.countries">38</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ 2 · THE CATALOGUE ============ -->
+<section class="uc-catalogue" id="catalogue" aria-labelledby="cat-h">
+  <div class="wrap">
+    <h2 class="sr" id="cat-h" tabindex="-1">The catalogue</h2>
+
+    <div class="uc-cat">
+      <!-- filters: what to show -->
+      <aside class="uc-filters" aria-label="Filter the engagements">
+        <form class="uc-f" id="uc-form" role="search" onsubmit="return false">
+          <div class="uc-fb">
+            <label class="lab" for="uc-q">Search</label>
+            <input class="uc-input" type="search" id="uc-q" name="q" placeholder="A place, a title, a partner" autocomplete="off" spellcheck="false">
+          </div>
+          <fieldset class="uc-fb">
+            <legend class="lab">Task</legend>
+            <div class="uc-opts" id="uc-tasks"></div>
+            <p class="uc-taskq" id="uc-taskq"></p>
+            <a class="link link--arrow uc-how" href="mission.html#framework">How the four tasks differ</a>
+          </fieldset>
+          <details class="uc-more" id="uc-more">
+            <summary>More filters <span class="sr">: year, country and audience</span></summary>
+            <div class="uc-more__in">
+              <div class="uc-two">
+                <div class="uc-fb">
+                  <label class="lab" for="uc-year">Year</label>
+                  <div class="uc-sel"><select class="uc-select" id="uc-year" name="year"></select></div>
+                </div>
+                <div class="uc-fb">
+                  <label class="lab" for="uc-country">Country</label>
+                  <div class="uc-sel"><select class="uc-select" id="uc-country" name="country"></select></div>
+                </div>
+              </div>
+              <div class="uc-fb">
+                <p class="lab">Audience</p>
+                <label class="uc-check"><input type="checkbox" id="uc-kids" name="kids"><span>With children and young people</span><span class="uc-opt__n" id="uc-kids-n"></span></label>
+                <p class="uc-note">Only where the case record says so.</p>
+              </div>
+            </div>
+          </details>
+        </form>
+      </aside>
+
+      <!-- results: how to show them, then the cards -->
+      <div class="uc-results">
+        <div class="uc-bar">
+          <p class="uc-count" id="uc-count" aria-live="polite" aria-atomic="true">All <b data-m="total">82</b> engagements</p>
+          <div class="uc-bar__ctl" id="uc-ctl">
+            <fieldset class="uc-seg">
+              <legend class="sr">Order</legend>
+              <label><input type="radio" name="sort" value="new" checked>Newest first</label>
+              <label><input type="radio" name="sort" value="old">Oldest first</label>
+            </fieldset>
+            <fieldset class="uc-seg">
+              <legend class="sr">Show as</legend>
+              <label><input type="radio" name="view" value="cards" checked>Cards</label>
+              <label><input type="radio" name="view" value="list">List</label>
+            </fieldset>
+          </div>
+        </div>
+        <div class="uc-active" id="uc-active" role="group" aria-label="Filters in use" hidden></div>
+        <div id="uc-list">
+          <noscript><p class="body" style="margin-top:24px">The catalogue needs JavaScript. Every published case is also on <a href="https://coplanai.com/portfolio/">the live portfolio</a>.</p></noscript>
+        </div>
+
+        <div class="uc-notes">
+          <div aria-labelledby="others-h">
+            <p class="lab" id="others-h">More case pages</p>
+            <p class="small">Written up on the live site, not yet in this catalogue.</p>
+            <ul>
+              <li><a class="link link--ext" href="https://coplanai.com/portfolio/humanizing-digital-twins/" target="_blank" rel="noopener">Humanizing Digital Twins, Estonia<span class="sr"> (opens in a new tab)</span></a></li>
+              <li><a class="link link--ext" href="https://coplanai.com/portfolio/forum-virium-helsinki/" target="_blank" rel="noopener">Forum Virium Helsinki<span class="sr"> (opens in a new tab)</span></a></li>
+              <li><a class="link link--ext" href="https://coplanai.com/portfolio/wiesbaden-child-friendly/" target="_blank" rel="noopener">Child-friendly neighbourhoods, Wiesbaden<span class="sr"> (opens in a new tab)</span></a></li>
+              <li><a class="link link--ext" href="https://coplanai.com/portfolio/dubai-municipality-sustainability/" target="_blank" rel="noopener">Dubai Municipality: coplanning integration and innovation programme<span class="sr"> (opens in a new tab)</span></a></li>
+            </ul>
+          </div>
+          <div aria-labelledby="images-h">
+            <p class="lab" id="images-h">About the images</p>
+            <p class="small">A <span class="uc-tag-i">Scenario</span> tag marks an image generated in the work: a possibility, not a plan. Where a partner published the image, the card credits them. Where we have no image, the card shows a map of the city. Map data ©&nbsp;<a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors<span class="sr"> (opens in a new tab)</span></a>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 · THE MAP ============ -->
+<section class="section section--flush-top" id="map" aria-labelledby="map-h">
+  <div class="wrap">
+    <div class="grid-12 uc-map-row hair hair-pad">
+      <div class="uc-map-text">
+        <p class="eyebrow">The map</p>
+        <h2 class="h2" id="map-h">Where we have <em>worked</em>.</h2>
+        <p class="body">The map shows all <b data-m="reach.engagements">95</b> engagements, city by city. Each disc is sized by how often we have worked there and coloured by the task we ran there most.</p>
+        <div class="legend uc-legend" id="uc-legend" role="group" aria-label="Map key"></div>
+      </div>
+      <figure class="uc-map-fig">
+        <div class="uc-map" id="uc-map"></div>
+        <figcaption class="uc-map-note" id="uc-map-note">Hover or focus a city for its engagements; the arrow keys move between cities.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 · WHO DELIVERED THE WORK (SITE-BRIEF §10 and R3.5: verbatim; the one sanctioned mention of that platform's name) ============ -->
+<section class="uc-provenance" aria-label="Who delivered the work">
+  <div class="wrap">
+    <div class="hair">
+      <div class="uc-provenance__in">
+        <p class="small">CoPlanAI is a service of SPIN Unit Lab Oy.</p>
+        <p class="small">UrbanistAI, developed by Toretei since 2021, was used in some of the deployments reported here through September 2025. Toretei collaborated with SPIN Unit on the platform's field application, incorporating ideas and feedback from SPIN Unit that helped to shape its usability and functionality over that period. The collaboration between the two parties ended in September 2025.</p>
+        <div class="actions"><a class="link link--arrow" href="https://spinunit.org" target="_blank" rel="noopener">Visit SPIN Unit<span class="sr"> (opens in a new tab)</span></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div data-site-invite></div>
+
+<div data-site-footer></div>
+
+<!-- data first, then the shared runtime, the map, then the page's own script -->
+<script src="data/matrix.js"></script>
+<script src="data/case-links.js"></script>
+<script src="data/case-images.js"></script>
+<script src="data/land.js"></script>
+<script src="data/places.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/map.js"></script>
+<script>
+SITE.ready(function(){
+  'use strict';
+  var C=window.COPLAN; if(!C||!C.data) return;
+  var esc=SITE.esc, doc=document;
+  var EXTRA=window.COPLAN_CASE_IMAGES||{};
+
+  /* ------------------------------------------------------------------
+     Case facts come from data/matrix.js (title, year, place, task), with the shared
+     corrections of SITE.caseTitles / SITE.casePlaces already applied by assets/site.js.
+     Links from data/case-links.js (SITE.liveUrl). Extra images from data/case-images.js.
+     ------------------------------------------------------------------ */
+
+  /* The title and place corrections, and the regrouping of data/places.js (the hidden Baku record,
+     the online workshop, the Cairo cohort), now live in assets/site.js (SITE.fixCases), so the Home
+     map and framework show the same names as this page (QA, 24 Sept). */
+
+  /* One factual line per case, only where a written record gives one.
+     Sources: the live use-cases page (content/use-cases.md), the live case pages,
+     reference/case-fact-pack.md, reference/FACT-AUDIT.md §7 and data/CASE-IMAGES.md. */
+  var LINES={
+    /* one case since 24 Sept (Damiano merged the two Eindhoven records; 2023-ai-in-the-hood-eindhoven is hidden) */
+    '2023-humankind-workshops':'The closing session of Baltan Laboratories’ three-part community series. With Humankind’s Good Public Space Analysis, residents reimagined a green space in the Rochusbuurt.',
+    '2023-newcastle-city-of-longevity':'With the National Innovation Centre for Ageing: participatory methods for involving older adults in age-friendly urban design.',
+    '2023-vantaa':'A two-day resident charrette pictured Havukoski in 2040: three narratives and scenario images that fed the district’s framework plan.',
+    '2023-dinnomo-zurich':'A mobile web app for residents to photograph Zurich’s streets and reimagine them, each transformation placed on a public map.',
+    '2023-dubai-world-government-summit':'A touchscreen installation at the Edge of Government exhibition of the World Government Summit, shown with the City of Jyväskylä.',
+    '2023-ace-children-playgrounds-to-planning':'For the Architects’ Council of Europe: a method and interface for children aged 6–14, tested with a school class in Finland and at a museum in Milan.',
+    '2023-berlin-kiezlabor':'The first of three summers in CityLAB Berlin’s touring Kiezlabor: passers-by reimagined streets in four districts.',
+    '2024-berlin-kiezlabor':'The Kiezlabor’s second summer, with stops in Pankow and Gropiusstadt.',
+    '2025-berlin-kiezlabor':'The third summer: the CityLAB team ran it on its own, under its own name, Stadtvisionen.',
+    '2023-lahti-city-centre':'At the city’s futures festival, residents, stakeholders and politicians put ideas into 66 images for the City Centre Vision 2040, adopted in spring 2024.',
+    '2023-undp-nusantara':'With the UNDP Accelerator Lab in Indonesia, communities in East Kalimantan co-designed a park and a residential area for the new capital, distilled into design guidelines.',
+    '2024-turku-university-nusantara':'With the University of Turku and the Nusantara Capital City Authority, future residents of the new capital put their expectations into images.',
+    '2023-undp-skopje':'With UNDP North Macedonia: seven sites across Skopje prepared for regreening scenarios.',
+    '2023-group-nao-valencia':'A workshop at the CityDNA Autumn Conference, sketching urban-tourism futures with destination-management professionals.',
+    '2023-milan-design-week':'At the National Museum of Science and Technology in Milan, children reimagined everyday places with a version of the tool made for them.',
+    '2023-undp-batumi':'With UNDP, municipalities from Georgia and Moldova brought seven sites, from squares to an old circus, to a hands-on session.',
+    '2024-civitas-athens':'A hands-on workshop for the municipal network at the second CIVINET Greece–Cyprus Forum.',
+    '2024-kyiv-school-of-economics-lviv':'At a Kyiv School of Economics event, five war-affected municipalities brought measured sites (parks, squares, a commemoration alley) to co-design their reconstruction.',
+    '2024-oman-planning-event':'In a capacity-building workshop led by Humankind, governors from Oman’s regions redesigned selected public spaces.',
+    '2026-lulea':'Schoolchildren photographed real streets around Luleå and reimagined them; the workshop started a PhD on bringing children into mobility planning.',
+    '2023-avalinn-tallinn':'Installed for the City of Tallinn’s ongoing co-design work.',
+    '2023-east-cleveland-connect':'With the design consultancy Seventh Hill, residents saw their ideas for the neighbourhood’s streets and public spaces as images, on the spot.',
+    '2023-helsinki-market-squares':'Voting posters at seven market squares asked passers-by what each square could hold in future.',
+    '2023-tallinn-ministry-liivalaia':'After a short training, three City of Tallinn planners ran their own stakeholder pilot on four sections of Liivalaia, a central artery.',
+    '2023-pristina-cluster':'Residents of Blloku 1 shaped the redesign of their block’s yards, parking and playgrounds, choosing between before-and-after options on photos of their own streets.',
+    '2024-zamanand-munich':'Visitors put more than 3,000 ideas for a car-free space around the Siegestor into images; about 300 votes chose one, built there as a walkable prototype four months later.',
+    '2024-unimi-milan-workshop':'With students of the University of Milan.',
+    '2026-vienna':'Every image carried the city’s own label: „KI-generiertes Beispielbild, kein Planungs-Rendering“, an AI-generated example image, not a planning rendering.',
+    '2023-helsinki-summer-streets':'EC Public Sector Tech Watch Best Cases Award 2024, awarded to the City of Helsinki · documented by the OECD in Governing with Artificial Intelligence (2025) · GovTech4All Innovation Award, Bronze, 2026.',
+    '2023-jyvaskyla-library':'Culture and real-estate actors generated 112 scenarios for the main library’s interiors in one session: the tool’s first use indoors.',
+    '2023-kalamaja-street-design':'Three working groups generated over 1,000 images of Niine Street in a three-hour Design Night, converging on a shared pedestrian-friendly vision.',
+    '2023-ura-singapore-codesign':'With Singapore’s Urban Redevelopment Authority.',
+    '2024-giz-manila':'After a bootcamp, GIZ staff generated feminist redesigns of Manila streets themselves, carried as postcards on a walk at the ADB Transport Forum.',
+    '2024-sweco-kaarina':'With Sweco, residents generated scenarios for the market square and voted on 28 of them in a workshop; water, art and a stage were built on the square.',
+    '2025-oulu':'Ten city-centre sites and 670 scenario images, prepared for the resident workshops that feed the vision for 2026–2040.',
+    '2021-jyvaskyla-recenter':'Where it began: a two-day charrette on Kauppakatu, one of Finland’s first pedestrianised streets, where participants’ sketches became street scenarios.',
+    '2025-lulea-subscription':'The university ran its own workshop with children on the platform.',
+    '2023-lulea-youth':'After facilitator bootcamps, the university ran its own workshop with 35 children aged 12–13 redesigning their school route.',
+    '2023-tallinn-biodiverse-city-museum':'A kiosk with no facilitator in the museum’s BiodiverseCity? exhibition, where visitors reimagined real Tallinn sites as more biodiverse.',
+    '2024-undp-panama-betania':'With the UNDP Accelerator Lab, young people at the Universidad de Panamá kept 223 scenarios of their city’s climate future: 115 showed a disaster, 108 a repair.',
+    '2024-twente-climate-blue-green':'University of Twente research: residents of Twekkelerveld co-designed climate-sensitive blue and green spaces on photographs of their own streets.',
+        '2024-paces-stockholm':'A Vinnova-funded project on accessible, calm, equitable and shared mobility in three Stockholm districts: generated images alongside a physical prototype and a card game.',
+    '2024-hamburg-hal':'After facilitator bootcamps, HafenCity University ran two children’s sessions reimagining a green space near its campus.',
+    '2025-turku-biodiversity-park':'Three workshops with residents and practitioners turned biodiversity element cards into nature-based visions, published by the University of Turku.',
+    '2026-giz':'Scenarios for GIZ’s year-long Green Corridors peer-learning cohort of municipal practitioners from Germany, North Africa and the Middle East.',
+    '2026-bologna':'The City of Bologna’s workshop truck, touring its neighbourhoods; ours is one station in it.',
+    '2026-wuf-2026':'A session with GIZ Connective Cities at the World Urban Forum in Baku, and a kiosk with a workspace for each of seven partner locations, from Huye to Hebron.',
+    'ai-based-visualisation-for-sustainable-and-affordable-housing':'An online peer-learning workshop with GIZ Connective Cities in January 2026, with practitioners from cities in Africa, the Middle East and Berlin.',
+    /* added 24 Sept 2026 (Q&A on the grey map points), only where a record describes the session. None yet for
+       GoTech World, Urban Future, Go Green Ternopil or the two Mayors for Economic Growth workshops (Kutaisi waits
+       on Q1a), nor for the MUST Festival (its line carries a claim still to verify, Q2) */
+    '2023-kosovo-architecture-foundation-lina-workshop':'At the Kosovo Architecture Festival, architecture students and residents pictured Pristina’s central public spaces with more nature, against heat and the loss of biodiversity.',
+    '2024-hal-aarhus':'Forty pupils aged 9 to 12 at Skødstrup Skole rethought the spaces children use.',
+    '2024-dubai-park-codesign-workshop':'Residents in two focus groups designed Nad Al Hamar 3 park on the Dubai Urban Design Platform.',
+    '2024-taltech-training':'University staff chose what the car park in front of TalTech’s main entrance should and should not become, and turned their choices into eight scenarios.',
+    '2024-mfw-breko-tagung':'Made with Museum für Werte for BREKO, the German broadband association: visitors chose a sector, from mobility to farming, picked a regenerative, connected or innovative future, saw the photo change and could print it as a postcard.',
+    '2024-museum-fur-werte':'A station in Museum für Werte’s exhibition Learn How To Change in Heilbronn: visitors picked a place on a map of the city, pictured it changed and liked each other’s ideas.',
+    '2023-humankind-zaandam':'With Humankind’s Good Public Space Analysis, professionals pictured the public space around the Spaghettiflat, a 1960s block in Poelenburg due for demolition.',
+    '2024-publictwin-rotterdam':'Fly-through videos let residents see the street changes in Mecanoo’s Dijk Park vision for Rotterdam Zuid.',
+    '2024-undp-m4eg-kutaisi':'With UNDP, officials from Georgian municipalities worked on public spaces from their own towns.',
+    '2025-undp-georgia-europe-day':'At UNDP’s Artificial Intelligence Hour at Expo Georgia, visitors reimagined an urban space.'
+  };
+
+  /* Our own images: the curated pool (larger, chosen per case) or the framework thumbnail.
+     [src, alt, object-position]. Alt text never names a street from the retired story.
+     null = no usable photograph of our own (then data/case-images.js may supply one). */
+  var IMG={
+    '2021-jyvaskyla-recenter':['img/pool/2021-jyvaskyla-recenter--table.jpg','People around a table under woven pendant lamps, working through printed material.'],
+    /* not the class photo (children's faces, 24 Sept 2026): hands on a tablet, filed under this case in data/collage-images.js;
+       a 1200 px copy of img/collage/hands--tablets.jpg with the tablet's address bar and logo blurred (the retired domain) */
+    '2023-ace-children-playgrounds-to-planning':['img/cases/2023-ace-children-playgrounds-to-planning--hands.jpg','Hands around a tablet on a white table, one pointing at the screen.'],
+    '2023-avalinn-tallinn':['img/cases/2023-avalinn-tallinn.jpg','A session in a room with a wide projected street scene, people seated at tables.'],
+    '2023-berlin-kiezlabor':['img/cases/2023-berlin-kiezlabor.jpg','A tree-lined Berlin street with parked cars, a bus and bicycles.'],
+    '2023-dinnomo-zurich':['img/pool/2023-dinnomo-zurich--riverbank-park.jpg','A paved riverbank in Zurich as a generated park with lawn, path and benches.'],
+    '2023-dubai-world-government-summit':['img/cases/2023-dubai-world-government-summit.jpg','A multi-lane road under an elevated highway, towers behind.'],
+    '2023-east-cleveland-connect':['img/pool/2023-east-cleveland-connect--residents.jpg','Residents at a table with a facilitator and a laptop, talking and laughing.'],
+    '2023-helsinki-market-squares':['img/cases/2023-helsinki-market-squares.jpg','A market square in summer: stalls, tables of goods and white canopies.'],
+    '2023-helsinki-summer-streets':['img/cases/2023-helsinki-summer-streets.jpg','A pedestrianised street in summer with planters, seating and steps, a red-brick building behind.','50% 70%'],
+    '2023-jyvaskyla-library':['img/cases/2023-jyvaskyla-library.jpg','A library lobby with display boards of images and a suspended sculpture.','50% 60%'],
+    '2023-lahti-city-centre':['img/pool/2023-lahti-city-centre--lake-view.jpg','An aerial view of Lahti’s city centre and the lake.'],
+    '2023-pristina-cluster':['img/pool/2023-pristina-cluster--wall.jpg','People pointing at printed scenarios pinned to a board.'],
+    '2023-tallinn-biodiverse-city-museum':['img/pool/2023-tallinn-biodiverse-city-museum--room.jpg','The exhibition room: a projected city scenario, low seats and a wall of printed images.'],
+    '2023-tallinn-ministry-liivalaia':['img/pool/2023-tallinn-ministry-liivalaia--courtyard.jpg','A generated courtyard in Tallinn: a sunken lawn with timber seating steps under birch trees.'],
+    '2023-undp-batumi':['img/cases/2023-undp-batumi.jpg','A park in Batumi under tall conifers, benches in the shade.'],
+    '2023-undp-nusantara':['img/pool/2023-undp-nusantara--table.jpg','Participants at a round table with printed images, one standing and presenting.'],
+    '2023-undp-skopje':['img/cases/2023-undp-skopje.jpg','A busy crossroads in Skopje seen from above.','50% 62%'],
+    '2023-vantaa':['img/pool/2023-vantaa--courtyard.jpg','A generated green path between apartment blocks in Havukoski, a child walking.'],
+    '2024-giz-manila':['img/pool/2024-giz-manila--street.jpg','A generated Manila street with benches, a drinking fountain, lighting and a mural.'],
+    /* the Dubai photo is filed under the platform record, not the Nad Al Hamar 3 workshop: the alt says what it shows, no more */
+    '2024-dubai-park-codesign-workshop':['img/pool/2024-urbanist-dubai--resident-session.jpg','People at round tables in a participatory design session in Dubai, a facilitator speaking beside a screen.'],
+    '2024-hamburg-hal':['img/cases/2024-hamburg-hal.jpg','An open, unpaved plot beside a street, trees and houses behind.'],
+    '2024-undp-m4eg-chisinau':['img/cases/2024-undp-m4eg-chisinau.jpg','The entrance of Chișinău’s central market under a green sign, stalls and umbrellas, people walking in: an AI-generated image.'],
+    '2024-kyiv-school-of-economics-lviv':['img/cases/2024-kyiv-school-of-economics-lviv.jpg','A small park with a monument, paths and benches, the trees still bare.'],
+    '2024-museum-fur-werte':['img/cases/2024-museum-fur-werte.jpg','A dark exhibition table lit by a single lamp.','50% 55%'],
+    /* the park photo, not the festival's map-kiosk photo, until Damiano says which part of the festival used the platform (Q2) */
+    '2024-must-turku':['img/cases/2024-must-turku.jpg','A park path forking between lawns and trees in central Turku.'],
+    '2024-sweco-kaarina':['img/pool/2024-sweco-kaarina--square-vision.jpg','A generated scenario of Kaarina market square: pergola, paving, planting and children on a bench.'],
+    '2024-taltech-training':['img/cases/2024-taltech-training.jpg','The car park and forecourt in front of TalTech’s main building, flags by the entrance.'],
+    '2024-turku-university-nusantara':['img/pool/2024-turku-university-nusantara--laptop.jpg','Participants gathered around a laptop, one pointing at the screen.'],
+    '2024-twente-climate-blue-green':['img/cases/2024-twente-climate-blue-green.jpg','Hands arranging coloured cards and printed images on a workshop table.'],
+    '2024-undp-panama-betania':['img/pool/2024-undp-panama-betania--coast-nature.jpg','A generated scenario of Panama City’s coastline as a nature-based repair: green shoreline, wetlands and parks.'],
+    '2024-zamanand-munich':['img/pool/2024-zamanand-munich--prototype.jpg','The walkable prototype built at the Siegestor: planters, a timber deck and people walking through.','50% 62%'],
+    '2025-berlin-kiezlabor':['img/pool/2025-berlin-kiezlabor--truck.jpg','The Kiezlabor container being lifted onto a truck, ready to tour Berlin’s districts.'],
+    '2025-oulu':['img/pool/2025-oulu--street.jpg','A tree-lined Oulu street and crossing in summer light.'],
+    '2025-turku-biodiversity-park':['img/pool/2025-turku-biodiversity-park--workshop.jpg','Residents and practitioners at laptops with element cards, a scenario on the screen.'],
+    '2026-bologna':['img/pool/2026-bologna--tico-generations.jpg','An older woman and a younger woman looking at a street image together on a touchscreen.'],
+    '2026-giz':['img/cases/2026-giz.jpg','A dirt road beside an open, unbuilt site with scattered trees.'],
+    '2026-lulea':['img/pool/2026-lulea--street-summer.jpg','A Luleå street as a summer scenario, with planters, benches and flowers.'],
+    '2026-norway':['img/pool/2026-norway--homes.jpg','A green field site as a generated scenario of timber homes with gardens and green roofs.'],
+    '2026-vienna':['img/pool/2026-vienna--street-label.jpg','A Vienna street as a calmer scenario with planting and children walking; the city’s label marks it as an AI-generated example image.']
+  };
+
+  /* Images generated in the work carry a quiet "Scenario" tag (the Vienna rule: say what an image is). */
+  var SCEN={'2023-dinnomo-zurich':'Scenario','2023-tallinn-ministry-liivalaia':'Scenario','2023-vantaa':'Scenario',
+    '2024-giz-manila':'Scenario','2024-sweco-kaarina':'Scenario','2024-undp-panama-betania':'Scenario','2026-lulea':'Scenario',
+    '2026-norway':'Scenario','2024-undp-m4eg-chisinau':'Scenario','2026-vienna':'Scenario','2026-wiesbaden':'Scenario',
+    'ai-based-visualisation-for-sustainable-and-affordable-housing':'Scenario','2026-wuf-2026':'Photo and scenario'};
+
+  /* Audience: engagements whose own record documents work with children or young people.
+     Deliberately narrow: fact pack (ACE, Luleå 2023 and 2026, Hamburg, Pristina children), Aarhus (pupils aged 9–12, QA),
+     FACT-AUDIT §7.6 (Panama), the live Milano Digital Week page, the ICLEI title, TICO's school classes. */
+  var KIDS={'2023-ace-children-playgrounds-to-planning':1,'2026-lulea':1,'2025-lulea-subscription':1,'2023-lulea-youth':1,'2024-hamburg-hal':1,
+    '2024-undp-panama-betania':1,'2024-undp-panama-utp-intergenerational':1,'2023-undp-kosovo-children-codesign':1,
+    '2025-iclei-youth-codesign-workshop':1,'2023-milan-design-week':1,'2026-bologna':1,'2024-hal-aarhus':1};
+
+  /* ------------------------------------------------------------------ the cases */
+  var QK={}; C.data.quadrants.forEach(function(q){QK[q.key]=q;});
+  var ORDER=['imagine','test','shape','improve'];
+  function label(k){return QK[k]?QK[k].label:k;}
+  function fold(s){s=String(s==null?'':s);try{s=s.normalize('NFD');}catch(e){}return s.replace(/[̀-ͯ]/g,'').toLowerCase();}
+  function clean(t){return String(t).replace(/\s+-\s+/g,', ').replace(/\s{2,}/g,' ').trim();}
+  function initials(t){var w=String(t).replace(/[()]/g,' ').split(/[\s–-]+/).filter(Boolean);return ((w[0]||'')[0]||'').toUpperCase()+(w.length>1?((w[1]||'')[0]||'').toUpperCase():'');}
+
+  function imageOf(c){
+    var own=IMG.hasOwnProperty(c.slug)?IMG[c.slug]:undefined;
+    if(own) return {src:own[0],alt:own[1],pos:own[2]||''};
+    if(own===undefined&&c.image) return {src:c.image,alt:'A photograph from this engagement.',pos:''};
+    var x=EXTRA[c.slug];
+    if(x&&x.file) return {src:x.file,alt:x.alt||'',pos:'',credit:x.credit||'',kind:x.kind||''};
+    return null;
+  }
+
+  /* never show a hidden record (data/matrix.js "hidden": true: a duplicate kept for provenance) */
+  var CASES=C.data.cases.filter(function(c){ return !c.hidden&&QK[c.task]; }).map(function(c){
+    var place=String(c.place||''), parts=place.split(',');
+    var country=parts.length>1?parts[parts.length-1].trim():place.trim();
+    var city=parts.length>1?parts.slice(0,-1).join(',').trim():'';
+    var title=clean(c.title), line=LINES[c.slug]||'';
+    return {slug:c.slug,title:title,year:+c.year,task:c.task,place:place,city:city,country:country,
+      where:city?city+' · '+country:country,url:SITE.liveUrl(c.slug),img:imageOf(c),line:line,kids:!!KIDS[c.slug],
+      hay:fold([title,place,label(c.task),c.year,line].join(' '))};
+  });
+  var TOTAL=CASES.length;
+
+  /* ------------------------------------------------------------------ the catalogue */
+  var S={task:'all',year:'all',country:'all',kids:false,q:'',sort:'new',view:'cards'};
+  var form=doc.getElementById('uc-form'), qIn=doc.getElementById('uc-q'), taskBox=doc.getElementById('uc-tasks'), taskQ=doc.getElementById('uc-taskq');
+  var ySel=doc.getElementById('uc-year'), cSel=doc.getElementById('uc-country'), kIn=doc.getElementById('uc-kids'), kN=doc.getElementById('uc-kids-n');
+  var out=doc.getElementById('uc-list'), countEl=doc.getElementById('uc-count'), ctl=doc.getElementById('uc-ctl'), active=doc.getElementById('uc-active'), more=doc.getElementById('uc-more');
+  var YEARS=[], COUNTRIES=[];
+  CASES.forEach(function(c){ if(YEARS.indexOf(c.year)<0) YEARS.push(c.year); if(COUNTRIES.indexOf(c.country)<0) COUNTRIES.push(c.country); });
+  YEARS.sort(function(a,b){return b-a;}); COUNTRIES.sort(function(a,b){return a.localeCompare(b);});
+
+  /* state ⇄ URL: ?task=shape&year=2024&country=Finland&kids=1&q=…&sort=old&view=list */
+  (function readURL(){
+    var p; try{p=new URLSearchParams(location.search);}catch(e){return;}
+    var t=p.get('task'); if(t&&QK[t]) S.task=t;
+    var y=p.get('year'); if(y&&YEARS.indexOf(+y)>-1) S.year=y;
+    var co=p.get('country'); if(co&&COUNTRIES.indexOf(co)>-1) S.country=co;
+    if(p.get('kids')==='1') S.kids=true;
+    var q=p.get('q'); if(q) S.q=q.slice(0,80);
+    if(p.get('sort')==='old') S.sort='old';
+    if(p.get('view')==='list') S.view='list';
+  })();
+  function writeURL(){
+    try{
+      var p=new URLSearchParams(location.search);
+      ['task','year','country','kids','q','sort','view'].forEach(function(k){p.delete(k);});
+      if(S.task!=='all') p.set('task',S.task); if(S.year!=='all') p.set('year',S.year);
+      if(S.country!=='all') p.set('country',S.country); if(S.kids) p.set('kids','1');
+      if(S.q) p.set('q',S.q); if(S.sort!=='new') p.set('sort',S.sort); if(S.view!=='cards') p.set('view',S.view);
+      var qs=p.toString(); history.replaceState(null,'',location.pathname+(qs?'?'+qs:'')+location.hash);
+    }catch(e){}
+  }
+  function filtered(){return S.task!=='all'||S.year!=='all'||S.country!=='all'||S.kids||!!S.q;}
+
+  function match(c,skip){
+    if(skip!=='task'&&S.task!=='all'&&c.task!==S.task) return false;
+    if(skip!=='year'&&S.year!=='all'&&String(c.year)!==S.year) return false;
+    if(skip!=='country'&&S.country!=='all'&&c.country!==S.country) return false;
+    if(skip!=='kids'&&S.kids&&!c.kids) return false;
+    if(S.q){var t=fold(S.q).split(/\s+/).filter(Boolean);for(var i=0;i<t.length;i++){if(c.hay.indexOf(t[i])<0)return false;}}
+    return true;
+  }
+  function count(fn,skip){var n=0;CASES.forEach(function(c){if(fn(c)&&match(c,skip))n++;});return n;}
+
+  /* the task options, each with the question people are asked in it (from data/matrix.js) */
+  taskBox.innerHTML=[{k:'all',l:'All tasks',q:''}].concat(ORDER.map(function(k){return {k:k,l:label(k),q:QK[k].question||''};})).map(function(o){
+    return '<label class="uc-opt"><input type="radio" name="task" value="'+o.k+'">'+
+      '<span class="uc-dot uc-dot--'+o.k+'" aria-hidden="true"></span>'+
+      '<span class="uc-opt__t"><span class="uc-opt__name">'+esc(o.l)+'</span>'+(o.q?'<span class="uc-opt__q">'+esc(o.q)+'</span>':'')+'</span>'+
+      '<span class="uc-opt__n"><span data-n="'+o.k+'"></span><span class="sr"> engagements</span></span></label>';
+  }).join('');
+
+  function syncControls(){
+    taskBox.querySelectorAll('input').forEach(function(i){
+      var k=i.value, n=count(function(c){return k==='all'||c.task===k;},'task');
+      i.checked=(k===S.task); i.disabled=(n===0&&k!==S.task);
+      taskBox.querySelector('[data-n="'+k+'"]').textContent=n;
+    });
+    taskQ.innerHTML=S.task==='all'?'Choose a task to see what people were asked.':'<span class="q">'+esc(QK[S.task].question||'')+'</span>';
+    ySel.innerHTML='<option value="all">All years ('+count(function(){return true;},'year')+')</option>'+YEARS.map(function(y){
+      var n=count(function(c){return c.year===y;},'year');
+      return '<option value="'+y+'"'+(n===0&&String(y)!==S.year?' disabled':'')+'>'+y+' ('+n+')</option>';
+    }).join('');
+    ySel.value=S.year;
+    cSel.innerHTML='<option value="all">All countries ('+count(function(){return true;},'country')+')</option>'+COUNTRIES.map(function(co){
+      var n=count(function(c){return c.country===co;},'country');
+      return '<option value="'+esc(co)+'"'+(n===0&&co!==S.country?' disabled':'')+'>'+esc(co)+' ('+n+')</option>';
+    }).join('');
+    cSel.value=S.country;
+    var kn=count(function(c){return c.kids;},'kids');
+    kIn.checked=S.kids; kIn.disabled=(kn===0&&!S.kids); kN.textContent=kn;
+    if(qIn.value!==S.q) qIn.value=S.q;
+    ctl.querySelectorAll('input[name="sort"]').forEach(function(i){i.checked=(i.value===S.sort);});
+    ctl.querySelectorAll('input[name="view"]').forEach(function(i){i.checked=(i.value===S.view);});
+    /* the filters in force, each one removable */
+    var a=[];
+    if(S.task!=='all') a.push(['task',label(S.task)]);
+    if(S.year!=='all') a.push(['year',S.year]);
+    if(S.country!=='all') a.push(['country',S.country]);
+    if(S.kids) a.push(['kids','With children and young people']);
+    if(S.q) a.push(['q','“'+S.q+'”']);
+    active.hidden=!a.length;
+    active.innerHTML=a.map(function(f){
+      return '<button type="button" class="uc-chip" data-rm="'+f[0]+'" aria-label="Remove filter: '+esc(f[1])+'">'+esc(f[1])+'<span class="uc-chip__x" aria-hidden="true"></span></button>';
+    }).join('')+(a.length>1?'<button type="button" class="link" data-clear>Clear all</button>':'');
+  }
+
+  /* one card, one engagement */
+  function media(c){
+    var i=c.img;
+    if(i){
+      var pos=i.pos?' style="object-position:'+esc(i.pos)+'"':'';
+      var tag=SCEN[c.slug]?'<span class="uc-tag" aria-hidden="true"><span class="uc-tag__l">'+esc(SCEN[c.slug])+'</span><span class="uc-tag__s">Scenario</span></span>':'';
+      return '<div class="card__media'+(i.kind==='city-map'?' uc-mapimg':'')+'"><img src="'+esc(i.src)+'" alt="'+esc(i.alt)+'" loading="lazy" decoding="async"'+pos+'>'+tag+'</div>';
+    }
+    var nm=c.city||c.country;
+    return '<div class="card__media uc-ph uc-ph--'+c.task+'" aria-hidden="true"><span class="uc-ph__city">'+esc(nm)+'</span><span class="uc-ph__ini">'+esc(initials(nm))+'</span></div>';
+  }
+  function credit(c){ return (c.img&&c.img.credit)?'<span class="uc-credit'+(c.img.kind==='city-map'?' uc-credit--map':'')+'">'+esc(c.img.credit)+'</span>':''; }
+  function foot(c,short){
+    /* a partner's own project page (TICO, Bologna: data/case-links.json "external") is not our case page */
+    var ext=c.url&&!/^https:\/\/coplanai\.com\//.test(c.url), k=ext?'project':'case';
+    return c.url?'<span class="uc-go">'+(short?(ext?'Project page':'Case page'):'Open the '+k+' page')+'<span class="sr"> (opens in a new tab)</span></span>':'<span class="uc-soon">No case page yet</span>';
+  }
+  function card(c){
+    var inner=media(c)+
+      '<div class="uc-card__b">'+
+        '<p class="card__meta"><span class="cap cap--sm cap--'+c.task+'">'+esc(label(c.task))+'</span><span class="lab">'+esc(c.where)+'</span></p>'+
+        '<h4 class="card__title">'+esc(c.title)+'</h4>'+
+        (c.line?'<p class="card__text">'+esc(c.line)+'</p>':'')+
+        '<p class="uc-foot">'+foot(c)+'</p>'+
+      '</div>'+credit(c);
+    return '<li class="uc-item" id="case-'+esc(c.slug)+'">'+(c.url
+      ?'<a class="card uc-card" href="'+esc(c.url)+'" target="_blank" rel="noopener">'+inner+'</a>'
+      :'<article class="card uc-card uc-card--off">'+inner+'</article>')+'</li>';
+  }
+  function row(c){
+    var inner='<span class="uc-dot uc-dot--'+c.task+'" aria-hidden="true"></span>'+
+      '<span class="uc-row__t">'+esc(c.title)+'</span>'+
+      '<span class="uc-row__p">'+esc(c.where)+'<span class="sr">, '+esc(label(c.task))+'</span></span>'+
+      '<span class="uc-row__k" aria-hidden="true"><span class="cap cap--sm cap--'+c.task+'">'+esc(label(c.task))+'</span></span>'+
+      '<span class="uc-row__go">'+foot(c,true)+'</span>';
+    return '<li id="case-'+esc(c.slug)+'">'+(c.url
+      ?'<a class="uc-row" href="'+esc(c.url)+'" target="_blank" rel="noopener">'+inner+'</a>'
+      :'<div class="uc-row uc-row--off">'+inner+'</div>')+'</li>';
+  }
+
+  function render(){
+    var list=CASES.filter(function(c){return match(c);});
+    list.sort(function(a,b){return (S.sort==='old'?a.year-b.year:b.year-a.year)||a.place.localeCompare(b.place)||a.title.localeCompare(b.title);});
+    var groups=[], cur=null;
+    list.forEach(function(c){ if(!cur||cur.y!==c.year){cur={y:c.year,items:[]};groups.push(cur);} cur.items.push(c); });
+    if(!list.length){
+      out.innerHTML='<div class="uc-empty"><p class="say say--s">This combination matches none of the '+TOTAL+'. Try removing a filter.</p><div class="actions"><button type="button" class="link" data-clear>Clear all filters</button></div></div>';
+    } else {
+      out.innerHTML=groups.map(function(g){
+        return '<section class="uc-group" aria-labelledby="y-'+g.y+'">'+
+          '<div class="uc-yh"><h3 class="uc-yh__n" id="y-'+g.y+'">'+g.y+'</h3><span class="lab">'+g.items.length+(g.items.length===1?' engagement':' engagements')+'</span></div>'+
+          (S.view==='list'?'<ul class="uc-list">'+g.items.map(row).join('')+'</ul>':'<ul class="uc-grid">'+g.items.map(card).join('')+'</ul>')+
+        '</section>';
+      }).join('');
+    }
+    countEl.innerHTML=filtered()
+      ?'<b>'+list.length+'</b> of '+TOTAL+' engagements'
+      :'All <b>'+TOTAL+'</b> engagements';
+  }
+  function syncAll(){ syncControls(); render(); writeURL(); }
+
+  /* events */
+  taskBox.addEventListener('change',function(e){if(e.target.name==='task'){S.task=e.target.value;syncAll();}});
+  ySel.addEventListener('change',function(){S.year=ySel.value;syncAll();});
+  cSel.addEventListener('change',function(){S.country=cSel.value;syncAll();});
+  kIn.addEventListener('change',function(){S.kids=kIn.checked;syncAll();});
+  ctl.addEventListener('change',function(e){
+    if(e.target.name==='sort'){S.sort=e.target.value;syncAll();}
+    if(e.target.name==='view'){S.view=e.target.value;syncAll();}
+  });
+  var qt=null;
+  qIn.addEventListener('input',function(){clearTimeout(qt);qt=setTimeout(function(){S.q=qIn.value.trim().slice(0,80);syncAll();},140);});
+  function clearAll(){S.task='all';S.year='all';S.country='all';S.kids=false;S.q='';syncAll();}
+  function onClick(e){
+    var t=e.target.closest&&e.target.closest('[data-rm],[data-clear]'); if(!t) return;
+    if(t.hasAttribute('data-clear')){ clearAll(); qIn.focus(); return; }
+    var k=t.getAttribute('data-rm'), idx=Array.prototype.indexOf.call(active.querySelectorAll('.uc-chip'),t);
+    if(k==='kids') S.kids=false; else if(k==='q') S.q=''; else S[k]='all';
+    syncAll();
+    /* keep the keyboard in the chip row: the chip that took this one's place, else the search */
+    var chips=active.querySelectorAll('.uc-chip'); var next=chips[Math.min(idx,chips.length-1)];
+    if(next) next.focus(); else qIn.focus();
+  }
+  active.addEventListener('click',onClick);
+  out.addEventListener('click',onClick);
+
+  /* smaller screens fold year, country and audience into "More filters"; wide screens keep them open */
+  var mqWide=window.matchMedia('(min-width:981px)'), moreTouched=false;
+  more.addEventListener('toggle',function(){ if(!mqWide.matches) moreTouched=true; });
+  function syncMore(){
+    var p=null; try{p=new URLSearchParams(location.search).get('filters');}catch(e){}
+    if(mqWide.matches){ more.open=true; }
+    else if(!moreTouched){ more.open=(p==='open')||S.year!=='all'||S.country!=='all'||S.kids; }
+  }
+  if(mqWide.addEventListener) mqWide.addEventListener('change',syncMore); else if(mqWide.addListener) mqWide.addListener(syncMore);
+  more.querySelector('summary').addEventListener('click',function(e){ if(mqWide.matches) e.preventDefault(); });
+
+  syncMore(); syncAll();
+  if(filtered()&&location.hash===''&&/[?&](task|year|country|kids|q)=/.test(location.search)){
+    /* arriving with a filter (e.g. from Use CoPlanAI): open on the catalogue */
+    setTimeout(function(){ doc.getElementById('catalogue').scrollIntoView({block:'start'}); },60);
+  }
+  SITE.bind(doc);
+
+  /* ------------------------------------------------------------------ the map */
+  var mapEl=doc.getElementById('uc-map'), note=doc.getElementById('uc-map-note'), legend=doc.getElementById('uc-legend');
+  var M=window.CoplanMap, ctrl=null, crop=null;
+  if(M&&mapEl){
+    var TC=M.taskColours();
+    legend.innerHTML=ORDER.map(function(k){return '<span><i style="background:'+esc(TC.mark[k])+'"></i>'+esc(label(k))+'</span>';}).join('')+
+      '<span><i style="background:'+esc(TC.mark.none)+'"></i>Not yet in the catalogue</span>';
+    var cropFor=function(){ return (mapEl.clientWidth||900)<700?'europe':'keynote'; };
+    var reserve=function(c){ var w=mapEl.clientWidth; if(w) mapEl.style.minHeight=Math.round(w/M.aspect(c))+'px'; };
+    var onrender=function(m){
+      mapEl.style.minHeight='';
+      var outside=(m.outside||[]).map(function(p){return p.place;});
+      note.textContent='Hover or focus a city for its engagements; the arrow keys move between cities.'+
+        (outside.length?' Beyond this frame: '+outside.join(', ')+'.':'');
+    };
+    var draw=function(){
+      var c=cropFor();
+      if(!ctrl){ crop=c; reserve(c); ctrl=M.render(mapEl,{fill:'stipple',crop:c,marks:'task',labels:true,interactive:true,totals:false,onrender:onrender}); }
+      else if(c!==crop){ crop=c; ctrl.update({crop:c}); }
+    };
+    reserve(cropFor());
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(en){ if(en.some(function(x){return x.isIntersecting;})){ io.disconnect(); draw(); } },{rootMargin:'800px 0px'});
+      io.observe(mapEl);
+    } else draw();
+    var rt=null;
+    window.addEventListener('resize',function(){ clearTimeout(rt); rt=setTimeout(function(){ if(ctrl) draw(); else reserve(cropFor()); },160); });
+    doc.addEventListener('site:type',function(){ if(ctrl) ctrl.update({}); });
+  }
+});
+</script>
+</body>
+</html>

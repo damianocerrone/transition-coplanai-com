@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-type="commons-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CoPlanAI · Signals</title>
+<meta name="coplan:release" content="public">
+<link rel="canonical" href="https://coplanai.com/signals.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CoPlanAI">
+<meta property="og:title" content="CoPlanAI · Signals">
+<meta property="og:description" content="Articles, research, reports and talks about our work in collaborative planning, from the cities and institutions we work with, from researchers and from the press. Newest first; every entry links to the original.">
+<meta property="og:url" content="https://coplanai.com/signals.html">
+<meta property="og:image" content="https://coplanai.com/img/pairs/vienna--vie-street.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="Articles, research, reports and talks about our work in collaborative planning, from the cities and institutions we work with, from researchers and from the press. Newest first; every entry links to the original.">
+<!-- type preset before first paint: ?type=<key> → saved choice → the attribute above. Keep this first in <head>. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500..700&family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=Onest:wght@800&family=Schibsted+Grotesk:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+<!-- page-specific components only: the index (filters, year groups, rows).
+     The page closes on the shared invitation (<div data-site-invite>, FOUNDATION.md §5). -->
+<style>
+/* ---------- page head ---------- */
+.sig-head .display{max-width:11.5em}
+.sig-head__note{margin-top:14px;color:var(--ink-3)}
+.sig-head .stats{margin-top:clamp(34px,3.6vw,48px);max-width:640px}
+.sig-review-note{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-top:18px;text-transform:none;letter-spacing:.02em}
+
+/* ---------- the index: filters beside the list ---------- */
+.sig-index{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,9fr);gap:0 clamp(36px,4.4vw,72px);align-items:start;border-top:1px solid var(--rule)}
+.sig-filters{position:sticky;top:var(--header-h);max-height:calc(100vh - var(--header-h));max-height:calc(100dvh - var(--header-h));overflow-y:auto;overscroll-behavior:contain;padding:30px 4px 32px 0;scrollbar-width:thin}
+.sf-title{margin-bottom:14px}
+.sf-search{position:relative}
+.sf-search svg{position:absolute;left:16px;top:50%;width:17px;height:17px;margin-top:-8.5px;color:var(--ink-3);pointer-events:none}
+.sf-search input{display:block;width:100%;height:48px;margin:0;padding:0 16px 0 44px;border:0;border-radius:var(--r-pill);background:var(--field);font-family:var(--f-ui);font-weight:var(--w-text);font-size:16px;line-height:1;letter-spacing:0;color:var(--ink);-webkit-appearance:none;appearance:none}
+.sf-search input::placeholder{color:var(--ink-4);opacity:1}
+.sf-search input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
+.sf-search input:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.sf-toggle{display:none}
+.sf-group{margin:0;padding:0;border:0;min-width:0}
+.sf-panel{margin-top:28px}
+.sf-group + .sf-group{margin-top:28px}
+.sf-group > legend,.sf-group > .lab{display:block;padding:0;margin-bottom:12px}
+.sf-chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative;display:inline-flex}
+.chip input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.chip span{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px 0 15px;border-radius:var(--r-pill);box-shadow:inset 0 0 0 1px var(--rule);font-family:var(--f-ui);font-weight:var(--w-ui);font-size:15px;line-height:1;letter-spacing:0;color:var(--ink-2);white-space:nowrap;transition:background-color .15s,color .15s,box-shadow .15s}
+.chip span i{font-style:normal;font-family:var(--f-label);font-weight:var(--w-label);font-size:11px;letter-spacing:.04em;color:var(--ink-4);font-variant-numeric:tabular-nums}
+.chip:hover span{background:var(--field)}
+.chip input:checked + span{background:var(--ink);color:var(--ground);box-shadow:none}
+.chip input:checked + span i{color:color-mix(in srgb,var(--ground) 74%,transparent)}
+.chip input:focus-visible + span{outline:2px solid var(--focus);outline-offset:2px}
+.chip.is-zero:not(:has(input:checked)) span{color:var(--ink-4)}
+.sf-select{position:relative}
+.sf-select select{display:block;width:100%;height:48px;margin:0;padding:0 44px 0 16px;border:0;border-radius:var(--r-pill);background:var(--field);font-family:var(--f-ui);font-weight:var(--w-ui);font-size:15.5px;line-height:1.2;letter-spacing:0;color:var(--ink);-webkit-appearance:none;appearance:none;cursor:pointer;text-overflow:ellipsis}
+.sf-select select:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.sf-select::after{content:"";position:absolute;right:20px;top:50%;width:8px;height:8px;margin-top:-6px;border-right:1.5px solid var(--ink-3);border-bottom:1.5px solid var(--ink-3);transform:rotate(45deg);pointer-events:none}
+.sf-status{margin-top:30px;padding-top:18px;border-top:1px solid var(--rule-soft);display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:10px 18px}
+.sf-status .lab b{color:var(--ink)}
+
+/* the list, one year at a time */
+.sig-list{min-width:0}
+.sig-year__head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:40px 0 14px;border-bottom:1px solid var(--rule)}
+.sig-year:first-child .sig-year__head{padding-top:26px}
+.sig-year__n{font-family:var(--f-display);font-weight:var(--w-display);font-variation-settings:var(--fvs-display);font-size:clamp(38px,3.4vw,52px);line-height:1;letter-spacing:var(--ls-h2);color:var(--ink);font-variant-numeric:lining-nums}
+.sig-rows{list-style:none}
+.sig-row{position:relative;display:grid;grid-template-columns:118px minmax(0,1fr);gap:10px 30px;padding:24px 0 26px;border-bottom:1px solid var(--rule-soft)}
+.sig-row__meta{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding-top:3px}
+.sig-row__src{font-family:var(--f-ui);font-weight:var(--w-ui);font-size:15px;line-height:1.4;letter-spacing:0;color:var(--ink-2)}
+.sig-row__title{margin-top:5px;font-family:var(--f-name);font-weight:var(--w-name);font-size:clamp(20px,1.5vw,22.5px);line-height:1.22;letter-spacing:var(--ls-name);color:var(--ink);text-wrap:pretty}
+.sig-row__title a{color:inherit;text-decoration:none;transition:color .2s;scroll-margin-top:calc(var(--header-h) + 40px);scroll-margin-bottom:40px}
+.sig-row__title a::after{content:"";position:absolute;inset:0;z-index:0}
+.sig-row__title a:focus-visible{outline:none}
+.sig-row__title a:focus-visible::after{inset:4px -12px;outline:2px solid var(--focus);outline-offset:0;border-radius:12px}
+.sig-ext{display:inline-block;margin-left:.3em;font-family:var(--f-ui);font-weight:var(--w-text);font-size:.82em;line-height:1;color:var(--ink-4);transition:transform .2s,color .2s}
+.sig-row:hover .sig-row__title a,.sig-row__title a:focus-visible{color:var(--amber)}
+.sig-row:hover .sig-ext{color:var(--amber);transform:translate(2px,-2px)}
+.sig-row__sum{margin-top:9px;font-size:calc(var(--fs-text) - 2px);line-height:1.55;color:var(--ink-3);max-width:44em}
+.sig-row__case{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin-top:14px}
+.sig-row__case .link{font-size:14.5px;border-bottom:0;padding-bottom:0;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px;text-decoration-color:color-mix(in srgb,var(--ink) 40%,transparent)}
+.sig-row__case .link:hover{text-decoration-color:var(--amber)}
+.cap--review{box-shadow:inset 0 0 0 1px var(--ink-3);background:transparent;color:var(--ink-2);outline:1.5px dashed var(--ink-3);outline-offset:2px}
+.sig-more{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 22px;padding-top:30px}
+.sig-empty{padding:44px 0 20px}
+.sig-empty .say{max-width:18em}
+.sig-empty .actions{margin-top:22px}
+
+/* ---------- responsive ---------- */
+@media (max-width:1120px){
+  .sig-index{grid-template-columns:minmax(0,4fr) minmax(0,8fr)}
+  .sig-row{grid-template-columns:104px minmax(0,1fr);gap:10px 24px}
+}
+@media (max-width:980px){
+  .sig-index{grid-template-columns:minmax(0,1fr)}
+  .sig-filters{position:static;max-height:none;overflow:visible;padding:26px 0 8px}
+  .sf-bar{display:flex;gap:10px;align-items:center}
+  .sf-bar .sf-search{flex:1;min-width:0}
+  .sf-toggle{display:inline-flex;align-items:center;gap:8px;flex:none;height:48px;padding:0 18px;border:0;border-radius:var(--r-pill);background:transparent;box-shadow:inset 0 0 0 1px var(--rule);font-family:var(--f-ui);font-weight:var(--w-ui);font-size:15.5px;line-height:1;letter-spacing:0;color:var(--ink)}
+  .sf-toggle[aria-expanded="true"]{background:var(--ink);color:var(--ground);box-shadow:none}
+  .sf-toggle b{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 6px;border-radius:var(--r-pill);background:var(--amber);color:var(--ground);font-family:var(--f-ui);font-weight:var(--w-ui);font-size:11.5px;line-height:1;letter-spacing:0}
+  .sf-toggle:focus-visible{border-radius:var(--r-pill)}
+  .js .sf-panel:not(.is-open){display:none}
+  .sf-panel{margin-top:22px}
+  .sf-status{margin-top:22px}
+  .sig-year:first-child .sig-year__head{padding-top:18px}
+}
+@media (max-width:640px){
+  .sig-row{grid-template-columns:minmax(0,1fr);gap:0;padding:20px 0 22px}
+  .sig-row__meta{flex-direction:row;align-items:center;gap:12px;padding:0 0 10px}
+  .sig-row__title{margin-top:4px}
+  .sf-toggle .sf-toggle__long{display:none}
+  .sig-year__n{font-size:38px}
+}
+</style>
+</head>
+<body data-page="signals">
+
+<div data-site-header></div>
+
+<main id="main">
+
+<!-- ============ PAGE HEAD ============ -->
+<section class="wrap page-head sig-head" aria-labelledby="h1">
+  <p class="eyebrow">Signals · media, research and news</p>
+  <h1 class="display" id="h1">The work, as others <em>report</em> it.</h1>
+  <p class="lede">Articles, research, reports and talks about our work: from the cities and institutions we work with, from researchers and from the press.</p>
+  <p class="body sig-head__note">Each entry opens the original in a new tab. Where an entry is about one of our engagements, it also links to that <a href="use-cases.html">use case</a>.</p>
+  <p class="stats"><span><b data-s="total">84</b> signals</span><span><b data-s="sources">63</b> sources</span><span>since <b data-s="since">2023</b></span><span>newest first</span></p>
+</section>
+
+<!-- ============ THE INDEX ============ -->
+<section class="section section--flush-top" aria-labelledby="idx-h">
+  <div class="wrap">
+    <h2 class="sr" id="idx-h">All signals</h2>
+    <div class="sig-index">
+
+      <div class="sig-filters" id="sig-filters">
+        <p class="lab sf-title" id="sf-title">Find a signal</p>
+        <div class="sf-bar">
+          <form class="sf-search" role="search" aria-labelledby="sf-title" onsubmit="return false">
+            <label class="sr" for="sf-q">Search signals by title, source, place or use case</label>
+            <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="8.5" cy="8.5" r="6" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M13 13l5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            <input type="search" id="sf-q" name="q" placeholder="Title, source, place…" autocomplete="off" spellcheck="false">
+          </form>
+          <button type="button" class="sf-toggle" id="sf-toggle" aria-expanded="false" aria-controls="sf-panel"><span>Filters<span class="sf-toggle__long">: type, year, source</span></span><b id="sf-active" hidden>0</b></button>
+        </div>
+
+        <div class="sf-panel" id="sf-panel">
+          <fieldset class="sf-group">
+            <legend class="lab">Type</legend>
+            <div class="sf-chips" id="sf-kind"></div>
+          </fieldset>
+          <fieldset class="sf-group">
+            <legend class="lab">Year</legend>
+            <div class="sf-chips" id="sf-year"></div>
+          </fieldset>
+          <div class="sf-group">
+            <label class="lab" for="sf-src">Source</label>
+            <div class="sf-select"><select id="sf-src"></select></div>
+          </div>
+        </div>
+
+        <div class="sf-status">
+          <p class="lab" id="sf-count" aria-live="polite" aria-atomic="true"><b>84</b> signals, newest first</p>
+          <button type="button" class="link" id="sf-clear" hidden>Clear filters</button>
+        </div>
+      </div>
+
+      <div class="sig-list" id="sig-list">
+        <noscript><p class="body" style="padding-top:28px">The index is built in your browser. You can also read it on the <a href="https://coplanai.com/knowledge/" target="_blank" rel="noopener">current Signals page<span class="sr"> (opens in a new tab)</span></a>.</p></noscript>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ THE SHARED INVITATION (rendered by site.js; text in site.js INVITE / WAYS) ============ -->
+<div data-site-invite></div>
+
+<div data-site-footer></div>
+
+<script src="data/signals-public.js"></script>
+<script src="assets/site.js"></script>
+<script>
+SITE.ready(function(){
+  'use strict';
+  var DATA=window.SIGNALS_PUBLIC; if(!DATA||!DATA.items) return;
+  document.documentElement.classList.add('js');
+  var esc=SITE.esc, doc=document;
+
+  /* ---------- settings ---------- */
+  var TYPE_KEYS=['Press','Report','Talk','Video','Link'];
+  var TYPE_ONE={Press:'Press',Report:'Report',Talk:'Talk',Video:'Video',Link:'Link'};
+  var TYPE_MANY=DATA.types||{};
+  var NEW_TAB='<span class="sr"> (opens in a new tab)</span>';
+
+  var params=null; try{params=new URLSearchParams(location.search);}catch(e){}
+  function P(k){return params?params.get(k):null;}
+  var REVIEW=P('review')==='1'&&!document.querySelector('meta[name="coplan:release"][content="public"]');   /* review mode: also show the items held for Damiano's decision */
+
+  function norm(s){s=String(s==null?'':s);try{s=s.normalize('NFD');}catch(e){}return s.replace(/[̀-ͯ]/g,'').toLowerCase();}
+
+  var ITEMS=DATA.items.filter(function(x){return x.r==='show'||(REVIEW&&x.r==='review');});
+  ITEMS.forEach(function(x){
+    x._q=norm([x.t,x.o,x.g,x.s,x.d,x.k,TYPE_MANY[x.k]||'',(x.c||[]).map(function(c){return c.n;}).join(' ')].join(' '));
+  });
+  var YEARS=[]; ITEMS.forEach(function(x){if(YEARS.indexOf(x.y)<0)YEARS.push(x.y);}); YEARS.sort(function(a,b){return b-a;});
+  var RECENT=YEARS.slice(0,2);      /* default view: the two newest years, the rest behind "Show" */
+  var GROUPS={}; ITEMS.forEach(function(x){GROUPS[x.g]=(GROUPS[x.g]||0)+1;});
+  var GROUP_LIST=Object.keys(GROUPS).sort(function(a,b){return GROUPS[b]-GROUPS[a]||a.localeCompare(b,'en');});
+
+  /* ---------- page-head figures ---------- */
+  /* sources = organisations, counted as the Source filter counts them (one per group), so the two numbers agree */
+  var FIG={total:ITEMS.length,sources:GROUP_LIST.length,since:YEARS[YEARS.length-1]};
+  doc.querySelectorAll('[data-s]').forEach(function(el){var k=el.getAttribute('data-s'); if(FIG[k]!=null) el.textContent=FIG[k];});
+  if(REVIEW){
+    var nRev=ITEMS.filter(function(x){return x.r==='review';}).length, st=doc.querySelector('.sig-head .stats');
+    if(st) st.insertAdjacentHTML('afterend','<p class="lab sig-review-note"><span class="cap cap--sm cap--review">For review</span>Review view: the '+nRev+' entries held for a decision are shown and marked. The public page leaves them out.</p>');
+  }
+
+  /* ---------- state (mirrored in the URL: ?kind= &year= &src= &q= &all=1) ---------- */
+  var state={kind:'all',year:'all',src:'all',q:'',all:false};
+  (function(){
+    var k=P('kind'); if(k){k=k.charAt(0).toUpperCase()+k.slice(1).toLowerCase(); if(TYPE_KEYS.indexOf(k)>=0) state.kind=k;}
+    var y=parseInt(P('year'),10); if(YEARS.indexOf(y)>=0) state.year=y;
+    var s=P('src'); if(s&&GROUPS[s]) state.src=s;
+    var q=P('q'); if(q) state.q=q.slice(0,80);
+    if(P('all')==='1') state.all=true;
+  })();
+
+  function matches(x,st,skip){
+    if(skip!=='kind'&&st.kind!=='all'&&x.k!==st.kind) return false;
+    if(skip!=='year'&&st.year!=='all'&&x.y!==st.year) return false;
+    if(st.src!=='all'&&x.g!==st.src) return false;
+    if(st.q){
+      var terms=norm(st.q).split(/\s+/).filter(Boolean);
+      for(var i=0;i<terms.length;i++){ if(x._q.indexOf(terms[i])<0) return false; }
+    }
+    return true;
+  }
+  function isFiltered(st){return st.kind!=='all'||st.year!=='all'||st.src!=='all'||!!norm(st.q).trim();}
+
+  /* ---------- controls ---------- */
+  var elKind=doc.getElementById('sf-kind'), elYear=doc.getElementById('sf-year'), elSrc=doc.getElementById('sf-src');
+  var elQ=doc.getElementById('sf-q'), elCount=doc.getElementById('sf-count'), elClear=doc.getElementById('sf-clear');
+  var elList=doc.getElementById('sig-list'), elToggle=doc.getElementById('sf-toggle'), elPanel=doc.getElementById('sf-panel');
+  var elActive=doc.getElementById('sf-active');
+
+  function chip(name,value,label,checked){
+    return '<label class="chip" data-v="'+esc(value)+'"><input type="radio" name="'+name+'" value="'+esc(value)+'"'+(checked?' checked':'')+'><span>'+esc(label)+' <i aria-hidden="true"></i><em class="sr"></em></span></label>';
+  }
+  elKind.innerHTML=chip('kind','all','All',state.kind==='all')+TYPE_KEYS.map(function(k){return chip('kind',k,TYPE_MANY[k]||k,state.kind===k);}).join('');
+  elYear.innerHTML=chip('year','all','All years',state.year==='all')+YEARS.map(function(y){return chip('year',String(y),String(y),state.year===y);}).join('');
+  elSrc.innerHTML='<option value="all">All sources ('+GROUP_LIST.length+')</option>'+GROUP_LIST.map(function(g){return '<option value="'+esc(g)+'"'+(state.src===g?' selected':'')+'>'+esc(g)+' ('+GROUPS[g]+')</option>';}).join('');
+  elQ.value=state.q;
+
+  function setChipCounts(box,counts,total){
+    box.querySelectorAll('.chip').forEach(function(c){
+      var v=c.getAttribute('data-v'), n=(v==='all')?total:(counts[v]||0);
+      c.querySelector('i').textContent=n;
+      c.querySelector('em').textContent=', '+n+(n===1?' signal':' signals');
+      c.classList.toggle('is-zero',n===0);
+    });
+  }
+
+  /* ---------- rows ---------- */
+  function caseLinks(x,cls){
+    if(!x.c||!x.c.length) return '';
+    return '<p class="'+cls+'"><span class="lab">'+(x.c.length>1?'Use cases':'Use case')+'</span>'+
+      x.c.map(function(c){return '<a class="link link--ext" href="'+esc(c.u)+'" target="_blank" rel="noopener">'+esc(c.n)+NEW_TAB+'</a>';}).join('')+'</p>';
+  }
+  /* a title that repeats its source ("OECD — …" under the source "OECD") drops the repeat */
+  function titleOf(x){
+    var t=String(x.t), o=String(x.o||''), pre=o+' \u2014 ';
+    if(o&&t.indexOf(pre)===0&&t.length>pre.length){ t=t.slice(pre.length); t=t.charAt(0).toUpperCase()+t.slice(1); }
+    return t;
+  }
+  function titleLink(x){
+    /* keep the last word and the arrow together, so ↗ never wraps alone */
+    var t=titleOf(x), i=t.lastIndexOf(' ');
+    var head=i>0?esc(t.slice(0,i+1)):'', tail=i>0?t.slice(i+1):t;
+    return '<a href="'+esc(x.u)+'" target="_blank" rel="noopener"'+(x.l?' lang="'+x.l+'"':'')+'>'+head+'<span class="nw">'+esc(tail)+'<span class="sig-ext" aria-hidden="true">↗</span></span>'+NEW_TAB+'</a>';
+  }
+  function row(x){
+    return '<li class="sig-row" data-id="'+esc(x.id)+'">'+
+      '<div class="sig-row__meta">'+
+        '<p class="lab"><time datetime="'+esc(x.ds)+'">'+esc(x.d)+'</time></p>'+
+        '<span class="cap cap--sm cap--line">'+esc(TYPE_ONE[x.k]||x.k)+'</span>'+
+        (x.r==='review'?'<span class="cap cap--sm cap--review" title="Held back for review: not shown on the public page">For review</span>':'')+
+      '</div>'+
+      '<div class="sig-row__main">'+
+        '<p class="sig-row__src">'+esc(x.o)+'</p>'+
+        '<h4 class="sig-row__title">'+titleLink(x)+'</h4>'+
+        '<p class="sig-row__sum">'+esc(x.s)+'</p>'+
+        caseLinks(x,'sig-row__case')+
+      '</div>'+
+    '</li>';
+  }
+
+  /* ---------- render ---------- */
+  var announceT=null;
+  function announce(text){
+    clearTimeout(announceT);
+    announceT=setTimeout(function(){elCount.innerHTML=text;},420);
+  }
+  /* after a filter change, bring the top of the index back into view if it has scrolled away */
+  var elIndex=doc.querySelector('.sig-index');
+  function revealIndex(){
+    var hh=(doc.getElementById('site-header')||{offsetHeight:0}).offsetHeight;
+    var top=elIndex.getBoundingClientRect().top;
+    if(top<hh-1) window.scrollTo({top:Math.max(0,window.pageYOffset+top-hh),behavior:SITE.reduceMotion?'auto':'smooth'});
+  }
+  function render(opts){
+    opts=opts||{};
+    var list=ITEMS.filter(function(x){return matches(x,state);});
+    var filtered=isFiltered(state);
+
+    /* facet counts: each group counts within the other active filters */
+    var kc={}, kt=0; ITEMS.forEach(function(x){ if(matches(x,state,'kind')){kc[x.k]=(kc[x.k]||0)+1;kt++;} });
+    var yc={}, yt=0; ITEMS.forEach(function(x){ if(matches(x,state,'year')){yc[x.y]=(yc[x.y]||0)+1;yt++;} });
+    setChipCounts(elKind,kc,kt); setChipCounts(elYear,yc,yt);
+
+    var limited=!filtered&&!state.all;
+    var shown=limited?list.filter(function(x){return RECENT.indexOf(x.y)>=0;}):list;
+    var hiddenN=list.length-shown.length;
+
+    var html='';
+    YEARS.forEach(function(y){
+      var inYear=list.filter(function(x){return x.y===y;});
+      var rows=shown.filter(function(x){return x.y===y;});
+      if(!rows.length) return;
+      html+='<section class="sig-year" aria-labelledby="y-'+y+'">'+
+        '<header class="sig-year__head"><h3 class="sig-year__n" id="y-'+y+'">'+y+'</h3><p class="lab">'+inYear.length+(inYear.length===1?' signal':' signals')+'</p></header>'+
+        '<ul class="sig-rows">'+rows.map(row).join('')+'</ul>'+
+      '</section>';
+    });
+    if(!list.length){
+      html='<div class="sig-empty"><p class="say say--s">No signal matches '+(norm(state.q).trim()?'“'+esc(state.q.trim())+'”':'these filters')+'.</p>'+
+        '<p class="body" style="margin-top:12px">Try fewer words, another year, or all sources.</p>'+
+        '<div class="actions"><button type="button" class="link" data-clear>Clear filters</button></div></div>';
+    }
+    if(hiddenN>0){
+      var older=YEARS.filter(function(y){return RECENT.indexOf(y)<0;});
+      html+='<div class="sig-more"><button type="button" class="link link--arrow" data-more>Show the '+hiddenN+' earlier signals</button>'+
+        '<p class="lab">'+older[older.length-1]+'–'+older[0]+'</p></div>';
+    }
+    elList.innerHTML=html;
+
+    var msg=filtered?('<b>'+list.length+'</b> of '+ITEMS.length+' signals'):('<b>'+ITEMS.length+'</b> signals, newest first');
+    if(opts.now){clearTimeout(announceT); elCount.innerHTML=msg;} else announce(msg);
+    elClear.hidden=!filtered;
+    var n=(state.kind!=='all')+(state.year!=='all')+(state.src!=='all');
+    elActive.innerHTML=n+'<span class="sr"> active</span>'; elActive.hidden=!n;
+    syncURL();
+    if(opts.reveal) revealIndex();
+  }
+
+  function syncURL(){
+    try{
+      var p=new URLSearchParams(location.search);
+      function put(k,v){ if(v==null||v===''||v==='all'||v===false) p.delete(k); else p.set(k,v===true?'1':v); }
+      put('kind',state.kind==='all'?null:state.kind.toLowerCase());
+      put('year',state.year==='all'?null:String(state.year));
+      put('src',state.src); put('q',norm(state.q).trim()?state.q.trim():null); put('all',state.all);
+      var s=p.toString();
+      history.replaceState(null,'',location.pathname+(s?'?'+s:'')+location.hash);
+    }catch(e){}
+  }
+
+  /* ---------- events ---------- */
+  elKind.addEventListener('change',function(e){ if(e.target.name==='kind'){ state.kind=e.target.value; render({reveal:true}); } });
+  elYear.addEventListener('change',function(e){ if(e.target.name==='year'){ state.year=e.target.value==='all'?'all':parseInt(e.target.value,10); render({reveal:true}); } });
+  elSrc.addEventListener('change',function(){ state.src=elSrc.value; render({reveal:true}); });
+  var qT=null;
+  elQ.addEventListener('input',function(){ clearTimeout(qT); qT=setTimeout(function(){ state.q=elQ.value.slice(0,80); render({reveal:true}); },160); });
+  elQ.addEventListener('keydown',function(e){ if(e.key==='Escape'&&elQ.value){ e.preventDefault(); elQ.value=''; state.q=''; render({reveal:true}); } });
+
+  function clearAll(){
+    state.kind='all'; state.year='all'; state.src='all'; state.q='';
+    elQ.value=''; elSrc.value='all';
+    elKind.querySelector('input[value="all"]').checked=true;
+    elYear.querySelector('input[value="all"]').checked=true;
+    render({now:true,reveal:true});
+    elQ.focus({preventScroll:true});
+  }
+  elClear.addEventListener('click',clearAll);
+  elList.addEventListener('click',function(e){
+    if(e.target.closest('[data-clear]')){ clearAll(); return; }
+    if(e.target.closest('[data-more]')){
+      var before=elList.querySelectorAll('.sig-row').length;
+      state.all=true; render({now:true});
+      var first=elList.querySelectorAll('.sig-row')[before];
+      var a=first&&first.querySelector('.sig-row__title a'); if(a) a.focus({preventScroll:false});
+    }
+  });
+
+  /* phones and tablets: the type / year / source panel folds behind "Filters" */
+  function setPanel(open){ elPanel.classList.toggle('is-open',open); elToggle.setAttribute('aria-expanded',open?'true':'false'); }
+  elToggle.addEventListener('click',function(){ setPanel(elToggle.getAttribute('aria-expanded')!=='true'); });
+  if(P('filters')==='open'||state.kind!=='all'||state.year!=='all'||state.src!=='all') setPanel(true);
+
+  render({now:true});
+});
+</script>
+</body>
+</html>

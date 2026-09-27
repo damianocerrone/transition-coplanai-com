@@ -1,0 +1,162 @@
+/* ============================================================================
+   CoPlanAI — site chrome for the stock (non-designed) pages
+   ----------------------------------------------------------------------------
+   The ~24 designed pages carry the CoPlanAI header/footer inside a large inline
+   <style> block. The ~131 stock pages (dated posts, /insights-and-updates/,
+   /community-highlights/, the plain portfolio cases) had no such block, so they
+   rendered the leftover WordPress block-theme chrome instead: two visual
+   identities on one site.
+
+   This file is the chrome-only extract of that inline design CSS, taken
+   verbatim from the block on /404.html (the one designed page that carries the
+   chrome and nothing else). Two deliberate differences:
+
+     1. Everything is SCOPED to `.nav` / `.foot`. The designed pages restyle the
+        document globally (`*{margin:0}`, `body{font:17px "Radio Canada"}`,
+        `a{color:inherit}` …). Those pages are built for it; a blog post is not.
+        Applying only the chrome rules leaves every article byte untouched.
+        Class names are collision-free: `nav`, `nav-in`, `word`, `foot`,
+        `foot-grid`, `wrap`, `btn`, `credit`, `base` and `dot` appear in ZERO
+        stock pages outside the chrome this file styles (verified 2026-08-04).
+
+     2. `.nav` / `.foot` get their own placement. On a designed page the chrome
+        sits inside the theme's 1110px content column; here it is a direct child
+        of `.wp-site-blocks`, so the 1110px column is restated — a centred
+        1110px header, and a full-bleed footer whose inner column lands on the
+        same 1110px. Measured to match /about/ exactly.
+
+   Load order on every stock page:
+       … theme bundles … → site-chrome.css → reskin.css   (reskin stays LAST)
+   reskin.css deliberately overrides parts of this file (`:root` token nudges,
+   the light footer, the ink nav pill, the 44px mobile tap targets) exactly as
+   it does on the designed pages.
+   ========================================================================== */
+
+
+/* ── tokens ────────────────────────────────────────────────────────────────
+   Same :root block the designed pages declare. reskin.css re-declares
+   --terra-deep / --faint / --shadow / --shadow-soft after this file and wins,
+   which is the intended cascade. Custom properties are inert until referenced,
+   so this changes nothing outside the chrome. */
+:root{
+  --canvas:#F3F9FD; --canvas2:#E4F1F9; --paper:#FFFFFF; --paper2:#EFF8FD;
+  --ink:#142530; --ink2:#26414F; --muted:#55707E; --faint:#4F6B79;
+  --terra:#F2593F; --terra-deep:#CB4028; --terra-soft:#FBCDC2;
+  --green:#1C93D8; --green-deep:#146FA8; --green-soft:#BEE0F4;
+  --sky:#14B0C6; --gold:#F2A83C;
+  --line:rgba(20,37,48,.13); --line2:rgba(20,37,48,.08);
+  --shadow:0 1px 2px rgba(20,60,90,.05), 0 14px 40px -20px rgba(20,60,90,.28);
+  --shadow-soft:0 1px 2px rgba(20,60,90,.04), 0 22px 60px -34px rgba(20,60,90,.32);
+  --r-lg:20px; --r-md:16px; --r-sm:12px;
+  --measure:66ch; --maxw:1180px;
+  --disp:"Radio Canada Big",system-ui,sans-serif;
+  --body:"Radio Canada",system-ui,sans-serif;
+  --serif:"Fraunces",Georgia,serif;
+}
+
+/* ── scoped reset ──────────────────────────────────────────────────────────
+   The designed pages get this from `*{margin:0;padding:0;box-sizing:border-box}`
+   and `a{color:inherit;text-decoration:none}`. Confined to the chrome here so
+   the WordPress block theme keeps styling the article exactly as it does now. */
+.nav, .nav *, .foot, .foot *{ margin:0; padding:0; box-sizing:border-box; }
+.nav a, .foot a{ color:inherit; text-decoration:none; }
+.nav img, .nav svg, .foot img, .foot svg{ display:block; max-width:100%; }
+.nav ul, .foot ul{ list-style:none; }
+.nav button{ font:inherit; }
+
+/* chrome typography base — the designed pages inherit this from body */
+.nav, .foot{
+  font-family:var(--body); font-size:17px; line-height:1.6; font-weight:400;
+  color:var(--ink); text-align:left; letter-spacing:normal;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+/* The stock pages load two theme bundles the designed pages do not
+   (bundle-5dc95fd96976.css / bundle-8dc9bea8d384.css). Those declare
+       body, p, li, input, textarea { font-family: Hanken Grotesk }
+       h1, h2, h3, h4, h5, h6      { font-family: Bricolage Grotesque !important }
+   and both reach into the chrome — an element rule always beats an inherited
+   value, and the heading rule is !important. Measured on /about/ the chrome is
+   Radio Canada / Radio Canada Big throughout (footer credit 56ch = 494.6px,
+   not the 409.7px Hanken produces), so restate the faces at a strength that
+   survives. Confined to `.nav`/`.foot`, so the article keeps Hanken. */
+.nav, .nav *, .foot, .foot *{ font-family:var(--body) !important; }
+.nav .word, .nav-links a, .nav .btn, .nav .btn-nav,
+.foot .word, .foot h5{ font-family:var(--disp) !important; }
+
+/* ── buttons (the header CTA) ─────────────────────────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;gap:.55em;font-family:var(--disp);font-weight:700;
+  font-size:.98rem;letter-spacing:-.01em;padding:.82em 1.35em;border-radius:100px;
+  cursor:pointer;border:1.5px solid transparent;transition:transform .18s ease,box-shadow .2s ease,background .2s ease;
+  line-height:1;
+}
+.btn-nav{background:transparent;color:var(--ink2);border:1px solid var(--line);box-shadow:none;font-size:.85rem;font-weight:600;padding:.58em 1.05em;letter-spacing:0}
+.btn-nav:hover{background:var(--canvas2);border-color:var(--line2);color:var(--ink);transform:none;box-shadow:none}
+.btn-nav:focus-visible{outline:2px solid var(--terra-deep);outline-offset:2px}
+
+/* ── top nav ─────────────────────────────────────────────────────────────── */
+/* doubled class = (0,2,0): the theme declares
+   `header.wp-block-template-part > div, .wp-site-blocks > header{background:rgba(255,255,255,.55);backdrop-filter:…}`
+   at (0,1,1), which otherwise repaints the header white. */
+.nav.nav{position:sticky;top:0;z-index:50;background:rgba(243,249,253,.82);backdrop-filter:blur(12px) saturate(1.2);
+  border-bottom:1px solid var(--line2)}
+.nav-in{max-width:var(--maxw);margin:0 auto;padding:14px 28px;display:flex;align-items:center;gap:28px}
+.word{font-family:var(--disp);font-weight:700;font-size:1.32rem;letter-spacing:-.03em;color:var(--ink);display:flex;align-items:center;gap:.5em}
+.word .dot{width:11px;height:11px;border-radius:50%;background:var(--terra);box-shadow:0 0 0 4px rgba(242,89,63,.18)}
+.nav-links{display:flex;gap:26px;margin-left:12px}
+.nav-links a{font-family:var(--disp);font-weight:600;font-size:.97rem;color:var(--ink2);padding:6px 2px;position:relative;transition:color .18s}
+.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-2px;height:2px;background:var(--terra);border-radius:2px;transition:right .22s ease}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after,.nav-links a.active::after{right:0}
+.nav-links a.active{color:var(--terra)}
+.nav-cta{margin-left:auto;display:flex;align-items:center;gap:14px}
+.nav-toggle{display:none;background:none;border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;cursor:pointer}
+.nav-toggle span{display:block;width:20px;height:2px;background:var(--ink);border-radius:2px}
+.nav-toggle span+span{margin-top:4px}
+
+/* ── footer ──────────────────────────────────────────────────────────────── */
+.foot{background:var(--ink);color:var(--canvas);padding:64px 0 40px;position:relative;z-index:3}
+.foot .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:3}
+.foot a{color:var(--canvas)}
+.foot .word{color:var(--canvas)}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,253,247,.14)}
+.foot h5{font-family:var(--disp);font-weight:700;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:#C9BCA9;margin-bottom:14px}
+.foot ul{display:flex;flex-direction:column;gap:9px}
+/* On a designed page the footer sits inside the WordPress post-content column,
+   where the theme's `li{margin:6px 0}` applies and opens the link lists to an
+   effective 21px rhythm — measured `.foot ul` = 232px on /use-cases/ and
+   /about/, against 172px with the scoped reset above. Restate it so the two
+   footers are the same height and rhythm. */
+.foot ul li{margin:6px 0}
+.foot ul a{color:#D9CFBE;font-size:.96rem;transition:color .18s}
+.foot ul a:hover{color:#fff}
+.foot .credit{color:#B4A991;font-size:.92rem;max-width:56ch;margin-top:16px;line-height:1.55}
+.foot .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:26px;color:#9C917C;font-size:.86rem}
+
+/* ── responsive (verbatim from the designed pages) ───────────────────────── */
+@media(max-width:940px){
+  .nav-in{position:relative;flex-wrap:wrap}
+  .nav-links{position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px;box-shadow:var(--shadow);gap:2px;margin-top:6px;z-index:120}
+  .nav-links a{padding:11px 12px;border-radius:8px}
+}
+@media(max-width:940px){
+  .nav-links{display:none} .nav-toggle{display:block}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+/* The ≤640 block is taken from the DESIGNED pages, not from /404.html: 404 has
+   its own `.foot-grid{gap:28px}` variant, while /about/, /use-cases/, /index/…
+   keep gap:40px, shrink `.wrap` to 18px and drop the base font to 16px (their
+   `body{font-size:16px}`, which the chrome inherits — it drives the footer link
+   rhythm: measured `.foot ul` 224px on /about/ at 390px, 232px at 17px). */
+@media(max-width:640px){
+  .nav, .foot{font-size:16px}
+  .foot .wrap{padding:0 18px}
+  .foot-grid{grid-template-columns:1fr}
+}
+
+/* ── placement: restate the theme's 1110px content column ─────────────────
+   Measured against /about/ at 1512px: header x=193.5 w=1110 margin-top=32;
+   footer x=0 w=viewport with 193.5px inline padding, inner .wrap w=1110.
+   Declared last so it beats the padding shorthands above. */
+.nav{ max-width:1110px; margin-left:auto; margin-right:auto; margin-top:32px; }
+.foot{ max-width:none; margin-top:0; padding-inline:max(0px, calc((100% - 1110px) / 2)); }

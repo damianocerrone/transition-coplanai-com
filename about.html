@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-type="commons-full">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CoPlanAI · About</title>
+<meta name="coplan:release" content="public">
+<link rel="canonical" href="https://coplanai.com/about.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CoPlanAI">
+<meta property="og:title" content="CoPlanAI · About">
+<meta property="og:description" content="Collaborative planning with AI, for cities. The people and the company behind CoPlanAI, who we work with, our ethics and AI governance, energy, data and service level, and how to reach us. Built and run in Helsinki by SPIN Unit Lab Oy since 2018.">
+<meta property="og:url" content="https://coplanai.com/about.html">
+<meta property="og:image" content="https://coplanai.com/img/pairs/vienna--vie-street.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="Collaborative planning with AI, for cities. The people and the company behind CoPlanAI, who we work with, our ethics and AI governance, energy, data and service level, and how to reach us. Built and run in Helsinki by SPIN Unit Lab Oy since 2018.">
+<!-- 1 · type preset before first paint: ?type=<key> → saved choice → the attribute above. Keep this first in <head>. -->
+<!-- 2 · fonts: the same link on every page (FOUNDATION.md §2). Founders Grotesk comes from site.css via local(). -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500..700&family=IBM+Plex+Mono:wght@400;500;600&family=JetBrains+Mono:wght@400..700&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=Onest:wght@800&family=Schibsted+Grotesk:ital,wght@0,400..700;1,400..700&display=swap">
+<!-- 3 · the shared foundation -->
+<link rel="stylesheet" href="assets/site.css">
+<!-- 4 · About: page-specific components only (no fonts, colours from tokens) -->
+<style>
+/* ---------- opening (typographic; the drawing that may sit here is a separate study) ---------- */
+.ab-open{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:28px 32px;align-items:end}
+.ab-open__title{grid-column:1/8}
+.ab-open__title .display{max-width:11em}
+.ab-open__lede{grid-column:8/13;padding-bottom:8px}
+.ab-open__lede .lede{margin-top:0}
+/* the opening collage: the grid as masonry (collage-study.html, option 01), one flat image; three columns below 600 px */
+.ab-collage{margin:clamp(40px,4.4vw,64px) 0 0}
+.ab-collage img{display:block;width:100%;height:auto;border-radius:var(--r-img);background:var(--field)}
+.ab-collage figcaption{margin-top:12px;font-size:14px;line-height:1.45;color:var(--ink-4);max-width:none}
+.ab-collage__s{display:none}
+@media (max-width:599px){ .ab-collage__w{display:none} .ab-collage__s{display:inline} }   /* the phone image has its own twelve photographs */
+.ab-also{margin-top:16px;font-size:calc(var(--fs-text) - 1.5px);line-height:1.55;color:var(--ink-3);max-width:34em}
+.ab-open__lede .stats{margin-top:28px}
+
+/* ---------- on this page ---------- */
+.toc{position:sticky;top:var(--header-h);z-index:60;background:color-mix(in srgb,var(--ground) 92%,transparent);border-block:1px solid var(--rule-soft)}
+@supports ((-webkit-backdrop-filter:blur(8px)) or (backdrop-filter:blur(8px))){
+  .toc{background:color-mix(in srgb,var(--ground) 84%,transparent);-webkit-backdrop-filter:saturate(1.3) blur(12px);backdrop-filter:saturate(1.3) blur(12px)}
+}
+.toc__row{display:flex;align-items:center;gap:10px 28px}
+.toc__k{flex:none;font-family:var(--f-label);font-weight:var(--w-label);font-size:var(--fs-label);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--ink-4)}
+.toc ul{list-style:none;display:flex;flex-wrap:wrap;gap:2px 24px}
+.toc a{position:relative;display:inline-block;padding:14px 0 13px;font-family:var(--f-ui);font-weight:var(--w-ui);font-size:14.5px;line-height:1;letter-spacing:0;color:var(--ink-3);text-decoration:none;white-space:nowrap;transition:color .2s}
+.toc a::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:2px;border-radius:2px;background:var(--amber);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.toc a:hover{color:var(--ink)}
+.toc a[aria-current="true"]{color:var(--ink)}
+.toc a[aria-current="true"]::after{transform:scaleX(1)}
+/* the sticky header + this bar cover ~116px: anchors and keyboard focus land below both */
+@media (min-width:981px){html{scroll-padding-top:calc(var(--header-h) + 64px)}}
+
+/* ---------- people ---------- */
+.people{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,1.6vw,24px)}
+.person{display:flex;flex-direction:column;min-height:100%}
+.mono{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;margin-bottom:22px;font-family:var(--f-display);font-weight:var(--w-display);font-size:25px;line-height:1;letter-spacing:-.01em;background:color-mix(in srgb,var(--plate-c) 20%,var(--ground));color:var(--mono-ink,var(--ink))}
+.person .lab{margin-top:8px}
+.person .body{margin-top:14px;font-size:calc(var(--fs-text) - 1px)}
+.person .work{margin-top:12px;font-size:calc(var(--fs-text) - 1.5px);line-height:1.5;color:var(--ink-3)}
+.person .work cite{font-style:normal;color:var(--ink-2)}
+.person .work a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--rule)}
+.person .work a:hover{color:var(--amber);text-decoration-color:var(--amber)}
+.person .note{margin-top:14px;padding-top:14px;border-top:1px solid color-mix(in srgb,var(--ink) 10%,transparent);font-size:calc(var(--fs-text) - 2px);line-height:1.55;color:var(--ink-3)}
+.person .actions{margin-top:auto;padding-top:24px}
+.person .link{overflow-wrap:anywhere}
+.person--dc{--mono-ink:var(--v-stake)}
+.person--sr{--mono-ink:var(--v-inst)}
+.person--studio{--mono-ink:var(--v-ai)}
+.mono--studio{font-family:var(--f-label);font-weight:var(--w-label);font-size:13px;letter-spacing:.08em}
+
+/* ---------- partners: who it is for, then the logo wall ---------- */
+.aud{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 clamp(20px,2.2vw,32px)}
+.aud li{padding-top:18px;border-top:1px solid var(--rule)}
+.aud .name{margin-top:10px;font-size:clamp(20px,1.6vw,23px)}
+.aud .body{margin-top:10px;font-size:calc(var(--fs-text) - 1.5px);line-height:1.55;color:var(--ink-3)}
+.orgs{margin-top:clamp(64px,7vw,104px)}
+.orgs__intro{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px 24px;padding-bottom:18px}
+.orgs__intro .small{max-width:44em}
+/* the wall: one quiet ledger of marks. Each mark is sized by its aspect ratio (--w, set by the page
+   script from data/logos.js) so wide wordmarks and square emblems carry about the same visual weight;
+   --lw-u is the width of a square mark at this viewport. Grey at rest, its own colours under the pointer. */
+/* the row rules are drawn by the list itself, so a short last row still closes as a full ruled row */
+.lw{--lw-u:52px;--lw-h:108px;list-style:none;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));grid-auto-rows:var(--lw-h);background:repeating-linear-gradient(to bottom,var(--rule-soft) 0 1px,transparent 1px var(--lw-h));border-bottom:1px solid var(--rule-soft)}
+.lw > li{display:grid;place-items:center;min-width:0;height:var(--lw-h);padding:0 clamp(8px,.8vw,12px)}
+.lw img{width:min(calc(var(--w,2) * var(--lw-u)),100%);height:auto;max-height:calc(var(--lw-h) - 36px);object-fit:contain;transform:translate(var(--dx,0),var(--dy,0));filter:grayscale(1) brightness(var(--b,1));opacity:.74;transition:filter .35s,opacity .35s}
+.lw > li:hover img{filter:none;opacity:1}
+.lw__txt{max-width:12em;font-family:var(--f-label);font-weight:var(--w-label);font-size:10.5px;line-height:1.4;letter-spacing:var(--ls-label);text-transform:uppercase;text-align:center;color:var(--ink-3);text-wrap:balance}
+.lw-more{display:none}
+
+/* ---------- ethics ---------- */
+.chain{list-style:none;display:grid;grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr) 44px minmax(0,1fr);align-items:stretch}
+.chain__step{display:flex;flex-direction:column;min-height:100%}
+.chain__step .lab{color:var(--role-ink)}
+.chain__who{margin-top:14px}
+.chain__step .body{margin-top:16px;font-size:calc(var(--fs-text) - 1.5px);line-height:1.55;color:var(--ink-2)}
+.chain__arrow{display:grid;place-items:center;color:var(--ink-4)}
+.chain__arrow svg{width:26px;height:26px}
+.role-ai{--plate-c:var(--ice);--role-ink:var(--v-ai)}
+.role-people{--plate-c:var(--gold);--role-ink:var(--v-stake)}
+.role-inst{--plate-c:var(--violet);--role-ink:var(--v-inst)}
+.chain-note{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:20px}
+.chain-note .small{color:var(--ink-3)}
+.cap .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:8px;transform:translateY(-.5px)}
+
+.commit{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;margin-top:clamp(64px,7vw,104px);align-items:start}
+.commit__head{grid-column:1/13}
+.commit__head .h3{margin-top:14px;max-width:22em}
+.commit__list{grid-column:1/8;list-style:none}
+.commit__list li{display:grid;grid-template-columns:52px minmax(0,1fr);gap:0 16px;padding:22px 0 24px;border-top:1px solid var(--rule)}
+.commit__list li:last-child{border-bottom:1px solid var(--rule)}
+.commit__n{font-family:var(--f-label);font-weight:var(--w-label);font-size:var(--fs-label);letter-spacing:var(--ls-label);color:var(--amber);padding-top:7px}
+.commit__list .name{font-size:clamp(20px,1.6vw,23px);line-height:1.2}
+.commit__list .body{margin-top:8px;font-size:calc(var(--fs-text) - 1.5px);line-height:1.55;color:var(--ink-3)}
+.commit__fig{grid-column:8/13;position:sticky;top:calc(var(--header-h) + 76px)}
+.commit__fig .figure__media{background:var(--field);box-shadow:inset 0 0 0 1px var(--rule-soft)}
+.commit__fig .figure__media img{object-fit:contain;padding:0}
+
+.bias{margin-top:clamp(64px,7vw,104px)}
+.bias__head{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px 32px;align-items:end}
+.bias__head > :first-child{grid-column:1/7}
+.bias__head > :last-child{grid-column:7/13}
+.bias__head .h3{margin-top:14px}
+.bias__list{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,1.4vw,20px);margin-top:clamp(28px,3vw,40px)}
+.bias__list .plate{min-height:100%}
+.bias__list .name{font-size:clamp(20px,1.6vw,23px)}
+.bias__list .body{margin-top:10px;font-size:calc(var(--fs-text) - 1.5px);line-height:1.55;color:var(--ink-2)}
+
+/* ---------- footprint ---------- */
+.fp{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:32px;align-items:center}
+.fp__lead{grid-column:1/6}
+.fp__lead .h2{margin-top:18px}
+.fp__lead .lede{margin-top:22px}
+.fp__lead .say{margin-top:clamp(28px,3vw,40px)}
+.fp__card{grid-column:7/13}
+.fp__card .plate{padding:clamp(24px,2.6vw,36px)}
+.fp__card .lab{margin-bottom:16px;color:var(--v-ai)}
+
+/* ---------- data and service level: two records side by side ---------- */
+.dc{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(16px,1.6vw,24px);align-items:start}
+.record{display:flex;flex-direction:column;padding:clamp(24px,2.6vw,36px)}
+.plate__top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 16px;margin-bottom:14px}
+.record dl{margin:0}
+.record dl > div{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:4px 20px;padding:13px 0 14px;border-top:1px solid color-mix(in srgb,var(--ink) 9%,transparent)}
+.record dt{font-family:var(--f-label);font-weight:var(--w-label);font-size:var(--fs-label);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-label);padding-top:3px}
+.record dd{margin:0;font-size:calc(var(--fs-text) - 1.5px);line-height:1.5;color:var(--ink-2)}
+.record dd b{color:var(--ink)}
+.record dd a{color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:color-mix(in srgb,var(--ink) 40%,transparent);overflow-wrap:anywhere}
+.record dd a:hover{color:var(--amber);text-decoration-color:var(--amber)}
+.record__foot{padding-top:20px}
+
+/* ---------- contact ---------- */
+.contact{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0 clamp(20px,2.2vw,32px)}
+.contact > li{display:flex;flex-direction:column;gap:10px;padding-top:18px;border-top:1px solid var(--rule)}
+.contact .small{color:var(--ink-3)}
+.contact .mail{font-family:var(--f-ui);font-weight:var(--w-ui);font-size:15.5px;line-height:1.4;color:var(--ink);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--ink) 40%,transparent);align-self:flex-start;overflow-wrap:anywhere;transition:color .2s,border-color .2s}
+.contact .mail:hover{color:var(--amber);border-color:var(--amber)}
+.contact address{font-style:normal;font-size:calc(var(--fs-text) - 1px);line-height:1.55;color:var(--ink-2)}
+.coords{font-family:var(--f-label);font-weight:var(--w-label);font-size:var(--fs-label);letter-spacing:var(--ls-label);color:var(--ink-4)}
+.company{margin-top:clamp(48px,5vw,72px)}
+.company dl{margin:14px 0 0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0 clamp(16px,1.8vw,28px)}
+.company dl > div{padding:14px 0 0;border-top:1px solid var(--rule-soft)}
+.company dt{font-family:var(--f-label);font-weight:var(--w-label);font-size:var(--fs-label);letter-spacing:var(--ls-label);text-transform:uppercase;color:var(--c-label)}
+.company dd{margin:6px 0 0;font-size:15px;line-height:1.45;color:var(--ink-2);font-variant-numeric:tabular-nums}
+
+/* ---------- responsive ---------- */
+@media (max-width:1120px){
+  .company dl{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:18px}
+  .bias__list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .lw{grid-template-columns:repeat(6,minmax(0,1fr));--lw-u:46px}
+}
+@media (max-width:980px){
+  .ab-open,.commit,.bias__head,.fp{grid-template-columns:minmax(0,1fr);gap:20px}
+  .ab-open > *,.commit > *,.bias__head > *,.fp > *{grid-column:1/-1!important}
+  .ab-open__lede{padding-bottom:0}
+  .toc{position:static}
+  .people{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .person--studio{grid-column:1/-1}
+  .aud{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:28px}
+  .commit__fig{position:static;margin-top:12px}
+  .commit{gap:24px}
+  .fp{gap:28px}
+  .dc{grid-template-columns:minmax(0,1fr)}
+  .contact{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:32px}
+}
+@media (max-width:760px){
+  .chain{grid-template-columns:minmax(0,1fr)}
+  .chain__arrow{height:40px}
+  .chain__arrow svg{transform:rotate(90deg)}
+  .record dl > div{grid-template-columns:minmax(0,1fr)}
+  .lw{grid-template-columns:repeat(4,minmax(0,1fr));--lw-u:44px;--lw-h:92px}
+}
+@media (max-width:640px){
+  .toc__k{display:none}
+  .toc ul{gap:0 18px}
+  .toc a{padding:12px 0 11px;font-size:14px}
+  .people{grid-template-columns:minmax(0,1fr)}
+  .aud{grid-template-columns:minmax(0,1fr)}
+  .bias__list{grid-template-columns:minmax(0,1fr)}
+  .contact{grid-template-columns:minmax(0,1fr)}
+  .company dl{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .commit__list li{grid-template-columns:36px minmax(0,1fr);gap:0 10px}
+  .lw{grid-template-columns:repeat(3,minmax(0,1fr));--lw-u:36px;--lw-h:80px}
+  .lw > li{padding:0 6px}
+  .lw__txt{font-size:9.5px}
+  /* phones: the first six rows, then the rest on request */
+  .lw.is-clipped > li:nth-child(n+19){display:none}
+  .lw-more{display:block;margin-top:18px}
+}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"CoPlanAI","url":"https://coplanai.com/","email":"info@coplanai.com","description":"A platform for collaborative planning, built and run in Helsinki.","contactPoint":[{"@type":"ContactPoint","contactType":"customer support","email":"governance@coplanai.com"}],"founder":[{"@type":"Person","name":"Damiano Cerrone","jobTitle":"Co-founder, product design and innovation lead"},{"@type":"Person","name":"Sampo Ruoppila","jobTitle":"Co-founder, research and policy lead"}],"parentOrganization":{"@type":"Organization","name":"SPIN Unit Lab Oy","alternateName":"SPIN Unit","foundingDate":"2018","email":"spin@spinunit.org","vatID":"FI29161991","address":{"@type":"PostalAddress","streetAddress":"Mechelininkatu 23","postalCode":"00100","addressLocality":"Helsinki","addressCountry":"FI"}}}
+</script>
+</head>
+<body data-page="about">
+
+<div data-site-header></div>
+
+<main id="main">
+
+<!-- ============ OPENING ============ -->
+<section class="wrap page-head" aria-labelledby="h1">
+  <div class="ab-open">
+    <div class="ab-open__title">
+      <p class="eyebrow">About CoPlanAI</p>
+      <h1 class="display" id="h1"><em>Collaborative</em> planning with AI, for cities.</h1>
+    </div>
+    <div class="ab-open__lede">
+      <p class="lede">CoPlanAI is a platform for collaborative planning. Residents work on a real place together with the institution that must decide, in the room and online. A resident’s words become an image of the place in seconds. The platform evaluates it against the institution’s own policy, and people weigh it before anything is decided.</p>
+      <p class="ab-also">We work with cities, public agencies and international organisations, and run educational programmes for schools, universities and professionals. Built and run in Helsinki by SPIN Unit Lab Oy since 2018.</p>
+      <p class="stats"><span><b data-m="reach.engagements">95</b> engagements</span><span><b data-m="reach.cities">73</b> cities</span><span><b data-m="reach.countries">38</b> countries</span><span>since <b data-m="reach.since">2021</b></span></p>
+    </div>
+  </div>
+  <figure class="ab-collage">
+    <picture>
+      <source media="(max-width: 599px)" srcset="img/collage/option-1-phone.jpg" width="1080" height="1350">
+      <img src="img/collage/option-1.jpg" width="2400" height="1050" decoding="async" fetchpriority="high" alt="A collage of workshop photographs. Group photos: participants in Kyiv holding a Ukrainian flag, and groups in Nusantara and Manila. Around them, people at work: hands on a tablet, residents at touchscreens in Bologna, residents at a laptop in East Cleveland, printed scenarios on a wall in Pristina, and boards and plans on workshop tables.">
+    </picture>
+    <figcaption><span class="ab-collage__w">Workshops in Kyiv, Nusantara, Manila, Bologna, East Cleveland, Pristina, Turku, Kaarina, Dubai and Vienna. Vienna photograph: Urban Innovation Vienna.</span><span class="ab-collage__s">Workshops in Kyiv, Nusantara, Manila, Bologna, East Cleveland, Pristina and Turku.</span></figcaption>
+  </figure>
+</section>
+
+<!-- ============ ON THIS PAGE ============ -->
+<nav class="toc" aria-label="On this page">
+  <div class="wrap toc__row">
+    <p class="toc__k" aria-hidden="true">On this page</p>
+    <ul role="list">
+      <li><a href="#people">People</a></li>
+      <li><a href="#partners">Partners</a></li>
+      <li><a href="#ethics">Ethics</a></li>
+      <li><a href="#footprint">Footprint</a></li>
+      <li><a href="#data">Data</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============ PEOPLE ============ -->
+<section class="section" id="people" data-toc-target aria-labelledby="people-h">
+  <div class="wrap">
+    <div class="head hair hair-pad">
+      <div class="head__main">
+        <p class="eyebrow">Who we are</p>
+        <h2 class="h2" id="people-h">Researchers and designers, working from <em>Helsinki</em>.</h2>
+      </div>
+      <p class="body head__aside">Two co-founders, and the company that builds and runs the platform.</p>
+    </div>
+    <div class="people">
+      <article class="person person--dc plate plate--amber" aria-labelledby="p-dc">
+        <span class="mono" aria-hidden="true">DC</span>
+        <h3 class="name" id="p-dc">Damiano Cerrone</h3>
+        <p class="lab">Co-founder · product design and innovation lead</p>
+        <p class="body">Doctoral dissertation on collaborative planning with generative AI, 2026. Co-founder of SPIN Unit.</p>
+        <div class="actions"><a class="link" href="mailto:damiano.cerrone@coplanai.com">damiano.cerrone@coplanai.com</a></div>
+      </article>
+      <article class="person person--sr plate plate--violet" aria-labelledby="p-sr">
+        <span class="mono" aria-hidden="true">SR</span>
+        <h3 class="name" id="p-sr">Sampo Ruoppila</h3>
+        <p class="lab">Co-founder · research and policy lead</p>
+        <p class="body">PhD and docent in urban studies. Professor of Practice, University of Vaasa, and senior researcher, University of Helsinki. Partner at SPIN Unit.</p>
+        <p class="work">Co-author, with Konsta Anastasiou, of <cite><a href="https://doi.org/10.1080/17535069.2026.2730986" target="_blank" rel="noopener">‘Participating with AI: how generative visualisations are changing participatory planning’<span class="sr"> (opens in a new tab)</span></a></cite>, <i>Urban Research &amp; Practice</i> (2026), open access.</p>
+        <div class="actions"><a class="link" href="mailto:sampo.ruoppila@coplanai.com">sampo.ruoppila@coplanai.com</a></div>
+      </article>
+      <article class="person person--studio plate plate--ice" aria-labelledby="p-spin">
+        <span class="mono mono--studio" aria-hidden="true">SPIN</span>
+        <h3 class="name" id="p-spin">SPIN Unit Lab Oy</h3>
+        <p class="lab">The company</p>
+        <p class="body">An urban-data and participatory-design studio.</p>
+        <!-- SITE-BRIEF §10, About formulation, verbatim (the only place this page names Toretei’s platform) -->
+        <p class="note">CoPlanAI is a service of SPIN Unit Lab Oy, based in Helsinki since 2018. From 2021 until September 2025, SPIN Unit worked with Toretei on the field application of UrbanistAI, the platform Toretei develops, and some engagements in our record were delivered with it. Ideas and feedback from that fieldwork helped shape the platform’s usability and functionality. The collaboration ended in September 2025.</p>
+        <div class="actions"><a class="link link--arrow" href="https://spinunit.org" target="_blank" rel="noopener">Visit SPIN Unit<span class="sr"> (opens in a new tab)</span></a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PARTNERS ============ -->
+<section class="section section--flush-top" id="partners" data-toc-target aria-labelledby="partners-h">
+  <div class="wrap">
+    <div class="head hair hair-pad">
+      <div class="head__main">
+        <p class="eyebrow">Who we work with</p>
+        <h2 class="h2" id="partners-h">For the people who <em>convene the room</em>.</h2>
+      </div>
+      <div class="head__aside"><a class="link link--arrow" href="use-coplanai.html">Ways to work together</a></div>
+    </div>
+    <ol class="aud" role="list">
+      <li><p class="lab lab--accent">01</p><h3 class="name">Cities and planners</h3><p class="body">Bring residents in while the plan can still change, and leave with evidence a council can act on.</p></li>
+      <li><p class="lab lab--accent">02</p><h3 class="name">Innovation offices</h3><p class="body">Our usual entry point: the team with the mandate to experiment before the line organisation commits.</p></li>
+      <li><p class="lab lab--accent">03</p><h3 class="name">International development</h3><p class="body">With UNDP and GIZ, from Nusantara and Skopje to Panama City and Manila.</p></li>
+      <li><p class="lab lab--accent">04</p><h3 class="name">Schools, universities and museums</h3><p class="body">Educational programmes, research partnerships, and a kiosk mode that runs without a facilitator.</p></li>
+    </ol>
+
+    <div class="orgs" role="group" aria-labelledby="orgs-h">
+      <div class="orgs__intro">
+        <h3 class="lab lab--ink" id="orgs-h">Clients, partners and funders</h3>
+        <p class="small"><span data-logo-n>64</span> organisations: cities, ministries and agencies, international bodies, universities and companies.</p>
+      </div>
+      <ul class="lw is-clipped" id="logo-wall" role="list" aria-labelledby="orgs-h"></ul>
+      <p class="lw-more"><button type="button" class="link" aria-expanded="false" aria-controls="logo-wall">Show all <span data-logo-n>64</span> organisations</button></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ETHICS & AI GOVERNANCE ============ -->
+<section class="section wash-commons" id="ethics" data-toc-target aria-labelledby="ethics-h">
+  <div class="wrap">
+    <div class="head">
+      <div class="head__main">
+        <p class="eyebrow">Ethics and AI governance</p>
+        <h2 class="h2" id="ethics-h">The platform informs the choice. <em>People make it.</em></h2>
+      </div>
+      <p class="body head__aside">AI in a planning institution changes how the institution decides. So we set out who does what, what we commit to, and how we handle the model’s bias.</p>
+    </div>
+
+    <ol class="chain" role="list" aria-label="Who does what: the platform generates and evaluates scenarios, people deliberate, the institution decides">
+      <li class="chain__step plate role-ai">
+        <p class="lab">01 · The platform</p>
+        <p class="name chain__who">Generates and evaluates scenarios</p>
+        <p class="body">From people’s own words, on the real place. Each scenario is evaluated against the institution’s own policy, design guides and law, and for its likely environmental and social impact.</p>
+      </li>
+      <li class="chain__arrow" aria-hidden="true"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h17M15 7l6 6-6 6"/></svg></li>
+      <li class="chain__step plate role-people">
+        <p class="lab">02 · People</p>
+        <p class="name chain__who">Deliberate</p>
+        <p class="body">They compare, argue and vote. They see what each option would do, and can change their minds.</p>
+      </li>
+      <li class="chain__arrow" aria-hidden="true"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13h17M15 7l6 6-6 6"/></svg></li>
+      <li class="chain__step plate role-inst">
+        <p class="lab">03 · The institution</p>
+        <p class="name chain__who">Decides</p>
+        <p class="body">It holds the mandate and sets the guardrails every option has to respect. What people agreed arrives documented, as evidence it can act on.</p>
+      </li>
+    </ol>
+    <div class="chain-note">
+      <span class="cap cap--sm cap--line"><span class="dot" aria-hidden="true"></span>EU AI Act · limited risk</span>
+      <p class="small">A decision-support tool: it informs decisions and takes none.</p>
+    </div>
+
+    <div class="commit">
+      <div class="commit__head">
+        <p class="eyebrow">Human in the loop, by design</p>
+        <h3 class="h3">Four commitments. We ask every partner organisation to <em>write its own</em>.</h3>
+      </div>
+      <ol class="commit__list" role="list">
+        <li><span class="commit__n" aria-hidden="true">01</span><div><h4 class="name">Augment judgement; never automate it away.</h4><p class="body">Every generative step is wrapped in a human step.</p></div></li>
+        <li><span class="commit__n" aria-hidden="true">02</span><div><h4 class="name">Preserve the right to know the consequences, and to change your choice.</h4><p class="body">Participants control what the model produces, and see a scenario’s likely impact and trade-offs before anyone chooses.</p></div></li>
+        <li><span class="commit__n" aria-hidden="true">03</span><div><h4 class="name">Make the model’s biases legible before asking anyone to trust its images.</h4><p class="body">We show where the model leans, and the room can correct it.</p></div></li>
+        <li><span class="commit__n" aria-hidden="true">04</span><div><h4 class="name">Represent those who cannot be in the room.</h4><p class="body">The platform can stand in for future residents and ecosystems, to stress-test a scenario. It never replaces the living public.</p></div></li>
+      </ol>
+      <a class="figure commit__fig" href="use-coplanai.html">
+        <div class="figure__media" style="aspect-ratio:1800/1099"><img src="img/platform/app-iterate-impact.jpg" width="1800" height="1099" loading="lazy" decoding="async" alt="The participant app: a transformed city street with planters, benches and planting, and beside it a Transformation analysis panel listing the impact and the trade-offs, gains and losses."></div>
+        <p class="figure__cap"><span class="lab">The participant app · Iterate</span>A scenario with its evaluation beside it: what it would improve, what it would narrow, who gains and who loses.</p>
+      </a>
+    </div>
+
+    <div class="bias">
+      <div class="bias__head">
+        <div>
+          <p class="eyebrow">Bias, curated in the open</p>
+          <h3 class="h3">Choosing a bias is choosing whose city gets imagined <em>more easily</em>.</h3>
+        </div>
+        <p class="body">Every tuning over-represents some features and under-represents others. We treat bias curation as design work, done in the open, in four practices.</p>
+      </div>
+      <ul class="bias__list" role="list">
+        <li class="plate plate--field"><h4 class="name">Declare</h4><p class="body">Every tuning ships with a note on what it favours and what it flattens.</p></li>
+        <li class="plate plate--field"><h4 class="name">Localise</h4><p class="body">Tuned with local imagery and policy, with the client.</p></li>
+        <li class="plate plate--field"><h4 class="name">Counter-balance</h4><p class="body">Deliberate weight for children, elders and biodiversity, set as open policy choices.</p></li>
+        <li class="plate plate--field"><h4 class="name">Supervise</h4><p class="body">Professionals review against regulation and quality before any decision.</p></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ ENERGY & FOOTPRINT ============ -->
+<section class="section" id="footprint" data-toc-target aria-labelledby="fp-h">
+  <div class="wrap">
+    <div class="fp">
+      <div class="fp__lead">
+        <p class="eyebrow">Energy and footprint</p>
+        <h2 class="h2" id="fp-h">Compute only when we <em>imagine</em>.</h2>
+        <p class="lede">Inference runs only while a workshop is live. The model generates in seconds, then stands down.</p>
+      </div>
+      <div class="fp__card">
+        <div class="plate plate--ice">
+          <p class="lab">How the platform uses energy</p>
+          <ul class="ticks ticks--ruled ticks--ice" role="list">
+            <li><b>Seconds per image, not training runs.</b> We use existing foundation models at workshop scale and train no large models in-house.</li>
+            <li><b>European cloud.</b> Hosted in AWS Europe regions. By AWS’s own reporting, Amazon matches its global electricity use with renewable energy.</li>
+            <li><b>Data minimisation.</b> We store only what the service needs, so there is less to keep, move and power.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DATA, COMPLIANCE AND SERVICE LEVEL ============ -->
+<section class="section section--flush-top" id="data" data-toc-target aria-labelledby="data-h">
+  <div class="wrap">
+    <div class="head hair hair-pad">
+      <div class="head__main">
+        <p class="eyebrow">Data and compliance</p>
+        <h2 class="h2" id="data-h">Hosted in Europe. The&nbsp;outputs belong to <em>the client</em>.</h2>
+      </div>
+      <p class="body head__aside">The platform runs on European cloud infrastructure, to the standards public institutions must meet.</p>
+    </div>
+    <div class="dc">
+      <div class="plate plate--field record" role="group" aria-labelledby="rec-data">
+        <div class="plate__top">
+          <h3 class="lab lab--ink" id="rec-data">The data record</h3>
+          <span class="cap cap--sm cap--line"><span class="dot" aria-hidden="true"></span>Europe</span>
+        </div>
+        <dl>
+          <div><dt>Hosting</dt><dd>AWS, Europe regions, unless agreed otherwise with the client</dd></div>
+          <div><dt>Data processor</dt><dd>AWS, under GDPR</dd></div>
+          <div><dt>Frameworks</dt><dd>GDPR, through a Data Processing Agreement · EU–US Data Privacy Framework</dd></div>
+          <div><dt>Personal data</dt><dd>Only what the service needs: data minimisation, purpose limitation, security by design</dd></div>
+          <div><dt>Facial analysis</dt><dd>None. Facial features in uploaded images are neither collected nor analysed</dd></div>
+          <div><dt>Encryption</dt><dd>In transit and at rest, with access controls</dd></div>
+          <div><dt>Your outputs</dt><dd>Generated content and aggregated preference data belong to the client, to use, modify and distribute freely</dd></div>
+          <div><dt>EU AI Act</dt><dd><b>Limited risk.</b> A decision-support tool, with transparency, human oversight and bias mitigation</dd></div>
+        </dl>
+        <div class="record__foot"><a class="link link--arrow" href="mailto:governance@coplanai.com?subject=CoPlanAI%20data%20and%20server%20sheet">Request the full data and server sheet</a></div>
+      </div>
+      <div class="plate plate--ice record" role="group" aria-labelledby="rec-sla">
+        <div class="plate__top">
+          <h3 class="lab lab--ink" id="rec-sla">Service level</h3>
+          <span class="cap cap--sm cap--line"><span class="dot" aria-hidden="true"></span>Standard SLA</span>
+        </div>
+        <dl>
+          <div><dt>Availability</dt><dd><b>99.5%</b> per month, during business hours</dd></div>
+          <div><dt>Support</dt><dd>By email to <a href="mailto:governance@coplanai.com">governance@coplanai.com</a>, <b>09:00–17:00 EET</b>, Monday to Friday</dd></div>
+          <div><dt>Critical response</dt><dd><b>2 business hours</b>, or <b>1 hour</b> during a live workshop on standby</dd></div>
+          <div><dt>Workshops</dt><dd>Readiness checked a day ahead; standby support for critical sessions, day or night</dd></div>
+          <div><dt>Backups</dt><dd>Daily · <b>RPO 24 h</b> · <b>RTO 8 business hours</b></dd></div>
+        </dl>
+        <p class="record__foot small">The headline terms of our standard Service Level Agreement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section section--flush-top" id="contact" data-toc-target aria-labelledby="contact-h">
+  <div class="wrap">
+    <div class="head hair hair-pad">
+      <div class="head__main">
+        <p class="eyebrow">Contact</p>
+        <h2 class="h2" id="contact-h">Come and say <em>hei</em>.</h2>
+      </div>
+      <p class="body head__aside">One address reaches the whole team. Support, data and compliance have their own.</p>
+    </div>
+    <ul class="contact" role="list">
+      <li>
+        <p class="lab">The team</p>
+        <a class="mail" href="mailto:info@coplanai.com">info@coplanai.com</a>
+      </li>
+      <li>
+        <p class="lab">The founders</p>
+        <a class="mail" href="mailto:damiano.cerrone@coplanai.com">damiano.cerrone@coplanai.com</a>
+        <a class="mail" href="mailto:sampo.ruoppila@coplanai.com">sampo.ruoppila@coplanai.com</a>
+      </li>
+      <li>
+        <p class="lab">Support, data and compliance</p>
+        <a class="mail" href="mailto:governance@coplanai.com">governance@coplanai.com</a>
+        <p class="small">By email, 09:00–17:00 EET, Monday to Friday.</p>
+      </li>
+      <li>
+        <p class="lab">Visit</p>
+        <address>SPIN Unit Lab Oy<br>Mechelininkatu 23<br>00100 Helsinki, Finland</address>
+        <p class="coords">60.1735° N · 24.9195° E</p>
+        <a class="link link--ext" href="https://www.openstreetmap.org/?mlat=60.1735&amp;mlon=24.9195#map=16/60.1735/24.9195" target="_blank" rel="noopener" style="align-self:flex-start">Open the map<span class="sr"> (opens in a new tab)</span></a>
+      </li>
+    </ul>
+    <div class="company" role="group" aria-labelledby="co-h">
+      <h3 class="lab lab--ink" id="co-h">Company details</h3>
+      <dl>
+        <div><dt>Company</dt><dd>SPIN Unit Lab Oy</dd></div>
+        <div><dt>Founded</dt><dd>Helsinki, 2018</dd></div>
+        <div><dt>Business ID</dt><dd>2916199-1</dd></div>
+        <div><dt>VAT</dt><dd>FI29161991</dd></div>
+        <div><dt>PIC (EU)</dt><dd>884696552</dd></div>
+        <div><dt>E-invoicing</dt><dd>003729161991 · Apix Messaging Oy (003723327487)</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<div data-site-invite></div>
+
+<div data-site-footer></div>
+
+<script src="data/matrix.js"></script>
+<script src="data/case-links.js"></script>
+<script src="data/logos.js"></script>
+<script src="assets/site.js"></script>
+<script>
+SITE.ready(function(){
+  var doc=document;
+
+  /* case links: the live case pages are written into each href; data/case-links.js wins */
+  doc.querySelectorAll('[data-case]').forEach(function(a){ var u=SITE.liveUrl(a.getAttribute('data-case')); if(u) a.href=u; });
+
+  /* ---------- the logo wall, from data/logos.js ----------
+     Optical sizing: a mark's width grows with its aspect ratio r, but slower than r, so a wide
+     wordmark and a square emblem get about the same visual weight (height ∝ r^-0.45, capped for
+     tall marks). TUNE[slug] = [size, tone, dx, dy], set from each mark's measured ink and then
+     by eye at 1440 and 390 (24 Sept): size evens out weight (solid boxes and heavy wordmarks
+     shrink; hairline marks and emblems with small lettering grow); tone is a CSS brightness factor
+     (below 1 darkens pale or thin marks, above 1 softens solid ones; marks with white painted
+     inside are never darkened); dx/dy (% of the image box) centre a mark whose file carries
+     invisible white parts (intrestik). */
+  var LOGOS=window.COPLAN_LOGOS||[];
+  var TUNE={'city-of-vienna':[0.9,1],'city-of-munich':[1.3,0.62],'comune-di-bologna':[1.32,0.62],'city-of-zurich':[1.06,1],'city-of-tallinn':[0.94,0.58],'dubai-municipality':[0.95,0.9],'nusantara':[1.26,0.62],'city-of-vantaa':[0.72,1.1],'city-of-lahti':[0.78,0.95],'city-of-jyvaskyla':[1.01,0.85],'city-of-kaarina':[0.9,0.55],'city-of-wiesbaden':[1.04,1],'helsingin-kaupunkitilat':[1.02,1],'estonia-ministry-of-climate':[1.4,1],'mbrcgi':[1.3,0.66],'ura-singapore':[1.08,0.66],'dubai-rta':[1.2,0.72],'urban-innovation-vienna':[1.2,0.8],'forum-virium-helsinki':[0.96,0.5],'citylab-berlin':[1.22,1],'fondazione-iu-rusconi-ghigi':[1.18,1],'ks-norway':[0.92,1.12],'doga':[1.3,0.8],'european-commission':[1.18,0.66],'undp':[1.06,0.8],'giz':[1.22,0.85],'iclei-europe':[1.12,0.7],'architects-council-of-europe':[0.94,1],'civinet-greece-cyprus':[1.26,0.6],'strategic-research-council':[1.2,0.62],'estonian-museum-of-natural-history':[1.3,0.85],'milano-digital-week':[0.76,1.08],'urbanizehub':[1.07,0.55],'university-of-helsinki':[1.22,1],'aarhus-university':[1.3,0.8],'tampere-university':[1.25,0.85],'university-of-twente':[1.3,0.8],'lulea-university-of-technology':[1.28,0.9],'hafencity-university-hamburg':[1.12,0.44],'newcastle-university':[1.05,0.91],'taltech':[0.8,0.6],'university-of-milan':[1.3,0.8],'kyiv-school-of-economics':[1.05,0.9],'sitowise':[0.76,0.4],'bolt':[0.78,0.4],'esri-italia':[0.95,1],'bable-smart-cities':[1.0,0.75],'humankind':[0.76,1.12],'cloudberry':[1.04,0.91],'ypo':[1.04,1],'group-nao':[0.68,1.1],'femma-planning':[0.74,1.08],'gotech-world':[0.96,0.7],'intrestik':[1.22,1,-7.5,23],'mfw-studio':[0.84,1.05],'seventh-hill':[1.15,1],'zamanand':[0.7,1.08],'dinnomo':[0.96,1]};
+  var wall=doc.getElementById('logo-wall');
+  function widthFor(r){ r=r>0?r:2.5; var h=Math.min(1.12,Math.pow(r,-0.45)); return r*h; }
+  if(wall&&LOGOS.length){
+    wall.innerHTML=LOGOS.map(function(l){
+      if(!l.file) return '<li class="lw__cell lw__cell--text"><span class="lw__txt">'+SITE.esc(l.name)+'</span></li>';
+      var r=l.ratio>0?l.ratio:2.5, t=TUNE[l.slug]||[1,1], w=widthFor(r)*t[0];
+      var shift=t.length>2?';--dx:'+t[2]+'%;--dy:'+t[3]+'%':'';
+      return '<li class="lw__cell"><img src="'+SITE.esc(l.file)+'" alt="'+SITE.esc(l.name)+'" width="'+Math.round(100*r)+'" height="100" loading="lazy" decoding="async" style="--w:'+w.toFixed(3)+';--b:'+t[1]+shift+'"></li>';
+    }).join('');
+    doc.querySelectorAll('[data-logo-n]').forEach(function(n){ n.textContent=LOGOS.length; });
+  }
+  /* phones show the first six rows; the button reveals the rest */
+  var more=doc.querySelector('.lw-more button');
+  if(more&&wall){
+    if(LOGOS.length<=18){ more.parentNode.hidden=true; wall.classList.remove('is-clipped'); }
+    more.addEventListener('click',function(){
+      var open=wall.classList.toggle('is-clipped')===false;
+      more.setAttribute('aria-expanded',open?'true':'false');
+      more.innerHTML=open?'Show fewer':'Show all <span data-logo-n>'+LOGOS.length+'</span> organisations';
+      /* folding the wall moves the button up by forty rows: keep it under the reader's eye */
+      if(!open) more.scrollIntoView({block:'center'});
+    });
+  }
+
+  /* "On this page": mark the section in view */
+  var links=[].slice.call(doc.querySelectorAll('.toc a[href^="#"]'));
+  var byId={}; links.forEach(function(a){ byId[a.getAttribute('href').slice(1)]=a; });
+  function mark(id){ links.forEach(function(a){ if(a===byId[id]) a.setAttribute('aria-current','true'); else a.removeAttribute('aria-current'); }); }
+  if('IntersectionObserver' in window){
+    var seen={};
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ seen[e.target.id]=e.isIntersecting; });
+      var ids=Object.keys(byId), cur=null;
+      for(var i=0;i<ids.length;i++){ if(seen[ids[i]]){ cur=ids[i]; break; } }
+      mark(cur);
+    },{rootMargin:'-30% 0px -60% 0px'});
+    doc.querySelectorAll('[data-toc-target]').forEach(function(s){ io.observe(s); });
+  }
+
+  /* review aid: ?at=<section id> scrolls there on load (for screenshots) */
+  try{
+    var at=new URLSearchParams(location.search).get('at');
+    if(at&&/^[a-z-]+$/.test(at)){ var t=doc.getElementById(at); if(t){ requestAnimationFrame(function(){ t.scrollIntoView({block:'start',behavior:'auto'}); }); } }
+  }catch(e){}
+});
+</script>
+</body>
+</html>

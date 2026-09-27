@@ -1,0 +1,842 @@
+/* ============================================================================
+   CoPlanAI — skin refinement v2 ("what we had, refined") + no dark bands
+   ----------------------------------------------------------------------------
+   Damiano's call 2026-08-03: keep the original fonts and colours (Radio Canada
+   + coral/light-blue civic palette) — refine, don't replace — and remove the
+   site's dark mode, i.e. the three page-width DARK BANDS (footer, the big
+   quote panel, the funded-programmes band). Loaded last on every page; nothing
+   structural. Remove the <link> and the site reverts exactly.
+   ========================================================================== */
+
+/* ── 1. Tokens: original values, three surgical nudges ─────────────────────
+   The palette is untouched except where a colour is used as SMALL TEXT and
+   sat just under WCAG AA. Same hues, a step deeper — reads identical at a
+   glance, measurably crisper on the page. */
+:root{
+  /* terra-deep carries eyebrows/labels: #CB4028 → a touch deeper for 4.5:1 */
+  --terra-deep:#BC3A22;
+  /* faint carries captions/section indices: #4F6B79 sat at ~4.4 on the tinted
+     band; one step darker clears it everywhere */
+  --faint:#47616E;
+  /* slightly softer, lower shadows — less "floating", more settled */
+  --shadow:0 1px 2px rgba(20,60,90,.05), 0 12px 32px -18px rgba(20,60,90,.25);
+  --shadow-soft:0 1px 2px rgba(20,60,90,.04), 0 18px 48px -30px rgba(20,60,90,.28);
+}
+
+/* ── 2. Remove the dark bands ──────────────────────────────────────────────
+   The footer, the pull-quote panel and the EU-programmes band all rendered as
+   near-black slabs (background:var(--ink) / #0f2a34). Rebuilt light, using
+   only palette tokens, with hairlines for separation instead of darkness. */
+
+/* footer: ink slab → soft tinted band with hairline top rule */
+.foot{
+  background:var(--canvas2) !important;
+  color:var(--ink) !important;
+  border-top:1px solid var(--line);
+}
+.foot .word, .foot a{ color:var(--ink) !important; }
+.foot h5{ color:var(--ink2) !important; }
+.foot ul a{ color:var(--muted) !important; }
+.foot ul a:hover{ color:var(--ink) !important; }
+.foot .credit{ color:var(--muted) !important; }
+.foot .base{ color:var(--faint) !important; }
+.foot-grid{ border-bottom-color:var(--line) !important; }
+
+/* the big serif quote: dark slab → tinted band, coral highlight kept */
+.mquote{ background:var(--canvas2) !important; color:var(--ink) !important; }
+.mquote .q .hl{ color:var(--terra-deep) !important; }
+
+/* funded-programmes band: dark teal + lime → light band, deep-blue accents.
+   The lime accent (#D6F24E) is unreadable on light, so links/badges move to
+   the palette's own deep blue-green. */
+.fundband{
+  background:var(--paper2) !important;
+  --faint:#47616E;
+  border-top:1px solid var(--line2);
+  border-bottom:1px solid var(--line2);
+}
+.fundband .eyebrow, .fundband .eyebrow.green{ color:var(--green-deep) !important; }
+.fundband h2, .fundband .tc-h, .fundband .tc-name, .fundband .tc-specs .v{ color:var(--ink) !important; }
+.fundband .sec-head p, .fundband .tc-b, .fundband .tc-full{ color:var(--muted) !important; }
+.fundband .tc-specs .k{ color:var(--faint) !important; }
+.fundband a{ color:var(--green-deep) !important; }
+.fundband .tcard{
+  background:var(--paper) !important;
+  border-color:var(--line) !important;
+  box-shadow:var(--shadow-soft);
+}
+.fundband .tc-h{ background:rgba(20,37,48,.03) !important; border-bottom-color:var(--line2) !important; }
+.fundband .tc-badge{ background:var(--green-soft) !important; color:var(--green-deep) !important; }
+
+/* ── 3. Small-text accents that sat under AA, same hue family ──────────────
+   The uppercase eyebrow labels are set in bright coral (--terra) at ~3.0:1 —
+   the single most-repeated small text on the site. Deep coral reads the same
+   at a glance and clears AA. (Per-card accent labels driven by --lc/--qc are
+   left as designed: they're the multi-colour card system, and each is tiny
+   and decorative.) */
+.eyebrow{ color:var(--terra-deep); }
+.eyebrow.green{ color:var(--green-deep); }
+
+/* ── 3b. Reveal failsafe ───────────────────────────────────────────────────
+   `.rise` starts at opacity:0 and is only revealed when an IntersectionObserver
+   callback adds `.in`. That makes ALL page content dependent on JavaScript
+   running: if the observer never fires, the page renders blank. There is a
+   <noscript> guard, but it does not cover the more likely case — script present
+   but erroring before `rio.observe()`. Reveal unconditionally when scripting is
+   unavailable, so content is never hostage to a JS failure. */
+@media (scripting: none){
+  .rise{ opacity:1 !important; transform:none !important; }
+}
+
+/* ── 4. Quiet polish ───────────────────────────────────────────────────────
+   Finish details only — no layout, no type-family changes. */
+::selection{ background:var(--terra-soft); color:var(--ink); }
+:focus-visible{ outline:2px solid var(--terra); outline-offset:2px; }
+a{ text-underline-offset:2px; }
+hr{ border:0; border-top:1px solid var(--line); }
+
+/* ── 5. Chapter marks ──────────────────────────────────────────────────────
+   The section eyebrows already carry a number (<span class="no">02</span>).
+   Promote them to a dossier rhythm: mono coral numeral, small-caps label, and
+   a hairline rule running to the right margin. Scoped to .sec-head so the
+   footer/band eyebrows stay as they are. */
+.sec-head .eyebrow{ display:flex; align-items:center; gap:12px; width:100%; }
+.sec-head .eyebrow .no{
+  font-family:var(--mono); font-weight:600; letter-spacing:.05em;
+  color:var(--terra-deep);
+}
+.sec-head .eyebrow::after{ content:""; flex:1; height:1px; background:var(--line); }
+
+/* ── 6. Two-tier buttons ───────────────────────────────────────────────────
+   Ink for actions, coral reserved for meaning (highlights, category accents,
+   the "imagine." moment). Primary buttons move from coral to ink; the nav CTA
+   becomes the one solid pill in the header. Coral text-links stay coral. */
+.btn-primary{
+  background:var(--ink) !important;
+  box-shadow:0 10px 22px -14px rgba(20,37,48,.5) !important;
+}
+.btn-primary:hover{ background:var(--ink2) !important; }
+.nav .btn-nav{ background:var(--ink); border-color:var(--ink); color:var(--canvas); }
+.nav .btn-nav:hover{ background:var(--ink2); border-color:var(--ink2); color:var(--paper); }
+
+/* (category top-rules tried 2026-08-03, rejected by Damiano — the coloured
+   line fought the rounded corners. Category colour lives in the stickers
+   only. Do not reintroduce coloured edge rules anywhere on the site.) */
+
+
+/* ══════════════════════════════════════════════════════════════════════════
+   7. CORRECTIVE FIXES — 2026-08-04 rendering audit
+   Bugs only. No layout restructuring, no design-language changes.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 7.1 THE BLACK PAGE (critical, 153 of 154 pages) ───────────────────────
+   The static-mirror URL rewriter treated the `#n` fragment inside the inline
+   `data:image/svg+xml` noise textures as a site-relative link and rewrote it:
+
+       filter='url(%23n)'  →  filter='url(../insights-and-updates/%23n)'
+
+   Inside a data: URI that reference cannot resolve, so the filter is dropped
+   and the `<rect width='200' height='200'>` — which has no `fill` — falls
+   back to BLACK and tiles across the whole element. On the blog index and the
+   ~140 dated posts nothing paints over it, so the page renders black with
+   rgb(27,37,50) body text: 1.36:1, far below the 4.5:1 AA floor.
+
+   Three separate textures carry the same rewrite. Restating each declaration
+   here with the correct `url(%23n)` repairs all of them on every page at once
+   (reskin.css is the last stylesheet, so it wins), and is a no-op on the home
+   page, which the rewriter happened to leave intact. */
+body{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' stitchTiles='stitch' result='t'/%3E%3CfeColorMatrix in='t' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.09 0.09 0.09 0 0' result='a'/%3E%3CfeFlood flood-color='%232b3640' result='c'/%3E%3CfeComposite in='c' in2='a' operator='in'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* the fixed 5%-multiply paper grain — was a flat black veil over every page */
+body::before{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* the 50%-soft-light grain inside .scene — was darkening every hero/figure */
+.scene .grain{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ── 7.2 Home: 40px of horizontal overflow from the client-wall tooltips ───
+   `.cw-cell[data-tip]::after` is `white-space:nowrap`, centred on its cell
+   with `left:50%; translateX(-50%)`. At 390px the grid is 2 columns of 177px,
+   so "TalTech — Tallinn University of Technology" renders a 294px tooltip on
+   a 177px cell and pushes the document to 430px. Because it is a pseudo-
+   element it never showed up in element sweeps — only in scrollWidth.
+   Letting it wrap and capping it to the cell's share of the viewport keeps
+   the tooltip centred and inside the page at every width. */
+.cw-cell[data-tip]::after{
+  white-space:normal;
+  width:max-content;
+  max-width:min(240px,44vw);
+  text-align:center;
+}
+/* touch has no hover, so all 43 client names were unreachable; reveal on
+   press as well. (The name is already in each logo's alt text, so assistive
+   tech was never blocked — this is for sighted touch users.) */
+.cw-cell[data-tip]:active::after{opacity:1;transform:translate(-50%,0)}
+.cw-cell[data-tip]:active::before{opacity:1}
+
+/* ── 7.3 Tap targets below the 44px minimum ────────────────────────────────
+   Standalone controls only. Inline links inside a sentence are exempt from
+   WCAG 2.5.8 and are left alone so body copy keeps its leading. */
+@media(max-width:940px){
+  /* hamburger was 43x33 */
+  .nav-toggle{
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    min-width:44px; min-height:44px;
+  }
+  /* Open-menu links were 356x36.8. There is also a cascade regression here:
+     the mobile block sets `.nav-links{gap:2px;padding:10px}` and
+     `.nav-links a{padding:11px 12px}`, but the base desktop rules
+     (`gap:26px`, `padding:6px 2px`) are declared LATER in the same document
+     and win, so the dropdown renders 346px tall with 26px voids between
+     items. Restore the intended compact spacing and give each row a real
+     44px hit box. */
+  .nav-links{ gap:2px; }
+  .nav-links a{ display:flex; align-items:center; min-height:44px; padding:11px 12px; }
+  /* header CTA pill was 105.7x31.4 */
+  .nav .btn-nav{ min-height:44px; display:inline-flex; align-items:center; }
+  /* the four-forms category tabs were 38.2px tall */
+  .ff-tab{ min-height:44px; }
+  /* engagements-map zoom / reset were 40x40 */
+  .cpmap-ctrls button{ width:44px; height:44px; }
+  /* hero pause was 40x40 */
+  .hero-pause{ width:44px; height:44px; }
+  /* Annual / Monthly pricing toggle was 34px tall */
+  .pr-toggle button{ min-height:44px; }
+}
+/* touch devices wider than the mobile breakpoint (tablets in landscape) kept
+   the map controls at 42px */
+@media(pointer:coarse){ .cpmap-ctrls button{ width:44px; height:44px; } }
+
+/* ── 7.3b Hero before/after handle: let touch drag it ──────────────────────
+   `.ba-bar` inherited `touch-action:auto`, so on a phone the browser claimed
+   the gesture for page scrolling and the wipe never moved. (The pointer-event
+   handlers and the zero-width rect bug are fixed in index.html.) */
+.ba-bar{ touch-action:none; }
+
+/* ── 7.4 About: the 3-across process row broke words mid-syllable ──────────
+   `.flow` is a 3-column flex row with `flex:1`. Inside a 308px container at
+   390px each cell is ~97px, narrower than the words it holds, so "The
+   institution" and "Business ID" wrapped mid-word. Stack it below 640px —
+   same cells, same styling, one per row. */
+@media(max-width:640px){
+  .flow{ flex-direction:column; gap:6px; }
+  .flow .fc{ text-align:left; }
+  .flow .ar{ align-self:center; transform:rotate(90deg); line-height:1; }
+}
+
+/* ── 7.4b Mission: the fixed chapter rail was drawn over the prose ─────────
+   mission/index.html is GENERATED (build_mission.py), so both fixes below are
+   made here rather than by hand in the page.
+
+   (a) The rail hides its text labels only below 1440px
+       (`@media(max-width:1439px)`), but `.msn-sc{max-width:1320px;padding:0
+       24px}` does not clear the rail until ~1578px. In between, the rail —
+       `position:fixed; left:22px; z-index:40`, 131px wide with labels — sits
+       directly on top of the narrative column. Measured at a 1440px window:
+       rail right edge 153, prose left edge 77, so 76px of every paragraph was
+       printed under the chapter list. Extending the existing label breakpoint
+       to 1599px closes the whole band.
+
+       The generator also keeps the ACTIVE chapter's label visible whenever
+       the rest are hidden (`.msn-rail a.on .rl{display:inline}`). That label
+       has the same problem and is in fact worse: forced through all ten
+       chapters at a 1440px window, the widest ("09 Getting started", 123px)
+       reaches x=162 against a prose edge at x=77 — 86px of text printed over
+       text, and the gap only grows on narrower screens because the rail is
+       `position:fixed` at left:22 while the column keeps moving left. There
+       is no width below 1600px where a label fits beside the column, so the
+       labels come off entirely; position is still legible from the active
+       dot, which is coral and scaled 1.6x.
+
+   SUPERSEDED 2026-08-04. The overlap diagnosis above is correct, but hiding the
+   labels removed the thing the chapter rail is for — Damiano: "I saw the side
+   bar with the chapter names and it was perfect... now I do not see the chapter
+   headers anymore". The labels only collided because the rail is
+   `position:fixed` in the viewport while the deck column is centred in it, so
+   the two share the same space. The fix is to give the rail its own GUTTER
+   (see `.entry-content > section.msn-ch{padding-left}` in the mission
+   generator) rather than to delete the labels. This block is intentionally
+   left empty so the generator's rail rules apply. */
+
+/*  (b) On mobile the stacked figures put their caption ON the figure.
+    `.mst-cap` is `position:absolute; bottom:14px; z-index:3` with a 92%-white
+    plate, and `.msn-inline` is a fixed 460px box, so the caption lands inside
+    the artwork: 19 of the 45 stages measured, covering 28–32% of the image
+    height and hiding exactly the axis labels and legends at the bottom of the
+    slides. Grow the inline box by the caption strip, pull the stage up out of
+    it, and let the caption sit under the figure as a caption. Every stage
+    keeps its previous height, which matters because the stages cross-fade on
+    top of each other. */
+@media(max-width:940px){
+  .msn-inline{ height:calc(min(64vh,460px) + 74px); }
+  /* `.mstage{height:100%}` would otherwise ignore the bottom offset and the
+     stage would still fill the taller box. The max-height clamps the one
+     portrait stage whose inline `aspect-ratio:1864/2800` sizes it taller than
+     the box (513.7px in a 460px slot) — it was already spilling past the
+     figure before this change. `overflow` has to open up so the caption can
+     sit below the card; the rounded corner it was clipping moves onto the
+     image itself, which is the only thing that needed clipping. */
+  .msn-inline .mstage{
+    inset:0 0 74px; height:auto; max-height:calc(100% - 74px);
+    overflow:visible;
+  }
+  .msn-inline .mstage > img{ border-radius:inherit; }
+  .msn-inline .mst-cap{
+    top:100%; bottom:auto; left:0; right:0;
+    margin-top:9px; width:auto; max-width:none;
+    background:none; padding:0;
+    font-size:.84rem; line-height:1.35; color:var(--muted);
+  }
+}
+
+/* ── 7.4d About: one dark band and one invisible label colour survived ─────
+   Section 2 above converted the three page-width dark slabs the owner asked
+   to remove (.foot, .mquote, .fundband). The About page carries a fourth,
+   `.pad.ab-dark` — the whole "Compliance & data" section, background
+   `var(--kink)` #0f2a34, measured luminance 37 over 1177px of page. Same
+   treatment as .fundband: light band, hairline separation, and the lime
+   accent moved to the palette's deep blue because #D6F24E cannot be read on
+   a light surface. */
+.ab-dark{
+  background:var(--paper2) !important;
+  color:var(--ink) !important;
+  --faint:#47616E;
+  border-top:1px solid var(--line2);
+  border-bottom:1px solid var(--line2);
+}
+.ab-dark .ab-eyebrow{ color:var(--green-deep) !important; }
+.ab-dark .ab-eyebrow .ln{ background:var(--line) !important; }
+.ab-dark .ab-h2{ color:var(--ink) !important; }
+.ab-dark .ab-h2 .lm{ color:var(--green-deep) !important; }
+.ab-dark .ab-p{ color:var(--muted) !important; }
+.ab-dark .ab-p strong{ color:var(--ink) !important; }
+/* the four compliance stat blocks inside the band were painted for the dark
+   surface: lime label, white value, #a9c7d1 body — 1.08–1.17:1 once the band
+   goes light */
+.ab-dark .ab-std .b{ color:var(--green-deep) !important; }
+.ab-dark .ab-std .t{ color:var(--ink) !important; }
+.ab-dark .ab-std p{ color:var(--muted) !important; }
+
+/* Same reasoning as §3: the current-page nav link is bright coral --terra at
+   15.5px, 3.15:1 on the header. Normal-size text needs 4.5:1, so it takes the
+   deep coral the eyebrows already use. The 2px coral underline underneath is
+   a graphic, not text, and stays as designed. */
+.nav a.active{ color:var(--terra-deep); }
+
+/* The same lime is used for the country labels under the masonry photos,
+   but those sit on --paper2. Measured 1.17:1 against rgb(239,248,253) — the
+   worst contrast left on the site, and 14 labels deep. Deep blue reads as
+   the same "quiet metadata" note and clears AA. */
+.mason figcaption .co{ color:var(--green-deep); }
+
+/* ── 7.4c Horizontal scrollers had no affordance ───────────────────────────
+   `.ledger` is `min-width:720px` inside `.ledger-wrap{overflow-x:auto}`. At
+   390px the wrap is 354px, so 2 of the 5 columns are off-screen and the last
+   visible cell is cut mid-word ("Forum Virium Helsin…") with nothing to say
+   the table continues — and macOS overlay scrollbars stay hidden until you
+   already scroll. These are neutral scroll shadows on the container, not
+   edge-rules: they ride the scroll position (`background-attachment:local`
+   for the masks, `scroll` for the shadows) so each side shows only while
+   there is more content that way, and both vanish at the ends. */
+.ledger-wrap, .mtl-scroll, .sla-tw{
+  background-image:
+    linear-gradient(to right,  var(--paper), var(--paper)),
+    linear-gradient(to left,   var(--paper), var(--paper)),
+    linear-gradient(to right,  rgba(20,37,48,.30), rgba(20,37,48,0)),
+    linear-gradient(to left,   rgba(20,37,48,.30), rgba(20,37,48,0));
+  background-position:0 0, 100% 0, 0 0, 100% 0;
+  background-repeat:no-repeat;
+  /* the masks must be WIDER than the shadows, or the tail of each shadow
+     leaks past its mask and paints a hairline at rest */
+  background-size:34px 100%, 34px 100%, 30px 100%, 30px 100%;
+  background-attachment:local, local, scroll, scroll;
+}
+
+/* ── 7.5 Type floors ───────────────────────────────────────────────────────
+   A handful of mono labels were set in ems that resolve to 8.96–10.6px on
+   the About and Use-cases pages — small enough that the uppercase letter-
+   spacing makes them shimmer. Raise the floor to 11.5px without touching
+   weight, colour, tracking or layout. */
+.flow .fc .k,          /* was 8.96px  — "AI" / "People" / "The institution" */
+.ab-reg .r .k,         /* was 9.28px  — Business ID / VAT / PIC (EU) / Founded */
+.artcard .hd .eb,      /* was 9.6px */
+.ab-std .b,            /* was 9.6px */
+.ab-addr .lbl,         /* was 9.92px */
+.mason figcaption .co, /* was 10.24px */
+.ab-fc .role,          /* was 10.56px */
+.ab-whom .w .n,        /* was 10.56px */
+.ab-maplink,           /* was 10.56px */
+.cpvenn-lab-sub,       /* was 9.5px  — venn sub-labels                     */
+.cpvenn-lab-ov,        /* was 10px   — the venn's overlap-lens labels.
+                          NOTE: scope these to the -ov/-sub variants, never
+                          to the shared `.cpvenn-lab` class — that would also
+                          catch .cpvenn-lab-role (15px) and .cpvenn-lab-center
+                          (15.5px) and shrink the diagram's main labels. */
+.artcard .hd .sticker, /* was 9.6px  — "limited risk" / "on-demand" pills */
+.xw-note .chip,        /* was 10.24px */
+.pr-acad,              /* was 10.4px  — the academic-discount pricing line */
+.xw-c .n,              /* was 10.56px — 01 / 02 / 03 step numbers */
+.uc-stats .s span,     /* was 11.2px */
+table.ledger th{ font-size:11.5px; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   8. THIRD CORRECTIVE PASS — 2026-08-04 verification round
+   Two surviving dark bands, the mission nav-link contrast, the tap targets
+   and type sizes on the 129 stock-theme pages, the accent colours that were
+   still under AA, and the missing reduced-motion guard.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 8.0 Two more "deep" palette steps ─────────────────────────────────────
+   --terra and --green already have deep partners (--terra-deep #BC3A22,
+   --green-deep #146FA8, both ~5.5:1 on the light surfaces). --sky and --gold
+   never got one, so every label set in them sat at 1.75–2.61:1. These two
+   values keep each hue and its saturation EXACTLY (HSL hue 187.4°/35.6°,
+   S .817/.875 — identical to the originals); only lightness moves, and it
+   lands on the same rung as terra-deep and green-deep so the four category
+   accents finally carry the same weight:
+
+     --sky  #14B0C6  L .353 → --sky-deep  #0D7685  L .147
+     --gold #F2A83C  L .472 → --gold-deep #985E0A  L .147
+
+   Measured (see 8.6): 5.32:1 / 5.33:1 on --paper, 4.62:1 / 4.63:1 on the
+   darkest light surface (--canvas2), and 5.3:1 for white text ON them, which
+   is what the category stickers need. */
+:root{
+  --sky-deep:#0D7685;
+  --gold-deep:#985E0A;
+}
+
+/* ── 8.1 /use-coplanai/ "Beyond the plans" — the last designed dark band ────
+   `.xw` renders background var(--kink) #0f2a34 — measured rgb(15,42,52), 669px
+   tall at 1280 — with #D6F24E lime accents and white text. Same conversion the
+   footer, the pull-quote, the funded-programmes band and .ab-dark already got
+   in §2/§7.4d: --paper2 surface, --ink text, hairline separation, and the lime
+   accent replaced by --green-deep (lime is unreadable on a light surface —
+   1.1:1). This is the pricing page's enterprise section, so the inner cards go
+   to --paper with the soft shadow rather than flat, to keep the tier reading
+   as the premium one. */
+.xw{
+  background:var(--paper2) !important;
+  color:var(--ink) !important;
+  border:1px solid var(--line2);
+  box-shadow:var(--shadow-soft);
+  --faint:#47616E;
+}
+/* the two corner glows were a teal and a lime bloom tuned for the dark slab;
+   restated in the light palette so the panel keeps its depth */
+.xw::before{
+  background:
+    radial-gradient(700px 420px at 90% -10%, rgba(20,111,168,.09), transparent 60%),
+    radial-gradient(600px 420px at -8% 110%, rgba(188,58,34,.06), transparent 60%) !important;
+}
+.xw .eb, .xw h2 .lm, .xw-c .n{ color:var(--green-deep) !important; }
+.xw h2, .xw .lede strong, .xw-c h3, .xw-c p b{ color:var(--ink) !important; }
+.xw .lede, .xw-c p, .xw-note .tx{ color:var(--muted) !important; }
+.xw-c{
+  background:var(--paper) !important;
+  border-color:var(--line) !important;
+  box-shadow:var(--shadow-soft);
+}
+.xw-note .chip{
+  background:transparent !important;
+  border-color:var(--line) !important;
+  color:var(--green-deep) !important;
+}
+/* the one link in the band is hard-coded `style="color:#fff"` for the dark
+   slab — 1.08:1 once the slab goes light, so it needs !important to beat the
+   inline declaration */
+.xw a{ color:var(--green-deep) !important; }
+
+/* ── 8.2 The stock-theme footer band (129 pages) ───────────────────────────
+   The WordPress block-theme footer is `<div class="wp-block-group alignfull
+   has-text-color has-background" style="color:#eef1f6;background-color:#1b2532">`
+   and the theme also restates it as
+   `footer.wp-block-template-part .wp-block-group.has-background{background-color:#1b2532!important}`.
+   Measured rgb(27,37,50), 290–555px tall depending on width. Same light
+   treatment as every other band.
+
+   These pages do NOT define the site palette custom properties (they are the
+   stock block theme — only --terra-deep survives, from §1 above), so the
+   values here are the palette's own hex literals, not var() references:
+     --canvas2 #E4F1F9 surface · --ink #142530 · --faint #47616E ·
+     --green-deep #146FA8 · --line rgba(20,37,48,.13)
+   Contrast on the new surface: ink 13.65:1, faint 5.70:1, green-deep 4.72:1. */
+footer.site-footer .wp-block-group.has-background,
+.wp-site-blocks > footer .wp-block-group.has-background{
+  background-color:#E4F1F9 !important;
+  color:#142530 !important;
+  border-top:1px solid rgba(20,37,48,.13);
+}
+footer.site-footer .wp-block-group.has-background h1,
+footer.site-footer .wp-block-group.has-background h2,
+footer.site-footer .wp-block-group.has-background h3,
+footer.site-footer .wp-block-group.has-background h4,
+footer.site-footer .wp-block-group.has-background strong{ color:#142530 !important; }
+footer.site-footer .wp-block-group.has-background p{ color:#47616E !important; }
+footer.site-footer .wp-block-group.has-background .sg-eyebrow{ color:#146FA8 !important; }
+footer.site-footer .wp-block-group.has-background a{ color:#146FA8 !important; }
+footer.site-footer .wp-block-group.has-background a:hover{ color:#142530 !important; }
+/* the divider was #33445c — a dark-slab rule; on light it becomes a hairline */
+footer.site-footer .wp-block-group.has-background hr.wp-block-separator{
+  background-color:rgba(20,37,48,.13) !important;
+  color:rgba(20,37,48,.13) !important;
+  border-color:rgba(20,37,48,.13) !important;
+}
+
+/* ── 8.3 /mission/ active nav link ─────────────────────────────────────────
+   §7.4d moved the current-page link to --terra-deep with `.nav a.active`
+   (0,2,0). mission/index.html is GENERATED and its inline stylesheet carries
+   `.nav-links a.active{color:var(--terra)}` at (0,2,1) — a higher specificity,
+   so on that one page the link stayed bright coral, measured 3.15:1 against
+   the header. A (0,3,1) selector clears it without touching any other page;
+   `!important` is belt-and-braces, because mission/index.html is regenerated
+   by build_mission.py and its inline block can come back more specific.
+   Measured after: rgb(188,58,34) on the header bar, 5.25:1, on /mission/,
+   /about/ and /use-coplanai/ alike. */
+.nav .nav-links a.active{ color:var(--terra-deep) !important; }
+
+/* ── 8.4 Tap targets on the 129 stock-theme pages ──────────────────────────
+   §7.3 only covered the classes that exist on the 25 designed pages. The
+   WordPress block-theme pages were untouched. Everything below raises the HIT
+   AREA, not the drawn size: a transparent `::after` overlay centred on the
+   control leaves the logo, the chips and the wordmark exactly as drawn.
+   (Inline links inside a sentence are exempt from WCAG 2.5.8 and are left
+   alone so body copy keeps its leading.) */
+button.wp-block-navigation__responsive-container-open,   /* was 38.4 x 38.4 */
+.wp-block-site-logo a.custom-logo-link,                  /* was 40 x 12.9   */
+.wp-block-site-title a,                                  /* was 70.5 x 26.5 */
+.wp-block-post-terms a,                                  /* was ~46 x 27.1  */
+a.tc-link,                                               /* was 312 x 24    */
+a.case-back,                                             /* was 101 x 23    */
+a.word{                                                  /* was 106 x 34    */
+  position:relative;
+}
+/* `a.ab-maplink` (81 x 31) is deliberately NOT in that list: the page pins it
+   with `position:absolute; right:12px; top:12px` over the map, and forcing it
+   to `relative` drops it back into flow (measured: it jumped from the map's
+   top-right corner to x=7, outside the 352px frame). It is already its own
+   containing block, so the ::after below works without any position change. */
+button.wp-block-navigation__responsive-container-open::after,
+.wp-block-site-logo a.custom-logo-link::after,
+.wp-block-site-title a::after,
+.wp-block-post-terms a::after,
+a.tc-link::after,
+a.case-back::after,
+a.ab-maplink::after,
+a.word::after{
+  content:"";
+  position:absolute;
+  left:50%; top:50%;
+  transform:translate(-50%,-50%);
+  width:100%; height:100%;
+  min-width:44px; min-height:44px;
+  /* the overlay must not eat clicks meant for a control drawn on top of it */
+  z-index:0;
+}
+/* the logo link is `display:inline-block` with `line-height:0`, and the site
+   title link is plain `inline` — neither establishes a usable containing block
+   until it is inline-block */
+.wp-block-site-logo a.custom-logo-link,
+.wp-block-site-title a,
+.wp-block-post-terms a{ display:inline-block; }
+/* the footer link lists are stacked with <br> at a 23px line box, so centred
+   44px overlays would sit on top of each other and steal each other's taps.
+   Padding is the only correct fix there: it grows the line box, so the rows
+   separate instead of overlapping. 23.1 + 24 = 47.1px per row. */
+footer.site-footer .wp-block-column p a{
+  display:inline-block;
+  padding-block:12px;
+  /* "Mission" is only 42.7px wide; min-width pads the BOX, and because the
+     column is left-aligned the label does not move a pixel */
+  min-width:44px;
+}
+/* the stock header's "Book a call" pill measured 106.6 x 38.4. Padding would
+   push the whole 12px-tall header taller, so it takes the same centred
+   overlay: 106.6 x 44 hit area, pill drawn exactly as before. */
+.wp-block-button__link{ position:relative; }
+.wp-block-button__link::after{
+  content:""; position:absolute;
+  left:50%; top:50%; transform:translate(-50%,-50%);
+  width:100%; height:100%; min-width:44px; min-height:44px;
+  z-index:0;
+}
+
+/* ── 8.5 Type floor, second pass ───────────────────────────────────────────
+   Four more labels resolve below the 11.5px floor set in §7.5. Same rule:
+   size only — weight, colour, tracking and layout untouched. */
+.xw .eb,        /* was 11.2px  — "Beyond the plans" band eyebrow          */
+.sla-tbl th,    /* was 10.56px — the SLA severity table's column heads    */
+.ab-galnote{    /* was 11.2px  — "Workshops · 25+ countries" gallery note */
+  font-size:11.5px;
+}
+/* `.ab-maplink` is already 11.5px from §7.5 at every width measured; the
+   floor is restated here with the `a` element so the page's own
+   `a.ab-maplink` (0,1,1) can never out-specify it. */
+a.ab-maplink{ font-size:11.5px; }
+
+/* ── 8.6 Accents that were still under AA ──────────────────────────────────
+   Every value below keeps its hue; only lightness moves. Measured before →
+   after (small text needs 4.5:1, the 41.6px .mnum needs 3:1):
+
+     .sticker.sky   white on #14B0C6  2.61 → white on #0D7685  5.32
+     .sticker.green white on #1C93D8  3.38 → white on #146FA8  5.43
+     .sticker.terra white on #F2593F  3.35 → white on #BC3A22  5.58
+     .qn/.qgo/.mnum/.toc-arw/.eyebrow, gold   2.01 → 5.33 (on --paper)
+     .qn/.qgo/.mnum/.toc-arw/.eyebrow, sky    2.61 → 5.32
+     .qn/.qgo/.mnum/.toc-arw/.eyebrow, terra  3.35 → 5.58
+     .qn/.qgo/.mnum/.toc-arw/.eyebrow, green  3.38 → 5.43
+     .ti2 .lbl sky  2.46 → 5.01 (on --canvas)   terra 3.15 → 5.25
+     .pr-acad sky   2.46 → 5.01
+     .case-eyebrow  3.15 → 5.25
+     .fundband .tc-badge  3.92 → 4.60 (on --green-soft; §2 introduced it) */
+
+/* (a) category stickers: the BACKGROUND darkens, the hue and the white label
+   stay. Same rung for all three, so the set still reads as one system. */
+.sticker.sky{   background:var(--sky-deep) !important; }
+.sticker.green{ background:var(--green-deep) !important; }
+.sticker.terra{ background:var(--terra-deep) !important; }
+
+/* (b) the per-card / per-section accent labels. The accent arrives as an
+   inline custom property (`style="--ac:var(--gold)"`, `style="--qc:var(--sky)"`),
+   so the only way to reach a single category is to match the inline
+   declaration itself. Only the TEXT is remapped — the accent dots, rules and
+   tint washes that also read var(--ac)/var(--qc) keep the bright hue, exactly
+   as the eyebrows/dots already pair elsewhere on the site. */
+[style*="--ac:var(--gold)"] .mnum,
+[style*="--ac:var(--gold)"] .eyebrow,
+[style*="--ac:var(--gold)"] .toc-arw,
+.qc[style*="--qc:var(--gold)"] .qn,
+.qc[style*="--qc:var(--gold)"] .qgo{ color:var(--gold-deep) !important; }
+
+[style*="--ac:var(--sky)"] .mnum,
+[style*="--ac:var(--sky)"] .eyebrow,
+[style*="--ac:var(--sky)"] .toc-arw,
+.qc[style*="--qc:var(--sky)"] .qn,
+.qc[style*="--qc:var(--sky)"] .qgo{ color:var(--sky-deep) !important; }
+
+[style*="--ac:var(--terra)"] .mnum,
+[style*="--ac:var(--terra)"] .eyebrow,
+[style*="--ac:var(--terra)"] .toc-arw,
+.qc[style*="--qc:var(--terra)"] .qn,
+.qc[style*="--qc:var(--terra)"] .qgo{ color:var(--terra-deep) !important; }
+
+[style*="--ac:var(--green)"] .mnum,
+[style*="--ac:var(--green)"] .eyebrow,
+[style*="--ac:var(--green)"] .toc-arw,
+.qc[style*="--qc:var(--green)"] .qn,
+.qc[style*="--qc:var(--green)"] .qgo{ color:var(--green-deep) !important; }
+
+/* (c) labels that carry the accent as an inline `color:` — needs !important,
+   because a normal inline declaration outranks any selector */
+.ti2 .lbl[style*="color:var(--sky)"],
+.ti-col .lbl[style*="color:var(--sky)"]{ color:var(--sky-deep) !important; }
+.ti2 .lbl[style*="color:var(--terra)"],
+.ti-col .lbl[style*="color:var(--terra)"]{ color:var(--terra-deep) !important; }
+.ti2 .lbl[style*="color:var(--gold)"],
+.ti-col .lbl[style*="color:var(--gold)"]{ color:var(--gold-deep) !important; }
+.ti2 .lbl[style*="color:var(--green)"],
+.ti-col .lbl[style*="color:var(--green)"]{ color:var(--green-deep) !important; }
+
+/* (d) fixed-colour accents */
+.pr-acad{ color:var(--sky-deep); }         /* the academic-discount line */
+.case-eyebrow{ color:var(--terra-deep); }  /* portfolio case kicker      */
+/* §2 above put green-deep on --green-soft for the funded-programmes badge;
+   that pairing measures 3.92:1, so the text takes one more step down. */
+.fundband .tc-badge{ color:#126497 !important; }
+
+/* ── 8.7 prefers-reduced-motion ────────────────────────────────────────────
+   `html{scroll-behavior:smooth}` is declared unconditionally on every designed
+   page, so every in-page anchor animated the viewport even for readers who
+   have asked the OS for reduced motion. */
+@media (prefers-reduced-motion: reduce){
+  html, body, *{ scroll-behavior:auto !important; }
+}
+
+/* ── 8.8 Two more found while re-measuring §8.6 ────────────────────────────
+   Both are colour-only; neither moves anything on the page.
+
+   (a) /use-coplanai/ prices the four models with an `--ac-ink` "readable
+   accent" already declared per section (#subscriber → --terra-deep,
+   #capacity → --green-deep, #innovation → #0D7786). The gold one, #966825,
+   stops at 4.24:1 on --canvas2 — the only one of the four that misses. It
+   takes the --gold-deep from §8.0 (4.63:1) so the set is consistent.
+   (b) The "Most popular" pricing badge is white on --terra: 3.35:1, and set
+   at .54rem = 8.64px, the smallest type on the site. The background takes the
+   deep coral (5.58:1) and the label the 11.5px floor §7.5 established. It is
+   `position:absolute`, so the larger pill cannot move the table. */
+#governance{ --ac-ink:var(--gold-deep); }
+.pr-plan .pr-badge{ background:var(--terra-deep) !important; font-size:11.5px; }
+
+
+/* ── 9. The header, rebuilt as the footer's counterpart ────────────────────
+   Damiano, 2026-08-04: "redesign the header so it is complementary to the
+   footer — the current header is not full width as the footer."
+
+   Measured before (1280px viewport, index.html):
+       .nav   x=78  w=1110   ← an island slab, 32px below the top edge
+       .foot  x=0   w=1265   ← full-bleed band, inner column 1110 at x=78
+   Both content columns already landed on the same 1110px, so the only thing
+   that broke the pairing was the BAND: the footer's tint runs edge to edge,
+   the header's stopped at the column. Two bars, two different ideas.
+
+   What makes them a pair now:
+     · the same full-bleed geometry — the header takes the identical
+       `padding-inline:max(0px,calc((100% - 1110px)/2))` the designed pages
+       already give `.entry-content > section, > footer`, so the band spans the
+       viewport and the inner column stays exactly 1110px;
+     · the same tint — --canvas2, the footer's band colour, carried at .86
+       alpha so the sticky blur still reads through it;
+     · the same hairline — 1px var(--line), the footer's top rule mirrored as
+       the header's bottom rule (it was the lighter --line2);
+     · the same mark — the CoPlanAI logo now opens the header and the footer;
+     · the same gutters at every width, including the 18px mobile gutter the
+       footer already used and the header did not.
+
+   Placement is stated for BOTH paths this chrome takes:
+     · designed pages — `.nav` is a child of the theme's constrained content
+       column (`.is-layout-constrained > *`, max-width 1110 + auto margins);
+     · stock pages — site-chrome.css §placement gives it max-width:1110 and
+       margin-top:32px explicitly.
+   `.nav.nav` (0,2,0) beats the first and, loading later, beats the second. */
+.nav.nav{
+  max-width:none;
+  margin-top:0; margin-inline:0;
+  padding-inline:max(0px, calc((100% - 1110px) / 2));
+  background:rgba(228,241,249,.86);        /* = --canvas2, the footer's band */
+  border-bottom:1px solid var(--line);
+}
+/* Without backdrop-filter the .86 alpha would let the page show through the
+   band as it scrolls under. Fall back to the flat footer tint. */
+@supports not ((backdrop-filter:blur(2px)) or (-webkit-backdrop-filter:blur(2px))){
+  .nav.nav{ background:var(--canvas2); }
+}
+/* 18px of extra bar height so a full-bleed band carries the weight the 1110px
+   slab did not need. The inner column keeps max-width:1180 inside a 1110px
+   content box — the same arithmetic as `.foot .wrap`, i.e. 1054px of content
+   in both, so the logo sits exactly above the footer's logo. */
+.nav .nav-in{ padding:18px 28px; }
+
+/* The same geometry stated for the footer, because two designed pages never
+   got it: /404.html and /knowledge/ were both hand-built after the mirror and
+   carry no `.entry-content > section, > footer{max-width:none; padding-inline:…}`
+   rule, so their footers render as 1110px slabs while the other 153 pages
+   run edge to edge. Identical values to the rule the other pages declare
+   inline and to site-chrome.css §placement, so this is a no-op everywhere
+   except those two. */
+.foot{
+  max-width:none;
+  padding-inline:max(0px, calc((100% - 1110px) / 2));
+}
+
+/* ── 9.1 The logo ──────────────────────────────────────────────────────────
+   `.word` was a coral dot plus the text "CoPlanAI" set in Radio Canada Big.
+   It is now the real lockup (CoPlan + the AI speech bubble), traced from
+   CoPlan-logo-black.png to a 3.9KB SVG so it stays crisp at any DPR — brand
+   colours untouched (#0B1B3F wordmark, #2D6CFF bubble). Header and footer
+   carry the same file. */
+.word .logo{
+  display:block; width:auto; height:28px;
+  /* Something in the theme gives images `margin-inline:auto`. In the header it
+     is inert — `.word` is a flex item sized to its content, so there is no free
+     space to distribute — but the footer's `.word` spans its whole grid column,
+     and the mark centred itself there (measured x=144 in a 18→372 column at
+     390px). Both marks must sit on the same left edge as the text under them. */
+  margin-inline:0;
+  /* the SVG has no padding of its own; the optical baseline of the wordmark
+     sits ~1px low against the nav links */
+  position:relative; top:-1px;
+}
+.foot .word .logo{ height:30px; top:0; }
+/* `.word` still declares font-size/letter-spacing for the text it no longer
+   holds; gap would add 8px of dead space beside a single child. */
+.word{ gap:0; }
+
+/* ── 9.2 Widths ────────────────────────────────────────────────────────────
+   ≤940 the padding-inline formula already collapses to 0 and the nav becomes
+   the mobile dropdown; only the bar height and the mobile gutter need saying.
+   18px matches `.foot .wrap` so the two bars share one edge on phones too. */
+@media(max-width:940px){
+  .nav .nav-in{ padding:14px 28px; }
+  .word .logo{ height:26px; }
+}
+@media(max-width:640px){
+  .nav .nav-in{ padding:12px 18px; }
+  .word .logo{ height:24px; }
+  .foot .word .logo{ height:26px; }
+}
+
+
+/* ── 10. The canvas is grey, and it is not supposed to be ──────────────────
+   Damiano, 2026-08-05: "I really do not like that grey colour as background,
+   just use a shade of white instead."
+
+   `--canvas` is #F3F9FD — a blue-cast white. The page rendered rgb(213,219,225),
+   a flat grey, on every page since the mirror. Measured each layer in isolation
+   (`_preview-grain.html`, headless Chrome, average of a 200x80 patch):
+
+       #F3F9FD alone ............. (243, 249, 253)   the design
+       + body speckle ............ (217, 222, 228)   ← the grey
+       + body::before veil ....... (241, 247, 251)   −2, genuinely subtle
+       both, i.e. what shipped ... (215, 220, 226)   matches the live page
+
+   So it is the `body` speckle, not the 5% multiply veil. That texture builds
+   its mask with
+
+       feColorMatrix values='… 0.09 0.09 0.09 0 0'   (the alpha row)
+
+   which SUMS the turbulence's R, G and B — so the mask averages ~3x the 0.09
+   it reads as, and the #2b3640 flood lands as a ~10% dark wash rather than
+   sparse speckle. §7.1 above repaired that texture's broken `url(#n)` filter
+   reference — it was right to, that was the black-page bug — but a working
+   texture with the wrong alpha is still a grey veil over the whole site.
+
+   Dropped rather than re-tuned: the ::before veil already carries the paper
+   grain at a cost of two points of lightness, and the canvas is now the
+   #F3F9FD it was designed as. To bring the speckle back, delete this rule and
+   change the three 0.09s in §7.1 to 0.03. */
+body{ background-image:none; }
+
+/* Same complaint, second cause: with the veil gone the 24 designed pages sit on
+   --canvas #F3F9FD but the 131 stock pages sit on the block theme's own
+   #EEF1F6 — a greyer white, and a visible step when you follow a link from
+   /use-cases/ into a post. The de-WordPressing of 2026-08-04 unified the
+   chrome; this unifies the paper under it. */
+body{ background-color:var(--canvas); }
+
+
+/* ── 11. /use-cases/: four cases per row ───────────────────────────────────
+   Damiano, 2026-08-05: "extend the use case pages to the full width so you can
+   fit 4 cases per row instead of 3." He chose the wide-grid reading: the case
+   grid breaks out to its own column, the chrome and the reading column stay on
+   the 1110px the header and footer are aligned to.
+
+   Two constraints have to give at once, or nothing moves:
+     · the theme's `.entry-content > section` clamps the content box to 1110px
+       via padding-inline — restated here at 1420px for this one section, with
+       a 24px floor so the cards never touch the viewport edge on a 1440
+       screen (where the formula alone would leave 10px);
+     · `.wrap` is capped at `--maxw`, i.e. 1180px — so widening the section
+       alone would have moved nothing.
+
+   Card width, measured: 3-up on the old 1110 column = 336.7px. 4-up on 1420 =
+   324.5px, and 317px at a 1440 viewport. Within 6% of the size the cards have
+   always been, which is why the breakout is only 1420 and not wider.
+
+   Only /use-cases/ carries `.uc-grid` markup (verified 2026-08-05), so the
+   column rules are scoped to the section and the grid rules are safe as-is. */
+section.uc-wide{ padding-inline:max(24px, calc((100% - 1420px) / 2)); }
+section.uc-wide > .wrap{ max-width:1420px; }
+
+/* The 4-up ladder. Below 1280 a fourth column costs more than it gives — the
+   cards fall to 257px and the two-word titles start breaking to three lines —
+   so it steps back to the 3-up the page already had. The 860 and 640 steps
+   below that are the page's own and are left alone.
+   `.uc-grid.list` (the list-view toggle) is (0,2,0) and out-specifies every
+   rule here, so the list view keeps its single column at every width. */
+.uc-grid{ grid-template-columns:repeat(4,1fr); }
+@media(max-width:1280px){ .uc-grid{ grid-template-columns:repeat(3,1fr); } }
+@media(max-width:860px){  .uc-grid{ grid-template-columns:repeat(2,1fr); } }
+@media(max-width:640px){  .uc-grid{ grid-template-columns:1fr; } }

@@ -1,0 +1,24 @@
+# https://coplanai.com/robots.txt
+# Static mirror of a former WordPress site, served by GitHub Pages.
+
+User-agent: *
+Allow: /
+
+# Dead WordPress endpoints. Still referenced by <link rel="alternate"> and
+# <link rel="EditURI"> in the <head> of all 154 pages; every one of them 404s
+# on GitHub Pages, so crawling them is pure waste.
+Disallow: /wp-json/
+Disallow: /xmlrpc.php
+Disallow: /feed/
+Disallow: /*/feed/
+Disallow: /comments/
+
+# Deliberately NOT blocked — /wp-content/uploads/ (every og:image), /_static/,
+# /_vendor/, /wp-content/plugins/ and /wp-includes/js/. Blocking them would
+# break rendering-based indexing.
+#
+# Also deliberately NOT blocked: thin or duplicated pages left out of the
+# sitemap. They must stay crawlable so a meta robots noindex can be read; a
+# Disallow would freeze them as URL-only index entries instead.
+
+Sitemap: https://coplanai.com/sitemap.xml

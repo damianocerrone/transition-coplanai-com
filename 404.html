@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex" />
+<title>Page not found &#8211; CoPlanAI</title>
+<meta name="description" content="That page isn&#039;t on coplanai.com. Head back to the home page, the use cases, the mission, or Signals." />
+<meta name="theme-color" content="#F3F9FD" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="32x32" href="/_static/icons/icon-32.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="/_static/icons/icon-192.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/_static/icons/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<style>
+@import url('/_vendor/fonts.googleapis.com/css2-e0d3b248.css');
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --canvas:#F3F9FD; --canvas2:#E4F1F9; --paper:#FFFFFF; --paper2:#EFF8FD;
+  --ink:#142530; --ink2:#26414F; --muted:#55707E; --faint:#4F6B79;
+  --terra:#F2593F; --terra-deep:#CB4028; --terra-soft:#FBCDC2;
+  --green:#1C93D8; --green-deep:#146FA8; --green-soft:#BEE0F4;
+  --sky:#14B0C6; --gold:#F2A83C;
+  --line:rgba(20,37,48,.13); --line2:rgba(20,37,48,.08);
+  --shadow:0 1px 2px rgba(20,60,90,.05), 0 14px 40px -20px rgba(20,60,90,.28);
+  --shadow-soft:0 1px 2px rgba(20,60,90,.04), 0 22px 60px -34px rgba(20,60,90,.32);
+  --r-lg:20px; --r-md:16px; --r-sm:12px;
+  --measure:66ch; --maxw:1180px;
+  --disp:"Radio Canada Big",system-ui,sans-serif;
+  --body:"Radio Canada",system-ui,sans-serif;
+  --serif:"Fraunces",Georgia,serif;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--body); color:var(--ink); background:var(--canvas);
+  font-size:17px; line-height:1.6; font-weight:400;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+/* warm paper grain */
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:2; opacity:.05;
+  mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--terra);color:#fff}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:3}
+section{position:relative;z-index:3}
+
+h1,h2,h3,h4{font-family:var(--disp);font-weight:700;line-height:1.02;letter-spacing:-.02em;color:var(--ink)}
+h2{font-size:clamp(1.9rem,3.6vw,3rem)}
+h3{font-size:clamp(1.3rem,2vw,1.7rem);letter-spacing:-.015em}
+p{max-width:var(--measure)}
+strong{font-weight:600}
+.tab{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1,"lnum" 1}
+
+/* eyebrow / label — warm uppercase tracked (no cold mono) */
+.eyebrow{
+  font-family:var(--disp);font-weight:700;font-size:.72rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--terra);display:inline-flex;align-items:center;gap:.6em;
+}
+.eyebrow.green{color:var(--green)}
+.eyebrow .no{
+  font-variant-numeric:tabular-nums;color:var(--faint);font-weight:700;letter-spacing:.05em;
+}
+.sec-head{display:flex;flex-direction:column;gap:16px;margin-bottom:44px}
+.sec-head p{color:var(--muted);font-size:1.12rem;max-width:60ch}
+
+/* buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:.55em;font-family:var(--disp);font-weight:700;
+  font-size:.98rem;letter-spacing:-.01em;padding:.82em 1.35em;border-radius:100px;
+  cursor:pointer;border:1.5px solid transparent;transition:transform .18s ease,box-shadow .2s ease,background .2s ease;
+  line-height:1;
+}
+.btn .arw{transition:transform .2s ease}
+.btn:hover .arw{transform:translateX(3px)}
+.btn-primary{background:var(--terra-deep);color:#fff;box-shadow:0 10px 22px -12px rgba(203,64,40,.9)}
+.btn-primary:hover{background:var(--terra);transform:translateY(-2px)}
+.btn-nav{background:transparent;color:var(--ink2);border:1px solid var(--line);box-shadow:none;font-size:.85rem;font-weight:600;padding:.58em 1.05em;letter-spacing:0}.btn-nav:hover{background:var(--canvas2);border-color:var(--line2);color:var(--ink);transform:none;box-shadow:none}.btn-nav:focus-visible{outline:2px solid var(--terra-deep);outline-offset:2px}.btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--ink);background:rgba(20,37,48,.03)}
+.btn-green{background:var(--green-deep);color:#fff;box-shadow:0 10px 22px -12px rgba(20,111,168,.9)}
+.btn-green:hover{background:var(--green);transform:translateY(-2px)}
+.btn-lg{font-size:1.06rem;padding:.95em 1.6em}
+
+/* ---- top nav ---- */
+.nav{position:sticky;top:0;z-index:50;background:rgba(243,249,253,.82);backdrop-filter:blur(12px) saturate(1.2);
+  border-bottom:1px solid var(--line2)}
+.nav-in{max-width:var(--maxw);margin:0 auto;padding:14px 28px;display:flex;align-items:center;gap:28px}
+.word{font-family:var(--disp);font-weight:700;font-size:1.32rem;letter-spacing:-.03em;color:var(--ink);display:flex;align-items:center;gap:.5em}
+.word .dot{width:11px;height:11px;border-radius:50%;background:var(--terra);box-shadow:0 0 0 4px rgba(242,89,63,.18)}
+.nav-links{display:flex;gap:26px;margin-left:12px}
+.nav-links a{font-family:var(--disp);font-weight:600;font-size:.97rem;color:var(--ink2);padding:6px 2px;position:relative;transition:color .18s}
+.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:-2px;height:2px;background:var(--terra);border-radius:2px;transition:right .22s ease}
+.nav-links a:hover{color:var(--ink)}
+.nav-links a:hover::after,.nav-links a.active::after{right:0}
+.nav-links a.active{color:var(--terra)}
+.nav-cta{margin-left:auto;display:flex;align-items:center;gap:14px}
+.nav-toggle{display:none;background:none;border:1.5px solid var(--line);border-radius:10px;padding:8px 10px;cursor:pointer}
+.nav-toggle span{display:block;width:20px;height:2px;background:var(--ink);border-radius:2px}
+.nav-toggle span+span{margin-top:4px}
+
+/* footer */
+.foot{background:var(--ink);color:var(--canvas);padding:64px 0 40px;position:relative;z-index:3;margin-top:0}
+.foot a{color:var(--canvas)}
+.foot .word{color:var(--canvas)}
+.foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,253,247,.14)}
+.foot h5{font-family:var(--disp);font-weight:700;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:#C9BCA9;margin-bottom:14px}
+.foot ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot ul a{color:#D9CFBE;font-size:.96rem;transition:color .18s}
+.foot ul a:hover{color:#fff}
+.foot .credit{color:#B4A991;font-size:.92rem;max-width:56ch;margin-top:16px;line-height:1.55}
+.foot .base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:26px;color:#9C917C;font-size:.86rem}
+
+@media(max-width:940px){.nav-in{position:relative;flex-wrap:wrap}.nav-links{position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px;box-shadow:var(--shadow);gap:2px;margin-top:6px;z-index:120}.nav-links a{padding:11px 12px;border-radius:8px}}
+/* mobile nav collapse (from the site's own responsive block) */
+@media(max-width:940px){
+  .nav-links{display:none} .nav-toggle{display:block}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+
+/* the WordPress theme constrains .nav/.foot to the 1110px content column on every
+   designed page; this page has no theme wrapper, so restate it here so the chrome
+   sits exactly where it does on /about/, /mission/, /knowledge/ … */
+.nav,.foot{max-width:1110px;margin-left:auto;margin-right:auto}
+.nav{margin-top:32px}
+
+/* skip link (the theme bundles that normally supply this are not loaded here) */
+.screen-reader-text{border:0;clip-path:inset(50%);height:1px;margin:-1px;overflow:hidden;padding:0;
+  position:absolute!important;width:1px;word-wrap:normal!important;word-break:normal!important}
+.screen-reader-text:focus{background-color:#eee;clip-path:none;color:#444;display:block;font-size:1em;
+  height:auto;left:5px;line-height:normal;padding:15px 23px 14px;text-decoration:none;top:5px;width:auto;z-index:100000}
+
+/* ---- 404 ---- */
+.nf{min-height:62vh;display:flex;align-items:center;padding:96px 0 104px}
+.nf .code{font-family:var(--disp);font-weight:700;font-size:clamp(4.4rem,15vw,9rem);line-height:.86;
+  letter-spacing:-.05em;color:var(--terra);font-variant-numeric:tabular-nums;margin:0 0 6px}
+.nf h1{font-size:clamp(1.9rem,4.4vw,3.1rem);margin:14px 0 0;max-width:16ch}
+.nf p.lead{color:var(--muted);font-size:1.1rem;margin-top:18px;max-width:52ch}
+.nf .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.nf .where{margin-top:44px;padding-top:26px;border-top:1px solid var(--line);max-width:var(--measure)}
+.nf .where h2{font-size:.74rem;font-family:var(--disp);font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--faint);margin-bottom:16px}
+.nf .where ul{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:2px}
+.nf .where a{display:block;padding:12px 14px 12px 0;font-family:var(--disp);font-weight:600;color:var(--ink2);
+  border-bottom:1px solid var(--line2);transition:color .18s,padding .18s}
+.nf .where a:hover{color:var(--terra);padding-left:6px}
+.nf .where a .d{display:block;font-family:var(--body);font-weight:400;font-size:.9rem;color:var(--muted);margin-top:3px}
+@media(max-width:640px){.nf{padding:64px 0 76px;min-height:0}.foot-grid{grid-template-columns:1fr;gap:28px}}
+</style>
+<link rel="stylesheet" id="coplanai-reskin" href="/_static/reskin.css?v=ae9cf6e7" type="text/css" media="all" />
+<link rel="stylesheet" id="coplanai-capsule" href="/_static/capsule-web.css?v=25b6b6d0" type="text/css" media="all" />
+<!-- portfolio-os analytics --><meta name="google-site-verification" content="9f4YK2ekwTW7bwTnaPEruwyAcN18acVNLL1Jjp594SY"><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "506f0d29942d446881a697f6390c93b4"}'></script><!-- /portfolio-os analytics --></head>
+<body class="page-404">
+<a class="skip-link screen-reader-text" href="#nf-main">Skip to content</a>
+<header class="nav"><div class="nav-in"><a class="word" href="/" aria-label="CoPlanAI &mdash; home"><img class="logo" src="/_static/coplanai-logo.svg" alt="CoPlanAI" width="1393" height="356" decoding="async"></a><nav class="nav-links"><a href="/use-cases">Use cases</a><a href="/mission">Mission</a><a href="/knowledge">Signals</a><a href="/use-coplanai">Use CoPlanAI</a></nav><div class="nav-cta"><a class="btn btn-nav" href="mailto:damiano.cerrone@coplanai.com?subject=Get%20in%20touch">Get in touch</a><button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').style.display=(getComputedStyle(document.querySelector('.nav-links')).display=='none'?'flex':'none')"><span></span><span></span><span></span></button></div></div></header>
+<div id="nf-main"></div>
+<main class="nf"><div class="wrap">
+<p class="code tab">404</p>
+<p class="eyebrow">Page not found</p>
+<h1>This one isn&rsquo;t on the map.</h1>
+<p class="lead">The link you followed doesn&rsquo;t lead anywhere on coplanai.com &mdash; it may have moved, or it may never have existed. Everything worth seeing is one step away.</p>
+<div class="acts">
+  <a class="btn btn-primary" href="/">Back to the home page <span class="arw">&rarr;</span></a>
+  <a class="btn btn-ghost" href="/knowledge">Browse Signals</a>
+</div>
+<div class="where">
+  <h2>Where you might be headed</h2>
+  <ul>
+    <li><a href="/use-cases">Use cases<span class="d">What cities and partners have built with CoPlanAI.</span></a></li>
+    <li><a href="/mission">Mission<span class="d">Why participation needs a shared image of the future.</span></a></li>
+    <li><a href="/knowledge">Signals<span class="d">Press, reports, and talks from our networks.</span></a></li>
+    <li><a href="/about">About<span class="d">The team, the platform, and how to reach us.</span></a></li>
+  </ul>
+</div>
+</div></main>
+<footer class="foot"><div class="wrap"><div class="foot-grid"><div><a class="word" href="/" aria-label="CoPlanAI &mdash; home"><img class="logo" src="/_static/coplanai-logo.svg" alt="CoPlanAI" width="1393" height="356" decoding="async"></a><p class="credit">CoPlanAI is a service of SPIN Unit Lab Oy, Helsinki, Finland.</p></div><div><h5>Explore</h5><ul><li><a href="/use-cases">Use cases</a></li><li><a href="/knowledge">Signals</a></li><li><a href="/mission">Mission</a></li><li><a href="/use-coplanai">Use CoPlanAI</a></li><li><a href="/about">About</a></li></ul></div><div><h5>Start</h5><ul><li><a href="mailto:damiano.cerrone@coplanai.com?subject=Book%20a%20call">Book a call</a></li><li><a href="/use-cases">See the use cases</a></li><li><a href="/mission">The mandate to imagine</a></li></ul></div></div><div class="base"><span>&copy; 2021&ndash;2026 SPIN Unit Lab Oy &middot; Helsinki</span><span>92 engagements &middot; 28 countries &middot; since 2021</span></div></div></footer>
+</body>
+</html>

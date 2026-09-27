@@ -1,0 +1,51 @@
+# product-only repo: pages + assets. Everything that is source, cache or
+# private stays local — same convention as spinunit.org.
+#
+# Anything left untracked here is ALSO still served by the local preview server
+# on 127.0.0.1 — .gitignore stops publication, not local serving. Nothing in the
+# served root should carry internal notes even so.
+
+# --- OS / editor noise -------------------------------------------------------
+.DS_Store
+._*
+*.swp
+*~
+
+# --- generator sources: never published --------------------------------------
+# build.py is deliberately NOT published: it carries the local Dropbox paths
+# and the internal gate logic, neither of which belongs in a public repo.
+build.py
+build-report.txt
+case-map.json
+# grid.py rewrites the homepage proofgrid from the ledger; its docstring quotes
+# internal direction verbatim. NOTE: this file is already TRACKED and currently
+# live at https://coplanai.com/grid.py — this line only keeps it out once it has
+# been untracked with `git rm --cached grid.py`.
+grid.py
+# sitemap generator, moved out of the served root on 2026-08-04. Its comments
+# carry per-page editorial notes (word counts, "0 inbound links", thin/orphan/
+# duplicate verdicts) that must not publish. Run it as: python3 tools/sitemap.py
+tools/
+
+# --- python build detritus ---------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# --- local-only previews and skin variants -----------------------------------
+# (never published; pick one, then delete)
+variant-*.html
+_static/reskin-b.css
+_static/reskin-c.css
+_preview-*.html
+
+# --- Claude Code scaffolding ------------------------------------------------
+# Background tasks run in git worktrees under .claude/worktrees/. deploy.py does
+# `git stash --include-untracked` and then `git add -A`, so leaving this
+# untracked would (a) risk stashing another session's live worktree out from
+# under it and (b) commit nested checkouts into a repo that is served as a
+# website. Ignored, never published.
+.claude/
+.index-pre-capsule.html.bak
